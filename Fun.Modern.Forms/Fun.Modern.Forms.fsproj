@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Types.fs" />
+		<Compile Include="Builder.fs" />
+		<Compile Include="AdaptiveControl.fs" />
+		<Compile Include="Elements\FormBuilder.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FSharp.Data.Adaptive" Version="1.2.13" />
+		<PackageReference Include="Modern.Forms" Version="0.3.0" />
+	</ItemGroup>
+
+</Project>
