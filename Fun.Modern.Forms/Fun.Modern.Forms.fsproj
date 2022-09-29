@@ -19,4 +19,8 @@
 		<PackageReference Include="Modern.Forms" Version="0.3.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="FSharp.Core" Version="6.0.0" />
+	</ItemGroup>
+
 </Project>
