@@ -14,3 +14,9 @@ type ui =
                     | ValueSome ctx -> unbox ctx
                 newCtx.Update()
     }
+
+    static member inline inject(key: obj, [<InlineIfLambda>] fn: InjectviewContext -> ElementCreator) = ui.inject (fn, key)
+
+
+    static member inline adaptive() = AdaptiviewBuilder()
+    static member inline adaptive(key) = AdaptiviewBuilder(key)

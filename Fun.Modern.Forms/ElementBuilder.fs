@@ -5,17 +5,50 @@ open FSharp.Data.Adaptive
 open Modern.Forms
 
 
-type ElementBuilderBase<'T>() =
+type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, ?key: obj) as this =
+    member val Properties = System.Collections.Generic.Dictionary<string, obj>()
+    member val ChildContexts = ResizeArray<IElementContext>()
+
+    member _.Element = nativeElement
+
+    interface IElementContext with
+        member _.Key = Option.toObj key
+        member _.NativeElement = box nativeElement
+        member _.ServiceProvider = sp
+
+        member _.Dispose() =
+            match tryUnbox<IDisposable> nativeElement with
+            | Some x -> x.Dispose()
+            | _ -> ()
+
+            for KeyValue (_, property) in this.Properties do
+                match tryUnbox<IDisposable> property with
+                | Some x -> x.Dispose()
+                | _ -> ()
+
+
+type BuildElement<'Element> = delegate of ctx: ElementBuildContext<'Element> * index: int -> int
+
+
+type ElementBuilder<'Element>() =
     let mutable key: obj = null
 
 
-    member inline _.Yield(_: unit) = ElementBuilder<'T>(fun _ i -> i)
+    member inline _.Yield(_: unit) = BuildElement<'T>(fun _ i -> i)
 
 
     [<CustomOperation("Key")>]
-    member this.Key(builder: ElementBuilder<'T>, x: obj) =
+    member _.Key(builder: BuildElement<'Element>, x: obj) =
         key <- x
         builder
+
+    [<CustomOperation("Ref")>]
+    member inline this.Ref([<InlineIfLambda>] builder: BuildElement<'Element>, setRef: 'Element -> unit) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            setRef ctx.Element
+            index + 1
+        )
 
 
     member _.GetKey() = key
@@ -23,7 +56,7 @@ type ElementBuilderBase<'T>() =
 
     member inline _.MakeElementCreator<'Element>
         (
-            [<InlineIfLambda>] builder: ElementBuilder<'Element>,
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] fn: unit -> 'Element,
             ?key: obj
         ) =
@@ -33,7 +66,7 @@ type ElementBuilderBase<'T>() =
                 fun (sp, ctx) ->
                     let newCtx =
                         match ctx with
-                        | ValueNone -> new ElementContext<'Element>(fn (), sp, Option.toObj key)
+                        | ValueNone -> new ElementBuildContext<'Element>(fn (), sp, Option.toObj key)
                         | ValueSome ctx -> unbox ctx
                     builder.Invoke(newCtx, 0) |> ignore
                     newCtx
@@ -42,12 +75,12 @@ type ElementBuilderBase<'T>() =
 
     member inline _.MakeEventPropertyBuilder<'Element, 'EventArg>
         (
-            [<InlineIfLambda>] builder: ElementBuilder<'Element>,
-            [<InlineIfLambda>] getEvent: ElementContext<'Element> -> IEvent<System.EventHandler<'EventArg>, 'EventArg>,
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler<'EventArg>, 'EventArg>,
             propertyName: string,
             [<InlineIfLambda>] fn: 'EventArg -> unit
         ) =
-        ElementBuilder<'Element>(fun ctx index ->
+        BuildElement<'Element>(fun ctx index ->
             let event = getEvent ctx
             let index = builder.Invoke(ctx, index)
             let propertyName = propertyName + "-" + string index
@@ -65,12 +98,12 @@ type ElementBuilderBase<'T>() =
 
     member inline _.MakeCompareablePropertyBuilder<'Element, 'Property when 'Property: equality>
         (
-            [<InlineIfLambda>] builder: ElementBuilder<'Element>,
-            [<InlineIfLambda>] getProperty: ElementContext<'Element> -> 'Property,
-            [<InlineIfLambda>] setProperty: ElementContext<'Element> -> 'Property -> unit,
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getProperty: ElementBuildContext<'Element> -> 'Property,
+            [<InlineIfLambda>] setProperty: ElementBuildContext<'Element> -> 'Property -> unit,
             value: 'Property
         ) =
-        ElementBuilder<'Element>(fun ctx index ->
+        BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             if getProperty ctx <> value then setProperty ctx value
             index + 1
@@ -79,12 +112,12 @@ type ElementBuilderBase<'T>() =
 
     member inline _.MakeAdaptivePropertyBuilder<'Element, 'Property when 'Property: equality>
         (
-            [<InlineIfLambda>] builder: ElementBuilder<'Element>,
-            [<InlineIfLambda>] getProperty: ElementContext<'Element> -> 'Property,
-            [<InlineIfLambda>] setProperty: ElementContext<'Element> -> 'Property -> unit,
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getProperty: ElementBuildContext<'Element> -> 'Property,
+            [<InlineIfLambda>] setProperty: ElementBuildContext<'Element> -> 'Property -> unit,
             value: 'Property aval
         ) =
-        ElementBuilder<'Element>(fun ctx index ->
+        BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             let propertyName = "store-prop-" + string index
 
@@ -101,11 +134,11 @@ type ElementBuilderBase<'T>() =
 
     member _.MakeChildrenBuilder<'Element>
         (
-            builder: ElementBuilder<'Element>,
-            getNativeChildren: ElementContext<'Element> -> Control.ControlCollection,
+            builder: BuildElement<'Element>,
+            getNativeChildren: ElementBuildContext<'Element> -> Control.ControlCollection,
             childrenCreators: ElementCreator seq
         ) =
-        ElementBuilder<'Element>(fun ctx index ->
+        BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             let childrenLength = Seq.length childrenCreators
             let nativeChildren = getNativeChildren ctx

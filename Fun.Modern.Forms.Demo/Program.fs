@@ -54,7 +54,7 @@ let main (args: string[]) =
     let mainForm =
         form () {
             Controls [
-                adaptiview () {
+                ui.adaptive () {
                     let! c = count
                     return
                         flowLayoutPanel () {
@@ -87,6 +87,10 @@ let main (args: string[]) =
                         button () {
                             Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Text "Increase"
+                        }
+                        ui.adaptive () {
+                            let! c = count
+                            return label () { Text "asdas" }
                         }
                         ui.inject (fun ctx ->
                             let counter = ctx.ServiceProvider.GetService<SimpleService>().Counter

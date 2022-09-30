@@ -5,17 +5,17 @@ open FSharp.Data.Adaptive
 
 
 type ElementAdaptiveContext(eleStore: ElementCreator aval, sp: IServiceProvider, key: obj) =
-    let mutable k = null
     let mutable ctx = ValueNone
 
     let eleStoreSub =
         eleStore.AddCallback(fun creator ->
-            k <- creator.Key
+            // Maybe need to recreate if key changed
+            // But for this we will need to access parent element
             ctx <- ValueSome(creator.CreateOrUpdate(sp, ctx))
         )
 
     interface IElementContext with
-        member _.Key = k
+        member _.Key = key
         member _.NativeElement = ctx.Value.NativeElement
         member _.ServiceProvider = sp
         member _.Dispose() = eleStoreSub.Dispose()
