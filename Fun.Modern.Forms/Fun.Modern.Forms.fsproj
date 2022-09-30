@@ -9,8 +9,8 @@
 
 	<ItemGroup>
 		<Compile Include="Types.fs" />
-		<Compile Include="Adaptiview.fs" />
 		<Compile Include="Injectview.fs" />
+		<Compile Include="Adaptiview.fs" />
 		<Compile Include="ElementBuilderBase.fs" />
 		<Compile Include="DslCore.fs" />
 		<Compile Include="Elements.generated.fs" />
