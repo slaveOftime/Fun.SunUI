@@ -1,6 +1,7 @@
 ﻿namespace Fun.Modern.Forms
 
 open System
+open FSharp.Data.Adaptive
 
 
 type IElementContext =
@@ -21,14 +22,15 @@ type ElementCreator = {
 }
 
 
-type ElementContext<'Element>(nativeElement: 'Element, sp: IServiceProvider) as this =
+type ElementContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, ?key: obj) as this =
     member val Properties = System.Collections.Generic.Dictionary<string, obj>()
-    member val ChildrenContexts = ResizeArray<IElementContext>()
+    member val ChildContexts = ResizeArray<IElementContext>()
 
     member _.Element = nativeElement
 
     interface IElementContext with
-        member val Key = null with get, set
+        member val Key = Option.toObj key with get, set
+
         member _.NativeElement = box nativeElement
         member _.ServiceProvider = sp
 

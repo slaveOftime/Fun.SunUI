@@ -33,7 +33,7 @@ let demoAnimation =
         let timer = new Timers.Timer(100)
         timer.Elapsed.Add(fun e ->
             transact (fun _ ->
-                height.Value <- int(100. * (1. + Math.Sin(float count)))
+                height.Value <- int (100. * (1. + Math.Sin(float count)))
                 count <- count + 0.1
             )
         )
@@ -55,8 +55,31 @@ let main (args: string[]) =
     let mainForm =
         form () {
             Controls [
+                adaptiview () {
+                    let! c = count
+                    return
+                        flowLayoutPanel () {
+                            Top 40
+                            Left 10
+                            Height 300
+                            Width 300
+                            Controls [
+                                if c > 4 then label () { Text $"count = {c}" }
+                                if c % 2 = 0 then
+                                    label () {
+                                        Key "%asda"
+                                        Text $"count  2 = {c}"
+                                    }
+                                button () {
+                                    Key "button-increase"
+                                    Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
+                                    Text "Increase"
+                                }
+                            ]
+                        }
+                }
                 flowLayoutPanel () {
-                    Top 40
+                    Top 400
                     Left 10
                     Height 300
                     Width 300
@@ -83,7 +106,7 @@ let main (args: string[]) =
     let sp = services.BuildServiceProvider()
 
     let nativeForm = mainForm.CreateOrUpdate(sp, ValueNone).NativeElement |> unbox<Form>
-    
+
     Application.Run(nativeForm)
 
     0

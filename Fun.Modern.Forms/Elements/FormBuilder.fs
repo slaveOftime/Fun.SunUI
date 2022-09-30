@@ -27,6 +27,11 @@ type ControlBuilder<'Element when 'Element :> Control>() =
     inherit ElementBuilderBase<'Element>()
 
 
+    [<CustomOperation("Controls")>]
+    member inline this.Controls([<InlineIfLambda>] builder: ElementBuilder<'Element>, controls: ElementCreator seq) =
+        this.MakeChildrenBuilder(builder, (fun x -> x.Element.Controls), controls)
+
+
     [<CustomOperation("Click")>]
     member inline this.Click([<InlineIfLambda>] builder: ElementBuilder<'Element>, [<InlineIfLambda>] fn) =
         this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), nameof this.Click, fn)
@@ -58,9 +63,6 @@ type ControlBuilder<'Element when 'Element :> Control>() =
     member inline this.Top([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
         this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Top), (fun ctx x -> ctx.Element.Top <- x), value)
 
-    [<CustomOperation("Controls")>]
-    member inline this.Controls([<InlineIfLambda>] builder: ElementBuilder<'Element>, controls: ElementCreator seq) =
-        this.MakeChildrenBuilder(builder, (fun x -> x.Element.Controls), controls)
 
     [<CustomOperation("Height")>]
     member inline this.Height([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =

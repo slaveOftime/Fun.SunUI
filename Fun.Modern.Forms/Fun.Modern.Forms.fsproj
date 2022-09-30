@@ -10,7 +10,7 @@
 	<ItemGroup>
 		<Compile Include="Types.fs" />
 		<Compile Include="Builder.fs" />
-		<Compile Include="AdaptiveControl.fs" />
+		<Compile Include="Adaptiview.fs" />
 		<Compile Include="DslCore.fs" />
 		<Compile Include="Elements\FormBuilder.fs" />
 	</ItemGroup>
