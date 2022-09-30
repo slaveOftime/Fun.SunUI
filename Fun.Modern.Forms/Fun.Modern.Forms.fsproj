@@ -17,10 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Elements\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="FSharp.Data.Adaptive" Version="1.2.13" />
 		<PackageReference Include="Modern.Forms" Version="0.3.0" />
 	</ItemGroup>
