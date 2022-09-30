@@ -1,4 +1,4 @@
-﻿module Fun.Modern.Forms.Builder
+﻿namespace Fun.Modern.Forms
 
 open System
 open FSharp.Data.Adaptive

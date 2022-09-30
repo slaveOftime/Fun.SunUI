@@ -4,7 +4,6 @@ open System
 open Modern.Forms
 open FSharp.Data.Adaptive
 open Fun.Modern.Forms
-open Fun.Modern.Forms.Elements
 open Microsoft.Extensions.DependencyInjection
 
 

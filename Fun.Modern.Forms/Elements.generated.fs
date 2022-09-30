@@ -1,9 +1,8 @@
 ﻿[<AutoOpen>]
-module Fun.Modern.Forms.Elements.FormBuilder
+module Fun.Modern.Forms.Elements
 
 open Modern.Forms
 open Fun.Modern.Forms
-open Fun.Modern.Forms.Builder
 
 
 type FormBuilder() =
