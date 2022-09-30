@@ -8,24 +8,17 @@ type ElementAdaptiveContext(eleStore: ElementCreator aval, sp: IServiceProvider,
     let mutable k = null
     let mutable ctx = ValueNone
 
-    let eleSub =
+    let eleStoreSub =
         eleStore.AddCallback(fun creator ->
             k <- creator.Key
             ctx <- ValueSome(creator.CreateOrUpdate(sp, ctx))
         )
 
-    member _.Context = ctx.Value
-
     interface IElementContext with
-        member _.Key
-            with get () = k
-            and set x = k <- x
-
+        member _.Key = k
         member _.NativeElement = ctx.Value.NativeElement
-
         member _.ServiceProvider = sp
-
-        member _.Dispose() = eleSub.Dispose()
+        member _.Dispose() = eleStoreSub.Dispose()
 
 
 type AdaptiviewBuilder(?key: obj) =

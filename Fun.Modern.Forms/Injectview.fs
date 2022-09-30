@@ -8,6 +8,7 @@ type InjectviewContext = {
     AddDispose: IDisposable -> unit
 }
 
+
 type ElementInjectviewContext(creatorFn: InjectviewContext -> ElementCreator, sp: IServiceProvider) =
     let disposes = ResizeArray<IDisposable>()
 
@@ -25,10 +26,7 @@ type ElementInjectviewContext(creatorFn: InjectviewContext -> ElementCreator, sp
 
 
     interface IElementContext with
-        member _.Key
-            with get () = k
-            and set x = k <- x
-
+        member _.Key = k
         member _.NativeElement = ctx.NativeElement
         member _.ServiceProvider = sp
 

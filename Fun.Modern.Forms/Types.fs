@@ -1,25 +1,14 @@
 ﻿namespace Fun.Modern.Forms
 
 open System
-open FSharp.Data.Adaptive
 
 
 type IElementContext =
     inherit IDisposable
 
-    abstract member Key: obj with get, set
+    abstract member Key: obj
     abstract member NativeElement: obj
     abstract member ServiceProvider: IServiceProvider
-
-
-type ElementFactories = (unit -> IElementContext) * (IElementContext -> IElementContext)
-
-
-[<Struct>]
-type ElementCreator = {
-    Key: obj
-    CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
-}
 
 
 type ElementContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, ?key: obj) as this =
@@ -29,8 +18,7 @@ type ElementContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, ?ke
     member _.Element = nativeElement
 
     interface IElementContext with
-        member val Key = Option.toObj key with get, set
-
+        member _.Key = Option.toObj key
         member _.NativeElement = box nativeElement
         member _.ServiceProvider = sp
 
@@ -43,6 +31,13 @@ type ElementContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, ?ke
                 match tryUnbox<IDisposable> property with
                 | Some x -> x.Dispose()
                 | _ -> ()
+
+
+[<Struct>]
+type ElementCreator = {
+    Key: obj
+    CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
+}
 
 
 type ElementBuilder<'Element> = delegate of ctx: ElementContext<'Element> * index: int -> int
