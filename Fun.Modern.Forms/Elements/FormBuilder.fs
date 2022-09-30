@@ -58,6 +58,34 @@ type ControlBuilder<'Element when 'Element :> Control>() =
     member inline this.Top([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
         this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Top), (fun ctx x -> ctx.Element.Top <- x), value)
 
+    [<CustomOperation("Controls")>]
+    member inline this.Controls([<InlineIfLambda>] builder: ElementBuilder<'Element>, controls: ElementCreator seq) =
+        this.MakeChildrenBuilder(builder, (fun x -> x.Element.Controls), controls)
+
+    [<CustomOperation("Height")>]
+    member inline this.Height([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
+        this.MakeCompareablePropertyBuilder(builder, (fun ctx -> ctx.Element.Height), (fun ctx x -> ctx.Element.Height <- x), value)
+
+    [<CustomOperation("Height")>]
+    member inline this.Height([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
+        this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Height), (fun ctx x -> ctx.Element.Height <- x), value)
+
+
+    [<CustomOperation("Width")>]
+    member inline this.Width([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
+        this.MakeCompareablePropertyBuilder(builder, (fun ctx -> ctx.Element.Width), (fun ctx x -> ctx.Element.Width <- x), value)
+
+    [<CustomOperation("Width")>]
+    member inline this.Width([<InlineIfLambda>] builder: ElementBuilder<'Element>, value) =
+        this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Width), (fun ctx x -> ctx.Element.Width <- x), value)
+
+
+
+type FlowLayoutPanelBuilder() =
+    inherit ControlBuilder<FlowLayoutPanel>()
+
+    member inline this.Run([<InlineIfLambda>] builder: ElementBuilder<FlowLayoutPanel>) =
+        this.MakeElementCreator(builder, (fun _ -> new FlowLayoutPanel()), this.GetKey())
 
 
 type ButtonBuilder() =
@@ -82,3 +110,4 @@ type LabelBuilder() =
 let inline form () = FormBuilder()
 let inline button () = ButtonBuilder()
 let inline label () = LabelBuilder()
+let inline flowLayoutPanel () = FlowLayoutPanelBuilder()

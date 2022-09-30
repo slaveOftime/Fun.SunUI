@@ -29,10 +29,10 @@ type ElementBuilderBase<'T>() =
         {
             ElementCreator.Key = Option.toObj key
             CreateOrUpdate =
-                fun ctx ->
+                fun (sp, ctx) ->
                     let newCtx =
                         match ctx with
-                        | ValueNone -> new ElementContext<'Element>(fn ())
+                        | ValueNone -> new ElementContext<'Element>(fn (), sp)
                         | ValueSome ctx -> unbox ctx
                     builder.Invoke(newCtx, 0) |> ignore
                     newCtx
@@ -98,16 +98,17 @@ type ElementBuilderBase<'T>() =
         )
 
 
-    member inline _.MakeChildrenBuilder<'Element>
+    member _.MakeChildrenBuilder<'Element>
         (
-            [<InlineIfLambda>] builder: ElementBuilder<'Element>,
-            [<InlineIfLambda>] getNativeElements: ElementContext<'Element> -> Control.ControlCollection,
+            builder: ElementBuilder<'Element>,
+            getNativeElements: ElementContext<'Element> -> Control.ControlCollection,
             children: ElementCreator seq
         ) =
         ElementBuilder<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             let childrenLength = Seq.length children
             let nativeElements = getNativeElements ctx
+            let sp = (ctx :> IElementContext).ServiceProvider
 
             if childrenLength = 0 && nativeElements.Count > 0 then
                 for child in ctx.ChildrenContexts do
@@ -124,8 +125,8 @@ type ElementBuilderBase<'T>() =
                     ctx.ChildrenContexts.Clear()
                     while i < childrenLength do
                         let elementCreator = Seq.item i children
-                        let newElementContext = elementCreator.CreateOrUpdate ValueNone
-                        ctx.ChildrenContexts.Add newElementContext
+                        let newElementContext = elementCreator.CreateOrUpdate(sp, ValueNone)
+                        ctx.ChildrenContexts.Add(newElementContext)
                         newNativeElements[i] <- newElementContext.NativeElement :?> Control
                         i <- i + 1
 
@@ -139,17 +140,18 @@ type ElementBuilderBase<'T>() =
                     let mutable i = 0
                     while i < childrenLength do
                         let elementCreator = Seq.item i children
+
                         let newElementContext =
                             if elementCreator.Key = null then
-                                let oldElementContext = ctx.ChildrenContexts |> Seq.tryItem i
-                                match oldElementContext with
-                                | Some ctx when ctx.Key = null -> elementCreator.CreateOrUpdate(ValueSome ctx)
-                                | _ -> elementCreator.CreateOrUpdate ValueNone
+                                let oldChild = ctx.ChildrenContexts |> Seq.tryItem i
+                                match oldChild with
+                                | Some ctx when ctx.Key = null -> elementCreator.CreateOrUpdate(sp, ValueSome ctx)
+                                | _ -> elementCreator.CreateOrUpdate(sp, ValueNone)
                             else
-                                let oldEleCtx = ctx.ChildrenContexts |> Seq.tryFind (fun x -> x.Key = elementCreator.Key)
-                                match oldEleCtx with
-                                | Some ctx -> elementCreator.CreateOrUpdate(ValueSome ctx)
-                                | None -> elementCreator.CreateOrUpdate ValueNone
+                                let oldChild = ctx.ChildrenContexts |> Seq.tryFind (fun x -> x.Key = elementCreator.Key)
+                                match oldChild with
+                                | Some ctx when elementCreator.Key = ctx.Key -> elementCreator.CreateOrUpdate(sp, ValueSome ctx)
+                                | _ -> elementCreator.CreateOrUpdate(sp, ValueNone)
                         newElementContexts[i] <- newElementContext
                         newNativeElements[i] <- newElementContext.NativeElement :?> Control
                         i <- i + 1
