@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TrimMode>link</TrimMode>
+		<IsTrimmable>true</IsTrimmable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Types.fs" />
+		<Compile Include="Injectview.fs" />
+		<Compile Include="Adaptiview.fs" />
+		<Compile Include="ElementBuilder.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FSharp.Data.Adaptive" Version="1.2.13" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>
