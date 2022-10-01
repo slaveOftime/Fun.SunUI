@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Utils.fs" />
+		<Compile Include="TypeInfo.fs" />
+		<Compile Include="MetaInfo.fs" />
+		<Compile Include="Generator.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Fun.SunUI.Core\Fun.SunUI.Core.fsproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>

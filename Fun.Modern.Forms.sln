@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.Core", "Fun.SunUI.Core\Fun.SunUI.Core.fsproj", "{89E46331-258C-4F7A-9CB4-63748408A9F2}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.Core", "Fun.SunUI.Core\Fun.SunUI.Core.fsproj", "{89E46331-258C-4F7A-9CB4-63748408A9F2}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms", "Fun.SunUI.ModernForms\Fun.SunUI.ModernForms.fsproj", "{6F515D20-EC5E-4AEC-ACDE-7C19E43DC6B7}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.ModernForms", "Fun.SunUI.ModernForms\Fun.SunUI.ModernForms.fsproj", "{6F515D20-EC5E-4AEC-ACDE-7C19E43DC6B7}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms.Demo", "Fun.SunUI.ModernForms.Demo\Fun.SunUI.ModernForms.Demo.fsproj", "{4C8017B4-3CB2-4541-A263-0501163C7C50}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.ModernForms.Demo", "Fun.SunUI.ModernForms.Demo\Fun.SunUI.ModernForms.Demo.fsproj", "{4C8017B4-3CB2-4541-A263-0501163C7C50}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms.Generator", "Fun.SunUI.ModernForms.Generator\Fun.SunUI.ModernForms.Generator.fsproj", "{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.ModernForms.Generator", "Fun.SunUI.ModernForms.Generator\Fun.SunUI.ModernForms.Generator.fsproj", "{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.Generator", "Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj", "{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

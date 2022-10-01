@@ -6,10 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Utils.fs" />
-		<Compile Include="TypeInfo.fs" />
-		<Compile Include="MetaInfo.fs" />
-		<Compile Include="Generator.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
@@ -18,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fun.SunUI.Core\Fun.SunUI.Core.fsproj" />
+	  <ProjectReference Include="..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
 	</ItemGroup>
 
 </Project>

@@ -81,8 +81,10 @@ let main (args: string[]) =
                             }
                             TextBox'() {
                                 Text "test asd ad"
+                                KeyPress (fun s e ->
+                                    ()
+                                )
                                 TextChanged(fun s e ->
-
                                     ()
                                 )
                             }
