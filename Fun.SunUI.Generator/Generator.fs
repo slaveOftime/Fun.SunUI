@@ -63,10 +63,14 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                             $"inherit {ctx.BuilderName}<'Element>()"
                         else
                             let baseTy, generics = meta.inheritInfo
-                            $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{elementGeneric :: (getTypeNames generics) |> createGenerics |> closeGenerics}()"
+                            let builderGenerics =
+                                [ if meta.ty.IsSealed then getTypeName meta.ty else elementGeneric; yield! getTypeNames generics ]
+                                |> createGenerics
+                                |> closeGenerics
+                            $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{builderGenerics}()"
 
                     $"""
-type {builderName}{builderGenericsWithContraints}() =
+type {builderName}{if meta.ty.IsSealed then "" else builderGenericsWithContraints}() =
     {inheirit'}
 
 {meta.props}
@@ -102,7 +106,7 @@ type {builderName}{builderGenericsWithContraints}() =
 
 
                     $"""    type {typeName}'{genericStr} () = 
-        inherit {builderName}{builderGenerics}()
+        inherit {builderName}{if meta.ty.IsSealed then "" else builderGenerics}()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> new {getTypeName meta.ty}()), this.GetKey())
 """
                 )

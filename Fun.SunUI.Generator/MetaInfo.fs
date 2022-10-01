@@ -35,10 +35,11 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
     let memberStart = if useInline then "member inline this." else "member this."
 
     let contextArg =
+        let generic = if ty.IsSealed then getTypeName ty else "'Element"
         if useInline then
-            "[<InlineIfLambda>] builder: BuildElement<'Element>"
+            $"[<InlineIfLambda>] builder: BuildElement<{generic}>"
         else
-            "builder: BuildElement<'Element>"
+            $"builder: BuildElement<{generic}>"
 
 
     let rawProps = ty.GetProperties()
@@ -48,6 +49,8 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
             prop.DeclaringType = ty
             && prop.SetMethod <> null
             && prop.SetMethod.IsPublic
+            && prop.GetIndexParameters().Length = 0
+            && not (prop.GetAccessors(true).[0].IsStatic)
             && prop.GetCustomAttributes false |> isObsoleted |> not
         )
 
