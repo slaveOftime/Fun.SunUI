@@ -102,6 +102,28 @@ type ElementBuilder<'UIStack, 'Element>() =
             index + 1
         )
 
+    member inline _.MakeEventPropertyBuilder<'Element>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler, EventArgs>,
+            propertyName: string,
+            [<InlineIfLambda>] fn: 'EventArg -> unit
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let event = getEvent ctx
+            let index = builder.Invoke(ctx, index)
+            let propertyName = propertyName + "-" + string index
+
+            if ctx.Properties.ContainsKey propertyName then
+                event.RemoveHandler(unbox ctx.Properties[propertyName])
+
+            let handler = EventHandler(fun _ e -> fn e)
+            ctx.Properties[ propertyName ] <- handler
+            event.AddHandler handler
+
+            index + 1
+        )
+
 
     member inline _.MakeEqualityPropertyBuilder<'Element, 'Property when 'Property: equality>
         (

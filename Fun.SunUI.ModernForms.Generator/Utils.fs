@@ -8,13 +8,13 @@ open System.Reflection
 type Namespace = Namespace of string
 
 
-type GeneratorContext =
-    {
-        RootType: Type
-        UIStackName: string
-        ChildrenPropName: string
-        IsChildrenProp: PropertyInfo -> bool
-    }
+type GeneratorContext = {
+    RootType: Type
+    BuilderName: string
+    UIStackName: string
+    ChildrenPropName: string
+    IsChildrenProp: PropertyInfo -> bool
+}
 
 
 let (</>) x y = Path.Combine(x, y)

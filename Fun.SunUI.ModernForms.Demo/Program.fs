@@ -16,11 +16,11 @@ type SimpleService() =
 let demoCounter (top: int) =
     UI.inject (fun ctx ->
         let counter = ctx.ServiceProvider.GetService<SimpleService>().Counter
-        button () {
+        Button'() {
             Left 10
             Top top
-            Click(fun _ -> transact (fun _ -> counter.Value <- counter.Value + 2))
-            Text "Increase"
+            //Click(fun _ -> transact (fun _ -> counter.Value <- counter.Value + 2))
+            //Text "Increase"
         }
     )
 
@@ -41,7 +41,7 @@ let demoAnimation =
 
         ctx.AddDispose timer
 
-        button () {
+        Button'() {
             Width height
             Text "ani..."
         }
@@ -53,11 +53,11 @@ let main (args: string[]) =
     let count = cval 0
 
     let mainForm =
-        form () {
+        Form' () {
             Controls [
                 UI.adaptive () {
                     let! c = count
-                    flowLayoutPanel () {
+                    FlowLayoutPanel'() {
                         Top 40
                         Left 10
                         Height 300
@@ -65,6 +65,10 @@ let main (args: string[]) =
                         Controls [
                             TextBox'() {
                                 Text "test asd ad"
+                                TextChanged(fun e ->
+
+                                    ()
+                                )
                             }
                             if c > 4 then label () { Text $"count = {c}" }
                             if c % 2 = 0 then
@@ -80,14 +84,14 @@ let main (args: string[]) =
                         ]
                     }
                 }
-                flowLayoutPanel () {
+                FlowLayoutPanel'() {
                     Top 400
                     Left 10
                     Height 300
                     Width 300
                     Controls [
-                        label () { Text(count |> AVal.map (sprintf "count = %d")) }
-                        button () {
+                        Label'() { Text(count |> AVal.map (sprintf "count = %d")) }
+                        Button'() {
                             Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Text "Increase"
                         }

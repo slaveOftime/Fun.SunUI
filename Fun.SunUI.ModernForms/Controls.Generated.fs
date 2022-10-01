@@ -5,7 +5,7 @@ open Fun.SunUI.ModernForms
 
 
 type ControlBuilder<'Element when 'Element :> Modern.Forms.Control>() =
-    inherit ElementBuilder<ModernForms, 'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Rectangle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Bounds), (fun ctx x -> ctx.Element.Bounds <- x), x)
     [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Bounds), (fun ctx x -> ctx.Element.Bounds <- x), x)
@@ -57,10 +57,42 @@ type ControlBuilder<'Element when 'Element :> Modern.Forms.Control>() =
     [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.Padding) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
+
+    [<CustomOperation("AutoSizeChanged")>] member inline this.AutoSizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoSizeChanged), "AutoSizeChanged", fn)
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
+    [<CustomOperation("ContextMenuChanged")>] member inline this.ContextMenuChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuChanged), "ContextMenuChanged", fn)
+    [<CustomOperation("ControlAdded")>] member inline this.ControlAdded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ControlAdded), "ControlAdded", fn)
+    [<CustomOperation("ControlRemoved")>] member inline this.ControlRemoved ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ControlRemoved), "ControlRemoved", fn)
+    [<CustomOperation("CursorChanged")>] member inline this.CursorChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CursorChanged), "CursorChanged", fn)
+    [<CustomOperation("DockChanged")>] member inline this.DockChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DockChanged), "DockChanged", fn)
+    [<CustomOperation("DoubleClick")>] member inline this.DoubleClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DoubleClick), "DoubleClick", fn)
+    [<CustomOperation("EnabledChanged")>] member inline this.EnabledChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.EnabledChanged), "EnabledChanged", fn)
+    [<CustomOperation("GotFocus")>] member inline this.GotFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotFocus), "GotFocus", fn)
+    [<CustomOperation("Invalidated")>] member inline this.Invalidated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Invalidated), "Invalidated", fn)
+    [<CustomOperation("KeyDown")>] member inline this.KeyDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.KeyDown), "KeyDown", fn)
+    [<CustomOperation("KeyPress")>] member inline this.KeyPress ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.KeyPress), "KeyPress", fn)
+    [<CustomOperation("KeyUp")>] member inline this.KeyUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.KeyUp), "KeyUp", fn)
+    [<CustomOperation("Layout")>] member inline this.Layout ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Layout), "Layout", fn)
+    [<CustomOperation("LocationChanged")>] member inline this.LocationChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LocationChanged), "LocationChanged", fn)
+    [<CustomOperation("MarginChanged")>] member inline this.MarginChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MarginChanged), "MarginChanged", fn)
+    [<CustomOperation("MouseDown")>] member inline this.MouseDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseDown), "MouseDown", fn)
+    [<CustomOperation("MouseEnter")>] member inline this.MouseEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseEnter), "MouseEnter", fn)
+    [<CustomOperation("MouseLeave")>] member inline this.MouseLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseLeave), "MouseLeave", fn)
+    [<CustomOperation("MouseMove")>] member inline this.MouseMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseMove), "MouseMove", fn)
+    [<CustomOperation("MouseUp")>] member inline this.MouseUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseUp), "MouseUp", fn)
+    [<CustomOperation("MouseWheel")>] member inline this.MouseWheel ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseWheel), "MouseWheel", fn)
+    [<CustomOperation("PaddingChanged")>] member inline this.PaddingChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaddingChanged), "PaddingChanged", fn)
+    [<CustomOperation("ParentChanged")>] member inline this.ParentChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ParentChanged), "ParentChanged", fn)
+    [<CustomOperation("Resize")>] member inline this.Resize ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Resize), "Resize", fn)
+    [<CustomOperation("SizeChanged")>] member inline this.SizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SizeChanged), "SizeChanged", fn)
+    [<CustomOperation("TabIndexChanged")>] member inline this.TabIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabIndexChanged), "TabIndexChanged", fn)
+    [<CustomOperation("TabStopChanged")>] member inline this.TabStopChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabStopChanged), "TabStopChanged", fn)
+    [<CustomOperation("TextChanged")>] member inline this.TextChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanged), "TextChanged", fn)
+    [<CustomOperation("VisibleChanged")>] member inline this.VisibleChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.VisibleChanged), "VisibleChanged", fn)
                 
 
 type MenuBaseBuilder<'Element when 'Element :> Modern.Forms.MenuBase>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
 
                 
@@ -70,6 +102,7 @@ type MenuDropDownBuilder<'Element when 'Element :> Modern.Forms.MenuDropDown>() 
 
     [<CustomOperation("Visible")>] member inline this.Visible ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Visible), (fun ctx x -> ctx.Element.Visible <- x), x)
     [<CustomOperation("Visible")>] member inline this.Visible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Visible), (fun ctx x -> ctx.Element.Visible <- x), x)
+
                 
 
 type ContextMenuBuilder<'Element when 'Element :> Modern.Forms.ContextMenu>() =
@@ -91,10 +124,12 @@ type ToolBarBuilder<'Element when 'Element :> Modern.Forms.ToolBar>() =
                 
 
 type ScrollableControlBuilder<'Element when 'Element :> Modern.Forms.ScrollableControl>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("AutoScroll")>] member inline this.AutoScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoScroll), (fun ctx x -> ctx.Element.AutoScroll <- x), x)
     [<CustomOperation("AutoScroll")>] member inline this.AutoScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoScroll), (fun ctx x -> ctx.Element.AutoScroll <- x), x)
+
+    [<CustomOperation("Scroll")>] member inline this.Scroll ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Scroll), "Scroll", fn)
                 
 
 type PanelBuilder<'Element when 'Element :> Modern.Forms.Panel>() =
@@ -110,6 +145,7 @@ type FlowLayoutPanelBuilder<'Element when 'Element :> Modern.Forms.FlowLayoutPan
     [<CustomOperation("FlowDirection")>] member inline this.FlowDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlowDirection), (fun ctx x -> ctx.Element.FlowDirection <- x), x)
     [<CustomOperation("WrapContents")>] member inline this.WrapContents ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WrapContents), (fun ctx x -> ctx.Element.WrapContents <- x), x)
     [<CustomOperation("WrapContents")>] member inline this.WrapContents ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WrapContents), (fun ctx x -> ctx.Element.WrapContents <- x), x)
+
                 
 
 type TableLayoutPanelBuilder<'Element when 'Element :> Modern.Forms.TableLayoutPanel>() =
@@ -123,6 +159,7 @@ type TableLayoutPanelBuilder<'Element when 'Element :> Modern.Forms.TableLayoutP
     [<CustomOperation("GrowStyle")>] member inline this.GrowStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.GrowStyle), (fun ctx x -> ctx.Element.GrowStyle <- x), x)
     [<CustomOperation("RowCount")>] member inline this.RowCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RowCount), (fun ctx x -> ctx.Element.RowCount <- x), x)
     [<CustomOperation("RowCount")>] member inline this.RowCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RowCount), (fun ctx x -> ctx.Element.RowCount <- x), x)
+
                 
 
 type TabPageBuilder<'Element when 'Element :> Modern.Forms.TabPage>() =
@@ -130,10 +167,11 @@ type TabPageBuilder<'Element when 'Element :> Modern.Forms.TabPage>() =
 
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
+
                 
 
 type ScrollBarBuilder<'Element when 'Element :> Modern.Forms.ScrollBar>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("LargeChange")>] member inline this.LargeChange ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.LargeChange), (fun ctx x -> ctx.Element.LargeChange <- x), x)
     [<CustomOperation("LargeChange")>] member inline this.LargeChange ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LargeChange), (fun ctx x -> ctx.Element.LargeChange <- x), x)
@@ -145,6 +183,9 @@ type ScrollBarBuilder<'Element when 'Element :> Modern.Forms.ScrollBar>() =
     [<CustomOperation("SmallChange")>] member inline this.SmallChange ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SmallChange), (fun ctx x -> ctx.Element.SmallChange <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
+
+    [<CustomOperation("Scroll")>] member inline this.Scroll ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Scroll), "Scroll", fn)
+    [<CustomOperation("ValueChanged")>] member inline this.ValueChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ValueChanged), "ValueChanged", fn)
                 
 
 type HorizontalScrollBarBuilder<'Element when 'Element :> Modern.Forms.HorizontalScrollBar>() =
@@ -160,10 +201,11 @@ type VerticalScrollBarBuilder<'Element when 'Element :> Modern.Forms.VerticalScr
                 
 
 type ScrollControlBuilder<'Element when 'Element :> Modern.Forms.ScrollControl>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("ScrollBars")>] member inline this.ScrollBars ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.ScrollBars) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollBars), (fun ctx x -> ctx.Element.ScrollBars <- x), x)
     [<CustomOperation("ScrollBars")>] member inline this.ScrollBars ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollBars), (fun ctx x -> ctx.Element.ScrollBars <- x), x)
+
                 
 
 type TextBoxBuilder<'Element when 'Element :> Modern.Forms.TextBox>() =
@@ -185,19 +227,21 @@ type TextBoxBuilder<'Element when 'Element :> Modern.Forms.TextBox>() =
     [<CustomOperation("SelectionStart")>] member inline this.SelectionStart ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionStart), (fun ctx x -> ctx.Element.SelectionStart <- x), x)
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
+
                 
 
 type ButtonBuilder<'Element when 'Element :> Modern.Forms.Button>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.DialogResult) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
     [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
     [<CustomOperation("TextAlign")>] member inline this.TextAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.ContentAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlign), (fun ctx x -> ctx.Element.TextAlign <- x), x)
     [<CustomOperation("TextAlign")>] member inline this.TextAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlign), (fun ctx x -> ctx.Element.TextAlign <- x), x)
+
                 
 
 type CheckBoxBuilder<'Element when 'Element :> Modern.Forms.CheckBox>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("AutoCheck")>] member inline this.AutoCheck ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoCheck), (fun ctx x -> ctx.Element.AutoCheck <- x), x)
     [<CustomOperation("AutoCheck")>] member inline this.AutoCheck ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoCheck), (fun ctx x -> ctx.Element.AutoCheck <- x), x)
@@ -207,10 +251,13 @@ type CheckBoxBuilder<'Element when 'Element :> Modern.Forms.CheckBox>() =
     [<CustomOperation("CheckState")>] member inline this.CheckState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CheckState), (fun ctx x -> ctx.Element.CheckState <- x), x)
     [<CustomOperation("ThreeState")>] member inline this.ThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ThreeState), (fun ctx x -> ctx.Element.ThreeState <- x), x)
     [<CustomOperation("ThreeState")>] member inline this.ThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ThreeState), (fun ctx x -> ctx.Element.ThreeState <- x), x)
+
+    [<CustomOperation("CheckedChanged")>] member inline this.CheckedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CheckedChanged), "CheckedChanged", fn)
+    [<CustomOperation("CheckStateChanged")>] member inline this.CheckStateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CheckStateChanged), "CheckStateChanged", fn)
                 
 
 type ComboBoxBuilder<'Element when 'Element :> Modern.Forms.ComboBox>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("DroppedDown")>] member inline this.DroppedDown ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DroppedDown), (fun ctx x -> ctx.Element.DroppedDown <- x), x)
     [<CustomOperation("DroppedDown")>] member inline this.DroppedDown ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DroppedDown), (fun ctx x -> ctx.Element.DroppedDown <- x), x)
@@ -218,10 +265,14 @@ type ComboBoxBuilder<'Element when 'Element :> Modern.Forms.ComboBox>() =
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
+
+    [<CustomOperation("DropDownClosed")>] member inline this.DropDownClosed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DropDownClosed), "DropDownClosed", fn)
+    [<CustomOperation("DropDownOpened")>] member inline this.DropDownOpened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DropDownOpened), "DropDownOpened", fn)
+    [<CustomOperation("SelectedIndexChanged")>] member inline this.SelectedIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndexChanged), "SelectedIndexChanged", fn)
                 
 
 type FormTitleBarBuilder<'Element when 'Element :> Modern.Forms.FormTitleBar>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
     [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
@@ -231,10 +282,11 @@ type FormTitleBarBuilder<'Element when 'Element :> Modern.Forms.FormTitleBar>() 
     [<CustomOperation("Image")>] member inline this.Image ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Image), (fun ctx x -> ctx.Element.Image <- x), x)
     [<CustomOperation("ShowImage")>] member inline this.ShowImage ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowImage), (fun ctx x -> ctx.Element.ShowImage <- x), x)
     [<CustomOperation("ShowImage")>] member inline this.ShowImage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowImage), (fun ctx x -> ctx.Element.ShowImage <- x), x)
+
                 
 
 type LabelBuilder<'Element when 'Element :> Modern.Forms.Label>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("AutoEllipsis")>] member inline this.AutoEllipsis ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoEllipsis), (fun ctx x -> ctx.Element.AutoEllipsis <- x), x)
     [<CustomOperation("AutoEllipsis")>] member inline this.AutoEllipsis ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoEllipsis), (fun ctx x -> ctx.Element.AutoEllipsis <- x), x)
@@ -242,10 +294,11 @@ type LabelBuilder<'Element when 'Element :> Modern.Forms.Label>() =
     [<CustomOperation("Multiline")>] member inline this.Multiline ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Multiline), (fun ctx x -> ctx.Element.Multiline <- x), x)
     [<CustomOperation("TextAlign")>] member inline this.TextAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.ContentAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlign), (fun ctx x -> ctx.Element.TextAlign <- x), x)
     [<CustomOperation("TextAlign")>] member inline this.TextAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlign), (fun ctx x -> ctx.Element.TextAlign <- x), x)
+
                 
 
 type ListBoxBuilder<'Element when 'Element :> Modern.Forms.ListBox>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("FirstVisibleIndex")>] member inline this.FirstVisibleIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FirstVisibleIndex), (fun ctx x -> ctx.Element.FirstVisibleIndex <- x), x)
     [<CustomOperation("FirstVisibleIndex")>] member inline this.FirstVisibleIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FirstVisibleIndex), (fun ctx x -> ctx.Element.FirstVisibleIndex <- x), x)
@@ -261,26 +314,32 @@ type ListBoxBuilder<'Element when 'Element :> Modern.Forms.ListBox>() =
     [<CustomOperation("SelectionMode")>] member inline this.SelectionMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionMode), (fun ctx x -> ctx.Element.SelectionMode <- x), x)
     [<CustomOperation("ShowHover")>] member inline this.ShowHover ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowHover), (fun ctx x -> ctx.Element.ShowHover <- x), x)
     [<CustomOperation("ShowHover")>] member inline this.ShowHover ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowHover), (fun ctx x -> ctx.Element.ShowHover <- x), x)
+
+    [<CustomOperation("SelectedIndexChanged")>] member inline this.SelectedIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndexChanged), "SelectedIndexChanged", fn)
                 
 
 type ListViewBuilder<'Element when 'Element :> Modern.Forms.ListView>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.ListViewItem) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
+
+    [<CustomOperation("ItemDoubleClicked")>] member inline this.ItemDoubleClicked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemDoubleClicked), "ItemDoubleClicked", fn)
                 
 
 type NavigationPaneBuilder<'Element when 'Element :> Modern.Forms.NavigationPane>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.NavigationPaneItem) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
+
+    [<CustomOperation("SelectedItemChanged")>] member inline this.SelectedItemChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItemChanged), "SelectedItemChanged", fn)
                 
 
 type PictureBoxBuilder<'Element when 'Element :> Modern.Forms.PictureBox>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("Image")>] member inline this.Image ([<InlineIfLambda>] builder: BuildElement<'Element>, x: SkiaSharp.SKBitmap) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Image), (fun ctx x -> ctx.Element.Image <- x), x)
     [<CustomOperation("Image")>] member inline this.Image ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Image), (fun ctx x -> ctx.Element.Image <- x), x)
@@ -288,10 +347,12 @@ type PictureBoxBuilder<'Element when 'Element :> Modern.Forms.PictureBox>() =
     [<CustomOperation("ImageLocation")>] member inline this.ImageLocation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ImageLocation), (fun ctx x -> ctx.Element.ImageLocation <- x), x)
     [<CustomOperation("SizeMode")>] member inline this.SizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.PictureBoxSizeMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SizeMode), (fun ctx x -> ctx.Element.SizeMode <- x), x)
     [<CustomOperation("SizeMode")>] member inline this.SizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SizeMode), (fun ctx x -> ctx.Element.SizeMode <- x), x)
+
+    [<CustomOperation("SizeModeChanged")>] member inline this.SizeModeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SizeModeChanged), "SizeModeChanged", fn)
                 
 
 type ProgressBarBuilder<'Element when 'Element :> Modern.Forms.ProgressBar>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("Maximum")>] member inline this.Maximum ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Maximum), (fun ctx x -> ctx.Element.Maximum <- x), x)
     [<CustomOperation("Maximum")>] member inline this.Maximum ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Maximum), (fun ctx x -> ctx.Element.Maximum <- x), x)
@@ -301,19 +362,22 @@ type ProgressBarBuilder<'Element when 'Element :> Modern.Forms.ProgressBar>() =
     [<CustomOperation("Step")>] member inline this.Step ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Step), (fun ctx x -> ctx.Element.Step <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
+
                 
 
 type RadioButtonBuilder<'Element when 'Element :> Modern.Forms.RadioButton>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("AutoCheck")>] member inline this.AutoCheck ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoCheck), (fun ctx x -> ctx.Element.AutoCheck <- x), x)
     [<CustomOperation("AutoCheck")>] member inline this.AutoCheck ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoCheck), (fun ctx x -> ctx.Element.AutoCheck <- x), x)
     [<CustomOperation("Checked")>] member inline this.Checked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Checked), (fun ctx x -> ctx.Element.Checked <- x), x)
     [<CustomOperation("Checked")>] member inline this.Checked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Checked), (fun ctx x -> ctx.Element.Checked <- x), x)
+
+    [<CustomOperation("CheckedChanged")>] member inline this.CheckedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CheckedChanged), "CheckedChanged", fn)
                 
 
 type RibbonBuilder<'Element when 'Element :> Modern.Forms.Ribbon>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.RibbonTabPage) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
     [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
@@ -321,10 +385,12 @@ type RibbonBuilder<'Element when 'Element :> Modern.Forms.Ribbon>() =
     [<CustomOperation("SelectedTabPageIndex")>] member inline this.SelectedTabPageIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPageIndex), (fun ctx x -> ctx.Element.SelectedTabPageIndex <- x), x)
     [<CustomOperation("ShowTabs")>] member inline this.ShowTabs ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowTabs), (fun ctx x -> ctx.Element.ShowTabs <- x), x)
     [<CustomOperation("ShowTabs")>] member inline this.ShowTabs ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowTabs), (fun ctx x -> ctx.Element.ShowTabs <- x), x)
+
+    [<CustomOperation("SelectedTabPageIndexChanged")>] member inline this.SelectedTabPageIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPageIndexChanged), "SelectedTabPageIndexChanged", fn)
                 
 
 type SplitContainerBuilder<'Element when 'Element :> Modern.Forms.SplitContainer>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
@@ -336,43 +402,50 @@ type SplitContainerBuilder<'Element when 'Element :> Modern.Forms.SplitContainer
     [<CustomOperation("SplitterColor")>] member inline this.SplitterColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SplitterColor), (fun ctx x -> ctx.Element.SplitterColor <- x), x)
     [<CustomOperation("SplitterWidth")>] member inline this.SplitterWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SplitterWidth), (fun ctx x -> ctx.Element.SplitterWidth <- x), x)
     [<CustomOperation("SplitterWidth")>] member inline this.SplitterWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SplitterWidth), (fun ctx x -> ctx.Element.SplitterWidth <- x), x)
+
                 
 
 type SplitterBuilder<'Element when 'Element :> Modern.Forms.Splitter>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("SplitterWidth")>] member inline this.SplitterWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SplitterWidth), (fun ctx x -> ctx.Element.SplitterWidth <- x), x)
     [<CustomOperation("SplitterWidth")>] member inline this.SplitterWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SplitterWidth), (fun ctx x -> ctx.Element.SplitterWidth <- x), x)
+
+    [<CustomOperation("Drag")>] member inline this.Drag ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Drag), "Drag", fn)
                 
 
 type StatusBarBuilder<'Element when 'Element :> Modern.Forms.StatusBar>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
 
                 
 
 type TabControlBuilder<'Element when 'Element :> Modern.Forms.TabControl>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TabPage) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
     [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
+
+    [<CustomOperation("SelectedIndexChanged")>] member inline this.SelectedIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndexChanged), "SelectedIndexChanged", fn)
                 
 
 type TabStripBuilder<'Element when 'Element :> Modern.Forms.TabStrip>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedTab")>] member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TabStripItem) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTab), (fun ctx x -> ctx.Element.SelectedTab <- x), x)
     [<CustomOperation("SelectedTab")>] member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTab), (fun ctx x -> ctx.Element.SelectedTab <- x), x)
+
+    [<CustomOperation("SelectedTabChanged")>] member inline this.SelectedTabChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabChanged), "SelectedTabChanged", fn)
                 
 
 type TreeViewBuilder<'Element when 'Element :> Modern.Forms.TreeView>() =
-    inherit ControlBuilder<'Element>()
+    inherit ModernFormsControlBuilder<'Element>()
 
     [<CustomOperation("DrawMode")>] member inline this.DrawMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TreeViewDrawMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DrawMode), (fun ctx x -> ctx.Element.DrawMode <- x), x)
     [<CustomOperation("DrawMode")>] member inline this.DrawMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DrawMode), (fun ctx x -> ctx.Element.DrawMode <- x), x)
@@ -384,67 +457,23 @@ type TreeViewBuilder<'Element when 'Element :> Modern.Forms.TreeView>() =
     [<CustomOperation("ShowItemImages")>] member inline this.ShowItemImages ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowItemImages), (fun ctx x -> ctx.Element.ShowItemImages <- x), x)
     [<CustomOperation("VirtualMode")>] member inline this.VirtualMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VirtualMode), (fun ctx x -> ctx.Element.VirtualMode <- x), x)
     [<CustomOperation("VirtualMode")>] member inline this.VirtualMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VirtualMode), (fun ctx x -> ctx.Element.VirtualMode <- x), x)
-                
 
-type WindowBaseBuilder<'Element when 'Element :> Modern.Forms.WindowBase>() =
-    inherit ElementBuilder<ModernForms, 'Element>()
-
-    [<CustomOperation("Resizeable")>] member inline this.Resizeable ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Resizeable), (fun ctx x -> ctx.Element.Resizeable <- x), x)
-    [<CustomOperation("Resizeable")>] member inline this.Resizeable ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Resizeable), (fun ctx x -> ctx.Element.Resizeable <- x), x)
-    [<CustomOperation("StartPosition")>] member inline this.StartPosition ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.FormStartPosition) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StartPosition), (fun ctx x -> ctx.Element.StartPosition <- x), x)
-    [<CustomOperation("StartPosition")>] member inline this.StartPosition ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StartPosition), (fun ctx x -> ctx.Element.StartPosition <- x), x)
-                
-
-type FormBuilder<'Element when 'Element :> Modern.Forms.Form>() =
-    inherit WindowBaseBuilder<'Element>()
-
-    [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
-    [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
-    [<CustomOperation("AllowMinimize")>] member inline this.AllowMinimize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMinimize), (fun ctx x -> ctx.Element.AllowMinimize <- x), x)
-    [<CustomOperation("AllowMinimize")>] member inline this.AllowMinimize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMinimize), (fun ctx x -> ctx.Element.AllowMinimize <- x), x)
-    [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Rectangle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Bounds), (fun ctx x -> ctx.Element.Bounds <- x), x)
-    [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Bounds), (fun ctx x -> ctx.Element.Bounds <- x), x)
-    [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.DialogResult) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
-    [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
-    [<CustomOperation("Image")>] member inline this.Image ([<InlineIfLambda>] builder: BuildElement<'Element>, x: SkiaSharp.SKBitmap) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Image), (fun ctx x -> ctx.Element.Image <- x), x)
-    [<CustomOperation("Image")>] member inline this.Image ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Image), (fun ctx x -> ctx.Element.Image <- x), x)
-    [<CustomOperation("Location")>] member inline this.Location ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Point) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Location), (fun ctx x -> ctx.Element.Location <- x), x)
-    [<CustomOperation("Location")>] member inline this.Location ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Location), (fun ctx x -> ctx.Element.Location <- x), x)
-    [<CustomOperation("MaximumSize")>] member inline this.MaximumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MaximumSize), (fun ctx x -> ctx.Element.MaximumSize <- x), x)
-    [<CustomOperation("MaximumSize")>] member inline this.MaximumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximumSize), (fun ctx x -> ctx.Element.MaximumSize <- x), x)
-    [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
-    [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
-    [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
-    [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
-    [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
-    [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
-    [<CustomOperation("UseSystemDecorations")>] member inline this.UseSystemDecorations ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UseSystemDecorations), (fun ctx x -> ctx.Element.UseSystemDecorations <- x), x)
-    [<CustomOperation("UseSystemDecorations")>] member inline this.UseSystemDecorations ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UseSystemDecorations), (fun ctx x -> ctx.Element.UseSystemDecorations <- x), x)
-    [<CustomOperation("WindowState")>] member inline this.WindowState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.FormWindowState) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowState), (fun ctx x -> ctx.Element.WindowState <- x), x)
-    [<CustomOperation("WindowState")>] member inline this.WindowState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowState), (fun ctx x -> ctx.Element.WindowState <- x), x)
-                
-
-type MessageBoxFormBuilder<'Element when 'Element :> Modern.Forms.MessageBoxForm>() =
-    inherit FormBuilder<'Element>()
-
-    [<CustomOperation("Message")>] member inline this.Message ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Message), (fun ctx x -> ctx.Element.Message <- x), x)
-    [<CustomOperation("Message")>] member inline this.Message ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Message), (fun ctx x -> ctx.Element.Message <- x), x)
-                
-
-type PopupWindowBuilder<'Element when 'Element :> Modern.Forms.PopupWindow>() =
-    inherit WindowBaseBuilder<'Element>()
-
-    [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
-    [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
+    [<CustomOperation("BeforeExpand")>] member inline this.BeforeExpand ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BeforeExpand), "BeforeExpand", fn)
+    [<CustomOperation("DrawNode")>] member inline this.DrawNode ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DrawNode), "DrawNode", fn)
+    [<CustomOperation("ItemSelected")>] member inline this.ItemSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemSelected), "ItemSelected", fn)
                 
             
+
 // =======================================================================================================================
+
 namespace Fun.SunUI.ModernForms
+
 [<AutoOpen>]
-module DslCE =
+module ModernFormsControlBuilderDslCE =
   
     open Fun.SunUI
     open Fun.SunUI.ModernForms.DslInternals
+
     type Control' () = 
         inherit ControlBuilder<Modern.Forms.Control>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Control>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Control()), this.GetKey())
@@ -572,17 +601,5 @@ module DslCE =
     type TreeView' () = 
         inherit TreeViewBuilder<Modern.Forms.TreeView>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TreeView()), this.GetKey())
-
-    type Form' () = 
-        inherit FormBuilder<Modern.Forms.Form>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Form>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Form()), this.GetKey())
-
-    type MessageBoxForm' () = 
-        inherit MessageBoxFormBuilder<Modern.Forms.MessageBoxForm>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.MessageBoxForm>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.MessageBoxForm()), this.GetKey())
-
-    //type PopupWindow' () = 
-    //    inherit PopupWindowBuilder<Modern.Forms.PopupWindow>()
-    //    member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.PopupWindow>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.PopupWindow()), this.GetKey())
 
             

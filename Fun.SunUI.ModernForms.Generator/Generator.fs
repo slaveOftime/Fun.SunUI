@@ -51,10 +51,8 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                 metas
                 |> Seq.map (fun meta ->
                     let originalGenerics = meta.generics |> getTypeNames |> createGenerics |> closeGenerics
-                    let originalTypeWithGenerics = $"{meta.ty.Namespace}.{getTypeShortName meta.ty}{originalGenerics}"
                     let builderName = makeBuilderName meta.ty
                     let builderGenericConstraint = $"{elementGeneric} :> {getTypeName meta.ty}"
-                    let builderGenerics = elementGeneric :: (getTypeNames meta.generics) |> createGenerics |> closeGenerics
                     let builderGenericsWithContraints =
                         elementGeneric :: (getTypeNames meta.generics)
                         |> createGenerics
@@ -62,10 +60,13 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                         |> closeGenerics
 
                     let inheirit' =
-                        match meta.inheritInfo with
-                        | None -> $"inherit ElementBuilder<{ctx.UIStackName}, 'Element>()"
-                        | Some (baseTy, generics) ->
-                            $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{elementGeneric :: (getTypeNames generics) |> createGenerics |> closeGenerics}()"
+                        if meta.ty = ctx.RootType then
+                            $"inherit {ctx.BuilderName}<'Element>()"
+                        else
+                            match meta.inheritInfo with
+                            | None -> $"inherit {ctx.BuilderName}<'Element>()"
+                            | Some (baseTy, generics) ->
+                                $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{elementGeneric :: (getTypeNames generics) |> createGenerics |> closeGenerics}()"
 
                     $"""
 type {builderName}{builderGenericsWithContraints}() =
@@ -90,7 +91,7 @@ type {builderName}{builderGenericsWithContraints}() =
             let metas = group |> Seq.map snd |> Seq.concat
             let code =
                 metas
-                |> Seq.filter (fun x -> not x.ty.IsAbstract)
+                |> Seq.filter (fun x -> not x.ty.IsAbstract && x.ty.GetConstructors() |> Seq.exists (fun ct -> ct.GetParameters().Length = 0))
                 |> Seq.map (fun meta ->
                     let originalGenerics = meta.generics |> getTypeNames |> createGenerics |> closeGenerics
                     let originalTypeWithGenerics = $"{meta.ty.Namespace}.{getTypeShortName meta.ty}{originalGenerics}"
@@ -102,11 +103,6 @@ type {builderName}{builderGenericsWithContraints}() =
                     let genericStr =
                         meta.generics |> getTypeNames |> createGenerics |> appendStr (createConstraint meta.generics) |> closeGenerics
 
-                    let linkerGenericStr =
-                        if meta.generics.Length > 0 then
-                            "<" + (meta.generics |> Seq.map (fun _ -> "_") |> String.concat ", ") + ">"
-                        else
-                            ""
 
                     $"""    type {typeName}'{genericStr} () = 
         inherit {builderName}{builderGenerics}()
@@ -116,11 +112,13 @@ type {builderName}{builderGenericsWithContraints}() =
                 |> String.concat "\n"
 
             $"""namespace {targetNamespace}{ns |> trimNamespace |> addStrIfNotEmpty "."}
+
 [<AutoOpen>]
-module DslCE =
+module {ctx.BuilderName}DslCE =
   
     open Fun.SunUI
     open {targetNamespace}.{internalSegment}{ns |> trimNamespace |> addStrIfNotEmpty "."}
+
 {code}
             """
         )
@@ -129,7 +127,7 @@ module DslCE =
     {| internalCode = internalCode; dslCode = dslCode |}
 
 
-let createCodeFile ctx (codesDir: string) (targetNamespace: string) (sourceAssemblyName: string) =
+let createCodeFile ctx (codesDir: string) (targetNamespace: string) (sourceAssemblyName: string) (fileName: string) =
     printfn $"Generating code for {targetNamespace}: {sourceAssemblyName}"
 
     let formatedName = targetNamespace.Replace("-", "_")
@@ -142,7 +140,7 @@ open Fun.SunUI.{ctx.UIStackName}
 """
 
         let types = Assembly.Load(sourceAssemblyName).GetTypes()
-        let path = codesDir </> formatedName + ".fs"
+        let path = codesDir </> fileName + ".fs"
 
         if Directory.Exists codesDir |> not then
             Directory.CreateDirectory codesDir |> ignore
@@ -151,7 +149,9 @@ open Fun.SunUI.{ctx.UIStackName}
 
         let code =
             $"""{codes.internalCode}
+
 // =======================================================================================================================
+
 {codes.dslCode}"""
 
         File.WriteAllText(path, code)

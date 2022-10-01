@@ -9,8 +9,8 @@
 
 	<ItemGroup>
 		<Compile Include="Core.fs" />
-		<Compile Include="Element.Generated.fs" />
-		<Compile Include="Fun.SunUI.ModernForms.fs" />
+		<Compile Include="Controls.Generated.fs" />
+		<Compile Include="Windows.Generated.fs" />
 	</ItemGroup>
 
 	<ItemGroup>

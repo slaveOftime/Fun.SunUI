@@ -59,14 +59,16 @@ let create (rootType: Type) (buildMetaInfo: Type -> Namespace * 'T) (types: Type
     seekMoreBaseTypes baseTypes
 
     let tree =
-        validTypes
-        |> Seq.append baseTypes
-        |> Seq.append deeperBaseTypes
-        |> Seq.distinct
-        |> Seq.filter (fun x -> not x.IsConstructedGenericType)
-        |> Seq.toList
-        |> getTypeTree rootType
-        |> Seq.toList
+        let trees =
+            validTypes
+            |> Seq.append baseTypes
+            |> Seq.append deeperBaseTypes
+            |> Seq.distinct
+            |> Seq.filter (fun x -> not x.IsConstructedGenericType)
+            |> Seq.toList
+            |> getTypeTree rootType
+            |> Seq.toList
+        [ Node(rootType, trees) ]
 
     let namespaces = getNamespaces tree |> Seq.toList
     let metaGroups = System.Collections.Generic.List<_>()
