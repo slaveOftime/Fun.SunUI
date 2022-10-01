@@ -3,13 +3,13 @@
 open System
 
 
-type InjectviewContext = {
+type ElementInjectContext = {
     ServiceProvider: IServiceProvider
     AddDispose: IDisposable -> unit
 }
 
 
-type ElementInjectviewContext(creatorFn: InjectviewContext -> ElementCreator, sp: IServiceProvider) =
+type ElementInjectviewContext(creatorFn: ElementInjectContext -> ElementCreator, sp: IServiceProvider, key: obj) =
     let disposes = ResizeArray<IDisposable>()
 
     let creator =
@@ -19,14 +19,12 @@ type ElementInjectviewContext(creatorFn: InjectviewContext -> ElementCreator, sp
                 AddDispose = fun d -> disposes.Add(d)
             }
 
-    let mutable k = creator.Key
-    let ctx = creator.CreateOrUpdate(sp, ValueNone)
+    let mutable ctx = creator.CreateOrUpdate(sp, ValueNone)
 
-    member _.Update() = creator.CreateOrUpdate(sp, ValueSome ctx)
-
+    member _.Update() = ctx <- creator.CreateOrUpdate(sp, ValueSome ctx)
 
     interface IElementContext with
-        member _.Key = k
+        member _.Key = key
         member _.NativeElement = ctx.NativeElement
         member _.ServiceProvider = sp
 
@@ -34,3 +32,23 @@ type ElementInjectviewContext(creatorFn: InjectviewContext -> ElementCreator, sp
             for item in disposes do
                 item.Dispose()
             ctx.Dispose()
+
+
+[<AutoOpen>]
+module Injectview =
+
+    type UI with
+
+        static member inline inject([<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator, ?key: obj) = {
+            ElementCreator.Key = Option.toObj key
+            CreateOrUpdate =
+                fun (sp, ctx) ->
+                    let newCtx =
+                        match ctx with
+                        | ValueNone -> new ElementInjectviewContext(fn, sp, Option.toObj key)
+                        | ValueSome ctx -> unbox ctx
+                    newCtx.Update()
+                    newCtx
+        }
+
+        static member inline inject(key: obj, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator) = UI.inject (fn, key)

@@ -16,3 +16,7 @@ type ElementCreator = {
     Key: obj
     CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
 }
+
+
+/// Used to attach DSL functions
+type UI = class end

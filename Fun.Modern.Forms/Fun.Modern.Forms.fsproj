@@ -12,7 +12,6 @@
 		<Compile Include="Injectview.fs" />
 		<Compile Include="Adaptiview.fs" />
 		<Compile Include="ElementBuilder.fs" />
-		<Compile Include="DslCore.fs" />
 		<Compile Include="Elements.generated.fs" />
 	</ItemGroup>
 

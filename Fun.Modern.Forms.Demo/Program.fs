@@ -13,7 +13,7 @@ type SimpleService() =
 
 
 let demoCounter (top: int) =
-    ui.inject (fun ctx ->
+    UI.inject (fun ctx ->
         let counter = ctx.ServiceProvider.GetService<SimpleService>().Counter
         button () {
             Left 10
@@ -25,7 +25,7 @@ let demoCounter (top: int) =
 
 
 let demoAnimation =
-    ui.inject (fun ctx ->
+    UI.inject (fun ctx ->
         let height = cval 100
         let mutable count = 0.
 
@@ -54,28 +54,27 @@ let main (args: string[]) =
     let mainForm =
         form () {
             Controls [
-                ui.adaptive () {
+                UI.adaptive () {
                     let! c = count
-                    return
-                        flowLayoutPanel () {
-                            Top 40
-                            Left 10
-                            Height 300
-                            Width 300
-                            Controls [
-                                if c > 4 then label () { Text $"count = {c}" }
-                                if c % 2 = 0 then
-                                    label () {
-                                        Key "%asda"
-                                        Text $"count  2 = {c}"
-                                    }
-                                button () {
-                                    Key "button-increase"
-                                    Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
-                                    Text "Increase"
+                    flowLayoutPanel () {
+                        Top 40
+                        Left 10
+                        Height 300
+                        Width 300
+                        Controls [
+                            if c > 4 then label () { Text $"count = {c}" }
+                            if c % 2 = 0 then
+                                label () {
+                                    Key "%asda"
+                                    Text $"count  2 = {c}"
                                 }
-                            ]
-                        }
+                            button () {
+                                Key "button-increase"
+                                Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
+                                Text "Increase"
+                            }
+                        ]
+                    }
                 }
                 flowLayoutPanel () {
                     Top 400
@@ -88,11 +87,11 @@ let main (args: string[]) =
                             Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Text "Increase"
                         }
-                        ui.adaptive () {
+                        UI.adaptive () {
                             let! c = count
-                            return label () { Text "asdas" }
+                            label () { Text "asdas" }
                         }
-                        ui.inject (fun ctx ->
+                        UI.inject (fun ctx ->
                             let counter = ctx.ServiceProvider.GetService<SimpleService>().Counter
                             label () { Text(counter |> AVal.map (sprintf "d = %d")) }
                         )

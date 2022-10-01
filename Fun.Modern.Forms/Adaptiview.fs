@@ -21,10 +21,29 @@ type ElementAdaptiveContext(eleStore: ElementCreator aval, sp: IServiceProvider,
         member _.Dispose() = eleStoreSub.Dispose()
 
 
+/// Used to help return AdaptiviewBuilder return one element without use return keyword
+[<Struct>]
+type AdaptiveSingleElement = AdaptiveSingleElement of ElementCreator aval
+
+
 type AdaptiviewBuilder(?key: obj) =
     inherit AValBuilder()
 
-    member this.Run(store: ElementCreator aval) = {
+
+    member inline _.Yield(x: ElementCreator) = AVal.constant x
+
+    member inline _.Delay([<InlineIfLambda>] fn: unit -> ElementCreator aval) = AdaptiveSingleElement(fn ())
+
+    member inline _.Combine(AdaptiveSingleElement elementCreator, builder: aval<_>) =
+        AdaptiveSingleElement(
+            adaptive {
+                let! _ = builder
+                return! elementCreator
+            }
+        )
+
+
+    member this.Run(AdaptiveSingleElement store) = {
         ElementCreator.Key = Option.toObj key
         CreateOrUpdate =
             fun (sp, ctx) ->
@@ -36,4 +55,10 @@ type AdaptiviewBuilder(?key: obj) =
     }
 
 
-type adaptiview = AdaptiviewBuilder
+[<AutoOpen>]
+module Adaptiview =
+
+    type UI with
+
+        static member inline adaptive() = AdaptiviewBuilder()
+        static member inline adaptive(key) = AdaptiviewBuilder(key)
