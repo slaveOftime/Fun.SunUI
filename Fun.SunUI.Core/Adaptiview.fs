@@ -4,7 +4,7 @@ open System
 open FSharp.Data.Adaptive
 
 
-type ElementAdaptiveContext(eleStore: ElementCreator aval, sp: IServiceProvider, key: obj) =
+type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, sp: IServiceProvider, key: obj) =
     let mutable ctx = ValueNone
 
     let eleStoreSub =
@@ -23,16 +23,16 @@ type ElementAdaptiveContext(eleStore: ElementCreator aval, sp: IServiceProvider,
 
 /// Used to help return AdaptiviewBuilder return one element without use return keyword
 [<Struct>]
-type AdaptiveSingleElement = AdaptiveSingleElement of ElementCreator aval
+type AdaptiveSingleElement<'UIStack> = AdaptiveSingleElement of ElementCreator<'UIStack> aval
 
 
-type AdaptiviewBuilder(?key: obj) =
+type AdaptiviewBuilder<'UIStack>(?key: obj) =
     inherit AValBuilder()
 
 
-    member inline _.Yield(x: ElementCreator) = AVal.constant x
+    member inline _.Yield(x: ElementCreator<'UIStack>) = AVal.constant x
 
-    member inline _.Delay([<InlineIfLambda>] fn: unit -> ElementCreator aval) = AdaptiveSingleElement(fn ())
+    member inline _.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<'UIStack> aval) = AdaptiveSingleElement(fn ())
 
     member inline _.Combine(AdaptiveSingleElement elementCreator, builder: aval<_>) =
         AdaptiveSingleElement(
@@ -49,7 +49,7 @@ type AdaptiviewBuilder(?key: obj) =
             fun (sp, ctx) ->
                 let newCtx =
                     match ctx with
-                    | ValueNone -> new ElementAdaptiveContext(store, sp, defaultArg key null)
+                    | ValueNone -> new ElementAdaptiveContext<'UIStack>(store, sp, defaultArg key null)
                     | ValueSome ctx -> unbox ctx
                 newCtx
     }
@@ -60,5 +60,5 @@ module Adaptiview =
 
     type UI with
 
-        static member inline adaptive() = AdaptiviewBuilder()
-        static member inline adaptive(key) = AdaptiviewBuilder(key)
+        static member inline adaptive() = AdaptiviewBuilder<'UIStack>()
+        static member inline adaptive(key) = AdaptiviewBuilder<'UIStack>(key)

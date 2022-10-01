@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms", "Fu
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms.Demo", "Fun.SunUI.ModernForms.Demo\Fun.SunUI.ModernForms.Demo.fsproj", "{4C8017B4-3CB2-4541-A263-0501163C7C50}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.ModernForms.Generator", "Fun.SunUI.ModernForms.Generator\Fun.SunUI.ModernForms.Generator.fsproj", "{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4C8017B4-3CB2-4541-A263-0501163C7C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8017B4-3CB2-4541-A263-0501163C7C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8017B4-3CB2-4541-A263-0501163C7C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

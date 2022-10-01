@@ -3,10 +3,11 @@ module Fun.SunUI.ModernForms.Elements
 
 open Modern.Forms
 open Fun.SunUI
+open Fun.SunUI.ModernForms
 
 
 type FormBuilder() =
-    inherit ElementBuilder<Form>()
+    inherit ElementBuilder<ModernForms, Form>()
 
 
     member inline this.Run([<InlineIfLambda>] builder: BuildElement<Form>) = this.MakeElementCreator(builder, (fun _ -> new Form()), this.GetKey())
@@ -17,7 +18,7 @@ type FormBuilder() =
         this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), nameof this.Closing, fn)
 
     [<CustomOperation("Controls")>]
-    member inline this.Controls([<InlineIfLambda>] builder: BuildElement<Form>, controls: ElementCreator seq) =
+    member inline this.Controls([<InlineIfLambda>] builder: BuildElement<Form>, controls: ElementCreator<ModernForms> seq) =
         this.MakeChildrenBuilder<Form, Control>(
             builder,
             (fun x -> x.Element.Controls.Count),
@@ -29,11 +30,11 @@ type FormBuilder() =
 
 type ControlBuilder<'Element when 'Element :> Control>() =
 
-    inherit ElementBuilder<'Element>()
+    inherit ElementBuilder<ModernForms, 'Element>()
 
 
     [<CustomOperation("Controls")>]
-    member inline this.Controls([<InlineIfLambda>] builder: BuildElement<'Element>, controls: ElementCreator seq) =
+    member inline this.Controls([<InlineIfLambda>] builder: BuildElement<'Element>, controls: ElementCreator<ModernForms> seq) =
         this.MakeChildrenBuilder<'Element, Control>(
             builder,
             (fun x -> x.Element.Controls.Count),

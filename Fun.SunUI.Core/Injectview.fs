@@ -9,7 +9,7 @@ type ElementInjectContext = {
 }
 
 
-type ElementInjectviewContext(creatorFn: ElementInjectContext -> ElementCreator, sp: IServiceProvider, key: obj) =
+type ElementInjectviewContext<'UIStack>(creatorFn: ElementInjectContext -> ElementCreator<'UIStack>, sp: IServiceProvider, key: obj) =
     let disposes = ResizeArray<IDisposable>()
 
     let creator =
@@ -40,16 +40,22 @@ module Injectview =
 
     type UI with
 
-        static member inline inject([<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator, ?key: obj) = {
-            ElementCreator.Key = Option.toObj key
-            CreateOrUpdate =
-                fun (sp, ctx) ->
-                    let newCtx =
-                        match ctx with
-                        | ValueNone -> new ElementInjectviewContext(fn, sp, Option.toObj key)
-                        | ValueSome ctx -> unbox ctx
-                    newCtx.Update()
-                    newCtx
-        }
+        static member inline inject
+            (
+                [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>,
+                ?key: obj
+            ) : ElementCreator<'UIStack> =
+            {
+                Key = Option.toObj key
+                CreateOrUpdate =
+                    fun (sp, ctx) ->
+                        let newCtx =
+                            match ctx with
+                            | ValueNone -> new ElementInjectviewContext<'UIStack>(fn, sp, Option.toObj key)
+                            | ValueSome ctx -> unbox ctx
+                        newCtx.Update()
+                        newCtx
+            }
 
-        static member inline inject(key: obj, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator) = UI.inject (fn, key)
+        static member inline inject(key: obj, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>) =
+            UI.inject (fn, key)

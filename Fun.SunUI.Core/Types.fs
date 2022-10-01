@@ -12,7 +12,7 @@ type IElementContext =
 
 
 [<Struct>]
-type ElementCreator = {
+type ElementCreator<'UIStack> = {
     Key: obj
     CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
 }

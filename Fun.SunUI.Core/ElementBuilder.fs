@@ -29,7 +29,7 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
 type BuildElement<'Element> = delegate of ctx: ElementBuildContext<'Element> * index: int -> int
 
 
-type ElementBuilder<'Element>() =
+type ElementBuilder<'UIStack, 'Element>() =
     let mutable key: obj = null
 
 
@@ -64,9 +64,9 @@ type ElementBuilder<'Element>() =
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] fn: unit -> 'Element,
             ?key: obj
-        ) =
+        ) : ElementCreator<'UIStack> =
         {
-            ElementCreator.Key = Option.toObj key
+            Key = Option.toObj key
             CreateOrUpdate =
                 fun (sp, ctx) ->
                     let newCtx =
@@ -149,7 +149,7 @@ type ElementBuilder<'Element>() =
             getNativeChildrenLength: ElementBuildContext<'Element> -> int,
             clearNativeChildren: ElementBuildContext<'Element> -> unit,
             addNativeChildren: ElementBuildContext<'Element> -> 'ChildElement[] -> unit,
-            childrenCreators: ElementCreator seq
+            childrenCreators: ElementCreator<'UIStack> seq
         ) =
         BuildElement<'Element>(fun ctx index ->
             let sp = (ctx :> IElementContext).ServiceProvider
