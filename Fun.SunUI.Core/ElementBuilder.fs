@@ -59,7 +59,7 @@ type ElementBuilder<'UIStack, 'Element>() =
 
 
     /// Helper method to build an ElementCreator
-    member inline _.MakeElementCreator<'Element>
+    member inline _.MakeElementCreator
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] fn: unit -> 'Element,

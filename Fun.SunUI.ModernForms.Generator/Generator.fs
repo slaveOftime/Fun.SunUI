@@ -70,6 +70,7 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                     $"""
 type {builderName}{builderGenericsWithContraints}() =
     {inheirit'}
+
 {meta.props}
                 """
                 )
@@ -89,6 +90,7 @@ type {builderName}{builderGenericsWithContraints}() =
             let metas = group |> Seq.map snd |> Seq.concat
             let code =
                 metas
+                |> Seq.filter (fun x -> not x.ty.IsAbstract)
                 |> Seq.map (fun meta ->
                     let originalGenerics = meta.generics |> getTypeNames |> createGenerics |> closeGenerics
                     let originalTypeWithGenerics = $"{meta.ty.Namespace}.{getTypeShortName meta.ty}{originalGenerics}"
@@ -106,7 +108,10 @@ type {builderName}{builderGenericsWithContraints}() =
                         else
                             ""
 
-                    $"""    type {typeName}'{genericStr} () = inherit {builderName}{builderGenerics}()"""
+                    $"""    type {typeName}'{genericStr} () = 
+        inherit {builderName}{builderGenerics}()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> new {getTypeName meta.ty}()), this.GetKey())
+"""
                 )
                 |> String.concat "\n"
 
@@ -115,7 +120,6 @@ type {builderName}{builderGenericsWithContraints}() =
 module DslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.{ctx.UIStackName}
     open {targetNamespace}.{internalSegment}{ns |> trimNamespace |> addStrIfNotEmpty "."}
 {code}
             """
@@ -131,7 +135,11 @@ let createCodeFile ctx (codesDir: string) (targetNamespace: string) (sourceAssem
     let formatedName = targetNamespace.Replace("-", "_")
 
     try
-        let opens = $"""open {targetNamespace}.{Utils.internalSegment}"""
+        let opens =
+            $"""open {targetNamespace}.{Utils.internalSegment}
+open Fun.SunUI
+open Fun.SunUI.{ctx.UIStackName}
+"""
 
         let types = Assembly.Load(sourceAssemblyName).GetTypes()
         let path = codesDir </> formatedName + ".fs"

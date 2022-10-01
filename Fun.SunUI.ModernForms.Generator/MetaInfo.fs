@@ -50,7 +50,10 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
     let filteredProps =
         rawProps
         |> Seq.filter (fun (prop: PropertyInfo) ->
-            prop.DeclaringType = ty && prop.SetMethod <> null && prop.GetCustomAttributes false |> isObsoleted |> not
+            prop.DeclaringType = ty
+            && prop.SetMethod <> null
+            && prop.SetMethod.IsPublic
+            && prop.GetCustomAttributes false |> isObsoleted |> not
         )
 
 

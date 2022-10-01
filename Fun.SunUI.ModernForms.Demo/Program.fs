@@ -63,6 +63,9 @@ let main (args: string[]) =
                         Height 300
                         Width 300
                         Controls [
+                            TextBox'() {
+                                Text "test asd ad"
+                            }
                             if c > 4 then label () { Text $"count = {c}" }
                             if c % 2 = 0 then
                                 label () {

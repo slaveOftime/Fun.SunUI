@@ -4,7 +4,7 @@ open Utils
 
 
 let ctx = {
-    GeneratorContext.RootType = typeof<Control>
+    GeneratorContext.RootType = typeof<System.ComponentModel.Component>
     UIStackName = "ModernForms"
     ChildrenPropName = "Controls"
     IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
