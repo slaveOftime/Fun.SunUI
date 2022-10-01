@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FSharp.Data.Adaptive" Version="1.2.13" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 	</ItemGroup>
 	
 	<ItemGroup>

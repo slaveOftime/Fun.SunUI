@@ -140,32 +140,33 @@ type ElementBuilder<'Element>() =
 
 
     /// Helper method to build a delegate to set or update native elements.
-    /// This is a simple implmentation. Or magic virtual dom or diff algorithm. 
+    /// This is a simple implmentation. Or magic virtual dom or diff algorithm.
     /// 1. Parent is static or will only render once, then this delegate will only call onetime.
     /// 2. Parent is dynamic or will render multiple times, then it will try to use the Key to identify old state and try to reuse it. Otherwise it will create a fresh new child.
-    member _.MakeChildrenBuilder<'Element, 'NativeElement>
+    member _.MakeChildrenBuilder<'Element, 'ChildElement>
         (
             builder: BuildElement<'Element>,
-            nativeChildrenLength: int,
-            clearNativeChildren: unit -> unit,
-            addNativeChildren: 'NativeElement[] -> unit,
+            getNativeChildrenLength: ElementBuildContext<'Element> -> int,
+            clearNativeChildren: ElementBuildContext<'Element> -> unit,
+            addNativeChildren: ElementBuildContext<'Element> -> 'ChildElement[] -> unit,
             childrenCreators: ElementCreator seq
         ) =
         BuildElement<'Element>(fun ctx index ->
             let sp = (ctx :> IElementContext).ServiceProvider
             let index = builder.Invoke(ctx, index)
             let childrenLength = Seq.length childrenCreators
+            let nativeChildrenLength = getNativeChildrenLength ctx
 
             if childrenLength = 0 && nativeChildrenLength > 0 then
                 for child in ctx.ChildContexts do
                     child.Dispose()
                 ctx.ChildContexts.Clear()
-                clearNativeChildren ()
+                clearNativeChildren ctx
 
             else if childrenLength > 0 then
 
                 if nativeChildrenLength = 0 then
-                    let newNativeElements = Array.create childrenLength Unchecked.defaultof<'NativeElement>
+                    let newNativeElements = Array.create childrenLength Unchecked.defaultof<'ChildElement>
 
                     let mutable i = 0
                     ctx.ChildContexts.Clear()
@@ -173,15 +174,15 @@ type ElementBuilder<'Element>() =
                         let childCreator = Seq.item i childrenCreators
                         let newChildContext = childCreator.CreateOrUpdate(sp, ValueNone)
                         ctx.ChildContexts.Add(newChildContext)
-                        newNativeElements[i] <- newChildContext.NativeElement :?> 'NativeElement
+                        newNativeElements[i] <- newChildContext.NativeElement :?> 'ChildElement
                         i <- i + 1
 
-                    clearNativeChildren ()
-                    addNativeChildren newNativeElements
+                    clearNativeChildren ctx
+                    addNativeChildren ctx newNativeElements
 
                 else
                     let newChildrenContexts = Array.create childrenLength Unchecked.defaultof<IElementContext>
-                    let newNativeChildren = Array.create childrenLength Unchecked.defaultof<'NativeElement>
+                    let newNativeChildren = Array.create childrenLength Unchecked.defaultof<'ChildElement>
 
                     let mutable i = 0
                     while i < childrenLength do
@@ -199,7 +200,7 @@ type ElementBuilder<'Element>() =
                                 | Some ctx when childCreator.Key = ctx.Key -> childCreator.CreateOrUpdate(sp, ValueSome ctx)
                                 | _ -> childCreator.CreateOrUpdate(sp, ValueNone)
                         newChildrenContexts[i] <- newChildContext
-                        newNativeChildren[i] <- newChildContext.NativeElement :?> 'NativeElement
+                        newNativeChildren[i] <- newChildContext.NativeElement :?> 'ChildElement
                         i <- i + 1
 
                     for item in ctx.ChildContexts do
@@ -207,8 +208,8 @@ type ElementBuilder<'Element>() =
 
                     ctx.ChildContexts.Clear()
                     ctx.ChildContexts.AddRange newChildrenContexts
-                    clearNativeChildren ()
-                    addNativeChildren newNativeChildren
+                    clearNativeChildren ctx
+                    addNativeChildren ctx newNativeChildren
 
             index + 1
         )
