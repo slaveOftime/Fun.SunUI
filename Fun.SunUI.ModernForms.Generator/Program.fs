@@ -1,9 +1,17 @@
-﻿// For more information see https://aka.ms/fsharp-console-apps
-printfn "Hello from F#"
+﻿open Modern.Forms
+open Fun.SunUI.Generator
+open Utils
 
 
-/// Get sorted type which need to generate
+let ctx = {
+    GeneratorContext.RootType = typeof<Control>
+    UIStackName = "ModernForms"
+    ChildrenPropName = "Controls"
+    IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+}
 
-/// Generate internal generic builder
+let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.SunUI.ModernForms"
+let namesp = "Fun.SunUI.ModernForms"
+let assemblyName = "Modern.Forms"
 
-/// Generate autoopen DSL
+Generator.createCodeFile ctx dir namesp assemblyName

@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<Compile Include="Core.fs" />
 		<Compile Include="Element.Generated.fs" />
+		<Compile Include="Fun.SunUI.ModernForms.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
