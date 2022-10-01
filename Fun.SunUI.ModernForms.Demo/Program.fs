@@ -19,8 +19,8 @@ let demoCounter (top: int) =
         Button'() {
             Left 10
             Top top
-            //Click(fun _ -> transact (fun _ -> counter.Value <- counter.Value + 2))
-            //Text "Increase"
+            Click(fun _ -> transact (fun s _ -> counter.Value <- counter.Value + 2))
+            Text "Increase"
         }
     )
 
@@ -53,7 +53,7 @@ let main (args: string[]) =
     let count = cval 0
 
     let mainForm =
-        Form' () {
+        Form'() {
             Controls [
                 UI.adaptive () {
                     let! c = count
@@ -63,22 +63,38 @@ let main (args: string[]) =
                         Height 300
                         Width 300
                         Controls [
+                            {
+                                Key = null
+                                CreateOrUpdate =
+                                    fun (sp, ctx) ->
+                                        match ctx with
+                                        | ValueNone ->
+                                            let tb = new TextBox()
+                                            tb.Placeholder <- "asdasd asd "
+                                            tb.TextChanged.Add(fun e -> ())
+                                            new ElementBuildContext<TextBox>(tb, sp, null) :> IElementContext
+                                        | ValueSome x -> x
+                            }
+                            CheckBox'() {
+                                Checked true
+                                CheckedChanged(fun s e -> ())
+                            }
                             TextBox'() {
                                 Text "test asd ad"
-                                TextChanged(fun e ->
+                                TextChanged(fun s e ->
 
                                     ()
                                 )
                             }
-                            if c > 4 then label () { Text $"count = {c}" }
+                            if c > 4 then Label'() { Text $"count = {c}" }
                             if c % 2 = 0 then
-                                label () {
+                                Label'() {
                                     Key "%asda"
                                     Text $"count  2 = {c}"
                                 }
-                            button () {
+                            Button'() {
                                 Key "button-increase"
-                                Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
+                                Click(fun _ -> transact (fun s _ -> count.Value <- count.Value + 1))
                                 Text "Increase"
                             }
                         ]
@@ -92,16 +108,16 @@ let main (args: string[]) =
                     Controls [
                         Label'() { Text(count |> AVal.map (sprintf "count = %d")) }
                         Button'() {
-                            Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
+                            Click(fun _ -> transact (fun s _ -> count.Value <- count.Value + 1))
                             Text "Increase"
                         }
                         UI.adaptive () {
                             let! c = count
-                            label () { Text "asdas" }
+                            Label'() { Text "asdas" }
                         }
                         UI.inject (fun ctx ->
                             let counter = ctx.ServiceProvider.GetService<SimpleService>().Counter
-                            label () { Text(counter |> AVal.map (sprintf "d = %d")) }
+                            Label'() { Text(counter |> AVal.map (sprintf "d = %d")) }
                         )
                         demoCounter 120
                         demoAnimation
@@ -116,6 +132,17 @@ let main (args: string[]) =
     let sp = services.BuildServiceProvider()
 
     let nativeForm = mainForm.CreateOrUpdate(sp, ValueNone).NativeElement |> unbox<Form>
+
+    //let form1 = new Form()
+
+    //let tb = new TextBox()
+    //tb.Top <- 40
+    //tb.Placeholder <- "asdasd asd "
+    //tb.TextChanged.Add(fun e ->
+    //    ()
+    //)
+
+    //form1.Controls.Add tb
 
     Application.Run(nativeForm)
 

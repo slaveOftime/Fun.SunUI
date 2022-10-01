@@ -20,20 +20,15 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
         else
             ty, []
 
-    let inherits = if ty.BaseType <> ctx.RootType then Some(getTypeMeta ty.BaseType) else None
+    let baseTy, baseGenerics = getTypeMeta ty.BaseType
 
-    let generics, inheritInfo =
-        match getTypeMeta ty, inherits with
-        | (ty, generics), Some (baseTy, baseGenerics) ->
-            let generics =
-                List.append baseGenerics generics
-                |> List.distinctBy (fun x -> x.Name)
-                |> List.filter (fun x -> (getTypeName x).StartsWith "'")
-            generics, Some(baseTy, baseGenerics)
+    let inheritInfo = baseTy, baseGenerics
 
-        | (name, generics), None -> generics, None
-
-    let originalGenerics = generics |> getTypeNames |> createGenerics |> closeGenerics
+    let generics =
+        let ty, generics = getTypeMeta ty
+        List.append baseGenerics generics
+        |> List.distinctBy (fun x -> x.Name)
+        |> List.filter (fun x -> (getTypeName x).StartsWith "'")
 
     let customOperation name = $"[<CustomOperation(\"{name}\")>]"
 

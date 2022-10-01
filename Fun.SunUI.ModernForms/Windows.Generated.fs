@@ -20,7 +20,7 @@ type WindowBaseBuilder<'Element when 'Element :> Modern.Forms.WindowBase>() =
                 
 
 type FormBuilder<'Element when 'Element :> Modern.Forms.Form>() =
-    inherit ModernFormsWindowBaseBuilder<'Element>()
+    inherit WindowBaseBuilder<'Element>()
 
     [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
     [<CustomOperation("AllowMaximize")>] member inline this.AllowMaximize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowMaximize), (fun ctx x -> ctx.Element.AllowMaximize <- x), x)
@@ -59,7 +59,7 @@ type MessageBoxFormBuilder<'Element when 'Element :> Modern.Forms.MessageBoxForm
                 
 
 type PopupWindowBuilder<'Element when 'Element :> Modern.Forms.PopupWindow>() =
-    inherit ModernFormsWindowBaseBuilder<'Element>()
+    inherit WindowBaseBuilder<'Element>()
 
     [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
     [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)

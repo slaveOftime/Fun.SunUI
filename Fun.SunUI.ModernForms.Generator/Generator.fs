@@ -50,7 +50,6 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
             let code =
                 metas
                 |> Seq.map (fun meta ->
-                    let originalGenerics = meta.generics |> getTypeNames |> createGenerics |> closeGenerics
                     let builderName = makeBuilderName meta.ty
                     let builderGenericConstraint = $"{elementGeneric} :> {getTypeName meta.ty}"
                     let builderGenericsWithContraints =
@@ -63,10 +62,8 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                         if meta.ty = ctx.RootType then
                             $"inherit {ctx.BuilderName}<'Element>()"
                         else
-                            match meta.inheritInfo with
-                            | None -> $"inherit {ctx.BuilderName}<'Element>()"
-                            | Some (baseTy, generics) ->
-                                $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{elementGeneric :: (getTypeNames generics) |> createGenerics |> closeGenerics}()"
+                            let baseTy, generics = meta.inheritInfo
+                            $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{elementGeneric :: (getTypeNames generics) |> createGenerics |> closeGenerics}()"
 
                     $"""
 type {builderName}{builderGenericsWithContraints}() =
