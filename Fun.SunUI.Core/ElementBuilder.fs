@@ -44,18 +44,52 @@ type ElementBuilder<'UIStack, 'Element>() =
         key <- x
         builder
 
-    /// This will return the native element reference.
-    [<CustomOperation("Ref")>]
-    member inline this.Ref([<InlineIfLambda>] builder: BuildElement<'Element>, setRef: 'Element -> unit) =
+
+    /// Helper method to get current key
+    member _.GetKey() = key
+
+
+    /// With this we can get some property, and if it is a mutable object then can change it accordingly
+    member inline this.MakeGetOnlyBuilder<'T>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getFn: 'Element -> 'T,
+            setFn: 'T -> unit
+        ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
-            setRef ctx.Element
+            setFn (getFn ctx.Element)
+            index + 1
+        )
+
+    /// With this we can get some property, and if it is a mutable object then can change it adaptively
+    member inline this.MakeGetOnlyAdaptiveBuilder<'T>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getFn: 'Element -> 'T,
+            getStore: 'T -> aval<unit>
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let propertyName = "getter-" + string index
+
+            if ctx.Properties.ContainsKey propertyName then
+                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+
+            ctx.Properties[ propertyName ] <- (getStore (getFn ctx.Element)).AddCallback ignore
+
             index + 1
         )
 
 
-    /// Helper method to get current key
-    member _.GetKey() = key
+    /// This will return the native element reference.
+    [<CustomOperation("Ref")>]
+    member inline this.Ref([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) = this.MakeGetOnlyBuilder(builder, (fun x -> x), setRef)
+
+    /// This will return the native element reference.
+    [<CustomOperation("Ref")>]
+    member inline this.Ref([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) =
+        this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), setRef)
 
 
     /// Helper method to build an ElementCreator

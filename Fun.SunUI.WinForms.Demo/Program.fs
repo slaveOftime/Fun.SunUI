@@ -24,6 +24,7 @@ let start () =
                         Button'() {
                             Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Height 100
+                            Width 200
                             Text "Incease"
                         }
                     ]

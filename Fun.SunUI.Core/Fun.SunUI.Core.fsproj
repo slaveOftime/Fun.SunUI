@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<Compile Include="Types.fs" />
+		<Compile Include="AdaptiveExtensions.fs" />
 		<Compile Include="Injectview.fs" />
 		<Compile Include="Adaptiview.fs" />
 		<Compile Include="ElementBuilder.fs" />

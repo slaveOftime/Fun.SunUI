@@ -83,6 +83,7 @@ let main (args: string[]) =
                                 Text "test asd ad"
                                 KeyPress(fun _ -> ())
                                 TextChanged(fun _ -> ())
+                                Style(fun s -> s.ForegroundColor <- SkiaSharp.SKColor(byte 10, byte 150, byte 110))
                             }
                             if c > 4 then Label'() { Text $"count = {c}" }
                             if c % 2 = 0 then
@@ -94,6 +95,13 @@ let main (args: string[]) =
                                 Key "button-increase"
                                 Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                                 Text "Increase"
+                                Style(fun s -> adaptive {
+                                    let! c = count
+                                    s.ForegroundColor <-
+                                        if c > 2 && c <= 6 then SkiaSharp.SKColor(byte 190, byte 150, byte 110)
+                                        else if c > 6 then SkiaSharp.SKColor(byte 10, byte 150, byte 0)
+                                        else SkiaSharp.SKColor(byte 10, byte 15, byte 210)
+                                })
                             }
                         }
                     )

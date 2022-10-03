@@ -47,8 +47,15 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
         rawProps
         |> Seq.filter (fun (prop: PropertyInfo) ->
             prop.DeclaringType = ty
-            && prop.SetMethod <> null
-            && prop.SetMethod.IsPublic
+            && ((prop.SetMethod <> null && prop.SetMethod.IsPublic)
+                || (prop.Name <> ctx.ChildrenPropName
+                    && not prop.PropertyType.IsPrimitive
+                    && not prop.PropertyType.IsEnum
+                    && prop.PropertyType <> typeof<Decimal>
+                    && prop.PropertyType <> typeof<DateTime>
+                    && prop.PropertyType <> typeof<DateTimeOffset>
+                    && prop.PropertyType <> typeof<Guid>
+                    && prop.PropertyType <> typeof<TimeSpan>))
             && prop.GetIndexParameters().Length = 0
             && not (prop.GetAccessors(true).[0].IsStatic)
             && prop.GetCustomAttributes false |> isObsoleted |> not
@@ -63,7 +70,12 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
             let createAdaptiveProps () =
                 $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), (fun ctx x -> ctx.Element.{prop.Name} <- x), x)"
 
-            if prop.PropertyType.IsGenericType then
+            if prop.SetMethod = null || not prop.SetMethod.IsPublic then
+                [
+                    $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{prop.Name}), x)"
+                    $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{prop.Name}), x)"
+                ]
+            else if prop.PropertyType.IsGenericType then
                 if prop.PropertyType.Name.StartsWith "System.EventHandler" then
                     [
                         $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), {prop.Name}, fn)"
