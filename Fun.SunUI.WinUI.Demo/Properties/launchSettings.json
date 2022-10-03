@@ -1,0 +1,10 @@
+{
+    "profiles": {
+        "Fun.SunUI.WinUI.Demo (Package)": {
+            "commandName": "MsixPackage"
+        },
+        "Fun.SunUI.WinUI.Demo (Unpackaged)": {
+            "commandName": "Project"
+        }
+    }
+}

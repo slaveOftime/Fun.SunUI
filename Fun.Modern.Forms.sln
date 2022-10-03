@@ -11,13 +11,19 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.ModernForms.Demo"
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.ModernForms.Generator", "Fun.SunUI.ModernForms.Generator\Fun.SunUI.ModernForms.Generator.fsproj", "{703E7DDF-FA0E-41B4-9FE2-2C643DD90EF8}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.Generator", "Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj", "{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.Generator", "Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj", "{2F9E615E-BDEB-4E7F-8851-F7F817F1ADB3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.WinForms", "Fun.SunUI.WinForms\Fun.SunUI.WinForms.fsproj", "{23405F60-DB5F-44C2-B5C7-290F7FA0E6BD}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinForms", "Fun.SunUI.WinForms\Fun.SunUI.WinForms.fsproj", "{23405F60-DB5F-44C2-B5C7-290F7FA0E6BD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.WinForms.Demo", "Fun.SunUI.WinForms.Demo\Fun.SunUI.WinForms.Demo.fsproj", "{483A4598-5FCC-4536-ADD6-22E15D9F23A8}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinForms.Demo", "Fun.SunUI.WinForms.Demo\Fun.SunUI.WinForms.Demo.fsproj", "{483A4598-5FCC-4536-ADD6-22E15D9F23A8}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.SunUI.WinForms.Generator", "Fun.SunUI.WinForms.Generator\Fun.SunUI.WinForms.Generator.fsproj", "{B3E800DD-A06C-4409-868D-F4FCE981CC93}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinForms.Generator", "Fun.SunUI.WinForms.Generator\Fun.SunUI.WinForms.Generator.fsproj", "{B3E800DD-A06C-4409-868D-F4FCE981CC93}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinUI", "Fun.SunUI.WinUI\Fun.SunUI.WinUI.fsproj", "{937ECC59-49FF-409A-AAD2-617F3FDE3051}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinUI.Generator", "Fun.SunUI.WinUI.Generator\Fun.SunUI.WinUI.Generator.fsproj", "{102489A6-6545-48A6-ABD3-548C5E9392FE}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.SunUI.WinUI.Demo", "Fun.SunUI.WinUI.Demo\Fun.SunUI.WinUI.Demo.fsproj", "{C62598AB-457B-459D-8F63-44583BE0D5F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{B3E800DD-A06C-4409-868D-F4FCE981CC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3E800DD-A06C-4409-868D-F4FCE981CC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3E800DD-A06C-4409-868D-F4FCE981CC93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937ECC59-49FF-409A-AAD2-617F3FDE3051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937ECC59-49FF-409A-AAD2-617F3FDE3051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937ECC59-49FF-409A-AAD2-617F3FDE3051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937ECC59-49FF-409A-AAD2-617F3FDE3051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102489A6-6545-48A6-ABD3-548C5E9392FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102489A6-6545-48A6-ABD3-548C5E9392FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102489A6-6545-48A6-ABD3-548C5E9392FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102489A6-6545-48A6-ABD3-548C5E9392FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62598AB-457B-459D-8F63-44583BE0D5F9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{C62598AB-457B-459D-8F63-44583BE0D5F9}.Debug|Any CPU.Build.0 = Debug|x64
+		{C62598AB-457B-459D-8F63-44583BE0D5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62598AB-457B-459D-8F63-44583BE0D5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
