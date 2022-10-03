@@ -20,12 +20,13 @@ let start () =
                 FlowLayoutPanel'() {
                     Dock DockStyle.Fill
                     Controls [
-                        Label'() { Text(count |> AVal.map (sprintf "Count = %d")) }
+                        Label'() { 
+                            AutoSize true
+                            Text(count |> AVal.map (sprintf "Count = %d")) }
                         Button'() {
-                            Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
-                            Height 100
-                            Width 200
+                            AutoSize true
                             Text "Incease"
+                            Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                         }
                     ]
                 }
