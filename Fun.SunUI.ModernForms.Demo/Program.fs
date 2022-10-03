@@ -19,7 +19,7 @@ let demoCounter (top: int) =
         Button'() {
             Left 10
             Top top
-            Click(fun _ -> transact (fun s _ -> counter.Value <- counter.Value + 2))
+            Click(fun _ -> transact (fun _ -> counter.Value <- counter.Value + 2))
             Text "Increase"
         }
     )
@@ -54,15 +54,15 @@ let main (args: string[]) =
 
     let mainForm =
         Form'() {
-            Controls [
-                UI.adaptive () {
-                    let! c = count
-                    FlowLayoutPanel'() {
-                        Top 40
-                        Left 10
-                        Height 300
-                        Width 300
-                        Controls [
+            StaticControls [
+                FlowLayoutPanel'() {
+                    Top 40
+                    Left 10
+                    Height 300
+                    Width 300
+                    Controls(
+                        alist {
+                            let! c = count
                             {
                                 Key = null
                                 CreateOrUpdate =
@@ -77,16 +77,12 @@ let main (args: string[]) =
                             }
                             CheckBox'() {
                                 Checked true
-                                CheckedChanged(fun s e -> ())
+                                CheckedChanged(fun _ -> ())
                             }
                             TextBox'() {
                                 Text "test asd ad"
-                                KeyPress (fun s e ->
-                                    ()
-                                )
-                                TextChanged(fun s e ->
-                                    ()
-                                )
+                                KeyPress(fun _ -> ())
+                                TextChanged(fun _ -> ())
                             }
                             if c > 4 then Label'() { Text $"count = {c}" }
                             if c % 2 = 0 then
@@ -96,21 +92,21 @@ let main (args: string[]) =
                                 }
                             Button'() {
                                 Key "button-increase"
-                                Click(fun _ -> transact (fun s _ -> count.Value <- count.Value + 1))
+                                Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                                 Text "Increase"
                             }
-                        ]
-                    }
+                        }
+                    )
                 }
                 FlowLayoutPanel'() {
                     Top 400
                     Left 10
                     Height 300
                     Width 300
-                    Controls [
+                    StaticControls [
                         Label'() { Text(count |> AVal.map (sprintf "count = %d")) }
                         Button'() {
-                            Click(fun _ -> transact (fun s _ -> count.Value <- count.Value + 1))
+                            Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Text "Increase"
                         }
                         UI.adaptive () {

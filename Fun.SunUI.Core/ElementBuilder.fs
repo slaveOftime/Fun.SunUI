@@ -85,7 +85,7 @@ type ElementBuilder<'UIStack, 'Element>() =
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler<'EventArg>, 'EventArg>,
             propertyName: string,
-            [<InlineIfLambda>] fn: 'Element -> 'EventArg -> unit
+            [<InlineIfLambda>] fn: 'Element * 'EventArg -> unit
         ) =
         BuildElement<'Element>(fun ctx index ->
             let event = getEvent ctx
@@ -95,7 +95,7 @@ type ElementBuilder<'UIStack, 'Element>() =
             if ctx.Properties.ContainsKey propertyName then
                 event.RemoveHandler(unbox ctx.Properties[propertyName])
 
-            let handler = EventHandler<'EventArg>(fun s e -> fn (s :?> 'Element) e)
+            let handler = EventHandler<'EventArg>(fun s e -> fn (s :?> 'Element, e))
             ctx.Properties[ propertyName ] <- handler
             event.AddHandler handler
 
@@ -107,7 +107,7 @@ type ElementBuilder<'UIStack, 'Element>() =
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler, EventArgs>,
             propertyName: string,
-            [<InlineIfLambda>] fn: 'Element -> EventArgs -> unit
+            [<InlineIfLambda>] fn: 'Element * EventArgs -> unit
         ) =
         BuildElement<'Element>(fun ctx index ->
             let event = getEvent ctx
@@ -117,7 +117,7 @@ type ElementBuilder<'UIStack, 'Element>() =
             if ctx.Properties.ContainsKey propertyName then
                 event.RemoveHandler(unbox ctx.Properties[propertyName])
 
-            let handler = EventHandler(fun s e -> fn (s :?> 'Element) e)
+            let handler = EventHandler(fun s e -> fn (s :?> 'Element, e))
             ctx.Properties[ propertyName ] <- handler
             event.AddHandler handler
 
@@ -168,7 +168,6 @@ type ElementBuilder<'UIStack, 'Element>() =
     member _.MakeChildrenBuilder<'Element, 'ChildElement>
         (
             builder: BuildElement<'Element>,
-            getNativeChildrenLength: ElementBuildContext<'Element> -> int,
             clearNativeChildren: ElementBuildContext<'Element> -> unit,
             addNativeChildren: ElementBuildContext<'Element> -> 'ChildElement[] -> unit,
             childrenCreators: ElementCreator<'UIStack> seq
@@ -177,9 +176,9 @@ type ElementBuilder<'UIStack, 'Element>() =
             let sp = (ctx :> IElementContext).ServiceProvider
             let index = builder.Invoke(ctx, index)
             let childrenLength = Seq.length childrenCreators
-            let nativeChildrenLength = getNativeChildrenLength ctx
+            let oldCholdrenLength = ctx.ChildContexts.Count
 
-            if childrenLength = 0 && nativeChildrenLength > 0 then
+            if childrenLength = 0 && oldCholdrenLength > 0 then
                 for child in ctx.ChildContexts do
                     child.Dispose()
                 ctx.ChildContexts.Clear()
@@ -187,7 +186,7 @@ type ElementBuilder<'UIStack, 'Element>() =
 
             else if childrenLength > 0 then
 
-                if nativeChildrenLength = 0 then
+                if oldCholdrenLength = 0 then
                     let newNativeElements = Array.create childrenLength Unchecked.defaultof<'ChildElement>
 
                     let mutable i = 0
@@ -232,6 +231,81 @@ type ElementBuilder<'UIStack, 'Element>() =
                     ctx.ChildContexts.AddRange newChildrenContexts
                     clearNativeChildren ctx
                     addNativeChildren ctx newNativeChildren
+
+            index + 1
+        )
+
+
+    member this.MakeChildrenBuilder<'Element, 'ChildElement>
+        (
+            builder: BuildElement<'Element>,
+            clearNativeChildren: ElementBuildContext<'Element> -> unit,
+            addNativeChildren: ElementBuildContext<'Element> -> 'ChildElement[] -> unit,
+            childrenCreators: ElementCreator<'UIStack> alist
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let propertyName = "adaptive-children-" + string index
+
+            if ctx.Properties.ContainsKey propertyName then
+                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+
+            ctx.Properties[ propertyName ] <-
+                childrenCreators.AddCallback(fun _ _ ->
+                    // TODO: take the advatage of the alist to update more efficiently
+                    let items = childrenCreators.Content |> AVal.force
+                    this.MakeChildrenBuilder(builder, clearNativeChildren, addNativeChildren, items).Invoke(ctx, index) |> ignore
+                )
+
+            index + 1
+        )
+
+
+    /// Assume the children list will not change, so we can safetly reuse its old state
+    member _.MakeStaticChildrenBuilder<'Element, 'ChildElement>
+        (
+            builder: BuildElement<'Element>,
+            clearNativeChildren: ElementBuildContext<'Element> -> unit,
+            addNativeChildren: ElementBuildContext<'Element> -> 'ChildElement[] -> unit,
+            childrenCreators: ElementCreator<'UIStack> seq
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let sp = (ctx :> IElementContext).ServiceProvider
+            let index = builder.Invoke(ctx, index)
+            let childrenLength = Seq.length childrenCreators
+
+            if ctx.ChildContexts.Count = 0 then
+                let newNativeElements = Array.create childrenLength Unchecked.defaultof<'ChildElement>
+
+                let mutable i = 0
+                while i < childrenLength do
+                    let childCreator = Seq.item i childrenCreators
+                    let newChildContext = childCreator.CreateOrUpdate(sp, ValueNone)
+                    ctx.ChildContexts.Add(newChildContext)
+                    newNativeElements[i] <- newChildContext.NativeElement :?> 'ChildElement
+                    i <- i + 1
+
+                clearNativeChildren ctx
+                addNativeChildren ctx newNativeElements
+
+            else
+                let newChildrenContexts = Array.create childrenLength Unchecked.defaultof<IElementContext>
+
+                let mutable i = 0
+                while i < childrenLength do
+                    let oldCtx = Seq.item i ctx.ChildContexts
+                    let childCreator = Seq.item i childrenCreators
+                    if childCreator.Key <> oldCtx.Key then
+                        newChildrenContexts[i] <- childCreator.CreateOrUpdate(sp, ValueNone)
+                    else
+                        newChildrenContexts[i] <- childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
+                    i <- i + 1
+
+                for item in ctx.ChildContexts do
+                    if Seq.exists ((=) item) newChildrenContexts |> not then item.Dispose()
+
+                ctx.ChildContexts.Clear()
+                ctx.ChildContexts.AddRange newChildrenContexts
 
             index + 1
         )
