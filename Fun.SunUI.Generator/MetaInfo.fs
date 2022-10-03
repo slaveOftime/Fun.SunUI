@@ -72,8 +72,8 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
 
             if prop.SetMethod = null || not prop.SetMethod.IsPublic then
                 [
-                    $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{prop.Name}), x)"
-                    $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{prop.Name}), x)"
+                    $"""    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{prop.Name}), x)"""
+                    $"""    {customOperation (name + "'")} {memberStart}{name}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{prop.Name}), x)"""
                 ]
             else if prop.PropertyType.IsGenericType then
                 if prop.PropertyType.Name.StartsWith "System.EventHandler" then
