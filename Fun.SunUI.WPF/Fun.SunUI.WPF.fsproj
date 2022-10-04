@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<UseWPF>true</UseWPF>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Core.fs" />
+		<Compile Include="Panels.Generated.fs" />
+		<Compile Include="Controls.Generated.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Fun.SunUI.Core\Fun.SunUI.Core.fsproj" />
+	</ItemGroup>
+
+</Project>

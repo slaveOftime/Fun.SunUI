@@ -343,3 +343,47 @@ type ElementBuilder<'UIStack, 'Element>() =
 
             index + 1
         )
+
+
+    member _.MakeSingleChildBuilder<'Element, 'ChildElement>
+        (
+            builder: BuildElement<'Element>,
+            setChild: ElementBuildContext<'Element> -> 'ChildElement -> unit,
+            creator: ElementCreator<'UIStack>
+        ) =
+        BuildElement(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let sp = (ctx :> IElementContext).ServiceProvider
+
+            if ctx.ChildContexts.Count = 0 then
+                ctx.ChildContexts.Add(creator.CreateOrUpdate(sp, ValueNone))
+            else
+                let oldCtx = ctx.ChildContexts[0]
+                ctx.ChildContexts[ 0 ] <-
+                    if creator.Key = oldCtx.Key then
+                        creator.CreateOrUpdate(sp, ValueSome oldCtx)
+                    else
+                        creator.CreateOrUpdate(sp, ValueNone)
+
+            setChild ctx (ctx.ChildContexts[0].NativeElement :?> 'ChildElement)
+
+            index + 1
+        )
+
+    member this.MakeAdaptiveSingleChildBuilder<'Element, 'ChildElement>
+        (
+            builder: BuildElement<'Element>,
+            setChild: ElementBuildContext<'Element> -> 'ChildElement -> unit,
+            creator: aval<ElementCreator<'UIStack>>
+        ) =
+        BuildElement(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let propertyName = "adaptive-child-" + string index
+
+            if ctx.Properties.ContainsKey propertyName then
+                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+
+            ctx.Properties[ propertyName ] <- creator.AddCallback(fun x -> this.MakeSingleChildBuilder(builder, setChild, x).Invoke(ctx, 0) |> ignore)
+
+            index + 1
+        )

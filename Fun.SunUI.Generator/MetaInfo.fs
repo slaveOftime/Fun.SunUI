@@ -46,10 +46,10 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
     let filteredProps =
         rawProps
         |> Seq.filter (fun (prop: PropertyInfo) ->
-            prop.DeclaringType = ty
+            not (ctx.IsChildrenProp prop)
+            && prop.DeclaringType = ty
             && ((prop.SetMethod <> null && prop.SetMethod.IsPublic)
-                || (prop.Name <> ctx.ChildrenPropName
-                    && not prop.PropertyType.IsPrimitive
+                || (not prop.PropertyType.IsPrimitive
                     && not prop.PropertyType.IsEnum
                     && prop.PropertyType <> typeof<Decimal>
                     && prop.PropertyType <> typeof<DateTime>

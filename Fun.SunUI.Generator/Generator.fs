@@ -19,6 +19,12 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                 None
         )
 
+    let trimWithTargetNamespace (ns: string) =
+        if ns.StartsWith targetNamespace && ns.Length > targetNamespace.Length then
+            ns.Substring(targetNamespace.Length + 1)
+        else
+            ns
+
     let builderNames = Dictionary<string, Dictionary<string, int>>()
 
     let makeBuilderName (ty: Type) =
@@ -64,7 +70,13 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
                         else
                             let baseTy, generics = meta.inheritInfo
                             let builderGenerics =
-                                [ if meta.ty.IsSealed then getTypeName meta.ty else elementGeneric; yield! getTypeNames generics ]
+                                [
+                                    if meta.ty.IsSealed then
+                                        getTypeName meta.ty
+                                    else
+                                        elementGeneric
+                                        yield! getTypeNames generics
+                                ]
                                 |> createGenerics
                                 |> closeGenerics
                             $"inherit {baseTy.Namespace |> trimNamespace |> appendStrIfNotEmpty (string '.')}{makeBuilderName meta.ty.BaseType}{builderGenerics}()"
@@ -115,7 +127,7 @@ type {builderName}{if meta.ty.IsSealed then "" else builderGenericsWithContraint
             $"""namespace {targetNamespace}{ns |> trimNamespace |> addStrIfNotEmpty "."}
 
 [<AutoOpen>]
-module {ctx.BuilderName}DslCE =
+module {ctx.BuilderName}DslCE{(trimWithTargetNamespace ns).Replace(".", "") |> addStrIfNotEmpty "_"} =
   
     open Fun.SunUI
     open {targetNamespace}.{internalSegment}{ns |> trimNamespace |> addStrIfNotEmpty "."}
