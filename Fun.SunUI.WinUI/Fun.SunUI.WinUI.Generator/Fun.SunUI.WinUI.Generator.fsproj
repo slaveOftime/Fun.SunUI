@@ -2,14 +2,16 @@
 
 	<PropertyGroup>
 		<UseWinUI>true</UseWinUI>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Core.fs" />
-		<Compile Include="Panels.Generated.fs" />
-		<Compile Include="Controls.Generated.fs" />
+		<Compile Include="Program.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -19,9 +21,5 @@
 	</ItemGroup>
 
 	<Target Name="XamlPreCompile" Condition="false" />
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Fun.SunUI.Core\Fun.SunUI.Core.fsproj" />
-	</ItemGroup>
 
 </Project>

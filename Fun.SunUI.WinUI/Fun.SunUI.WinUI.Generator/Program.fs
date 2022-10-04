@@ -3,7 +3,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.SunUI.WinUI"
+let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.Modern.Forms\Fun.SunUI.WinUI"
 let namesp = "Fun.SunUI.WinUI"
 let assemblyName = "Microsoft.WinUI"
 

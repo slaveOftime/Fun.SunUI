@@ -12,7 +12,7 @@ let controlCtx = {
     ExcludeBaseTypes = []
 }
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.SunUI.ModernForms"
+let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.Modern.Forms\Fun.SunUI.ModernForms"
 let namesp = "Fun.SunUI.ModernForms"
 let assemblyName = "Modern.Forms"
 

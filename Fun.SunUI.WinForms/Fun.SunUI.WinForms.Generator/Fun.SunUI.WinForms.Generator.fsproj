@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -11,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
+	  <ProjectReference Include="..\..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
 	</ItemGroup>
 
 </Project>

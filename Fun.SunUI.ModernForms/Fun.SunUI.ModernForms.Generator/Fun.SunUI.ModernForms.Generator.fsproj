@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
+	  <ProjectReference Include="..\..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
 	</ItemGroup>
 
 </Project>

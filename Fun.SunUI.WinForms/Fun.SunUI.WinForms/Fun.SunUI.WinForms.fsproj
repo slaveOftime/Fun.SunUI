@@ -2,17 +2,23 @@
 
 	<PropertyGroup>
 		<UseWindowsForms>true</UseWindowsForms>
-		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TrimMode>link</TrimMode>
+		<IsTrimmable>true</IsTrimmable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Program.fs" />
+		<Compile Include="Core.fs" />
+		<Compile Include="Controls.Generated.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Fun.SunUI.Generator\Fun.SunUI.Generator.fsproj" />
+		<ProjectReference Include="..\..\Fun.SunUI\Fun.SunUI.fsproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
 	</ItemGroup>
 
 </Project>
