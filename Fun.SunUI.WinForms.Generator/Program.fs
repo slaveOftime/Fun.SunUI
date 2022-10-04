@@ -8,7 +8,7 @@ let controlCtx = {
     BuilderName = "WinFormsControlBuilder"
     UIStackName = "WinForms"
     ChildrenPropName = "Controls"
-    IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
     ExcludeBaseTypes = []
 }
 

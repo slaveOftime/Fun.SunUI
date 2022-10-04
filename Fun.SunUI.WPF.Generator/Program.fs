@@ -26,7 +26,7 @@ let panelCtx = {
     BuilderName = "WPFPanelBuilder"
     UIStackName = "WPF"
     ChildrenPropName = "Children"
-    IsChildrenProp = fun prop -> prop.PropertyType = typeof<UIElementCollection> && prop.Name = "Children"
+    IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<UIElementCollection> && prop.Name = "Children"
     ExcludeBaseTypes = []
 }
 

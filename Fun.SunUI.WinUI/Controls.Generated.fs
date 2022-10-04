@@ -56,6 +56,9 @@ type ControlBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Control
     [<CustomOperation("VerticalContentAlignment")>] member inline this.VerticalContentAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.VerticalAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalContentAlignment), (fun ctx x -> ctx.Element.VerticalContentAlignment <- x), x)
     [<CustomOperation("VerticalContentAlignment")>] member inline this.VerticalContentAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalContentAlignment), (fun ctx x -> ctx.Element.VerticalContentAlignment <- x), x)
 
+    [<CustomOperation("FocusDisengaged")>] member inline this.FocusDisengaged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FocusDisengaged), "FocusDisengaged", fn)
+    [<CustomOperation("FocusEngaged")>] member inline this.FocusEngaged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FocusEngaged), "FocusEngaged", fn)
+    [<CustomOperation("IsEnabledChanged")>] member inline this.IsEnabledChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsEnabledChanged), "IsEnabledChanged", fn)
                 
 
 type ContentControlBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ContentControl>() =
@@ -90,6 +93,7 @@ type ButtonBaseBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Prim
     [<CustomOperation("CommandParameter")>] member inline this.CommandParameter ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CommandParameter), (fun ctx x -> ctx.Element.CommandParameter <- x), x)
     [<CustomOperation("CommandParameter")>] member inline this.CommandParameter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CommandParameter), (fun ctx x -> ctx.Element.CommandParameter <- x), x)
 
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals
@@ -146,6 +150,9 @@ type ToggleButtonBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Pr
     [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
     [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
 
+    [<CustomOperation("Checked")>] member inline this.Checked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Checked), "Checked", fn)
+    [<CustomOperation("Indeterminate")>] member inline this.Indeterminate ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Indeterminate), "Indeterminate", fn)
+    [<CustomOperation("Unchecked")>] member inline this.Unchecked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unchecked), "Unchecked", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals
@@ -248,6 +255,7 @@ type TabViewItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Tab
     [<CustomOperation("TabViewTemplateSettings")>] member inline this.TabViewTemplateSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TabViewTemplateSettings), x)
     [<CustomOperation("TabViewTemplateSettings'")>] member inline this.TabViewTemplateSettings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TabViewTemplateSettings), x)
 
+    [<CustomOperation("CloseRequested")>] member inline this.CloseRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CloseRequested), "CloseRequested", fn)
                 
 
 type TreeViewItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TreeViewItem>() =
@@ -338,6 +346,7 @@ type CommandBarBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Comm
     [<CustomOperation("SecondaryCommands")>] member inline this.SecondaryCommands ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.SecondaryCommands), x)
     [<CustomOperation("SecondaryCommands'")>] member inline this.SecondaryCommands' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.SecondaryCommands), x)
 
+    [<CustomOperation("DynamicOverflowItemsChanging")>] member inline this.DynamicOverflowItemsChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DynamicOverflowItemsChanging), "DynamicOverflowItemsChanging", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals.Primitives
@@ -428,6 +437,7 @@ type SplitButtonBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Spl
     [<CustomOperation("Flyout")>] member inline this.Flyout ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.Primitives.FlyoutBase) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Flyout), (fun ctx x -> ctx.Element.Flyout <- x), x)
     [<CustomOperation("Flyout")>] member inline this.Flyout ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Flyout), (fun ctx x -> ctx.Element.Flyout <- x), x)
 
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
                 
 
 type ToggleSplitButtonBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ToggleSplitButton>() =
@@ -436,6 +446,7 @@ type ToggleSplitButtonBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Contro
     [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
     [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
 
+    [<CustomOperation("IsCheckedChanged")>] member inline this.IsCheckedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsCheckedChanged), "IsCheckedChanged", fn)
                 
 
 type AppBarElementContainerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.AppBarElementContainer>() =
@@ -494,6 +505,12 @@ type ContentDialogBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.C
     [<CustomOperation("TitleTemplate")>] member inline this.TitleTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TitleTemplate), (fun ctx x -> ctx.Element.TitleTemplate <- x), x)
     [<CustomOperation("TitleTemplate")>] member inline this.TitleTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TitleTemplate), (fun ctx x -> ctx.Element.TitleTemplate <- x), x)
 
+    [<CustomOperation("CloseButtonClick")>] member inline this.CloseButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CloseButtonClick), "CloseButtonClick", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
+    [<CustomOperation("Opened")>] member inline this.Opened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opened), "Opened", fn)
+    [<CustomOperation("PrimaryButtonClick")>] member inline this.PrimaryButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PrimaryButtonClick), "PrimaryButtonClick", fn)
+    [<CustomOperation("SecondaryButtonClick")>] member inline this.SecondaryButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SecondaryButtonClick), "SecondaryButtonClick", fn)
                 
 
 type ExpanderBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Expander>() =
@@ -512,6 +529,8 @@ type ExpanderBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Expand
     [<CustomOperation("TemplateSettings")>] member inline this.TemplateSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplateSettings), x)
     [<CustomOperation("TemplateSettings'")>] member inline this.TemplateSettings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplateSettings), x)
 
+    [<CustomOperation("Collapsed")>] member inline this.Collapsed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Collapsed), "Collapsed", fn)
+    [<CustomOperation("Expanding")>] member inline this.Expanding ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Expanding), "Expanding", fn)
                 
 
 type FlyoutPresenterBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.FlyoutPresenter>() =
@@ -538,6 +557,10 @@ type FrameBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Frame>() 
     [<CustomOperation("SourcePageType")>] member inline this.SourcePageType ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Type) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SourcePageType), (fun ctx x -> ctx.Element.SourcePageType <- x), x)
     [<CustomOperation("SourcePageType")>] member inline this.SourcePageType ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SourcePageType), (fun ctx x -> ctx.Element.SourcePageType <- x), x)
 
+    [<CustomOperation("Navigated")>] member inline this.Navigated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigated), "Navigated", fn)
+    [<CustomOperation("Navigating")>] member inline this.Navigating ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigating), "Navigating", fn)
+    [<CustomOperation("NavigationFailed")>] member inline this.NavigationFailed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationFailed), "NavigationFailed", fn)
+    [<CustomOperation("NavigationStopped")>] member inline this.NavigationStopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationStopped), "NavigationStopped", fn)
                 
 
 type GroupItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.GroupItem>() =
@@ -622,6 +645,16 @@ type NavigationViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.
     [<CustomOperation("TemplateSettings")>] member inline this.TemplateSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplateSettings), x)
     [<CustomOperation("TemplateSettings'")>] member inline this.TemplateSettings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplateSettings), x)
 
+    [<CustomOperation("DisplayModeChanged")>] member inline this.DisplayModeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DisplayModeChanged), "DisplayModeChanged", fn)
+    [<CustomOperation("ItemInvoked")>] member inline this.ItemInvoked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemInvoked), "ItemInvoked", fn)
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
+    [<CustomOperation("BackRequested")>] member inline this.BackRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BackRequested), "BackRequested", fn)
+    [<CustomOperation("Collapsed")>] member inline this.Collapsed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Collapsed), "Collapsed", fn)
+    [<CustomOperation("Expanding")>] member inline this.Expanding ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Expanding), "Expanding", fn)
+    [<CustomOperation("PaneClosed")>] member inline this.PaneClosed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneClosed), "PaneClosed", fn)
+    [<CustomOperation("PaneClosing")>] member inline this.PaneClosing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneClosing), "PaneClosing", fn)
+    [<CustomOperation("PaneOpened")>] member inline this.PaneOpened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneOpened), "PaneOpened", fn)
+    [<CustomOperation("PaneOpening")>] member inline this.PaneOpening ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneOpening), "PaneOpening", fn)
                 
 
 type PickerFlyoutPresenterBuilder() =
@@ -646,6 +679,7 @@ type RefreshContainerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Control
     [<CustomOperation("Visualizer")>] member inline this.Visualizer ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.RefreshVisualizer) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Visualizer), (fun ctx x -> ctx.Element.Visualizer <- x), x)
     [<CustomOperation("Visualizer")>] member inline this.Visualizer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Visualizer), (fun ctx x -> ctx.Element.Visualizer <- x), x)
 
+    [<CustomOperation("RefreshRequested")>] member inline this.RefreshRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RefreshRequested), "RefreshRequested", fn)
                 
 
 type ScrollViewerBuilder() =
@@ -712,6 +746,7 @@ type ScrollViewerBuilder() =
     [<CustomOperation("ZoomSnapPointsType")>] member inline this.ZoomSnapPointsType ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, x: Microsoft.UI.Xaml.Controls.SnapPointsType) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ZoomSnapPointsType), (fun ctx x -> ctx.Element.ZoomSnapPointsType <- x), x)
     [<CustomOperation("ZoomSnapPointsType")>] member inline this.ZoomSnapPointsType ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ZoomSnapPointsType), (fun ctx x -> ctx.Element.ZoomSnapPointsType <- x), x)
 
+    [<CustomOperation("AnchorRequested")>] member inline this.AnchorRequested ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AnchorRequested), "AnchorRequested", fn)
     [<CustomOperation("DirectManipulationCompleted")>] member inline this.DirectManipulationCompleted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DirectManipulationCompleted), "DirectManipulationCompleted", fn)
     [<CustomOperation("DirectManipulationStarted")>] member inline this.DirectManipulationStarted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DirectManipulationStarted), "DirectManipulationStarted", fn)
     [<CustomOperation("ViewChanged")>] member inline this.ViewChanged ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ViewChanged), "ViewChanged", fn)
@@ -778,6 +813,10 @@ type TeachingTipBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Tea
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
 
+    [<CustomOperation("ActionButtonClick")>] member inline this.ActionButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ActionButtonClick), "ActionButtonClick", fn)
+    [<CustomOperation("CloseButtonClick")>] member inline this.CloseButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CloseButtonClick), "CloseButtonClick", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
                 
 
 type ToolTipBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ToolTip>() =
@@ -798,6 +837,8 @@ type ToolTipBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ToolTip
     [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
     [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
 
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("Opened")>] member inline this.Opened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opened), "Opened", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals.Primitives
@@ -886,6 +927,7 @@ type SelectorBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Primit
     [<CustomOperation("SelectedValuePath")>] member inline this.SelectedValuePath ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedValuePath), (fun ctx x -> ctx.Element.SelectedValuePath <- x), x)
     [<CustomOperation("SelectedValuePath")>] member inline this.SelectedValuePath ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedValuePath), (fun ctx x -> ctx.Element.SelectedValuePath <- x), x)
 
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals
@@ -944,6 +986,12 @@ type ListViewBaseBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Li
     [<CustomOperation("SingleSelectionFollowsFocus")>] member inline this.SingleSelectionFollowsFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SingleSelectionFollowsFocus), (fun ctx x -> ctx.Element.SingleSelectionFollowsFocus <- x), x)
     [<CustomOperation("SingleSelectionFollowsFocus")>] member inline this.SingleSelectionFollowsFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SingleSelectionFollowsFocus), (fun ctx x -> ctx.Element.SingleSelectionFollowsFocus <- x), x)
 
+    [<CustomOperation("ChoosingGroupHeaderContainer")>] member inline this.ChoosingGroupHeaderContainer ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ChoosingGroupHeaderContainer), "ChoosingGroupHeaderContainer", fn)
+    [<CustomOperation("ChoosingItemContainer")>] member inline this.ChoosingItemContainer ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ChoosingItemContainer), "ChoosingItemContainer", fn)
+    [<CustomOperation("ContainerContentChanging")>] member inline this.ContainerContentChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContainerContentChanging), "ContainerContentChanging", fn)
+    [<CustomOperation("DragItemsCompleted")>] member inline this.DragItemsCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragItemsCompleted), "DragItemsCompleted", fn)
+    [<CustomOperation("DragItemsStarting")>] member inline this.DragItemsStarting ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragItemsStarting), "DragItemsStarting", fn)
+    [<CustomOperation("ItemClick")>] member inline this.ItemClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemClick), "ItemClick", fn)
                 
 
 type ListViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ListView>() =
@@ -1020,6 +1068,7 @@ type ComboBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ComboB
 
     [<CustomOperation("DropDownClosed")>] member inline this.DropDownClosed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DropDownClosed), "DropDownClosed", fn)
     [<CustomOperation("DropDownOpened")>] member inline this.DropDownOpened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DropDownOpened), "DropDownOpened", fn)
+    [<CustomOperation("TextSubmitted")>] member inline this.TextSubmitted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextSubmitted), "TextSubmitted", fn)
                 
 
 type FlipViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.FlipView>() =
@@ -1070,6 +1119,9 @@ type AutoSuggestBoxBuilder() =
     [<CustomOperation("UpdateTextOnSelect")>] member inline this.UpdateTextOnSelect ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UpdateTextOnSelect), (fun ctx x -> ctx.Element.UpdateTextOnSelect <- x), x)
     [<CustomOperation("UpdateTextOnSelect")>] member inline this.UpdateTextOnSelect ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UpdateTextOnSelect), (fun ctx x -> ctx.Element.UpdateTextOnSelect <- x), x)
 
+    [<CustomOperation("QuerySubmitted")>] member inline this.QuerySubmitted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.QuerySubmitted), "QuerySubmitted", fn)
+    [<CustomOperation("SuggestionChosen")>] member inline this.SuggestionChosen ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SuggestionChosen), "SuggestionChosen", fn)
+    [<CustomOperation("TextChanged")>] member inline this.TextChanged ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanged), "TextChanged", fn)
                 
 
 type CommandBarOverflowPresenterBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter>() =
@@ -1116,6 +1168,11 @@ type PivotBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Pivot>() 
     [<CustomOperation("TitleTemplate")>] member inline this.TitleTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TitleTemplate), (fun ctx x -> ctx.Element.TitleTemplate <- x), x)
     [<CustomOperation("TitleTemplate")>] member inline this.TitleTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TitleTemplate), (fun ctx x -> ctx.Element.TitleTemplate <- x), x)
 
+    [<CustomOperation("PivotItemLoaded")>] member inline this.PivotItemLoaded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PivotItemLoaded), "PivotItemLoaded", fn)
+    [<CustomOperation("PivotItemLoading")>] member inline this.PivotItemLoading ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PivotItemLoading), "PivotItemLoading", fn)
+    [<CustomOperation("PivotItemUnloaded")>] member inline this.PivotItemUnloaded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PivotItemUnloaded), "PivotItemUnloaded", fn)
+    [<CustomOperation("PivotItemUnloading")>] member inline this.PivotItemUnloading ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PivotItemUnloading), "PivotItemUnloading", fn)
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
 
 type MenuFlyoutItemBaseBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase>() =
@@ -1140,6 +1197,7 @@ type MenuFlyoutItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
 
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
                 
 
 type RadioMenuFlyoutItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem>() =
@@ -1198,6 +1256,7 @@ type RangeBaseBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Primi
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
 
+    [<CustomOperation("ValueChanged")>] member inline this.ValueChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ValueChanged), "ValueChanged", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals
@@ -1284,6 +1343,7 @@ type ScrollBarBuilder() =
     [<CustomOperation("ViewportSize")>] member inline this.ViewportSize ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ScrollBar>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ViewportSize), (fun ctx x -> ctx.Element.ViewportSize <- x), x)
     [<CustomOperation("ViewportSize")>] member inline this.ViewportSize ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ScrollBar>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ViewportSize), (fun ctx x -> ctx.Element.ViewportSize <- x), x)
 
+    [<CustomOperation("Scroll")>] member inline this.Scroll ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ScrollBar>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Scroll), "Scroll", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals
@@ -1332,6 +1392,7 @@ type BreadcrumbBarBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.B
     [<CustomOperation("ItemsSource")>] member inline this.ItemsSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsSource), (fun ctx x -> ctx.Element.ItemsSource <- x), x)
     [<CustomOperation("ItemsSource")>] member inline this.ItemsSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsSource), (fun ctx x -> ctx.Element.ItemsSource <- x), x)
 
+    [<CustomOperation("ItemClicked")>] member inline this.ItemClicked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemClicked), "ItemClicked", fn)
                 
 
 type CalendarDatePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.CalendarDatePicker>() =
@@ -1374,7 +1435,9 @@ type CalendarDatePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Contr
     [<CustomOperation("PlaceholderText")>] member inline this.PlaceholderText ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlaceholderText), (fun ctx x -> ctx.Element.PlaceholderText <- x), x)
     [<CustomOperation("PlaceholderText")>] member inline this.PlaceholderText ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlaceholderText), (fun ctx x -> ctx.Element.PlaceholderText <- x), x)
 
+    [<CustomOperation("CalendarViewDayItemChanging")>] member inline this.CalendarViewDayItemChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CalendarViewDayItemChanging), "CalendarViewDayItemChanging", fn)
     [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("DateChanged")>] member inline this.DateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DateChanged), "DateChanged", fn)
     [<CustomOperation("Opened")>] member inline this.Opened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opened), "Opened", fn)
                 
 
@@ -1532,6 +1595,8 @@ type CalendarViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Ca
     [<CustomOperation("VerticalFirstOfMonthLabelAlignment")>] member inline this.VerticalFirstOfMonthLabelAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.VerticalAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalFirstOfMonthLabelAlignment), (fun ctx x -> ctx.Element.VerticalFirstOfMonthLabelAlignment <- x), x)
     [<CustomOperation("VerticalFirstOfMonthLabelAlignment")>] member inline this.VerticalFirstOfMonthLabelAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalFirstOfMonthLabelAlignment), (fun ctx x -> ctx.Element.VerticalFirstOfMonthLabelAlignment <- x), x)
 
+    [<CustomOperation("CalendarViewDayItemChanging")>] member inline this.CalendarViewDayItemChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CalendarViewDayItemChanging), "CalendarViewDayItemChanging", fn)
+    [<CustomOperation("SelectedDatesChanged")>] member inline this.SelectedDatesChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedDatesChanged), "SelectedDatesChanged", fn)
                 
 
 type CalendarViewDayItemBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.CalendarViewDayItem>() =
@@ -1584,6 +1649,7 @@ type ColorPickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Col
     [<CustomOperation("PreviousColor")>] member inline this.PreviousColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Nullable<Windows.UI.Color>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviousColor), (fun ctx x -> ctx.Element.PreviousColor <- x), x)
     [<CustomOperation("PreviousColor")>] member inline this.PreviousColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PreviousColor), (fun ctx x -> ctx.Element.PreviousColor <- x), x)
 
+    [<CustomOperation("ColorChanged")>] member inline this.ColorChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColorChanged), "ColorChanged", fn)
                 
 
 type DatePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.DatePicker>() =
@@ -1621,6 +1687,7 @@ type DatePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Date
     [<CustomOperation("YearVisible")>] member inline this.YearVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.YearVisible), (fun ctx x -> ctx.Element.YearVisible <- x), x)
 
     [<CustomOperation("DateChanged")>] member inline this.DateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DateChanged), "DateChanged", fn)
+    [<CustomOperation("SelectedDateChanged")>] member inline this.SelectedDateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedDateChanged), "SelectedDateChanged", fn)
                 
 
 type DatePickerFlyoutPresenterBuilder() =
@@ -1655,6 +1722,8 @@ type HubBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Hub>() =
     [<CustomOperation("SemanticZoomOwner")>] member inline this.SemanticZoomOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.SemanticZoom) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SemanticZoomOwner), (fun ctx x -> ctx.Element.SemanticZoomOwner <- x), x)
     [<CustomOperation("SemanticZoomOwner")>] member inline this.SemanticZoomOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SemanticZoomOwner), (fun ctx x -> ctx.Element.SemanticZoomOwner <- x), x)
 
+    [<CustomOperation("SectionHeaderClick")>] member inline this.SectionHeaderClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SectionHeaderClick), "SectionHeaderClick", fn)
+    [<CustomOperation("SectionsInViewChanged")>] member inline this.SectionsInViewChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SectionsInViewChanged), "SectionsInViewChanged", fn)
                 
 
 type HubSectionBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.HubSection>() =
@@ -1703,6 +1772,9 @@ type InfoBarBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.InfoBar
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
 
+    [<CustomOperation("CloseButtonClick")>] member inline this.CloseButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CloseButtonClick), "CloseButtonClick", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
                 
 
 type ListPickerFlyoutPresenterBuilder() =
@@ -1771,6 +1843,7 @@ type NumberBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Numbe
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
 
+    [<CustomOperation("ValueChanged")>] member inline this.ValueChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ValueChanged), "ValueChanged", fn)
                 
 
 type PasswordBoxBuilder() =
@@ -1805,6 +1878,10 @@ type PasswordBoxBuilder() =
     [<CustomOperation("TextReadingOrder")>] member inline this.TextReadingOrder ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, x: Microsoft.UI.Xaml.TextReadingOrder) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TextReadingOrder), (fun ctx x -> ctx.Element.TextReadingOrder <- x), x)
     [<CustomOperation("TextReadingOrder")>] member inline this.TextReadingOrder ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextReadingOrder), (fun ctx x -> ctx.Element.TextReadingOrder <- x), x)
 
+    [<CustomOperation("ContextMenuOpening")>] member inline this.ContextMenuOpening ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuOpening), "ContextMenuOpening", fn)
+    [<CustomOperation("PasswordChanged")>] member inline this.PasswordChanged ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PasswordChanged), "PasswordChanged", fn)
+    [<CustomOperation("PasswordChanging")>] member inline this.PasswordChanging ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PasswordChanging), "PasswordChanging", fn)
+    [<CustomOperation("Paste")>] member inline this.Paste ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Paste), "Paste", fn)
                 
 
 type PersonPictureBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.PersonPicture>() =
@@ -1861,6 +1938,7 @@ type PipsPagerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.PipsP
     [<CustomOperation("TemplateSettings")>] member inline this.TemplateSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplateSettings), x)
     [<CustomOperation("TemplateSettings'")>] member inline this.TemplateSettings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplateSettings), x)
 
+    [<CustomOperation("SelectedIndexChanged")>] member inline this.SelectedIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndexChanged), "SelectedIndexChanged", fn)
                 
 
 type ProgressRingBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.ProgressRing>() =
@@ -1901,6 +1979,7 @@ type RadioButtonsBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Ra
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
     [<CustomOperation("SelectedItem")>] member inline this.SelectedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedItem), (fun ctx x -> ctx.Element.SelectedItem <- x), x)
 
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
 
 type RatingControlBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.RatingControl>() =
@@ -1923,6 +2002,7 @@ type RatingControlBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.R
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
 
+    [<CustomOperation("ValueChanged")>] member inline this.ValueChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ValueChanged), "ValueChanged", fn)
                 
 
 type RefreshVisualizerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.RefreshVisualizer>() =
@@ -1933,6 +2013,8 @@ type RefreshVisualizerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Contro
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.RefreshVisualizerOrientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
 
+    [<CustomOperation("RefreshRequested")>] member inline this.RefreshRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RefreshRequested), "RefreshRequested", fn)
+    [<CustomOperation("RefreshStateChanged")>] member inline this.RefreshStateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RefreshStateChanged), "RefreshStateChanged", fn)
                 
 
 type RichEditBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.RichEditBox>() =
@@ -1991,6 +2073,18 @@ type RichEditBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Ric
     [<CustomOperation("TextWrapping")>] member inline this.TextWrapping ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.TextWrapping) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TextWrapping), (fun ctx x -> ctx.Element.TextWrapping <- x), x)
     [<CustomOperation("TextWrapping")>] member inline this.TextWrapping ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextWrapping), (fun ctx x -> ctx.Element.TextWrapping <- x), x)
 
+    [<CustomOperation("CandidateWindowBoundsChanged")>] member inline this.CandidateWindowBoundsChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CandidateWindowBoundsChanged), "CandidateWindowBoundsChanged", fn)
+    [<CustomOperation("ContextMenuOpening")>] member inline this.ContextMenuOpening ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuOpening), "ContextMenuOpening", fn)
+    [<CustomOperation("CopyingToClipboard")>] member inline this.CopyingToClipboard ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CopyingToClipboard), "CopyingToClipboard", fn)
+    [<CustomOperation("CuttingToClipboard")>] member inline this.CuttingToClipboard ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CuttingToClipboard), "CuttingToClipboard", fn)
+    [<CustomOperation("Paste")>] member inline this.Paste ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Paste), "Paste", fn)
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
+    [<CustomOperation("SelectionChanging")>] member inline this.SelectionChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanging), "SelectionChanging", fn)
+    [<CustomOperation("TextChanged")>] member inline this.TextChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanged), "TextChanged", fn)
+    [<CustomOperation("TextChanging")>] member inline this.TextChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanging), "TextChanging", fn)
+    [<CustomOperation("TextCompositionChanged")>] member inline this.TextCompositionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionChanged), "TextCompositionChanged", fn)
+    [<CustomOperation("TextCompositionEnded")>] member inline this.TextCompositionEnded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionEnded), "TextCompositionEnded", fn)
+    [<CustomOperation("TextCompositionStarted")>] member inline this.TextCompositionStarted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionStarted), "TextCompositionStarted", fn)
                 
 
 type SemanticZoomBuilder() =
@@ -2007,6 +2101,8 @@ type SemanticZoomBuilder() =
     [<CustomOperation("ZoomedOutView")>] member inline this.ZoomedOutView ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>, x: Microsoft.UI.Xaml.Controls.ISemanticZoomInformation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ZoomedOutView), (fun ctx x -> ctx.Element.ZoomedOutView <- x), x)
     [<CustomOperation("ZoomedOutView")>] member inline this.ZoomedOutView ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ZoomedOutView), (fun ctx x -> ctx.Element.ZoomedOutView <- x), x)
 
+    [<CustomOperation("ViewChangeCompleted")>] member inline this.ViewChangeCompleted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ViewChangeCompleted), "ViewChangeCompleted", fn)
+    [<CustomOperation("ViewChangeStarted")>] member inline this.ViewChangeStarted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ViewChangeStarted), "ViewChangeStarted", fn)
                 
 
 type SplitViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.SplitView>() =
@@ -2033,6 +2129,10 @@ type SplitViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Split
     [<CustomOperation("TemplateSettings")>] member inline this.TemplateSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplateSettings), x)
     [<CustomOperation("TemplateSettings'")>] member inline this.TemplateSettings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplateSettings), x)
 
+    [<CustomOperation("PaneClosed")>] member inline this.PaneClosed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneClosed), "PaneClosed", fn)
+    [<CustomOperation("PaneClosing")>] member inline this.PaneClosing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneClosing), "PaneClosing", fn)
+    [<CustomOperation("PaneOpened")>] member inline this.PaneOpened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneOpened), "PaneOpened", fn)
+    [<CustomOperation("PaneOpening")>] member inline this.PaneOpening ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaneOpening), "PaneOpening", fn)
                 
 
 type TabViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TabView>() =
@@ -2075,6 +2175,15 @@ type TabViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TabView
     [<CustomOperation("TabWidthMode")>] member inline this.TabWidthMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.TabViewWidthMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TabWidthMode), (fun ctx x -> ctx.Element.TabWidthMode <- x), x)
     [<CustomOperation("TabWidthMode")>] member inline this.TabWidthMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TabWidthMode), (fun ctx x -> ctx.Element.TabWidthMode <- x), x)
 
+    [<CustomOperation("AddTabButtonClick")>] member inline this.AddTabButtonClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AddTabButtonClick), "AddTabButtonClick", fn)
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
+    [<CustomOperation("TabCloseRequested")>] member inline this.TabCloseRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabCloseRequested), "TabCloseRequested", fn)
+    [<CustomOperation("TabDragCompleted")>] member inline this.TabDragCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabDragCompleted), "TabDragCompleted", fn)
+    [<CustomOperation("TabDragStarting")>] member inline this.TabDragStarting ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabDragStarting), "TabDragStarting", fn)
+    [<CustomOperation("TabDroppedOutside")>] member inline this.TabDroppedOutside ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabDroppedOutside), "TabDroppedOutside", fn)
+    [<CustomOperation("TabItemsChanged")>] member inline this.TabItemsChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabItemsChanged), "TabItemsChanged", fn)
+    [<CustomOperation("TabStripDragOver")>] member inline this.TabStripDragOver ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabStripDragOver), "TabStripDragOver", fn)
+    [<CustomOperation("TabStripDrop")>] member inline this.TabStripDrop ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TabStripDrop), "TabStripDrop", fn)
                 
 
 type TextBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TextBox>() =
@@ -2135,6 +2244,19 @@ type TextBoxBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TextBox
     [<CustomOperation("TextWrapping")>] member inline this.TextWrapping ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.TextWrapping) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TextWrapping), (fun ctx x -> ctx.Element.TextWrapping <- x), x)
     [<CustomOperation("TextWrapping")>] member inline this.TextWrapping ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextWrapping), (fun ctx x -> ctx.Element.TextWrapping <- x), x)
 
+    [<CustomOperation("BeforeTextChanging")>] member inline this.BeforeTextChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BeforeTextChanging), "BeforeTextChanging", fn)
+    [<CustomOperation("CandidateWindowBoundsChanged")>] member inline this.CandidateWindowBoundsChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CandidateWindowBoundsChanged), "CandidateWindowBoundsChanged", fn)
+    [<CustomOperation("ContextMenuOpening")>] member inline this.ContextMenuOpening ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuOpening), "ContextMenuOpening", fn)
+    [<CustomOperation("CopyingToClipboard")>] member inline this.CopyingToClipboard ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CopyingToClipboard), "CopyingToClipboard", fn)
+    [<CustomOperation("CuttingToClipboard")>] member inline this.CuttingToClipboard ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CuttingToClipboard), "CuttingToClipboard", fn)
+    [<CustomOperation("Paste")>] member inline this.Paste ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Paste), "Paste", fn)
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
+    [<CustomOperation("SelectionChanging")>] member inline this.SelectionChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanging), "SelectionChanging", fn)
+    [<CustomOperation("TextChanged")>] member inline this.TextChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanged), "TextChanged", fn)
+    [<CustomOperation("TextChanging")>] member inline this.TextChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextChanging), "TextChanging", fn)
+    [<CustomOperation("TextCompositionChanged")>] member inline this.TextCompositionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionChanged), "TextCompositionChanged", fn)
+    [<CustomOperation("TextCompositionEnded")>] member inline this.TextCompositionEnded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionEnded), "TextCompositionEnded", fn)
+    [<CustomOperation("TextCompositionStarted")>] member inline this.TextCompositionStarted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextCompositionStarted), "TextCompositionStarted", fn)
                 
 
 type TimePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TimePicker>() =
@@ -2155,6 +2277,7 @@ type TimePickerBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Time
     [<CustomOperation("Time")>] member inline this.Time ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.TimeSpan) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Time), (fun ctx x -> ctx.Element.Time <- x), x)
     [<CustomOperation("Time")>] member inline this.Time ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Time), (fun ctx x -> ctx.Element.Time <- x), x)
 
+    [<CustomOperation("SelectedTimeChanged")>] member inline this.SelectedTimeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTimeChanged), "SelectedTimeChanged", fn)
     [<CustomOperation("TimeChanged")>] member inline this.TimeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TimeChanged), "TimeChanged", fn)
                 
 
@@ -2186,6 +2309,7 @@ type ToggleSwitchBuilder() =
     [<CustomOperation("TemplateSettings")>] member inline this.TemplateSettings ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSwitch>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplateSettings), x)
     [<CustomOperation("TemplateSettings'")>] member inline this.TemplateSettings' ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSwitch>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplateSettings), x)
 
+    [<CustomOperation("Toggled")>] member inline this.Toggled ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSwitch>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Toggled), "Toggled", fn)
                 
 
 type TreeViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TreeView>() =
@@ -2220,6 +2344,11 @@ type TreeViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TreeVi
     [<CustomOperation("SelectionMode")>] member inline this.SelectionMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.TreeViewSelectionMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionMode), (fun ctx x -> ctx.Element.SelectionMode <- x), x)
     [<CustomOperation("SelectionMode")>] member inline this.SelectionMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionMode), (fun ctx x -> ctx.Element.SelectionMode <- x), x)
 
+    [<CustomOperation("Collapsed")>] member inline this.Collapsed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Collapsed), "Collapsed", fn)
+    [<CustomOperation("Expanding")>] member inline this.Expanding ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Expanding), "Expanding", fn)
+    [<CustomOperation("ItemInvoked")>] member inline this.ItemInvoked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemInvoked), "ItemInvoked", fn)
+    [<CustomOperation("DragItemsCompleted")>] member inline this.DragItemsCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragItemsCompleted), "DragItemsCompleted", fn)
+    [<CustomOperation("DragItemsStarting")>] member inline this.DragItemsStarting ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragItemsStarting), "DragItemsStarting", fn)
                 
 
 type TwoPaneViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.TwoPaneView>() =
@@ -2244,6 +2373,7 @@ type TwoPaneViewBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.Two
     [<CustomOperation("WideModeConfiguration")>] member inline this.WideModeConfiguration ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.TwoPaneViewWideModeConfiguration) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WideModeConfiguration), (fun ctx x -> ctx.Element.WideModeConfiguration <- x), x)
     [<CustomOperation("WideModeConfiguration")>] member inline this.WideModeConfiguration ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WideModeConfiguration), (fun ctx x -> ctx.Element.WideModeConfiguration <- x), x)
 
+    [<CustomOperation("ModeChanged")>] member inline this.ModeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ModeChanged), "ModeChanged", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals.Primitives
@@ -2276,6 +2406,7 @@ type ColorSpectrumBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.P
     [<CustomOperation("Shape")>] member inline this.Shape ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.UI.Xaml.Controls.ColorSpectrumShape) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Shape), (fun ctx x -> ctx.Element.Shape <- x), x)
     [<CustomOperation("Shape")>] member inline this.Shape ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Shape), (fun ctx x -> ctx.Element.Shape <- x), x)
 
+    [<CustomOperation("ColorChanged")>] member inline this.ColorChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColorChanged), "ColorChanged", fn)
                 
 
 type LoopingSelectorBuilder() =
@@ -2296,12 +2427,16 @@ type LoopingSelectorBuilder() =
     [<CustomOperation("ShouldLoop")>] member inline this.ShouldLoop ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.LoopingSelector>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShouldLoop), (fun ctx x -> ctx.Element.ShouldLoop <- x), x)
     [<CustomOperation("ShouldLoop")>] member inline this.ShouldLoop ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.LoopingSelector>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShouldLoop), (fun ctx x -> ctx.Element.ShouldLoop <- x), x)
 
+    [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.LoopingSelector>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
 
 type ThumbBuilder() =
     inherit ControlBuilder<Microsoft.UI.Xaml.Controls.Primitives.Thumb>()
 
 
+    [<CustomOperation("DragCompleted")>] member inline this.DragCompleted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.Thumb>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragCompleted), "DragCompleted", fn)
+    [<CustomOperation("DragDelta")>] member inline this.DragDelta ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.Thumb>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragDelta), "DragDelta", fn)
+    [<CustomOperation("DragStarted")>] member inline this.DragStarted ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.Thumb>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragStarted), "DragStarted", fn)
                 
             
 
@@ -2310,7 +2445,7 @@ type ThumbBuilder() =
 namespace Fun.SunUI.WinUI
 
 [<AutoOpen>]
-module WinUIControlBuilderDslCE =
+module WinUIControlBuilderDslCE_MicrosoftUIXamlControls =
   
     open Fun.SunUI
     open Fun.SunUI.WinUI.DslInternals
@@ -2667,7 +2802,7 @@ module WinUIControlBuilderDslCE =
 namespace Fun.SunUI.WinUI.Primitives
 
 [<AutoOpen>]
-module WinUIControlBuilderDslCE =
+module WinUIControlBuilderDslCE_MicrosoftUIXamlControlsPrimitives =
   
     open Fun.SunUI
     open Fun.SunUI.WinUI.DslInternals.Primitives

@@ -94,7 +94,7 @@ type PopupWindowBuilder<'Element when 'Element :> Modern.Forms.PopupWindow>() =
 namespace Fun.SunUI.ModernForms
 
 [<AutoOpen>]
-module ModernFormsWindowBaseBuilderDslCE =
+module ModernFormsWindowBaseBuilderDslCE_ModernForms =
   
     open Fun.SunUI
     open Fun.SunUI.ModernForms.DslInternals

@@ -58,6 +58,7 @@ type VirtualizingStackPanelBuilder() =
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VirtualizingStackPanel>, x: Microsoft.UI.Xaml.Controls.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VirtualizingStackPanel>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
 
+    [<CustomOperation("CleanUpVirtualizedItemEvent")>] member inline this.CleanUpVirtualizedItemEvent ([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VirtualizingStackPanel>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CleanUpVirtualizedItemEvent), "CleanUpVirtualizedItemEvent", fn)
                 
 
 type WrapGridBuilder() =
@@ -138,6 +139,7 @@ type SwapChainPanelBuilder<'Element when 'Element :> Microsoft.UI.Xaml.Controls.
     inherit GridBuilder<'Element>()
 
 
+    [<CustomOperation("CompositionScaleChanged")>] member inline this.CompositionScaleChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CompositionScaleChanged), "CompositionScaleChanged", fn)
                 
             
 namespace rec Fun.SunUI.WinUI.DslInternals.Primitives
@@ -328,7 +330,7 @@ type PivotPanelBuilder() =
 namespace Fun.SunUI.WinUI
 
 [<AutoOpen>]
-module WinUIPanelBuilderDslCE =
+module WinUIPanelBuilderDslCE_MicrosoftUIXamlControls =
   
     open Fun.SunUI
     open Fun.SunUI.WinUI.DslInternals
@@ -381,7 +383,7 @@ module WinUIPanelBuilderDslCE =
 namespace Fun.SunUI.WinUI.Primitives
 
 [<AutoOpen>]
-module WinUIPanelBuilderDslCE =
+module WinUIPanelBuilderDslCE_MicrosoftUIXamlControlsPrimitives =
   
     open Fun.SunUI
     open Fun.SunUI.WinUI.DslInternals.Primitives

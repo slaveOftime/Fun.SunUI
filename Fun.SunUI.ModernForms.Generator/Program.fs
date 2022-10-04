@@ -8,7 +8,7 @@ let controlCtx = {
     BuilderName = "ModernFormsControlBuilder"
     UIStackName = "ModernForms"
     ChildrenPropName = "Controls"
-    IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
     ExcludeBaseTypes = []
 }
 
@@ -24,7 +24,7 @@ let windowBaseCtx = {
     BuilderName = "ModernFormsWindowBaseBuilder"
     UIStackName = "ModernForms"
     ChildrenPropName = "Controls"
-    IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
     ExcludeBaseTypes = []
 }
 

@@ -579,7 +579,7 @@ type TreeViewBuilder<'Element when 'Element :> Modern.Forms.TreeView>() =
 namespace Fun.SunUI.ModernForms
 
 [<AutoOpen>]
-module ModernFormsControlBuilderDslCE =
+module ModernFormsControlBuilderDslCE_ModernForms =
   
     open Fun.SunUI
     open Fun.SunUI.ModernForms.DslInternals
