@@ -113,13 +113,12 @@ type ElementBuilder<'UIStack, 'Element>() =
         }
 
 
-    /// Helper method to build a delegate for a event property
-    member inline _.MakeEventPropertyBuilder<'Element, 'EventArg>
+    member inline _.MakeEventPropertyBuilder<'Element, 'Handler, 'Args when 'Handler :> Delegate>
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
-            [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler<'EventArg>, 'EventArg>,
+            [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<'Handler, 'Args>,
             propertyName: string,
-            [<InlineIfLambda>] fn: 'Element * 'EventArg -> unit
+            [<InlineIfLambda>] fn: 'Element * 'Args -> unit
         ) =
         BuildElement<'Element>(fun ctx index ->
             let event = getEvent ctx
@@ -127,33 +126,9 @@ type ElementBuilder<'UIStack, 'Element>() =
             let propertyName = propertyName + "-" + string index
 
             if ctx.Properties.ContainsKey propertyName then
-                event.RemoveHandler(unbox ctx.Properties[propertyName])
+                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
 
-            let handler = EventHandler<'EventArg>(fun s e -> fn (s :?> 'Element, e))
-            ctx.Properties[ propertyName ] <- handler
-            event.AddHandler handler
-
-            index + 1
-        )
-
-    member inline _.MakeEventPropertyBuilder<'Element>
-        (
-            [<InlineIfLambda>] builder: BuildElement<'Element>,
-            [<InlineIfLambda>] getEvent: ElementBuildContext<'Element> -> IEvent<System.EventHandler, EventArgs>,
-            propertyName: string,
-            [<InlineIfLambda>] fn: 'Element * EventArgs -> unit
-        ) =
-        BuildElement<'Element>(fun ctx index ->
-            let event = getEvent ctx
-            let index = builder.Invoke(ctx, index)
-            let propertyName = propertyName + "-" + string index
-
-            if ctx.Properties.ContainsKey propertyName then
-                event.RemoveHandler(unbox ctx.Properties[propertyName])
-
-            let handler = EventHandler(fun s e -> fn (s :?> 'Element, e))
-            ctx.Properties[ propertyName ] <- handler
-            event.AddHandler handler
+            ctx.Properties[ propertyName ] <- event.Subscribe(fun e -> fn (ctx.Element, e))
 
             index + 1
         )

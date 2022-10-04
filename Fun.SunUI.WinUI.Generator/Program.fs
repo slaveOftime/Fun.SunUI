@@ -14,6 +14,7 @@ let controlCtx = {
     UIStackName = "WinUI"
     ChildrenPropName = "Controls"
     IsChildrenProp = fun _ -> false
+    ExcludeBaseTypes = []
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
@@ -25,6 +26,7 @@ let panelCtx = {
     UIStackName = "WinUI"
     ChildrenPropName = "Children"
     IsChildrenProp = fun prop -> prop.PropertyType = typeof<UIElementCollection> && prop.Name = "Children"
+    ExcludeBaseTypes = []
 }
 
 Generator.createCodeFile panelCtx dir namesp assemblyName "Panels.Generated"

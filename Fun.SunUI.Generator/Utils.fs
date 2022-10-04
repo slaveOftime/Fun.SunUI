@@ -14,6 +14,7 @@ type GeneratorContext = {
     UIStackName: string
     ChildrenPropName: string
     IsChildrenProp: PropertyInfo -> bool
+    ExcludeBaseTypes: Type seq
 }
 
 

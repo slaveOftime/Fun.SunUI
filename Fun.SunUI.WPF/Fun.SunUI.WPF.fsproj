@@ -8,6 +8,8 @@
 
 	<ItemGroup>
 		<Compile Include="Core.fs" />
+		<Compile Include="Elements.Generated.fs" />
+		<Compile Include="ExtendedTypes.fs" />
 		<Compile Include="Panels.Generated.fs" />
 		<Compile Include="Controls.Generated.fs" />
 	</ItemGroup>

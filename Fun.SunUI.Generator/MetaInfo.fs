@@ -106,7 +106,7 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
 
     let evts =
         ty.GetEvents()
-        |> Seq.filter (fun x -> x.DeclaringType = ty && x.EventHandlerType.FullName.StartsWith "System.EventHandler")
+        |> Seq.filter (fun x -> x.DeclaringType = ty)
         |> Seq.map (fun evt ->
             let name = if fsharpKeywords |> List.contains evt.Name then $"{evt.Name}'" else evt.Name
             $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{evt.Name}), \"{evt.Name}\", fn)"

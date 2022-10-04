@@ -34,6 +34,7 @@ type ButtonBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primiti
     [<CustomOperation("ClickMode")>] member inline this.ClickMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ClickMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ClickMode), (fun ctx x -> ctx.Element.ClickMode <- x), x)
     [<CustomOperation("ClickMode")>] member inline this.ClickMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ClickMode), (fun ctx x -> ctx.Element.ClickMode <- x), x)
 
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
                 
 
 type ToggleButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.ToggleButton>() =
@@ -44,6 +45,9 @@ type ToggleButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primi
     [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
     [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
 
+    [<CustomOperation("Checked")>] member inline this.Checked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Checked), "Checked", fn)
+    [<CustomOperation("Unchecked")>] member inline this.Unchecked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unchecked), "Unchecked", fn)
+    [<CustomOperation("Indeterminate")>] member inline this.Indeterminate ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Indeterminate), "Indeterminate", fn)
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals
@@ -195,10 +199,12 @@ type WindowBuilder<'Element when 'Element :> System.Windows.Window>() =
     [<CustomOperation("ShowActivated")>] member inline this.ShowActivated ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowActivated), (fun ctx x -> ctx.Element.ShowActivated <- x), x)
 
     [<CustomOperation("SourceInitialized")>] member inline this.SourceInitialized ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SourceInitialized), "SourceInitialized", fn)
+    [<CustomOperation("DpiChanged")>] member inline this.DpiChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DpiChanged), "DpiChanged", fn)
     [<CustomOperation("Activated")>] member inline this.Activated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Activated), "Activated", fn)
     [<CustomOperation("Deactivated")>] member inline this.Deactivated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Deactivated), "Deactivated", fn)
     [<CustomOperation("StateChanged")>] member inline this.StateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StateChanged), "StateChanged", fn)
     [<CustomOperation("LocationChanged")>] member inline this.LocationChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LocationChanged), "LocationChanged", fn)
+    [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
     [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
     [<CustomOperation("ContentRendered")>] member inline this.ContentRendered ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentRendered), "ContentRendered", fn)
                 
@@ -227,6 +233,13 @@ type NavigationWindowBuilder<'Element when 'Element :> System.Windows.Navigation
     [<CustomOperation("CurrentSource")>] member inline this.CurrentSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentSource), x)
     [<CustomOperation("CurrentSource'")>] member inline this.CurrentSource' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentSource), x)
 
+    [<CustomOperation("Navigating")>] member inline this.Navigating ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigating), "Navigating", fn)
+    [<CustomOperation("NavigationProgress")>] member inline this.NavigationProgress ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationProgress), "NavigationProgress", fn)
+    [<CustomOperation("NavigationFailed")>] member inline this.NavigationFailed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationFailed), "NavigationFailed", fn)
+    [<CustomOperation("Navigated")>] member inline this.Navigated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigated), "Navigated", fn)
+    [<CustomOperation("LoadCompleted")>] member inline this.LoadCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LoadCompleted), "LoadCompleted", fn)
+    [<CustomOperation("NavigationStopped")>] member inline this.NavigationStopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationStopped), "NavigationStopped", fn)
+    [<CustomOperation("FragmentNavigation")>] member inline this.FragmentNavigation ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FragmentNavigation), "FragmentNavigation", fn)
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals
@@ -241,6 +254,8 @@ type ListBoxItemBuilder<'Element when 'Element :> System.Windows.Controls.ListBo
     [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
     [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
 
+    [<CustomOperation("Selected")>] member inline this.Selected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Selected), "Selected", fn)
+    [<CustomOperation("Unselected")>] member inline this.Unselected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unselected), "Unselected", fn)
                 
 
 type ComboBoxItemBuilder<'Element when 'Element :> System.Windows.Controls.ComboBoxItem>() =
@@ -277,6 +292,8 @@ type ExpanderBuilder<'Element when 'Element :> System.Windows.Controls.Expander>
     [<CustomOperation("IsExpanded")>] member inline this.IsExpanded ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsExpanded), (fun ctx x -> ctx.Element.IsExpanded <- x), x)
     [<CustomOperation("IsExpanded")>] member inline this.IsExpanded ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsExpanded), (fun ctx x -> ctx.Element.IsExpanded <- x), x)
 
+    [<CustomOperation("Expanded")>] member inline this.Expanded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Expanded), "Expanded", fn)
+    [<CustomOperation("Collapsed")>] member inline this.Collapsed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Collapsed), "Collapsed", fn)
                 
 
 type GroupBoxBuilder<'Element when 'Element :> System.Windows.Controls.GroupBox>() =
@@ -303,6 +320,8 @@ type DataGridCellBuilder<'Element when 'Element :> System.Windows.Controls.DataG
     [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
     [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
 
+    [<CustomOperation("Selected")>] member inline this.Selected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Selected), "Selected", fn)
+    [<CustomOperation("Unselected")>] member inline this.Unselected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unselected), "Unselected", fn)
                 
 
 type FrameBuilder<'Element when 'Element :> System.Windows.Controls.Frame>() =
@@ -326,6 +345,13 @@ type FrameBuilder<'Element when 'Element :> System.Windows.Controls.Frame>() =
     [<CustomOperation("ForwardStack'")>] member inline this.ForwardStack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ForwardStack), x)
 
     [<CustomOperation("ContentRendered")>] member inline this.ContentRendered ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentRendered), "ContentRendered", fn)
+    [<CustomOperation("Navigating")>] member inline this.Navigating ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigating), "Navigating", fn)
+    [<CustomOperation("NavigationProgress")>] member inline this.NavigationProgress ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationProgress), "NavigationProgress", fn)
+    [<CustomOperation("NavigationFailed")>] member inline this.NavigationFailed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationFailed), "NavigationFailed", fn)
+    [<CustomOperation("Navigated")>] member inline this.Navigated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigated), "Navigated", fn)
+    [<CustomOperation("LoadCompleted")>] member inline this.LoadCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LoadCompleted), "LoadCompleted", fn)
+    [<CustomOperation("NavigationStopped")>] member inline this.NavigationStopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationStopped), "NavigationStopped", fn)
+    [<CustomOperation("FragmentNavigation")>] member inline this.FragmentNavigation ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FragmentNavigation), "FragmentNavigation", fn)
                 
 
 type GroupItemBuilder<'Element when 'Element :> System.Windows.Controls.GroupItem>() =
@@ -360,6 +386,7 @@ type ScrollViewerBuilder<'Element when 'Element :> System.Windows.Controls.Scrol
     [<CustomOperation("PanningRatio")>] member inline this.PanningRatio ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PanningRatio), (fun ctx x -> ctx.Element.PanningRatio <- x), x)
     [<CustomOperation("PanningRatio")>] member inline this.PanningRatio ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PanningRatio), (fun ctx x -> ctx.Element.PanningRatio <- x), x)
 
+    [<CustomOperation("ScrollChanged")>] member inline this.ScrollChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollChanged), "ScrollChanged", fn)
                 
 
 type ToolTipBuilder<'Element when 'Element :> System.Windows.Controls.ToolTip>() =
@@ -386,6 +413,8 @@ type ToolTipBuilder<'Element when 'Element :> System.Windows.Controls.ToolTip>()
     [<CustomOperation("ShowsToolTipOnKeyboardFocus")>] member inline this.ShowsToolTipOnKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Nullable<System.Boolean>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsToolTipOnKeyboardFocus), (fun ctx x -> ctx.Element.ShowsToolTipOnKeyboardFocus <- x), x)
     [<CustomOperation("ShowsToolTipOnKeyboardFocus")>] member inline this.ShowsToolTipOnKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsToolTipOnKeyboardFocus), (fun ctx x -> ctx.Element.ShowsToolTipOnKeyboardFocus <- x), x)
 
+    [<CustomOperation("Opened")>] member inline this.Opened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opened), "Opened", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
                 
 
 type UserControlBuilder<'Element when 'Element :> System.Windows.Controls.UserControl>() =

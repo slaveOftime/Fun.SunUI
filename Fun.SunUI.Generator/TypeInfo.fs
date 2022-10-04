@@ -18,7 +18,7 @@ let rec private getTypeTree (baseType: Type) (tys: Type list) : TypeTree list =
     |> Seq.toList
 
 
-let create (rootType: Type) (buildMetaInfo: Type -> Namespace * 'T) (types: Type seq) =
+let create (rootType: Type) (excludeBaseTypes: Type seq) (buildMetaInfo: Type -> Namespace * 'T) (types: Type seq) =
     let rec getNamespaces tree = tree |> Seq.map (fun (Node (ty, childTys)) -> ty.Namespace :: (getNamespaces childTys |> Seq.toList)) |> Seq.concat
 
     let rec getTypesInNamespace tree ns =
@@ -43,7 +43,12 @@ let create (rootType: Type) (buildMetaInfo: Type -> Namespace * 'T) (types: Type
 
     let validTypes =
         types
-        |> Seq.filter (fun x -> x.IsAssignableTo rootType && x.IsPublic && not (isObsoleted (x.GetCustomAttributes(false))))
+        |> Seq.filter (fun x ->
+            x.IsAssignableTo rootType
+            && x.IsPublic
+            && not (isObsoleted (x.GetCustomAttributes(false)))
+            && not (Seq.exists (fun t -> t = x || x.IsAssignableTo t) excludeBaseTypes)
+        )
         |> Seq.toList
 
     let baseTypes = validTypes |> Seq.map (fun x -> x.BaseType) |> Seq.filter ((<>) rootType)

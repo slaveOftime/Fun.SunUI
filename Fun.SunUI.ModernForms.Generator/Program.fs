@@ -9,6 +9,7 @@ let controlCtx = {
     UIStackName = "ModernForms"
     ChildrenPropName = "Controls"
     IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    ExcludeBaseTypes = []
 }
 
 let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.SunUI.ModernForms"
@@ -24,6 +25,7 @@ let windowBaseCtx = {
     UIStackName = "ModernForms"
     ChildrenPropName = "Controls"
     IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    ExcludeBaseTypes = []
 }
 
 Generator.createCodeFile windowBaseCtx dir namesp assemblyName "Windows.Generated"

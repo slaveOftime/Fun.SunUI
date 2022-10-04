@@ -9,6 +9,7 @@ let controlCtx = {
     UIStackName = "WinForms"
     ChildrenPropName = "Controls"
     IsChildrenProp = fun prop -> prop.PropertyType = typeof<Control.ControlCollection> && prop.Name = "Controls"
+    ExcludeBaseTypes = []
 }
 
 let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.SunUI.WinForms"
