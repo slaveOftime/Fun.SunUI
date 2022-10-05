@@ -14,6 +14,7 @@ let controlCtx = {
     BuilderName = "MAUIElementBuilder"
     UIStackName = "MAUI"
     IsChildrenProp = fun prop -> prop.DeclaringType.IsAssignableTo typeof<ShellContent> && prop.Name = "Content"
+    IsYieldProp = fun prop -> prop.Name = "Content"
     // https://github.com/dotnet/fsharp/issues/14020
     ExcludeBaseTypes = [ typeof<NavigationPage>; typeof<FlyoutPage>; typeof<TabbedPage> ]
     ExcludeProp = fun prop -> prop.Name = "LogicalChildren"

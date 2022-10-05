@@ -34,12 +34,12 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
 
     let memberStart = if useInline then "member inline this." else "member this."
 
+    let genericElementName = if ty.IsSealed then getTypeName ty else "'Element"
     let contextArg =
-        let generic = if ty.IsSealed then getTypeName ty else "'Element"
         if useInline then
-            $"[<InlineIfLambda>] builder: BuildElement<{generic}>"
+            $"[<InlineIfLambda>] builder: BuildElement<{genericElementName}>"
         else
-            $"builder: BuildElement<{generic}>"
+            $"builder: BuildElement<{genericElementName}>"
 
 
     let filteredProps =
@@ -179,6 +179,34 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
                     ]
             else if ctx.IsChildrenProp prop || prop.PropertyType.IsAssignableTo ctx.ChildType then
                 [
+                    if ctx.IsYieldProp prop then
+                        $"""
+
+    member inline _.Yield(creator: ElementCreator<{ctx.UIStackName}>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<{ctx.UIStackName}>, [<InlineIfLambda>] builder: BuildElement<{genericElementName}>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<{genericElementName}>, [<InlineIfLambda>] fn: unit -> ElementCreator<{ctx.UIStackName}>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<{ctx.UIStackName}>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<{ctx.UIStackName}> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<{ctx.UIStackName}> aval, [<InlineIfLambda>] builder: BuildElement<{genericElementName}>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<{genericElementName}>, [<InlineIfLambda>] fn: unit -> ElementCreator<{ctx.UIStackName}> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<{ctx.UIStackName}> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), fn ())
+
+                        """
+
                     $"""
     {customOperation name}
     {memberStart}{name} ({contextArg}, creator) =

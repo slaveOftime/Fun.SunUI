@@ -276,6 +276,32 @@ type ContentPageBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Conten
     inherit TemplatedPageBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
+
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
@@ -514,6 +540,32 @@ type ContentViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Conten
     inherit TemplatedViewBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
+
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
@@ -679,6 +731,32 @@ type ContentPresenterBuilder<'Element when 'Element :> Microsoft.Maui.Controls.C
     inherit Compatibility.LayoutBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
+
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
@@ -695,6 +773,32 @@ type ScrollViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ScrollV
 
     [<CustomOperation("LayoutAreaOverride")>] member inline this.LayoutAreaOverride ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Graphics.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutAreaOverride), (fun ctx x -> ctx.Element.LayoutAreaOverride <- x), x)
     [<CustomOperation("LayoutAreaOverride")>] member inline this.LayoutAreaOverride ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutAreaOverride), (fun ctx x -> ctx.Element.LayoutAreaOverride <- x), x)
+
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
 
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -1411,6 +1515,32 @@ type BorderBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Border>() =
     inherit ViewBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
+
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
@@ -2089,6 +2219,32 @@ type ShellContentBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell
             (fun x (ls: Microsoft.Maui.Controls.MenuItem[]) -> for i in ls do x.Element.MenuItems.Add(i) |> ignore),
             items
         )
+                        
+
+
+    member inline _.Yield(creator: ElementCreator<MAUI>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<MAUI> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<MAUI> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<MAUI> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
                         
 
     [<CustomOperation("Content")>]

@@ -38,6 +38,10 @@ type ElementBuilder<'UIStack, 'Element>() =
 
     member inline _.Yield(_: unit) = BuildElement<'T>(fun _ i -> i)
 
+    member inline _.Delay([<InlineIfLambda>] fn: unit -> BuildElement<'Element>) = BuildElement<'Element>(fun ctx i -> fn().Invoke(ctx, i))
+
+    member _.For(builder: BuildElement<'Element>, fn: unit -> BuildElement<'Element>) = BuildElement<'Element>(fun ctx i -> fn().Invoke(ctx, i))
+
 
     /// Set key to the element builder.
     /// When the parent rerender, it will check the key, if it is changed then it will try to recreate new element and throw old element state and dispose related stuff.
