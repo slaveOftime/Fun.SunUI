@@ -1,14 +1,15 @@
-﻿open System.Windows.Forms
+﻿module Fun.SunUI.WinForms.Generator
+
+open System.Windows.Forms
 open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.WinForms\Fun.SunUI.WinForms"
 let namesp = "Fun.SunUI.WinForms"
 let assemblyName = "System.Windows.Forms"
 
 
-let controlCtx = {
+let makeControlCtx () = {
     GeneratorContext.RootType = typeof<Control>
     ChildType = typeof<Control>
     BuilderName = "WinFormsControlBuilder"
@@ -20,4 +21,8 @@ let controlCtx = {
     ExcludeEvent = fun _ -> false
 }
 
-Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
+
+let generateDefault dir = Generator.createCodeFile (makeControlCtx ()) dir namesp assemblyName "Controls.Generated"
+
+
+let generateCodeFile codesDir namesp assemblyName = Generator.createCodeFile (makeControlCtx ()) codesDir namesp assemblyName namesp

@@ -33,9 +33,10 @@ module CodeGenProject =
 
 
     let createAndRun forDefault (uiStackName: string) (projectFile: string) codesDirName sdk generatorVersion (packages: PackageMeta seq) =
-        AnsiConsole.MarkupLine "[green]Create temp project[/]"
-
         let codeGenFolder = Path.GetTempPath() </> "FunSunUI-Cli-" + Guid.NewGuid().ToString()
+
+        AnsiConsole.MarkupLine $"[green]Create temp project: {codeGenFolder}[/]"
+
         Directory.CreateDirectory codeGenFolder |> ignore
 
         match sdk with
@@ -52,8 +53,48 @@ module CodeGenProject =
             """
             )
 
-        Cli.Wrap("dotnet").WithArguments("new console -lang f#").WithWorkingDirectory(codeGenFolder).Run()
+        let stack =
+            match uiStackName with
+            | "MAUI" ->
+                """
+		<UseMaui>true</UseMaui>
+		<TargetFramework>net6.0</TargetFramework>
+                """
+            | "WinForms" ->
+                """
+        <UseWindowsForms>true</UseWindowsForms>
+	    <TargetFramework>net6.0-windows</TargetFramework>
+                """
+            | "WPF" ->
+                """
+		<UseWPF>true</UseWPF>
+		<TargetFramework>net6.0-windows</TargetFramework>
+                """
+            | _ ->
+                """
+        <TargetFramework>net6.0</TargetFramework>
+                """
 
+        File.WriteAllText(
+            codeGenFolder </> "Temp.fsproj",
+            $"""
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		{stack}
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Program.fs" />
+	</ItemGroup>
+
+</Project>
+
+        """
+        )
+
+        File.WriteAllText(codeGenFolder </> "Program.fs", "")
 
         AnsiConsole.WriteLine()
         AnsiConsole.MarkupLine "[green]Add Fun.SunUI.Generator[/]"
@@ -80,7 +121,8 @@ module CodeGenProject =
         let bootstrapCode = StringBuilder()
 
         if forDefault then
-            bootstrapCode.AppendLine $"Fun.SunUI.{uiStackName}.Generator.generateDefault \"{codesDir}\"" |> ignore
+            bootstrapCode.AppendLine $"Fun.SunUI.{uiStackName}.Generator.generateDefault \"{Path.GetDirectoryName projectFile}\""
+            |> ignore
         else
             for package in packages do
                 AnsiConsole.WriteLine()

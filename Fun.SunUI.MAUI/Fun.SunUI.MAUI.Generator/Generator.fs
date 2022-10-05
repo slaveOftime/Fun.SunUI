@@ -1,14 +1,15 @@
-﻿open Microsoft.Maui.Controls
+﻿module Fun.SunUI.MAUI.Generator
+
+open Microsoft.Maui.Controls
 open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.MAUI\Fun.SunUI.MAUI"
 let namesp = "Fun.SunUI.MAUI"
 let assemblyName = "Microsoft.Maui.Controls"
 
 
-let controlCtx = {
+let makeControlCtx () = {
     GeneratorContext.RootType = typeof<Element>
     ChildType = typeof<Microsoft.Maui.IElement>
     BuilderName = "MAUIElementBuilder"
@@ -21,4 +22,7 @@ let controlCtx = {
     ExcludeEvent = fun _ -> false
 }
 
-Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
+
+let generateDefault dir = Generator.createCodeFile (makeControlCtx ()) dir namesp assemblyName "Controls.Generated"
+
+let generateCodeFile codesDir namesp assemblyName = Generator.createCodeFile (makeControlCtx ()) codesDir namesp assemblyName namesp

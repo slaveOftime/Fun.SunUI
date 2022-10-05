@@ -85,25 +85,27 @@ let startGenerate forDefault uiStackName (projectFile: string) (codesDirName: st
     let project = XDocument.Load projectFile
 
 
-    let codesDir = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(projectFile)), codesDirName)
-    if codesDir |> Directory.Exists |> not then
-        Directory.CreateDirectory codesDir |> ignore
+    if not forDefault then
+        let codesDir = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(projectFile)), codesDirName)
+        if codesDir |> Directory.Exists |> not then
+            Directory.CreateDirectory codesDir |> ignore
 
-
-    AnsiConsole.MarkupLine "Clean previous generated code files"
-    clean project projectFile codesDirName
+        AnsiConsole.MarkupLine "Clean previous generated code files"
+        clean project projectFile codesDirName
 
 
     AnsiConsole.WriteLine()
     AnsiConsole.MarkupLine "Find packages and generate codes"
-    findPackageMetas project |> CodeGenProject.createAndRun forDefault uiStackName projectFile codesDirName sdk generatorVersion
+    findPackageMetas project
+    |> CodeGenProject.createAndRun forDefault uiStackName projectFile codesDirName sdk generatorVersion
+
+    if not forDefault then
+
+        AnsiConsole.WriteLine()
+        AnsiConsole.MarkupLine "Attach generated code files"
+        attachCodeFiles project projectFile codesDirName
 
 
-    AnsiConsole.WriteLine()
-    AnsiConsole.MarkupLine "Attach generated code files"
-    attachCodeFiles project projectFile codesDirName
-
-
-    AnsiConsole.WriteLine()
-    AnsiConsole.MarkupLine $"Save project file changes: [green]{projectFile}[/]"
-    project.Save projectFile
+        AnsiConsole.WriteLine()
+        AnsiConsole.MarkupLine $"Save project file changes: [green]{projectFile}[/]"
+        project.Save projectFile

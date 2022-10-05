@@ -1,15 +1,16 @@
-﻿open System.Windows
+﻿module Fun.SunUI.WPF.Generator
+
+open System.Windows
 open System.Windows.Controls
 open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.WPF\Fun.SunUI.WPF"
 let namesp = "Fun.SunUI.WPF"
 let assemblyName = "PresentationFramework"
 
 
-let elementCtx = {
+let makeElementCtx () = {
     GeneratorContext.RootType = typeof<FrameworkElement>
     ChildType = typeof<FrameworkElement>
     BuilderName = "WPFElementBuilder"
@@ -24,4 +25,8 @@ let elementCtx = {
     ExcludeEvent = fun evt -> evt.Name = "MessageHook"
 }
 
-Generator.createCodeFile elementCtx dir namesp assemblyName "Elements.Generated"
+
+let generateDefault dir = Generator.createCodeFile (makeElementCtx ()) dir namesp assemblyName "Elements.Generated"
+
+
+let generateCodeFile codesDir namesp assemblyName = Generator.createCodeFile (makeElementCtx ()) codesDir namesp assemblyName namesp
