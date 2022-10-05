@@ -65,7 +65,7 @@ let mainForm =
                     alist {
                         let! c = count
                         {
-                            Key = null
+                            RenderMode = RenderMode.CreateOnce
                             CreateOrUpdate =
                                 fun (sp, ctx) ->
                                     match ctx with
@@ -73,7 +73,7 @@ let mainForm =
                                         let tb = new TextBox()
                                         tb.Placeholder <- "asdasd asd "
                                         tb.TextChanged.Add(fun e -> ())
-                                        new ElementBuildContext<TextBox>(tb, sp, null) :> IElementContext
+                                        new ElementBuildContext<TextBox>(tb, sp, RenderMode.CreateOnce) :> IElementContext
                                     | ValueSome x -> x
                         }
                         CheckBox'() {
@@ -89,11 +89,11 @@ let mainForm =
                         if c > 4 then Label'() { Text $"count = {c}" }
                         if c % 2 = 0 then
                             Label'() {
-                                Key "%asda"
+                                RenderMode(RenderMode.Key "%asda")
                                 Text $"count  2 = {c}"
                             }
                         Button'() {
-                            Key "button-increase"
+                            RenderMode(RenderMode.Key "button-increase")
                             Click(fun _ -> transact (fun _ -> count.Value <- count.Value + 1))
                             Text "Increase"
                             Style'(fun s -> adaptive {

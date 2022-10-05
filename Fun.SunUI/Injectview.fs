@@ -9,7 +9,7 @@ type ElementInjectContext = {
 }
 
 
-type ElementInjectviewContext<'UIStack>(creatorFn: ElementInjectContext -> ElementCreator<'UIStack>, sp: IServiceProvider, key: obj) =
+type ElementInjectviewContext<'UIStack>(creatorFn: ElementInjectContext -> ElementCreator<'UIStack>, sp: IServiceProvider, renderMode) =
     let disposes = ResizeArray<IDisposable>()
 
     let creator =
@@ -24,7 +24,7 @@ type ElementInjectviewContext<'UIStack>(creatorFn: ElementInjectContext -> Eleme
     member _.Update() = ctx <- creator.CreateOrUpdate(sp, ValueSome ctx)
 
     interface IElementContext with
-        member val Key = key with get, set
+        member val RenderMode = renderMode with get, set
 
         member _.NativeElement = ctx.NativeElement
         member _.ServiceProvider = sp
@@ -40,22 +40,16 @@ module Injectview =
 
     type UI with
 
-        static member inline inject
-            (
-                [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>,
-                ?key: obj
-            ) : ElementCreator<'UIStack> =
-            {
-                Key = Option.toObj key
-                CreateOrUpdate =
-                    fun (sp, ctx) ->
-                        let newCtx =
-                            match ctx with
-                            | ValueNone -> new ElementInjectviewContext<'UIStack>(fn, sp, Option.toObj key)
-                            | ValueSome ctx -> unbox ctx
-                        newCtx.Update()
-                        newCtx
-            }
+        static member inline inject([<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>, ?key) : ElementCreator<'UIStack> = {
+            RenderMode = defaultArg key RenderMode.CreateOnce
+            CreateOrUpdate =
+                fun (sp, ctx) ->
+                    let newCtx =
+                        match ctx with
+                        | ValueNone -> new ElementInjectviewContext<'UIStack>(fn, sp, defaultArg key RenderMode.CreateOnce)
+                        | ValueSome ctx -> unbox ctx
+                    newCtx.Update()
+                    newCtx
+        }
 
-        static member inline inject(key: obj, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>) =
-            UI.inject (fn, key)
+        static member inline inject(key: RenderMode, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>) = UI.inject (fn, key)

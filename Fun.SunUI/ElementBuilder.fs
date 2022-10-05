@@ -4,14 +4,16 @@ open System
 open FSharp.Data.Adaptive
 
 
-type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, key: obj) as this =
-    member val Properties = System.Collections.Generic.Dictionary<string, obj>()
+type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, key) as this =
+    /// Used to reserve property related thing like event handler for later to clean up.
+    member val PropertyResources = System.Collections.Generic.Dictionary<string, obj>()
+
     member val ChildContexts = ResizeArray<IElementContext>()
 
     member _.Element = nativeElement
 
     interface IElementContext with
-        member val Key = key with get, set
+        member val RenderMode = key with get, set
         member _.NativeElement = box nativeElement
         member _.ServiceProvider = sp
 
@@ -20,7 +22,7 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
             | Some x -> x.Dispose()
             | _ -> ()
 
-            for KeyValue (_, property) in this.Properties do
+            for KeyValue (_, property) in this.PropertyResources do
                 match tryUnbox<IDisposable> property with
                 | Some x -> x.Dispose()
                 | _ -> ()
@@ -30,7 +32,7 @@ type BuildElement<'Element> = delegate of ctx: ElementBuildContext<'Element> * i
 
 
 type ElementBuilder<'UIStack, 'Element>() =
-    let mutable key: obj = null
+    let mutable renderMode: RenderMode = RenderMode.CreateOnce
 
 
     member inline _.Yield(_: unit) = BuildElement<'T>(fun _ i -> i)
@@ -39,14 +41,14 @@ type ElementBuilder<'UIStack, 'Element>() =
     /// Set key to the element builder.
     /// When the parent rerender, it will check the key, if it is changed then it will try to recreate new element and throw old element state and dispose related stuff.
     /// This is used when the parent control will rerender and its children order or number will change when it rerender.
-    [<CustomOperation("Key")>]
-    member _.Key(builder: BuildElement<'Element>, x: obj) =
-        key <- x
+    [<CustomOperation("RenderMode")>]
+    member _.RenderMode(builder: BuildElement<'Element>, x) =
+        renderMode <- x
         builder
 
 
     /// Helper method to get current key
-    member _.GetKey() = key
+    member _.GetRenderMode() = renderMode
 
 
     /// With this we can get some property, and if it is a mutable object then can change it accordingly
@@ -73,10 +75,10 @@ type ElementBuilder<'UIStack, 'Element>() =
             let index = builder.Invoke(ctx, index)
             let propertyName = "getter-" + string index
 
-            if ctx.Properties.ContainsKey propertyName then
-                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+            if ctx.PropertyResources.ContainsKey propertyName then
+                (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
-            ctx.Properties[ propertyName ] <- (getStore (getFn ctx.Element)).AddCallback ignore
+            ctx.PropertyResources[ propertyName ] <- (getStore (getFn ctx.Element)).AddCallback ignore
 
             index + 1
         )
@@ -97,18 +99,19 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] fn: unit -> 'Element,
-            ?key: obj
+            ?key
         ) : ElementCreator<'UIStack> =
+        let key = defaultArg key RenderMode.CreateOnce
         {
-            Key = Option.toObj key
+            RenderMode = key
             CreateOrUpdate =
                 fun (sp, ctx) ->
                     let newCtx =
                         match ctx with
-                        | ValueNone -> new ElementBuildContext<'Element>(fn (), sp, Option.toObj key)
+                        | ValueNone -> new ElementBuildContext<'Element>(fn (), sp, key)
                         | ValueSome ctx -> unbox ctx
                     builder.Invoke(newCtx, 0) |> ignore
-                    (newCtx :> IElementContext).Key <- key
+                    (newCtx :> IElementContext).RenderMode <- key
                     newCtx
         }
 
@@ -125,10 +128,10 @@ type ElementBuilder<'UIStack, 'Element>() =
             let index = builder.Invoke(ctx, index)
             let propertyName = propertyName + "-" + string index
 
-            if ctx.Properties.ContainsKey propertyName then
-                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+            if ctx.PropertyResources.ContainsKey propertyName then
+                (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
-            ctx.Properties[ propertyName ] <- event.Subscribe(fun e -> fn (ctx.Element, e))
+            ctx.PropertyResources[ propertyName ] <- event.Subscribe(fun e -> fn (ctx.Element, e))
 
             index + 1
         )
@@ -159,21 +162,21 @@ type ElementBuilder<'UIStack, 'Element>() =
             let index = builder.Invoke(ctx, index)
             let propertyName = "store-prop-" + string index
 
-            if ctx.Properties.ContainsKey propertyName then
-                match ctx.Properties[propertyName] with
+            if ctx.PropertyResources.ContainsKey propertyName then
+                match ctx.PropertyResources[propertyName] with
                 | :? IDisposable as x -> x.Dispose()
                 | _ -> ()
 
-            ctx.Properties[ propertyName ] <- value.AddCallback(fun x -> if getProperty ctx <> x then setProperty ctx x)
+            ctx.PropertyResources[ propertyName ] <- value.AddCallback(fun x -> if getProperty ctx <> x then setProperty ctx x)
 
             index + 1
         )
 
 
-    /// Helper method to build a delegate to set or update native elements.
+    /// Helper method to build a delegate to set or update native child elements.
     /// This is a simple implmentation. Or magic virtual dom or diff algorithm.
-    /// 1. Parent is static or will only render once, then this delegate will only call onetime.
-    /// 2. Parent is dynamic or will render multiple times, then it will try to use the Key to identify old state and try to reuse it. Otherwise it will create a fresh new child.
+    /// 1. If the child elements shape (order, type, length etc.) will not change, you can use MakeStaticChildrenBuilder.
+    /// 2. It is better to use RenderMode.Key to each element. Other RenderMode will be treated as RenderMode.AlwaysRecreate.
     member _.MakeChildrenBuilder<'Element, 'ChildElement>
         (
             builder: BuildElement<'Element>,
@@ -219,16 +222,20 @@ type ElementBuilder<'UIStack, 'Element>() =
                         let childCreator = Seq.item i childrenCreators
 
                         let newChildContext =
-                            if childCreator.Key = null then
-                                let oldChild = ctx.ChildContexts |> Seq.tryItem i
+                            match childCreator.RenderMode with
+                            | RenderMode.CreateOnce
+                            | RenderMode.CreateOnceNoRerender
+                            //let oldChild = ctx.ChildContexts |> Seq.tryItem i
+                            //match oldChild with
+                            //| None -> childCreator.CreateOrUpdate(sp, ValueNone)
+                            //| Some ctx -> childCreator.CreateOrUpdate(sp, ValueSome ctx)
+                            | RenderMode.AlwaysRecreate -> childCreator.CreateOrUpdate(sp, ValueNone)
+                            | RenderMode.Key _ ->
+                                let oldChild = ctx.ChildContexts |> Seq.tryFind (fun x -> x.RenderMode = childCreator.RenderMode)
                                 match oldChild with
-                                | Some ctx when ctx.Key = null -> childCreator.CreateOrUpdate(sp, ValueSome ctx)
+                                | Some ctx when childCreator.RenderMode = ctx.RenderMode -> childCreator.CreateOrUpdate(sp, ValueSome ctx)
                                 | _ -> childCreator.CreateOrUpdate(sp, ValueNone)
-                            else
-                                let oldChild = ctx.ChildContexts |> Seq.tryFind (fun x -> x.Key = childCreator.Key)
-                                match oldChild with
-                                | Some ctx when childCreator.Key = ctx.Key -> childCreator.CreateOrUpdate(sp, ValueSome ctx)
-                                | _ -> childCreator.CreateOrUpdate(sp, ValueNone)
+
                         newChildrenContexts[i] <- newChildContext
                         newNativeChildren[i] <- newChildContext.NativeElement :?> 'ChildElement
                         i <- i + 1
@@ -256,10 +263,10 @@ type ElementBuilder<'UIStack, 'Element>() =
             let index = builder.Invoke(ctx, index)
             let propertyName = "adaptive-children-" + string index
 
-            if ctx.Properties.ContainsKey propertyName then
-                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+            if ctx.PropertyResources.ContainsKey propertyName then
+                (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
-            ctx.Properties[ propertyName ] <-
+            ctx.PropertyResources[ propertyName ] <-
                 childrenCreators.AddCallback(fun _ _ ->
                     // TODO: take the advatage of the alist to update more efficiently
                     let items = childrenCreators.Content |> AVal.force
@@ -304,10 +311,15 @@ type ElementBuilder<'UIStack, 'Element>() =
                 while i < childrenLength do
                     let oldCtx = Seq.item i ctx.ChildContexts
                     let childCreator = Seq.item i childrenCreators
-                    if childCreator.Key <> oldCtx.Key then
-                        newChildrenContexts[i] <- childCreator.CreateOrUpdate(sp, ValueNone)
-                    else
-                        newChildrenContexts[i] <- childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
+
+                    newChildrenContexts[i] <-
+                        match childCreator.RenderMode with
+                        | RenderMode.CreateOnce -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
+                        | RenderMode.CreateOnceNoRerender -> oldCtx
+                        | RenderMode.AlwaysRecreate -> childCreator.CreateOrUpdate(sp, ValueNone)
+                        | RenderMode.Key _ when childCreator.RenderMode <> oldCtx.RenderMode -> childCreator.CreateOrUpdate(sp, ValueNone)
+                        | RenderMode.Key _ -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
+
                     i <- i + 1
 
                 for item in ctx.ChildContexts do
@@ -324,21 +336,23 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             builder: BuildElement<'Element>,
             setChild: ElementBuildContext<'Element> -> 'ChildElement -> unit,
-            creator: ElementCreator<'UIStack>
+            childCreator: ElementCreator<'UIStack>
         ) =
         BuildElement(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             let sp = (ctx :> IElementContext).ServiceProvider
 
             if ctx.ChildContexts.Count = 0 then
-                ctx.ChildContexts.Add(creator.CreateOrUpdate(sp, ValueNone))
+                ctx.ChildContexts.Add(childCreator.CreateOrUpdate(sp, ValueNone))
             else
                 let oldCtx = ctx.ChildContexts[0]
                 ctx.ChildContexts[ 0 ] <-
-                    if creator.Key = oldCtx.Key then
-                        creator.CreateOrUpdate(sp, ValueSome oldCtx)
-                    else
-                        creator.CreateOrUpdate(sp, ValueNone)
+                    match childCreator.RenderMode with
+                    | RenderMode.CreateOnce -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
+                    | RenderMode.CreateOnceNoRerender -> oldCtx
+                    | RenderMode.AlwaysRecreate -> childCreator.CreateOrUpdate(sp, ValueNone)
+                    | RenderMode.Key _ when childCreator.RenderMode <> oldCtx.RenderMode -> childCreator.CreateOrUpdate(sp, ValueNone)
+                    | RenderMode.Key _ -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
 
             setChild ctx (ctx.ChildContexts[0].NativeElement :?> 'ChildElement)
 
@@ -355,10 +369,11 @@ type ElementBuilder<'UIStack, 'Element>() =
             let index = builder.Invoke(ctx, index)
             let propertyName = "adaptive-child-" + string index
 
-            if ctx.Properties.ContainsKey propertyName then
-                (ctx.Properties[propertyName] :?> IDisposable).Dispose()
+            if ctx.PropertyResources.ContainsKey propertyName then
+                (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
-            ctx.Properties[ propertyName ] <- creator.AddCallback(fun x -> this.MakeSingleChildBuilder(builder, setChild, x).Invoke(ctx, 0) |> ignore)
+            ctx.PropertyResources[ propertyName ] <-
+                creator.AddCallback(fun x -> this.MakeSingleChildBuilder(builder, setChild, x).Invoke(ctx, 0) |> ignore)
 
             index + 1
         )

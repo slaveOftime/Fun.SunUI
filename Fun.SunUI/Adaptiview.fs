@@ -4,7 +4,7 @@ open System
 open FSharp.Data.Adaptive
 
 
-type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, sp: IServiceProvider, key: obj) =
+type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, sp: IServiceProvider, key) =
     let mutable ctx = ValueNone
 
     let eleStoreSub =
@@ -15,7 +15,7 @@ type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, s
         )
 
     interface IElementContext with
-        member val Key = key with get, set
+        member val RenderMode = key with get, set
         member _.NativeElement = ctx.Value.NativeElement
         member _.ServiceProvider = sp
         member _.Dispose() = eleStoreSub.Dispose()
@@ -26,7 +26,7 @@ type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, s
 type AdaptiveSingleElement<'UIStack> = AdaptiveSingleElement of ElementCreator<'UIStack> aval
 
 
-type AdaptiviewBuilder<'UIStack>(?key: obj) =
+type AdaptiviewBuilder<'UIStack>(?key) =
     inherit AValBuilder()
 
 
@@ -44,12 +44,12 @@ type AdaptiviewBuilder<'UIStack>(?key: obj) =
 
 
     member this.Run(AdaptiveSingleElement store) = {
-        ElementCreator.Key = Option.toObj key
+        ElementCreator.RenderMode = defaultArg key RenderMode.CreateOnce
         CreateOrUpdate =
             fun (sp, ctx) ->
                 let newCtx =
                     match ctx with
-                    | ValueNone -> new ElementAdaptiveContext<'UIStack>(store, sp, defaultArg key null)
+                    | ValueNone -> new ElementAdaptiveContext<'UIStack>(store, sp, defaultArg key RenderMode.CreateOnce)
                     | ValueSome ctx -> unbox ctx
                 newCtx
     }

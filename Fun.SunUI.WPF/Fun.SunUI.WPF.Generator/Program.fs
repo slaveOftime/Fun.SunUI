@@ -4,7 +4,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.Modern.Forms\Fun.SunUI.WPF"
+let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.WPF\Fun.SunUI.WPF"
 let namesp = "Fun.SunUI.WPF"
 let assemblyName = "PresentationFramework"
 

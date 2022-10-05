@@ -3387,215 +3387,215 @@ module WinFormsControlBuilderDslCE_SystemWindowsForms =
 
     type Control' () = 
         inherit ControlBuilder<System.Windows.Forms.Control>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Control>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Control()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Control>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Control()), this.GetRenderMode())
 
     type ScrollableControl' () = 
         inherit ScrollableControlBuilder<System.Windows.Forms.ScrollableControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ScrollableControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ScrollableControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ScrollableControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ScrollableControl()), this.GetRenderMode())
 
     type ToolStrip' () = 
         inherit ToolStripBuilder<System.Windows.Forms.ToolStrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStrip()), this.GetRenderMode())
 
     type ToolStripDropDown' () = 
         inherit ToolStripDropDownBuilder<System.Windows.Forms.ToolStripDropDown>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripDropDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripDropDown()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripDropDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripDropDown()), this.GetRenderMode())
 
     type ToolStripDropDownMenu' () = 
         inherit ToolStripDropDownMenuBuilder<System.Windows.Forms.ToolStripDropDownMenu>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripDropDownMenu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripDropDownMenu()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripDropDownMenu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripDropDownMenu()), this.GetRenderMode())
 
     type ContextMenuStrip' () = 
         inherit ContextMenuStripBuilder<System.Windows.Forms.ContextMenuStrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ContextMenuStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ContextMenuStrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ContextMenuStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ContextMenuStrip()), this.GetRenderMode())
 
     type BindingNavigator' () = 
         inherit BindingNavigatorBuilder<System.Windows.Forms.BindingNavigator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.BindingNavigator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.BindingNavigator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.BindingNavigator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.BindingNavigator()), this.GetRenderMode())
 
     type MenuStrip' () = 
         inherit MenuStripBuilder<System.Windows.Forms.MenuStrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MenuStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MenuStrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MenuStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MenuStrip()), this.GetRenderMode())
 
     type StatusStrip' () = 
         inherit StatusStripBuilder<System.Windows.Forms.StatusStrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.StatusStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.StatusStrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.StatusStrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.StatusStrip()), this.GetRenderMode())
 
     type ContainerControl' () = 
         inherit ContainerControlBuilder<System.Windows.Forms.ContainerControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ContainerControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ContainerControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ContainerControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ContainerControl()), this.GetRenderMode())
 
     type DomainUpDown' () = 
         inherit DomainUpDownBuilder<System.Windows.Forms.DomainUpDown>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DomainUpDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DomainUpDown()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DomainUpDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DomainUpDown()), this.GetRenderMode())
 
     type NumericUpDown' () = 
         inherit NumericUpDownBuilder<System.Windows.Forms.NumericUpDown>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.NumericUpDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.NumericUpDown()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.NumericUpDown>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.NumericUpDown()), this.GetRenderMode())
 
     type Form' () = 
         inherit FormBuilder<System.Windows.Forms.Form>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Form>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Form()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Form>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Form()), this.GetRenderMode())
 
     type PrintPreviewDialog' () = 
         inherit PrintPreviewDialogBuilder<System.Windows.Forms.PrintPreviewDialog>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PrintPreviewDialog>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PrintPreviewDialog()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PrintPreviewDialog>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PrintPreviewDialog()), this.GetRenderMode())
 
     type PropertyGrid' () = 
         inherit PropertyGridBuilder<System.Windows.Forms.PropertyGrid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PropertyGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PropertyGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PropertyGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PropertyGrid()), this.GetRenderMode())
 
     type SplitContainer' () = 
         inherit SplitContainerBuilder<System.Windows.Forms.SplitContainer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitContainer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.SplitContainer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitContainer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.SplitContainer()), this.GetRenderMode())
 
     type ToolStripContainer' () = 
         inherit ToolStripContainerBuilder<System.Windows.Forms.ToolStripContainer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripContainer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripContainer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripContainer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripContainer()), this.GetRenderMode())
 
     type ToolStripPanel' () = 
         inherit ToolStripPanelBuilder<System.Windows.Forms.ToolStripPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripPanel()), this.GetRenderMode())
 
     type UserControl' () = 
         inherit UserControlBuilder<System.Windows.Forms.UserControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.UserControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.UserControl()), this.GetRenderMode())
 
     type Panel' () = 
         inherit PanelBuilder<System.Windows.Forms.Panel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Panel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Panel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Panel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Panel()), this.GetRenderMode())
 
     type FlowLayoutPanel' () = 
         inherit FlowLayoutPanelBuilder<System.Windows.Forms.FlowLayoutPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.FlowLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.FlowLayoutPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.FlowLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.FlowLayoutPanel()), this.GetRenderMode())
 
     type TableLayoutPanel' () = 
         inherit TableLayoutPanelBuilder<System.Windows.Forms.TableLayoutPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TableLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TableLayoutPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TableLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TableLayoutPanel()), this.GetRenderMode())
 
     type TabPage' () = 
         inherit TabPageBuilder<System.Windows.Forms.TabPage>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TabPage>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TabPage()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TabPage>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TabPage()), this.GetRenderMode())
 
     type ToolStripContentPanel' () = 
         inherit ToolStripContentPanelBuilder<System.Windows.Forms.ToolStripContentPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripContentPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripContentPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ToolStripContentPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ToolStripContentPanel()), this.GetRenderMode())
 
     type ListBox' () = 
         inherit ListBoxBuilder<System.Windows.Forms.ListBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ListBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ListBox()), this.GetRenderMode())
 
     type CheckedListBox' () = 
         inherit CheckedListBoxBuilder<System.Windows.Forms.CheckedListBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.CheckedListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.CheckedListBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.CheckedListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.CheckedListBox()), this.GetRenderMode())
 
     type ComboBox' () = 
         inherit ComboBoxBuilder<System.Windows.Forms.ComboBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ComboBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ComboBox()), this.GetRenderMode())
 
     type DataGridViewComboBoxEditingControl' () = 
         inherit DataGridViewComboBoxEditingControlBuilder<System.Windows.Forms.DataGridViewComboBoxEditingControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridViewComboBoxEditingControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridViewComboBoxEditingControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridViewComboBoxEditingControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridViewComboBoxEditingControl()), this.GetRenderMode())
 
     type TextBox' () = 
         inherit TextBoxBuilder<System.Windows.Forms.TextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TextBox()), this.GetRenderMode())
 
     type DataGridViewTextBoxEditingControl' () = 
         inherit DataGridViewTextBoxEditingControlBuilder<System.Windows.Forms.DataGridViewTextBoxEditingControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridViewTextBoxEditingControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridViewTextBoxEditingControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridViewTextBoxEditingControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridViewTextBoxEditingControl()), this.GetRenderMode())
 
     type MaskedTextBox' () = 
         inherit MaskedTextBoxBuilder<System.Windows.Forms.MaskedTextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MaskedTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MaskedTextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MaskedTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MaskedTextBox()), this.GetRenderMode())
 
     type RichTextBox' () = 
         inherit RichTextBoxBuilder<System.Windows.Forms.RichTextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.RichTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.RichTextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.RichTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.RichTextBox()), this.GetRenderMode())
 
     type Button' () = 
         inherit ButtonBuilder<System.Windows.Forms.Button>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Button>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Button()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Button>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Button()), this.GetRenderMode())
 
     type CheckBox' () = 
         inherit CheckBoxBuilder<System.Windows.Forms.CheckBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.CheckBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.CheckBox()), this.GetRenderMode())
 
     type RadioButton' () = 
         inherit RadioButtonBuilder<System.Windows.Forms.RadioButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.RadioButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.RadioButton()), this.GetRenderMode())
 
     type HScrollBar' () = 
         inherit HScrollBarBuilder<System.Windows.Forms.HScrollBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.HScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.HScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.HScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.HScrollBar()), this.GetRenderMode())
 
     type VScrollBar' () = 
         inherit VScrollBarBuilder<System.Windows.Forms.VScrollBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.VScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.VScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.VScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.VScrollBar()), this.GetRenderMode())
 
     type Label' () = 
         inherit LabelBuilder<System.Windows.Forms.Label>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Label>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Label()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Label>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Label()), this.GetRenderMode())
 
     type LinkLabel' () = 
         inherit LinkLabelBuilder<System.Windows.Forms.LinkLabel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.LinkLabel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.LinkLabel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.LinkLabel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.LinkLabel()), this.GetRenderMode())
 
     type WebBrowser' () = 
         inherit WebBrowserBuilder<System.Windows.Forms.WebBrowser>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.WebBrowser>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.WebBrowser()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.WebBrowser>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.WebBrowser()), this.GetRenderMode())
 
     type DataGridView' () = 
         inherit DataGridViewBuilder<System.Windows.Forms.DataGridView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DataGridView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DataGridView()), this.GetRenderMode())
 
     type DateTimePicker' () = 
         inherit DateTimePickerBuilder<System.Windows.Forms.DateTimePicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DateTimePicker>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DateTimePicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.DateTimePicker>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.DateTimePicker()), this.GetRenderMode())
 
     type GroupBox' () = 
         inherit GroupBoxBuilder<System.Windows.Forms.GroupBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.GroupBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.GroupBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.GroupBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.GroupBox()), this.GetRenderMode())
 
     type MonthCalendar' () = 
         inherit MonthCalendarBuilder<System.Windows.Forms.MonthCalendar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MonthCalendar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MonthCalendar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MonthCalendar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MonthCalendar()), this.GetRenderMode())
 
     type ListView' () = 
         inherit ListViewBuilder<System.Windows.Forms.ListView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ListView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ListView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ListView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ListView()), this.GetRenderMode())
 
     type MdiClient' () = 
         inherit MdiClientBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MdiClient()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.MdiClient()), this.GetRenderMode())
 
     type PictureBox' () = 
         inherit PictureBoxBuilder<System.Windows.Forms.PictureBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PictureBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PictureBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PictureBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PictureBox()), this.GetRenderMode())
 
     type PrintPreviewControl' () = 
         inherit PrintPreviewControlBuilder<System.Windows.Forms.PrintPreviewControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PrintPreviewControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PrintPreviewControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.PrintPreviewControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.PrintPreviewControl()), this.GetRenderMode())
 
     type ProgressBar' () = 
         inherit ProgressBarBuilder<System.Windows.Forms.ProgressBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ProgressBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.ProgressBar()), this.GetRenderMode())
 
     type Splitter' () = 
         inherit SplitterBuilder<System.Windows.Forms.Splitter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Splitter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Splitter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.Splitter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.Splitter()), this.GetRenderMode())
 
     type TabControl' () = 
         inherit TabControlBuilder<System.Windows.Forms.TabControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TabControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TabControl()), this.GetRenderMode())
 
     type TrackBar' () = 
         inherit TrackBarBuilder<System.Windows.Forms.TrackBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TrackBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TrackBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TrackBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TrackBar()), this.GetRenderMode())
 
     type TreeView' () = 
         inherit TreeViewBuilder<System.Windows.Forms.TreeView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TreeView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TreeView()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WinForms.Design

@@ -119,7 +119,7 @@ type {builderName}{if meta.ty.IsSealed then "" else builderGenericsWithContraint
 
                     $"""    type {typeName}'{genericStr} () = 
         inherit {builderName}{if meta.ty.IsSealed then "" else builderGenerics}()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> new {getTypeName meta.ty}()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> new {getTypeName meta.ty}()), this.GetRenderMode())
 """
                 )
                 |> String.concat "\n"

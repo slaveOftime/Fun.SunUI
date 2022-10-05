@@ -20,9 +20,10 @@ let start () =
                 FlowLayoutPanel'() {
                     Dock DockStyle.Fill
                     Controls [
-                        Label'() { 
+                        Label'() {
                             AutoSize true
-                            Text(count |> AVal.map (sprintf "Count = %d")) }
+                            Text(count |> AVal.map (sprintf "Count = %d"))
+                        }
                         Button'() {
                             AutoSize true
                             Text "Incease"
@@ -46,6 +47,7 @@ let main (_: string[]) =
     Application.SetCompatibleTextRenderingDefault(false)
     Application.SetHighDpiMode(HighDpiMode.SystemAware) |> ignore
 
+    /// Do not inline start here to avoid bootstrapping issue
     start ()
 
     0

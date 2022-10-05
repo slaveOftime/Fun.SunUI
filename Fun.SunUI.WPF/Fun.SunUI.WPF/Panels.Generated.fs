@@ -193,31 +193,31 @@ module WPFPanelBuilderDslCE_SystemWindowsControls =
 
     type VirtualizingStackPanel' () = 
         inherit VirtualizingStackPanelBuilder<System.Windows.Controls.VirtualizingStackPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.VirtualizingStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.VirtualizingStackPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.VirtualizingStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.VirtualizingStackPanel()), this.GetRenderMode())
 
     type DataGridCellsPanel' () = 
         inherit DataGridCellsPanelBuilder<System.Windows.Controls.DataGridCellsPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCellsPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCellsPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCellsPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCellsPanel()), this.GetRenderMode())
 
     type Grid' () = 
         inherit GridBuilder<System.Windows.Controls.Grid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Grid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Grid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Grid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Grid()), this.GetRenderMode())
 
     type StackPanel' () = 
         inherit StackPanelBuilder<System.Windows.Controls.StackPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.StackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.StackPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.StackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.StackPanel()), this.GetRenderMode())
 
     type Canvas' () = 
         inherit CanvasBuilder<System.Windows.Controls.Canvas>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Canvas>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Canvas()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Canvas>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Canvas()), this.GetRenderMode())
 
     type DockPanel' () = 
         inherit DockPanelBuilder<System.Windows.Controls.DockPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DockPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DockPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DockPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DockPanel()), this.GetRenderMode())
 
     type WrapPanel' () = 
         inherit WrapPanelBuilder<System.Windows.Controls.WrapPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WrapPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WrapPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WrapPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WrapPanel()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Primitives
@@ -230,26 +230,26 @@ module WPFPanelBuilderDslCE_SystemWindowsControlsPrimitives =
 
     type DataGridRowsPresenter' () = 
         inherit DataGridRowsPresenterBuilder<System.Windows.Controls.Primitives.DataGridRowsPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowsPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowsPresenter()), this.GetRenderMode())
 
     type SelectiveScrollingGrid' () = 
         inherit SelectiveScrollingGridBuilder<System.Windows.Controls.Primitives.SelectiveScrollingGrid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.SelectiveScrollingGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.SelectiveScrollingGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.SelectiveScrollingGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.SelectiveScrollingGrid()), this.GetRenderMode())
 
     type ToolBarPanel' () = 
         inherit ToolBarPanelBuilder<System.Windows.Controls.Primitives.ToolBarPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarPanel()), this.GetRenderMode())
 
     type TabPanel' () = 
         inherit TabPanelBuilder<System.Windows.Controls.Primitives.TabPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.TabPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.TabPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.TabPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.TabPanel()), this.GetRenderMode())
 
     type ToolBarOverflowPanel' () = 
         inherit ToolBarOverflowPanelBuilder<System.Windows.Controls.Primitives.ToolBarOverflowPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarOverflowPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarOverflowPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarOverflowPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarOverflowPanel()), this.GetRenderMode())
 
     type UniformGrid' () = 
         inherit UniformGridBuilder<System.Windows.Controls.Primitives.UniformGrid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.UniformGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.UniformGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.UniformGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.UniformGrid()), this.GetRenderMode())
 
             

@@ -448,79 +448,79 @@ module WPFContentControlBuilderDslCE_SystemWindowsControls =
 
     type ContentControl' () = 
         inherit ContentControlBuilder<System.Windows.Controls.ContentControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContentControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContentControl()), this.GetRenderMode())
 
     type CheckBox' () = 
         inherit CheckBoxBuilder<System.Windows.Controls.CheckBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.CheckBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.CheckBox()), this.GetRenderMode())
 
     type RadioButton' () = 
         inherit RadioButtonBuilder<System.Windows.Controls.RadioButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.RadioButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.RadioButton()), this.GetRenderMode())
 
     type Button' () = 
         inherit ButtonBuilder<System.Windows.Controls.Button>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Button>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Button()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Button>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Button()), this.GetRenderMode())
 
     type GridViewColumnHeader' () = 
         inherit GridViewColumnHeaderBuilder<System.Windows.Controls.GridViewColumnHeader>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewColumnHeader()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewColumnHeader()), this.GetRenderMode())
 
     type ListBoxItem' () = 
         inherit ListBoxItemBuilder<System.Windows.Controls.ListBoxItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListBoxItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListBoxItem()), this.GetRenderMode())
 
     type ComboBoxItem' () = 
         inherit ComboBoxItemBuilder<System.Windows.Controls.ComboBoxItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ComboBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ComboBoxItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ComboBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ComboBoxItem()), this.GetRenderMode())
 
     type ListViewItem' () = 
         inherit ListViewItemBuilder<System.Windows.Controls.ListViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListViewItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListViewItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListViewItem()), this.GetRenderMode())
 
     type HeaderedContentControl' () = 
         inherit HeaderedContentControlBuilder<System.Windows.Controls.HeaderedContentControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.HeaderedContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.HeaderedContentControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.HeaderedContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.HeaderedContentControl()), this.GetRenderMode())
 
     type Expander' () = 
         inherit ExpanderBuilder<System.Windows.Controls.Expander>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Expander>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Expander()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Expander>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Expander()), this.GetRenderMode())
 
     type GroupBox' () = 
         inherit GroupBoxBuilder<System.Windows.Controls.GroupBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupBox()), this.GetRenderMode())
 
     type TabItem' () = 
         inherit TabItemBuilder<System.Windows.Controls.TabItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TabItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TabItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TabItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TabItem()), this.GetRenderMode())
 
     type DataGridCell' () = 
         inherit DataGridCellBuilder<System.Windows.Controls.DataGridCell>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCell>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCell()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCell>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCell()), this.GetRenderMode())
 
     type Frame' () = 
         inherit FrameBuilder<System.Windows.Controls.Frame>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Frame>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Frame()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Frame>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Frame()), this.GetRenderMode())
 
     type GroupItem' () = 
         inherit GroupItemBuilder<System.Windows.Controls.GroupItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupItem()), this.GetRenderMode())
 
     type Label' () = 
         inherit LabelBuilder<System.Windows.Controls.Label>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Label>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Label()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Label>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Label()), this.GetRenderMode())
 
     type ScrollViewer' () = 
         inherit ScrollViewerBuilder<System.Windows.Controls.ScrollViewer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ScrollViewer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ScrollViewer()), this.GetRenderMode())
 
     type ToolTip' () = 
         inherit ToolTipBuilder<System.Windows.Controls.ToolTip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolTip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolTip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolTip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolTip()), this.GetRenderMode())
 
     type UserControl' () = 
         inherit UserControlBuilder<System.Windows.Controls.UserControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.UserControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.UserControl()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Primitives
@@ -533,31 +533,31 @@ module WPFContentControlBuilderDslCE_SystemWindowsControlsPrimitives =
 
     type ToggleButton' () = 
         inherit ToggleButtonBuilder<System.Windows.Controls.Primitives.ToggleButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToggleButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToggleButton()), this.GetRenderMode())
 
     type CalendarButton' () = 
         inherit CalendarButtonBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarButton()), this.GetRenderMode())
 
     type CalendarDayButton' () = 
         inherit CalendarDayButtonBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarDayButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarDayButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarDayButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarDayButton()), this.GetRenderMode())
 
     type DataGridColumnHeader' () = 
         inherit DataGridColumnHeaderBuilder<System.Windows.Controls.Primitives.DataGridColumnHeader>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridColumnHeader()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridColumnHeader()), this.GetRenderMode())
 
     type DataGridRowHeader' () = 
         inherit DataGridRowHeaderBuilder<System.Windows.Controls.Primitives.DataGridRowHeader>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowHeader()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowHeader()), this.GetRenderMode())
 
     type RepeatButton' () = 
         inherit RepeatButtonBuilder<System.Windows.Controls.Primitives.RepeatButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.RepeatButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.RepeatButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.RepeatButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.RepeatButton()), this.GetRenderMode())
 
     type StatusBarItem' () = 
         inherit StatusBarItemBuilder<System.Windows.Controls.Primitives.StatusBarItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.StatusBarItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.StatusBarItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.StatusBarItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.StatusBarItem()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF
@@ -570,7 +570,7 @@ module WPFContentControlBuilderDslCE_SystemWindows =
 
     type Window' () = 
         inherit WindowBuilder<System.Windows.Window>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Window>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Window()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Window>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Window()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Navigation
@@ -583,6 +583,6 @@ module WPFContentControlBuilderDslCE_SystemWindowsNavigation =
 
     type NavigationWindow' () = 
         inherit NavigationWindowBuilder<System.Windows.Navigation.NavigationWindow>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.NavigationWindow>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.NavigationWindow()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.NavigationWindow>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.NavigationWindow()), this.GetRenderMode())
 
             

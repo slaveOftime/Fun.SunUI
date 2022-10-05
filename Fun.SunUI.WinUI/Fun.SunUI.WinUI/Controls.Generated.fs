@@ -2452,351 +2452,351 @@ module WinUIControlBuilderDslCE_MicrosoftUIXamlControls =
 
     type ContentControl' () = 
         inherit ContentControlBuilder<Microsoft.UI.Xaml.Controls.ContentControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ContentControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ContentControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ContentControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ContentControl()), this.GetRenderMode())
 
     type Button' () = 
         inherit ButtonBuilder<Microsoft.UI.Xaml.Controls.Button>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Button>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Button()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Button>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Button()), this.GetRenderMode())
 
     type AppBarButton' () = 
         inherit AppBarButtonBuilder<Microsoft.UI.Xaml.Controls.AppBarButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarButton()), this.GetRenderMode())
 
     type DropDownButton' () = 
         inherit DropDownButtonBuilder<Microsoft.UI.Xaml.Controls.DropDownButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.DropDownButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.DropDownButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.DropDownButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.DropDownButton()), this.GetRenderMode())
 
     type AppBarToggleButton' () = 
         inherit AppBarToggleButtonBuilder<Microsoft.UI.Xaml.Controls.AppBarToggleButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarToggleButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarToggleButton()), this.GetRenderMode())
 
     type CheckBox' () = 
         inherit CheckBoxBuilder<Microsoft.UI.Xaml.Controls.CheckBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CheckBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CheckBox()), this.GetRenderMode())
 
     type RadioButton' () = 
         inherit RadioButtonBuilder<Microsoft.UI.Xaml.Controls.RadioButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioButton()), this.GetRenderMode())
 
     type HyperlinkButton' () = 
         inherit HyperlinkButtonBuilder<Microsoft.UI.Xaml.Controls.HyperlinkButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.HyperlinkButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.HyperlinkButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.HyperlinkButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.HyperlinkButton()), this.GetRenderMode())
 
     type ListViewItem' () = 
         inherit ListViewItemBuilder<Microsoft.UI.Xaml.Controls.ListViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListViewItem()), this.GetRenderMode())
 
     type TabViewItem' () = 
         inherit TabViewItemBuilder<Microsoft.UI.Xaml.Controls.TabViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TabViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TabViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TabViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TabViewItem()), this.GetRenderMode())
 
     type TreeViewItem' () = 
         inherit TreeViewItemBuilder<Microsoft.UI.Xaml.Controls.TreeViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeViewItem()), this.GetRenderMode())
 
     type ComboBoxItem' () = 
         inherit ComboBoxItemBuilder<Microsoft.UI.Xaml.Controls.ComboBoxItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ComboBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ComboBoxItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ComboBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ComboBoxItem()), this.GetRenderMode())
 
     type FlipViewItem' () = 
         inherit FlipViewItemBuilder<Microsoft.UI.Xaml.Controls.FlipViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlipViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlipViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlipViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlipViewItem()), this.GetRenderMode())
 
     type GridViewItem' () = 
         inherit GridViewItemBuilder<Microsoft.UI.Xaml.Controls.GridViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridViewItem()), this.GetRenderMode())
 
     type ListBoxItem' () = 
         inherit ListBoxItemBuilder<Microsoft.UI.Xaml.Controls.ListBoxItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListBoxItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListBoxItem()), this.GetRenderMode())
 
     type AppBar' () = 
         inherit AppBarBuilder<Microsoft.UI.Xaml.Controls.AppBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBar()), this.GetRenderMode())
 
     type CommandBar' () = 
         inherit CommandBarBuilder<Microsoft.UI.Xaml.Controls.CommandBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CommandBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CommandBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CommandBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CommandBar()), this.GetRenderMode())
 
     type GridViewHeaderItem' () = 
         inherit GridViewHeaderItemBuilder<Microsoft.UI.Xaml.Controls.GridViewHeaderItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridViewHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridViewHeaderItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridViewHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridViewHeaderItem()), this.GetRenderMode())
 
     type ListViewHeaderItem' () = 
         inherit ListViewHeaderItemBuilder<Microsoft.UI.Xaml.Controls.ListViewHeaderItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListViewHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListViewHeaderItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListViewHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListViewHeaderItem()), this.GetRenderMode())
 
     type NavigationViewItem' () = 
         inherit NavigationViewItemBuilder<Microsoft.UI.Xaml.Controls.NavigationViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItem()), this.GetRenderMode())
 
     type NavigationViewItemHeader' () = 
         inherit NavigationViewItemHeaderBuilder<Microsoft.UI.Xaml.Controls.NavigationViewItemHeader>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItemHeader>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItemHeader()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItemHeader>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItemHeader()), this.GetRenderMode())
 
     type NavigationViewItemSeparator' () = 
         inherit NavigationViewItemSeparatorBuilder<Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator()), this.GetRenderMode())
 
     type SplitButton' () = 
         inherit SplitButtonBuilder<Microsoft.UI.Xaml.Controls.SplitButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SplitButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SplitButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SplitButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SplitButton()), this.GetRenderMode())
 
     type ToggleSplitButton' () = 
         inherit ToggleSplitButtonBuilder<Microsoft.UI.Xaml.Controls.ToggleSplitButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSplitButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleSplitButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSplitButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleSplitButton()), this.GetRenderMode())
 
     type AppBarElementContainer' () = 
         inherit AppBarElementContainerBuilder<Microsoft.UI.Xaml.Controls.AppBarElementContainer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarElementContainer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarElementContainer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarElementContainer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarElementContainer()), this.GetRenderMode())
 
     type BreadcrumbBarItem' () = 
         inherit BreadcrumbBarItemBuilder<Microsoft.UI.Xaml.Controls.BreadcrumbBarItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.BreadcrumbBarItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.BreadcrumbBarItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.BreadcrumbBarItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.BreadcrumbBarItem()), this.GetRenderMode())
 
     type ContentDialog' () = 
         inherit ContentDialogBuilder<Microsoft.UI.Xaml.Controls.ContentDialog>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ContentDialog>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ContentDialog()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ContentDialog>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ContentDialog()), this.GetRenderMode())
 
     type Expander' () = 
         inherit ExpanderBuilder<Microsoft.UI.Xaml.Controls.Expander>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Expander>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Expander()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Expander>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Expander()), this.GetRenderMode())
 
     type FlyoutPresenter' () = 
         inherit FlyoutPresenterBuilder<Microsoft.UI.Xaml.Controls.FlyoutPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlyoutPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlyoutPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlyoutPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlyoutPresenter()), this.GetRenderMode())
 
     type Frame' () = 
         inherit FrameBuilder<Microsoft.UI.Xaml.Controls.Frame>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Frame>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Frame()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Frame>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Frame()), this.GetRenderMode())
 
     type GroupItem' () = 
         inherit GroupItemBuilder<Microsoft.UI.Xaml.Controls.GroupItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GroupItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GroupItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GroupItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GroupItem()), this.GetRenderMode())
 
     type NavigationView' () = 
         inherit NavigationViewBuilder<Microsoft.UI.Xaml.Controls.NavigationView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NavigationView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NavigationView()), this.GetRenderMode())
 
     type PivotItem' () = 
         inherit PivotItemBuilder<Microsoft.UI.Xaml.Controls.PivotItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PivotItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PivotItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PivotItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PivotItem()), this.GetRenderMode())
 
     type RefreshContainer' () = 
         inherit RefreshContainerBuilder<Microsoft.UI.Xaml.Controls.RefreshContainer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RefreshContainer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RefreshContainer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RefreshContainer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RefreshContainer()), this.GetRenderMode())
 
     type ScrollViewer' () = 
         inherit ScrollViewerBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ScrollViewer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ScrollViewer()), this.GetRenderMode())
 
     type SwipeControl' () = 
         inherit SwipeControlBuilder<Microsoft.UI.Xaml.Controls.SwipeControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwipeControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwipeControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwipeControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwipeControl()), this.GetRenderMode())
 
     type TeachingTip' () = 
         inherit TeachingTipBuilder<Microsoft.UI.Xaml.Controls.TeachingTip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TeachingTip>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TeachingTip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TeachingTip>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TeachingTip()), this.GetRenderMode())
 
     type ToolTip' () = 
         inherit ToolTipBuilder<Microsoft.UI.Xaml.Controls.ToolTip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToolTip>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToolTip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToolTip>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToolTip()), this.GetRenderMode())
 
     type ItemsControl' () = 
         inherit ItemsControlBuilder<Microsoft.UI.Xaml.Controls.ItemsControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsControl()), this.GetRenderMode())
 
     type ListView' () = 
         inherit ListViewBuilder<Microsoft.UI.Xaml.Controls.ListView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListView()), this.GetRenderMode())
 
     type TreeViewList' () = 
         inherit TreeViewListBuilder<Microsoft.UI.Xaml.Controls.TreeViewList>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeViewList>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeViewList()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeViewList>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeViewList()), this.GetRenderMode())
 
     type GridView' () = 
         inherit GridViewBuilder<Microsoft.UI.Xaml.Controls.GridView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.GridView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.GridView()), this.GetRenderMode())
 
     type ComboBox' () = 
         inherit ComboBoxBuilder<Microsoft.UI.Xaml.Controls.ComboBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ComboBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ComboBox()), this.GetRenderMode())
 
     type FlipView' () = 
         inherit FlipViewBuilder<Microsoft.UI.Xaml.Controls.FlipView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlipView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlipView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.FlipView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.FlipView()), this.GetRenderMode())
 
     type ListBox' () = 
         inherit ListBoxBuilder<Microsoft.UI.Xaml.Controls.ListBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ListBox()), this.GetRenderMode())
 
     type AutoSuggestBox' () = 
         inherit AutoSuggestBoxBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AutoSuggestBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AutoSuggestBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AutoSuggestBox()), this.GetRenderMode())
 
     type CommandBarOverflowPresenter' () = 
         inherit CommandBarOverflowPresenterBuilder<Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CommandBarOverflowPresenter()), this.GetRenderMode())
 
     type MenuFlyoutPresenter' () = 
         inherit MenuFlyoutPresenterBuilder<Microsoft.UI.Xaml.Controls.MenuFlyoutPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutPresenter()), this.GetRenderMode())
 
     type Pivot' () = 
         inherit PivotBuilder<Microsoft.UI.Xaml.Controls.Pivot>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Pivot>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Pivot()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Pivot>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Pivot()), this.GetRenderMode())
 
     type MenuFlyoutItem' () = 
         inherit MenuFlyoutItemBuilder<Microsoft.UI.Xaml.Controls.MenuFlyoutItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutItem()), this.GetRenderMode())
 
     type RadioMenuFlyoutItem' () = 
         inherit RadioMenuFlyoutItemBuilder<Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem()), this.GetRenderMode())
 
     type ToggleMenuFlyoutItem' () = 
         inherit ToggleMenuFlyoutItemBuilder<Microsoft.UI.Xaml.Controls.ToggleMenuFlyoutItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleMenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleMenuFlyoutItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleMenuFlyoutItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleMenuFlyoutItem()), this.GetRenderMode())
 
     type MenuFlyoutSeparator' () = 
         inherit MenuFlyoutSeparatorBuilder<Microsoft.UI.Xaml.Controls.MenuFlyoutSeparator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutSeparator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutSeparator()), this.GetRenderMode())
 
     type MenuFlyoutSubItem' () = 
         inherit MenuFlyoutSubItemBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutSubItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutSubItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuFlyoutSubItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuFlyoutSubItem()), this.GetRenderMode())
 
     type Slider' () = 
         inherit SliderBuilder<Microsoft.UI.Xaml.Controls.Slider>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Slider>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Slider()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Slider>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Slider()), this.GetRenderMode())
 
     type ProgressBar' () = 
         inherit ProgressBarBuilder<Microsoft.UI.Xaml.Controls.ProgressBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ProgressBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ProgressBar()), this.GetRenderMode())
 
     type UserControl' () = 
         inherit UserControlBuilder<Microsoft.UI.Xaml.Controls.UserControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.UserControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.UserControl()), this.GetRenderMode())
 
     type Page' () = 
         inherit PageBuilder<Microsoft.UI.Xaml.Controls.Page>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Page()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Page()), this.GetRenderMode())
 
     type AppBarSeparator' () = 
         inherit AppBarSeparatorBuilder<Microsoft.UI.Xaml.Controls.AppBarSeparator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarSeparator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.AppBarSeparator>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.AppBarSeparator()), this.GetRenderMode())
 
     type BreadcrumbBar' () = 
         inherit BreadcrumbBarBuilder<Microsoft.UI.Xaml.Controls.BreadcrumbBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.BreadcrumbBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.BreadcrumbBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.BreadcrumbBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.BreadcrumbBar()), this.GetRenderMode())
 
     type CalendarDatePicker' () = 
         inherit CalendarDatePickerBuilder<Microsoft.UI.Xaml.Controls.CalendarDatePicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarDatePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarDatePicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarDatePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarDatePicker()), this.GetRenderMode())
 
     type CalendarView' () = 
         inherit CalendarViewBuilder<Microsoft.UI.Xaml.Controls.CalendarView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarView()), this.GetRenderMode())
 
     type CalendarViewDayItem' () = 
         inherit CalendarViewDayItemBuilder<Microsoft.UI.Xaml.Controls.CalendarViewDayItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarViewDayItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarViewDayItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.CalendarViewDayItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.CalendarViewDayItem()), this.GetRenderMode())
 
     type ColorPicker' () = 
         inherit ColorPickerBuilder<Microsoft.UI.Xaml.Controls.ColorPicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ColorPicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ColorPicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ColorPicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ColorPicker()), this.GetRenderMode())
 
     type DatePicker' () = 
         inherit DatePickerBuilder<Microsoft.UI.Xaml.Controls.DatePicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.DatePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.DatePicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.DatePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.DatePicker()), this.GetRenderMode())
 
     type Hub' () = 
         inherit HubBuilder<Microsoft.UI.Xaml.Controls.Hub>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Hub>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Hub()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Hub>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Hub()), this.GetRenderMode())
 
     type HubSection' () = 
         inherit HubSectionBuilder<Microsoft.UI.Xaml.Controls.HubSection>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.HubSection>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.HubSection()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.HubSection>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.HubSection()), this.GetRenderMode())
 
     type InfoBar' () = 
         inherit InfoBarBuilder<Microsoft.UI.Xaml.Controls.InfoBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.InfoBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.InfoBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.InfoBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.InfoBar()), this.GetRenderMode())
 
     type MenuBar' () = 
         inherit MenuBarBuilder<Microsoft.UI.Xaml.Controls.MenuBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuBar()), this.GetRenderMode())
 
     type MenuBarItem' () = 
         inherit MenuBarItemBuilder<Microsoft.UI.Xaml.Controls.MenuBarItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuBarItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuBarItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.MenuBarItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.MenuBarItem()), this.GetRenderMode())
 
     type NumberBox' () = 
         inherit NumberBoxBuilder<Microsoft.UI.Xaml.Controls.NumberBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NumberBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NumberBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.NumberBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.NumberBox()), this.GetRenderMode())
 
     type PasswordBox' () = 
         inherit PasswordBoxBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PasswordBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PasswordBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PasswordBox()), this.GetRenderMode())
 
     type PersonPicture' () = 
         inherit PersonPictureBuilder<Microsoft.UI.Xaml.Controls.PersonPicture>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PersonPicture>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PersonPicture()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PersonPicture>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PersonPicture()), this.GetRenderMode())
 
     type PipsPager' () = 
         inherit PipsPagerBuilder<Microsoft.UI.Xaml.Controls.PipsPager>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PipsPager>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PipsPager()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.PipsPager>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.PipsPager()), this.GetRenderMode())
 
     type ProgressRing' () = 
         inherit ProgressRingBuilder<Microsoft.UI.Xaml.Controls.ProgressRing>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ProgressRing>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ProgressRing()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ProgressRing>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ProgressRing()), this.GetRenderMode())
 
     type RadioButtons' () = 
         inherit RadioButtonsBuilder<Microsoft.UI.Xaml.Controls.RadioButtons>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioButtons>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioButtons()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RadioButtons>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RadioButtons()), this.GetRenderMode())
 
     type RatingControl' () = 
         inherit RatingControlBuilder<Microsoft.UI.Xaml.Controls.RatingControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RatingControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RatingControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RatingControl>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RatingControl()), this.GetRenderMode())
 
     type RefreshVisualizer' () = 
         inherit RefreshVisualizerBuilder<Microsoft.UI.Xaml.Controls.RefreshVisualizer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RefreshVisualizer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RefreshVisualizer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RefreshVisualizer>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RefreshVisualizer()), this.GetRenderMode())
 
     type RichEditBox' () = 
         inherit RichEditBoxBuilder<Microsoft.UI.Xaml.Controls.RichEditBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RichEditBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RichEditBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RichEditBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RichEditBox()), this.GetRenderMode())
 
     type SemanticZoom' () = 
         inherit SemanticZoomBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SemanticZoom()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SemanticZoom>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SemanticZoom()), this.GetRenderMode())
 
     type SplitView' () = 
         inherit SplitViewBuilder<Microsoft.UI.Xaml.Controls.SplitView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SplitView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SplitView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SplitView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SplitView()), this.GetRenderMode())
 
     type TabView' () = 
         inherit TabViewBuilder<Microsoft.UI.Xaml.Controls.TabView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TabView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TabView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TabView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TabView()), this.GetRenderMode())
 
     type TextBox' () = 
         inherit TextBoxBuilder<Microsoft.UI.Xaml.Controls.TextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TextBox()), this.GetRenderMode())
 
     type TimePicker' () = 
         inherit TimePickerBuilder<Microsoft.UI.Xaml.Controls.TimePicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TimePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TimePicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TimePicker>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TimePicker()), this.GetRenderMode())
 
     type ToggleSwitch' () = 
         inherit ToggleSwitchBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSwitch>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleSwitch()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ToggleSwitch>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ToggleSwitch()), this.GetRenderMode())
 
     type TreeView' () = 
         inherit TreeViewBuilder<Microsoft.UI.Xaml.Controls.TreeView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TreeView()), this.GetRenderMode())
 
     type TwoPaneView' () = 
         inherit TwoPaneViewBuilder<Microsoft.UI.Xaml.Controls.TwoPaneView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TwoPaneView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TwoPaneView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.TwoPaneView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.TwoPaneView()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WinUI.Primitives
@@ -2809,42 +2809,42 @@ module WinUIControlBuilderDslCE_MicrosoftUIXamlControlsPrimitives =
 
     type ToggleButton' () = 
         inherit ToggleButtonBuilder<Microsoft.UI.Xaml.Controls.Primitives.ToggleButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ToggleButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ToggleButton()), this.GetRenderMode())
 
     type RepeatButton' () = 
         inherit RepeatButtonBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.RepeatButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.RepeatButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.RepeatButton>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.RepeatButton()), this.GetRenderMode())
 
     type CommandBarFlyoutCommandBar' () = 
         inherit CommandBarFlyoutCommandBarBuilder<Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar()), this.GetRenderMode())
 
     type NavigationViewItemPresenter' () = 
         inherit NavigationViewItemPresenterBuilder<Microsoft.UI.Xaml.Controls.Primitives.NavigationViewItemPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.NavigationViewItemPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.NavigationViewItemPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.NavigationViewItemPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.NavigationViewItemPresenter()), this.GetRenderMode())
 
     type PivotHeaderItem' () = 
         inherit PivotHeaderItemBuilder<Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderItem>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderItem()), this.GetRenderMode())
 
     type TabViewListView' () = 
         inherit TabViewListViewBuilder<Microsoft.UI.Xaml.Controls.Primitives.TabViewListView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.TabViewListView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.TabViewListView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.TabViewListView>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.TabViewListView()), this.GetRenderMode())
 
     type ColorPickerSlider' () = 
         inherit ColorPickerSliderBuilder<Microsoft.UI.Xaml.Controls.Primitives.ColorPickerSlider>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ColorPickerSlider>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ColorPickerSlider()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ColorPickerSlider>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ColorPickerSlider()), this.GetRenderMode())
 
     type ScrollBar' () = 
         inherit ScrollBarBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ScrollBar()), this.GetRenderMode())
 
     type ColorSpectrum' () = 
         inherit ColorSpectrumBuilder<Microsoft.UI.Xaml.Controls.Primitives.ColorSpectrum>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ColorSpectrum>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ColorSpectrum()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.ColorSpectrum>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.ColorSpectrum()), this.GetRenderMode())
 
     type Thumb' () = 
         inherit ThumbBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.Thumb>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.Thumb()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.Thumb>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.Thumb()), this.GetRenderMode())
 
             

@@ -586,130 +586,130 @@ module ModernFormsControlBuilderDslCE_ModernForms =
 
     type Control' () = 
         inherit ControlBuilder<Modern.Forms.Control>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Control>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Control()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Control>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Control()), this.GetRenderMode())
 
     type MenuDropDown' () = 
         inherit MenuDropDownBuilder<Modern.Forms.MenuDropDown>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.MenuDropDown>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.MenuDropDown()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.MenuDropDown>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.MenuDropDown()), this.GetRenderMode())
 
     type ContextMenu' () = 
         inherit ContextMenuBuilder<Modern.Forms.ContextMenu>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ContextMenu>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ContextMenu()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ContextMenu>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ContextMenu()), this.GetRenderMode())
 
     type Menu' () = 
         inherit MenuBuilder<Modern.Forms.Menu>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Menu>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Menu()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Menu>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Menu()), this.GetRenderMode())
 
     type ToolBar' () = 
         inherit ToolBarBuilder<Modern.Forms.ToolBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ToolBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ToolBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ToolBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ToolBar()), this.GetRenderMode())
 
     type ScrollableControl' () = 
         inherit ScrollableControlBuilder<Modern.Forms.ScrollableControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ScrollableControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ScrollableControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ScrollableControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ScrollableControl()), this.GetRenderMode())
 
     type Panel' () = 
         inherit PanelBuilder<Modern.Forms.Panel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Panel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Panel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Panel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Panel()), this.GetRenderMode())
 
     type FlowLayoutPanel' () = 
         inherit FlowLayoutPanelBuilder<Modern.Forms.FlowLayoutPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.FlowLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.FlowLayoutPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.FlowLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.FlowLayoutPanel()), this.GetRenderMode())
 
     type TableLayoutPanel' () = 
         inherit TableLayoutPanelBuilder<Modern.Forms.TableLayoutPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TableLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TableLayoutPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TableLayoutPanel>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TableLayoutPanel()), this.GetRenderMode())
 
     type TabPage' () = 
         inherit TabPageBuilder<Modern.Forms.TabPage>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabPage>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabPage()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabPage>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabPage()), this.GetRenderMode())
 
     type HorizontalScrollBar' () = 
         inherit HorizontalScrollBarBuilder<Modern.Forms.HorizontalScrollBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.HorizontalScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.HorizontalScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.HorizontalScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.HorizontalScrollBar()), this.GetRenderMode())
 
     type VerticalScrollBar' () = 
         inherit VerticalScrollBarBuilder<Modern.Forms.VerticalScrollBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.VerticalScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.VerticalScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.VerticalScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.VerticalScrollBar()), this.GetRenderMode())
 
     type ScrollControl' () = 
         inherit ScrollControlBuilder<Modern.Forms.ScrollControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ScrollControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ScrollControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ScrollControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ScrollControl()), this.GetRenderMode())
 
     type TextBox' () = 
         inherit TextBoxBuilder<Modern.Forms.TextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TextBox()), this.GetRenderMode())
 
     type Button' () = 
         inherit ButtonBuilder<Modern.Forms.Button>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Button>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Button()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Button>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Button()), this.GetRenderMode())
 
     type CheckBox' () = 
         inherit CheckBoxBuilder<Modern.Forms.CheckBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.CheckBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.CheckBox()), this.GetRenderMode())
 
     type ComboBox' () = 
         inherit ComboBoxBuilder<Modern.Forms.ComboBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ComboBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ComboBox()), this.GetRenderMode())
 
     type FormTitleBar' () = 
         inherit FormTitleBarBuilder<Modern.Forms.FormTitleBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.FormTitleBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.FormTitleBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.FormTitleBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.FormTitleBar()), this.GetRenderMode())
 
     type Label' () = 
         inherit LabelBuilder<Modern.Forms.Label>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Label>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Label()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Label>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Label()), this.GetRenderMode())
 
     type ListBox' () = 
         inherit ListBoxBuilder<Modern.Forms.ListBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ListBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ListBox()), this.GetRenderMode())
 
     type ListView' () = 
         inherit ListViewBuilder<Modern.Forms.ListView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ListView>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ListView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ListView>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ListView()), this.GetRenderMode())
 
     type NavigationPane' () = 
         inherit NavigationPaneBuilder<Modern.Forms.NavigationPane>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.NavigationPane>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.NavigationPane()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.NavigationPane>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.NavigationPane()), this.GetRenderMode())
 
     type PictureBox' () = 
         inherit PictureBoxBuilder<Modern.Forms.PictureBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.PictureBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.PictureBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.PictureBox>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.PictureBox()), this.GetRenderMode())
 
     type ProgressBar' () = 
         inherit ProgressBarBuilder<Modern.Forms.ProgressBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ProgressBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.ProgressBar()), this.GetRenderMode())
 
     type RadioButton' () = 
         inherit RadioButtonBuilder<Modern.Forms.RadioButton>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.RadioButton()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.RadioButton()), this.GetRenderMode())
 
     type Ribbon' () = 
         inherit RibbonBuilder<Modern.Forms.Ribbon>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Ribbon>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Ribbon()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Ribbon>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Ribbon()), this.GetRenderMode())
 
     type SplitContainer' () = 
         inherit SplitContainerBuilder<Modern.Forms.SplitContainer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.SplitContainer>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.SplitContainer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.SplitContainer>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.SplitContainer()), this.GetRenderMode())
 
     type Splitter' () = 
         inherit SplitterBuilder<Modern.Forms.Splitter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Splitter>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Splitter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Splitter>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Splitter()), this.GetRenderMode())
 
     type StatusBar' () = 
         inherit StatusBarBuilder<Modern.Forms.StatusBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.StatusBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.StatusBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.StatusBar>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.StatusBar()), this.GetRenderMode())
 
     type TabControl' () = 
         inherit TabControlBuilder<Modern.Forms.TabControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabControl()), this.GetRenderMode())
 
     type TabStrip' () = 
         inherit TabStripBuilder<Modern.Forms.TabStrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabStrip>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabStrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TabStrip>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TabStrip()), this.GetRenderMode())
 
     type TreeView' () = 
         inherit TreeViewBuilder<Modern.Forms.TreeView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TreeView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.TreeView()), this.GetRenderMode())
 
             

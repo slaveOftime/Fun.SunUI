@@ -101,10 +101,10 @@ module ModernFormsWindowBaseBuilderDslCE_ModernForms =
 
     type Form' () = 
         inherit FormBuilder<Modern.Forms.Form>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Form>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Form()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.Form>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.Form()), this.GetRenderMode())
 
     type MessageBoxForm' () = 
         inherit MessageBoxFormBuilder<Modern.Forms.MessageBoxForm>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.MessageBoxForm>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.MessageBoxForm()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Modern.Forms.MessageBoxForm>) = this.MakeElementCreator(builder, (fun _ -> new Modern.Forms.MessageBoxForm()), this.GetRenderMode())
 
             

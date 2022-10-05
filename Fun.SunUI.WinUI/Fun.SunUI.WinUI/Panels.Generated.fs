@@ -337,47 +337,47 @@ module WinUIPanelBuilderDslCE_MicrosoftUIXamlControls =
 
     type VirtualizingStackPanel' () = 
         inherit VirtualizingStackPanelBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VirtualizingStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.VirtualizingStackPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VirtualizingStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.VirtualizingStackPanel()), this.GetRenderMode())
 
     type WrapGrid' () = 
         inherit WrapGridBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.WrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.WrapGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.WrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.WrapGrid()), this.GetRenderMode())
 
     type Grid' () = 
         inherit GridBuilder<Microsoft.UI.Xaml.Controls.Grid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Grid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Grid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Grid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Grid()), this.GetRenderMode())
 
     type SwapChainBackgroundPanel' () = 
         inherit SwapChainBackgroundPanelBuilder<Microsoft.UI.Xaml.Controls.SwapChainBackgroundPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwapChainBackgroundPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwapChainBackgroundPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwapChainBackgroundPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwapChainBackgroundPanel()), this.GetRenderMode())
 
     type SwapChainPanel' () = 
         inherit SwapChainPanelBuilder<Microsoft.UI.Xaml.Controls.SwapChainPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwapChainPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwapChainPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.SwapChainPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.SwapChainPanel()), this.GetRenderMode())
 
     type Canvas' () = 
         inherit CanvasBuilder<Microsoft.UI.Xaml.Controls.Canvas>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Canvas>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Canvas()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Canvas>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Canvas()), this.GetRenderMode())
 
     type ItemsStackPanel' () = 
         inherit ItemsStackPanelBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsStackPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsStackPanel()), this.GetRenderMode())
 
     type ItemsWrapGrid' () = 
         inherit ItemsWrapGridBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsWrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsWrapGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.ItemsWrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.ItemsWrapGrid()), this.GetRenderMode())
 
     type RelativePanel' () = 
         inherit RelativePanelBuilder<Microsoft.UI.Xaml.Controls.RelativePanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RelativePanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RelativePanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.RelativePanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.RelativePanel()), this.GetRenderMode())
 
     type StackPanel' () = 
         inherit StackPanelBuilder<Microsoft.UI.Xaml.Controls.StackPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.StackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.StackPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.StackPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.StackPanel()), this.GetRenderMode())
 
     type VariableSizedWrapGrid' () = 
         inherit VariableSizedWrapGridBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VariableSizedWrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.VariableSizedWrapGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.VariableSizedWrapGrid>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.VariableSizedWrapGrid()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WinUI.Primitives
@@ -390,26 +390,26 @@ module WinUIPanelBuilderDslCE_MicrosoftUIXamlControlsPrimitives =
 
     type CarouselPanel' () = 
         inherit CarouselPanelBuilder<Microsoft.UI.Xaml.Controls.Primitives.CarouselPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CarouselPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CarouselPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CarouselPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CarouselPanel()), this.GetRenderMode())
 
     type MonochromaticOverlayPresenter' () = 
         inherit MonochromaticOverlayPresenterBuilder<Microsoft.UI.Xaml.Controls.Primitives.MonochromaticOverlayPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.MonochromaticOverlayPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.MonochromaticOverlayPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.MonochromaticOverlayPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.MonochromaticOverlayPresenter()), this.GetRenderMode())
 
     type PivotHeaderPanel' () = 
         inherit PivotHeaderPanelBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotHeaderPanel()), this.GetRenderMode())
 
     type CalendarPanel' () = 
         inherit CalendarPanelBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CalendarPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CalendarPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.CalendarPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.CalendarPanel()), this.GetRenderMode())
 
     type InfoBarPanel' () = 
         inherit InfoBarPanelBuilder<Microsoft.UI.Xaml.Controls.Primitives.InfoBarPanel>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.InfoBarPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.InfoBarPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.InfoBarPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.InfoBarPanel()), this.GetRenderMode())
 
     type PivotPanel' () = 
         inherit PivotPanelBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotPanel()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.UI.Xaml.Controls.Primitives.PivotPanel>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.UI.Xaml.Controls.Primitives.PivotPanel()), this.GetRenderMode())
 
             

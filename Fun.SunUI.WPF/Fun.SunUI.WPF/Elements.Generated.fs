@@ -1936,7 +1936,7 @@ module WPFElementBuilderDslCE_SystemWindows =
 
     type FrameworkElement' () = 
         inherit FrameworkElementBuilder<System.Windows.FrameworkElement>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.FrameworkElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.FrameworkElement()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.FrameworkElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.FrameworkElement()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Controls
@@ -1949,191 +1949,191 @@ module WPFElementBuilderDslCE_SystemWindowsControls =
 
     type Page' () = 
         inherit PageBuilder<System.Windows.Controls.Page>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Page()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Page()), this.GetRenderMode())
 
     type Control' () = 
         inherit ControlBuilder<System.Windows.Controls.Control>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Control>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Control()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Control>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Control()), this.GetRenderMode())
 
     type ItemsControl' () = 
         inherit ItemsControlBuilder<System.Windows.Controls.ItemsControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ItemsControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ItemsControl()), this.GetRenderMode())
 
     type DataGrid' () = 
         inherit DataGridBuilder<System.Windows.Controls.DataGrid>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGrid()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGrid()), this.GetRenderMode())
 
     type ListBox' () = 
         inherit ListBoxBuilder<System.Windows.Controls.ListBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListBox()), this.GetRenderMode())
 
     type ListView' () = 
         inherit ListViewBuilder<System.Windows.Controls.ListView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListView()), this.GetRenderMode())
 
     type ComboBox' () = 
         inherit ComboBoxBuilder<System.Windows.Controls.ComboBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ComboBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ComboBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ComboBox()), this.GetRenderMode())
 
     type TabControl' () = 
         inherit TabControlBuilder<System.Windows.Controls.TabControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TabControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TabControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TabControl()), this.GetRenderMode())
 
     type ContextMenu' () = 
         inherit ContextMenuBuilder<System.Windows.Controls.ContextMenu>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContextMenu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContextMenu()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContextMenu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContextMenu()), this.GetRenderMode())
 
     type Menu' () = 
         inherit MenuBuilder<System.Windows.Controls.Menu>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Menu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Menu()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Menu>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Menu()), this.GetRenderMode())
 
     type HeaderedItemsControl' () = 
         inherit HeaderedItemsControlBuilder<System.Windows.Controls.HeaderedItemsControl>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.HeaderedItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.HeaderedItemsControl()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.HeaderedItemsControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.HeaderedItemsControl()), this.GetRenderMode())
 
     type MenuItem' () = 
         inherit MenuItemBuilder<System.Windows.Controls.MenuItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.MenuItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.MenuItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.MenuItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.MenuItem()), this.GetRenderMode())
 
     type ToolBar' () = 
         inherit ToolBarBuilder<System.Windows.Controls.ToolBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolBar()), this.GetRenderMode())
 
     type TreeViewItem' () = 
         inherit TreeViewItemBuilder<System.Windows.Controls.TreeViewItem>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TreeViewItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TreeViewItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TreeViewItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TreeViewItem()), this.GetRenderMode())
 
     type TreeView' () = 
         inherit TreeViewBuilder<System.Windows.Controls.TreeView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TreeView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TreeView()), this.GetRenderMode())
 
     type TextBox' () = 
         inherit TextBoxBuilder<System.Windows.Controls.TextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TextBox()), this.GetRenderMode())
 
     type RichTextBox' () = 
         inherit RichTextBoxBuilder<System.Windows.Controls.RichTextBox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.RichTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.RichTextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.RichTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.RichTextBox()), this.GetRenderMode())
 
     type DocumentViewer' () = 
         inherit DocumentViewerBuilder<System.Windows.Controls.DocumentViewer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DocumentViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DocumentViewer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DocumentViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DocumentViewer()), this.GetRenderMode())
 
     type FlowDocumentPageViewer' () = 
         inherit FlowDocumentPageViewerBuilder<System.Windows.Controls.FlowDocumentPageViewer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentPageViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentPageViewer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentPageViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentPageViewer()), this.GetRenderMode())
 
     type GridSplitter' () = 
         inherit GridSplitterBuilder<System.Windows.Controls.GridSplitter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridSplitter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridSplitter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridSplitter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridSplitter()), this.GetRenderMode())
 
     type ProgressBar' () = 
         inherit ProgressBarBuilder<System.Windows.Controls.ProgressBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ProgressBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ProgressBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ProgressBar()), this.GetRenderMode())
 
     type Slider' () = 
         inherit SliderBuilder<System.Windows.Controls.Slider>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Slider>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Slider()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Slider>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Slider()), this.GetRenderMode())
 
     type Calendar' () = 
         inherit CalendarBuilder<System.Windows.Controls.Calendar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Calendar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Calendar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Calendar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Calendar()), this.GetRenderMode())
 
     type DataGridRow' () = 
         inherit DataGridRowBuilder<System.Windows.Controls.DataGridRow>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridRow>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridRow()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridRow>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridRow()), this.GetRenderMode())
 
     type DatePicker' () = 
         inherit DatePickerBuilder<System.Windows.Controls.DatePicker>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DatePicker>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DatePicker()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DatePicker>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DatePicker()), this.GetRenderMode())
 
     type FlowDocumentReader' () = 
         inherit FlowDocumentReaderBuilder<System.Windows.Controls.FlowDocumentReader>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentReader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentReader()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentReader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentReader()), this.GetRenderMode())
 
     type FlowDocumentScrollViewer' () = 
         inherit FlowDocumentScrollViewerBuilder<System.Windows.Controls.FlowDocumentScrollViewer>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentScrollViewer()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.FlowDocumentScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.FlowDocumentScrollViewer()), this.GetRenderMode())
 
     type PasswordBox' () = 
         inherit PasswordBoxBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.PasswordBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.PasswordBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.PasswordBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.PasswordBox()), this.GetRenderMode())
 
     type Separator' () = 
         inherit SeparatorBuilder<System.Windows.Controls.Separator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Separator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Separator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Separator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Separator()), this.GetRenderMode())
 
     type WebBrowser' () = 
         inherit WebBrowserBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WebBrowser>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WebBrowser()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WebBrowser>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WebBrowser()), this.GetRenderMode())
 
     type Decorator' () = 
         inherit DecoratorBuilder<System.Windows.Controls.Decorator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Decorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Decorator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Decorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Decorator()), this.GetRenderMode())
 
     type Border' () = 
         inherit BorderBuilder<System.Windows.Controls.Border>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Border>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Border()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Border>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Border()), this.GetRenderMode())
 
     type InkPresenter' () = 
         inherit InkPresenterBuilder<System.Windows.Controls.InkPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.InkPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.InkPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.InkPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.InkPresenter()), this.GetRenderMode())
 
     type Viewbox' () = 
         inherit ViewboxBuilder<System.Windows.Controls.Viewbox>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Viewbox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Viewbox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Viewbox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Viewbox()), this.GetRenderMode())
 
     type GridViewHeaderRowPresenter' () = 
         inherit GridViewHeaderRowPresenterBuilder<System.Windows.Controls.GridViewHeaderRowPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewHeaderRowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewHeaderRowPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewHeaderRowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewHeaderRowPresenter()), this.GetRenderMode())
 
     type GridViewRowPresenter' () = 
         inherit GridViewRowPresenterBuilder<System.Windows.Controls.GridViewRowPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewRowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewRowPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewRowPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewRowPresenter()), this.GetRenderMode())
 
     type ContentPresenter' () = 
         inherit ContentPresenterBuilder<System.Windows.Controls.ContentPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContentPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContentPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContentPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContentPresenter()), this.GetRenderMode())
 
     type ScrollContentPresenter' () = 
         inherit ScrollContentPresenterBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ScrollContentPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ScrollContentPresenter()), this.GetRenderMode())
 
     type AccessText' () = 
         inherit AccessTextBuilder<System.Windows.Controls.AccessText>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.AccessText>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.AccessText()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.AccessText>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.AccessText()), this.GetRenderMode())
 
     type AdornedElementPlaceholder' () = 
         inherit AdornedElementPlaceholderBuilder<System.Windows.Controls.AdornedElementPlaceholder>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.AdornedElementPlaceholder>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.AdornedElementPlaceholder()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.AdornedElementPlaceholder>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.AdornedElementPlaceholder()), this.GetRenderMode())
 
     type Image' () = 
         inherit ImageBuilder<System.Windows.Controls.Image>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Image>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Image()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Image>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Image()), this.GetRenderMode())
 
     type InkCanvas' () = 
         inherit InkCanvasBuilder<System.Windows.Controls.InkCanvas>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.InkCanvas>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.InkCanvas()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.InkCanvas>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.InkCanvas()), this.GetRenderMode())
 
     type ItemsPresenter' () = 
         inherit ItemsPresenterBuilder<System.Windows.Controls.ItemsPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ItemsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ItemsPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ItemsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ItemsPresenter()), this.GetRenderMode())
 
     type MediaElement' () = 
         inherit MediaElementBuilder<System.Windows.Controls.MediaElement>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.MediaElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.MediaElement()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.MediaElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.MediaElement()), this.GetRenderMode())
 
     type TextBlock' () = 
         inherit TextBlockBuilder<System.Windows.Controls.TextBlock>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TextBlock>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TextBlock()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TextBlock>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TextBlock()), this.GetRenderMode())
 
     type ToolBarTray' () = 
         inherit ToolBarTrayBuilder<System.Windows.Controls.ToolBarTray>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolBarTray>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolBarTray()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolBarTray>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolBarTray()), this.GetRenderMode())
 
     type Viewport3D' () = 
         inherit Viewport3DBuilder<System.Windows.Controls.Viewport3D>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Viewport3D>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Viewport3D()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Viewport3D>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Viewport3D()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Navigation
@@ -2146,7 +2146,7 @@ module WPFElementBuilderDslCE_SystemWindowsNavigation =
 
     type PageFunction'<'T> () = 
         inherit PageFunctionBuilder<System.Windows.Navigation.PageFunction<'T>, 'T>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.PageFunction<'T>>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.PageFunction<'T>()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.PageFunction<'T>>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.PageFunction<'T>()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Controls.Primitives
@@ -2159,59 +2159,59 @@ module WPFElementBuilderDslCE_SystemWindowsControlsPrimitives =
 
     type DataGridCellsPresenter' () = 
         inherit DataGridCellsPresenterBuilder<System.Windows.Controls.Primitives.DataGridCellsPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridCellsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridCellsPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridCellsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridCellsPresenter()), this.GetRenderMode())
 
     type DataGridColumnHeadersPresenter' () = 
         inherit DataGridColumnHeadersPresenterBuilder<System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridColumnHeadersPresenter()), this.GetRenderMode())
 
     type StatusBar' () = 
         inherit StatusBarBuilder<System.Windows.Controls.Primitives.StatusBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.StatusBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.StatusBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.StatusBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.StatusBar()), this.GetRenderMode())
 
     type DatePickerTextBox' () = 
         inherit DatePickerTextBoxBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DatePickerTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DatePickerTextBox()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DatePickerTextBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DatePickerTextBox()), this.GetRenderMode())
 
     type Thumb' () = 
         inherit ThumbBuilder<System.Windows.Controls.Primitives.Thumb>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Thumb>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Thumb()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Thumb>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Thumb()), this.GetRenderMode())
 
     type ScrollBar' () = 
         inherit ScrollBarBuilder<System.Windows.Controls.Primitives.ScrollBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ScrollBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ScrollBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ScrollBar()), this.GetRenderMode())
 
     type CalendarItem' () = 
         inherit CalendarItemBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarItem()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarItem()), this.GetRenderMode())
 
     type ResizeGrip' () = 
         inherit ResizeGripBuilder<System.Windows.Controls.Primitives.ResizeGrip>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ResizeGrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ResizeGrip()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ResizeGrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ResizeGrip()), this.GetRenderMode())
 
     type BulletDecorator' () = 
         inherit BulletDecoratorBuilder<System.Windows.Controls.Primitives.BulletDecorator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.BulletDecorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.BulletDecorator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.BulletDecorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.BulletDecorator()), this.GetRenderMode())
 
     type DataGridDetailsPresenter' () = 
         inherit DataGridDetailsPresenterBuilder<System.Windows.Controls.Primitives.DataGridDetailsPresenter>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridDetailsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridDetailsPresenter()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridDetailsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridDetailsPresenter()), this.GetRenderMode())
 
     type DocumentPageView' () = 
         inherit DocumentPageViewBuilder<System.Windows.Controls.Primitives.DocumentPageView>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DocumentPageView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DocumentPageView()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DocumentPageView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DocumentPageView()), this.GetRenderMode())
 
     type Popup' () = 
         inherit PopupBuilder<System.Windows.Controls.Primitives.Popup>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Popup>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Popup()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Popup>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Popup()), this.GetRenderMode())
 
     type TickBar' () = 
         inherit TickBarBuilder<System.Windows.Controls.Primitives.TickBar>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.TickBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.TickBar()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.TickBar>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.TickBar()), this.GetRenderMode())
 
     type Track' () = 
         inherit TrackBuilder<System.Windows.Controls.Primitives.Track>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Track>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Track()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Track>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Track()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Interop
@@ -2234,27 +2234,27 @@ module WPFElementBuilderDslCE_SystemWindowsShapes =
 
     type Ellipse' () = 
         inherit EllipseBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Ellipse>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Ellipse()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Ellipse>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Ellipse()), this.GetRenderMode())
 
     type Line' () = 
         inherit LineBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Line>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Line()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Line>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Line()), this.GetRenderMode())
 
     type Path' () = 
         inherit PathBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Path>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Path()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Path>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Path()), this.GetRenderMode())
 
     type Polygon' () = 
         inherit PolygonBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Polygon>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Polygon()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Polygon>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Polygon()), this.GetRenderMode())
 
     type Polyline' () = 
         inherit PolylineBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Polyline>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Polyline()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Polyline>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Polyline()), this.GetRenderMode())
 
     type Rectangle' () = 
         inherit RectangleBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Rectangle>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Rectangle()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Shapes.Rectangle>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Shapes.Rectangle()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Documents
@@ -2267,22 +2267,22 @@ module WPFElementBuilderDslCE_SystemWindowsDocuments =
 
     type AdornerDecorator' () = 
         inherit AdornerDecoratorBuilder<System.Windows.Documents.AdornerDecorator>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.AdornerDecorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.AdornerDecorator()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.AdornerDecorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.AdornerDecorator()), this.GetRenderMode())
 
     type DocumentReference' () = 
         inherit DocumentReferenceBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.DocumentReference>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.DocumentReference()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.DocumentReference>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.DocumentReference()), this.GetRenderMode())
 
     type FixedPage' () = 
         inherit FixedPageBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.FixedPage()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.FixedPage()), this.GetRenderMode())
 
     type Glyphs' () = 
         inherit GlyphsBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.Glyphs>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.Glyphs()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.Glyphs>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.Glyphs()), this.GetRenderMode())
 
     type PageContent' () = 
         inherit PageContentBuilder()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.PageContent()), this.GetKey())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Documents.PageContent()), this.GetRenderMode())
 
             

@@ -3,6 +3,11 @@ open Fun.SunUI.Generator
 open Utils
 
 
+let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.ModernForms\Fun.SunUI.ModernForms"
+let namesp = "Fun.SunUI.ModernForms"
+let assemblyName = "Modern.Forms"
+
+
 let controlCtx = {
     GeneratorContext.RootType = typeof<Control>
     BuilderName = "ModernFormsControlBuilder"
@@ -11,10 +16,6 @@ let controlCtx = {
     IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
     ExcludeBaseTypes = []
 }
-
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.Modern.Forms\Fun.Modern.Forms\Fun.SunUI.ModernForms"
-let namesp = "Fun.SunUI.ModernForms"
-let assemblyName = "Modern.Forms"
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
 
