@@ -1,4 +1,6 @@
 namespace rec Fun.SunUI.ModernForms.DslInternals
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.ModernForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.ModernForms
@@ -15,8 +17,43 @@ type ControlBuilder<'Element when 'Element :> Modern.Forms.Control>() =
     [<CustomOperation("ClientRectangle'")>] member inline this.ClientRectangle' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ClientRectangle), x)
     [<CustomOperation("ClientSize")>] member inline this.ClientSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ClientSize), x)
     [<CustomOperation("ClientSize'")>] member inline this.ClientSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ClientSize), x)
-    [<CustomOperation("ContextMenu")>] member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.ContextMenu) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenu), (fun ctx x -> ctx.Element.ContextMenu <- x), x)
-    [<CustomOperation("ContextMenu")>] member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenu), (fun ctx x -> ctx.Element.ContextMenu <- x), x)
+
+    [<CustomOperation("ContextMenu")>]
+    member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenu <- x), creator)
+
+    [<CustomOperation("ContextMenu")>]
+    member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenu <- x), creator)
+                        
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> alist) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("CurrentStyle")>] member inline this.CurrentStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentStyle), x)
     [<CustomOperation("CurrentStyle'")>] member inline this.CurrentStyle' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentStyle), x)
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.Cursor) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
@@ -35,8 +72,15 @@ type ControlBuilder<'Element when 'Element :> Modern.Forms.Control>() =
     [<CustomOperation("Name")>] member inline this.Name ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Name), (fun ctx x -> ctx.Element.Name <- x), x)
     [<CustomOperation("PaddedClientRectangle")>] member inline this.PaddedClientRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.PaddedClientRectangle), x)
     [<CustomOperation("PaddedClientRectangle'")>] member inline this.PaddedClientRectangle' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.PaddedClientRectangle), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.Control) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+                        
     [<CustomOperation("ScaledBounds")>] member inline this.ScaledBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ScaledBounds), x)
     [<CustomOperation("ScaledBounds'")>] member inline this.ScaledBounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ScaledBounds), x)
     [<CustomOperation("ScaledSize")>] member inline this.ScaledSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ScaledSize), x)
@@ -197,6 +241,34 @@ type TableLayoutPanelBuilder<'Element when 'Element :> Modern.Forms.TableLayoutP
     [<CustomOperation("LayoutEngine'")>] member inline this.LayoutEngine' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LayoutEngine), x)
     [<CustomOperation("LayoutSettings")>] member inline this.LayoutSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TableLayoutSettings) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutSettings), (fun ctx x -> ctx.Element.LayoutSettings <- x), x)
     [<CustomOperation("LayoutSettings")>] member inline this.LayoutSettings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutSettings), (fun ctx x -> ctx.Element.LayoutSettings <- x), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> alist) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("ColumnCount")>] member inline this.ColumnCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnCount), (fun ctx x -> ctx.Element.ColumnCount <- x), x)
     [<CustomOperation("ColumnCount")>] member inline this.ColumnCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnCount), (fun ctx x -> ctx.Element.ColumnCount <- x), x)
     [<CustomOperation("GrowStyle")>] member inline this.GrowStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TableLayoutPanelGrowStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.GrowStyle), (fun ctx x -> ctx.Element.GrowStyle <- x), x)
@@ -525,12 +597,45 @@ type StatusBarBuilder<'Element when 'Element :> Modern.Forms.StatusBar>() =
 type TabControlBuilder<'Element when 'Element :> Modern.Forms.TabControl>() =
     inherit ControlBuilder<'Element>()
 
-    [<CustomOperation("TabPages")>] member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TabPages), x)
-    [<CustomOperation("TabPages'")>] member inline this.TabPages' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TabPages), x)
+
+    [<CustomOperation("TabPages")>]
+    member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.TabPage>(
+            builder,
+            (fun x -> x.Element.TabPages.Clear()),
+            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("TabPages")>]
+    member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> alist) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.TabPage>(
+            builder,
+            (fun x -> x.Element.TabPages.Clear()),
+            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticTabPages")>]
+    member inline this.StaticTabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Modern.Forms.TabPage>(
+            builder,
+            (fun x -> x.Element.TabPages.Clear()),
+            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
-    [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Modern.Forms.TabPage) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
-    [<CustomOperation("SelectedTabPage")>] member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTabPage), (fun ctx x -> ctx.Element.SelectedTabPage <- x), x)
+
+    [<CustomOperation("SelectedTabPage")>]
+    member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.SelectedTabPage <- x), creator)
+
+    [<CustomOperation("SelectedTabPage")>]
+    member inline this.SelectedTabPage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.SelectedTabPage <- x), creator)
+                        
 
     [<CustomOperation("SelectedIndexChanged")>] member inline this.SelectedIndexChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndexChanged), "SelectedIndexChanged", fn)
                 

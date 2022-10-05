@@ -1,4 +1,6 @@
 namespace rec Fun.SunUI.WinForms.DslInternals
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WinForms
@@ -47,8 +49,43 @@ type ControlBuilder<'Element when 'Element :> System.Windows.Forms.Control>() =
     [<CustomOperation("ClientSize")>] member inline this.ClientSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ClientSize), (fun ctx x -> ctx.Element.ClientSize <- x), x)
     [<CustomOperation("CompanyName")>] member inline this.CompanyName ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CompanyName), x)
     [<CustomOperation("CompanyName'")>] member inline this.CompanyName' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CompanyName), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContextMenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+                        
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Cursor) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("DataBindings")>] member inline this.DataBindings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DataBindings), x)
@@ -79,8 +116,15 @@ type ControlBuilder<'Element when 'Element :> System.Windows.Forms.Control>() =
     [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
     [<CustomOperation("Name")>] member inline this.Name ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Name), (fun ctx x -> ctx.Element.Name <- x), x)
     [<CustomOperation("Name")>] member inline this.Name ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Name), (fun ctx x -> ctx.Element.Name <- x), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Control) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+                        
     [<CustomOperation("ProductName")>] member inline this.ProductName ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ProductName), x)
     [<CustomOperation("ProductName'")>] member inline this.ProductName' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ProductName), x)
     [<CustomOperation("ProductVersion")>] member inline this.ProductVersion ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ProductVersion), x)
@@ -243,6 +287,34 @@ type ToolStripBuilder<'Element when 'Element :> System.Windows.Forms.ToolStrip>(
     [<CustomOperation("CanOverflow")>] member inline this.CanOverflow ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanOverflow), (fun ctx x -> ctx.Element.CanOverflow <- x), x)
     [<CustomOperation("CausesValidation")>] member inline this.CausesValidation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CausesValidation), (fun ctx x -> ctx.Element.CausesValidation <- x), x)
     [<CustomOperation("CausesValidation")>] member inline this.CausesValidation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CausesValidation), (fun ctx x -> ctx.Element.CausesValidation <- x), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Cursor) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("Font")>] member inline this.Font ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Font) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Font), (fun ctx x -> ctx.Element.Font <- x), x)
@@ -324,8 +396,15 @@ type ToolStripDropDownBuilder<'Element when 'Element :> System.Windows.Forms.Too
     [<CustomOperation("AutoClose")>] member inline this.AutoClose ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoClose), (fun ctx x -> ctx.Element.AutoClose <- x), x)
     [<CustomOperation("CanOverflow")>] member inline this.CanOverflow ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanOverflow), (fun ctx x -> ctx.Element.CanOverflow <- x), x)
     [<CustomOperation("CanOverflow")>] member inline this.CanOverflow ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanOverflow), (fun ctx x -> ctx.Element.CanOverflow <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContextMenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+                        
     [<CustomOperation("DefaultDropDownDirection")>] member inline this.DefaultDropDownDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ToolStripDropDownDirection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DefaultDropDownDirection), (fun ctx x -> ctx.Element.DefaultDropDownDirection <- x), x)
     [<CustomOperation("DefaultDropDownDirection")>] member inline this.DefaultDropDownDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DefaultDropDownDirection), (fun ctx x -> ctx.Element.DefaultDropDownDirection <- x), x)
     [<CustomOperation("Dock")>] member inline this.Dock ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.DockStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Dock), (fun ctx x -> ctx.Element.Dock <- x), x)
@@ -508,8 +587,15 @@ type ContainerControlBuilder<'Element when 'Element :> System.Windows.Forms.Cont
     [<CustomOperation("AutoValidate")>] member inline this.AutoValidate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutoValidate), (fun ctx x -> ctx.Element.AutoValidate <- x), x)
     [<CustomOperation("BindingContext")>] member inline this.BindingContext ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.BindingContext) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BindingContext), (fun ctx x -> ctx.Element.BindingContext <- x), x)
     [<CustomOperation("BindingContext")>] member inline this.BindingContext ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BindingContext), (fun ctx x -> ctx.Element.BindingContext <- x), x)
-    [<CustomOperation("ActiveControl")>] member inline this.ActiveControl ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Control) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ActiveControl), (fun ctx x -> ctx.Element.ActiveControl <- x), x)
-    [<CustomOperation("ActiveControl")>] member inline this.ActiveControl ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ActiveControl), (fun ctx x -> ctx.Element.ActiveControl <- x), x)
+
+    [<CustomOperation("ActiveControl")>]
+    member inline this.ActiveControl ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ActiveControl <- x), creator)
+
+    [<CustomOperation("ActiveControl")>]
+    member inline this.ActiveControl ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ActiveControl <- x), creator)
+                        
     [<CustomOperation("CurrentAutoScaleDimensions")>] member inline this.CurrentAutoScaleDimensions ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentAutoScaleDimensions), x)
     [<CustomOperation("CurrentAutoScaleDimensions'")>] member inline this.CurrentAutoScaleDimensions' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentAutoScaleDimensions), x)
     [<CustomOperation("ParentForm")>] member inline this.ParentForm ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ParentForm), x)
@@ -537,8 +623,15 @@ type UpDownBaseBuilder<'Element when 'Element :> System.Windows.Forms.UpDownBase
     [<CustomOperation("BackgroundImageLayout")>] member inline this.BackgroundImageLayout ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageLayout), (fun ctx x -> ctx.Element.BackgroundImageLayout <- x), x)
     [<CustomOperation("BorderStyle")>] member inline this.BorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.BorderStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BorderStyle), (fun ctx x -> ctx.Element.BorderStyle <- x), x)
     [<CustomOperation("BorderStyle")>] member inline this.BorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BorderStyle), (fun ctx x -> ctx.Element.BorderStyle <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContextMenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+                        
     [<CustomOperation("DockPadding")>] member inline this.DockPadding ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DockPadding), x)
     [<CustomOperation("DockPadding'")>] member inline this.DockPadding' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.DockPadding), x)
     [<CustomOperation("ForeColor")>] member inline this.ForeColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Color) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ForeColor), (fun ctx x -> ctx.Element.ForeColor <- x), x)
@@ -665,28 +758,45 @@ type FormBuilder<'Element when 'Element :> System.Windows.Forms.Form>() =
     [<CustomOperation("Location")>] member inline this.Location ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Location), (fun ctx x -> ctx.Element.Location <- x), x)
     [<CustomOperation("MaximumSize")>] member inline this.MaximumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MaximumSize), (fun ctx x -> ctx.Element.MaximumSize <- x), x)
     [<CustomOperation("MaximumSize")>] member inline this.MaximumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximumSize), (fun ctx x -> ctx.Element.MaximumSize <- x), x)
-    [<CustomOperation("MainMenuStrip")>] member inline this.MainMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.MenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MainMenuStrip), (fun ctx x -> ctx.Element.MainMenuStrip <- x), x)
-    [<CustomOperation("MainMenuStrip")>] member inline this.MainMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MainMenuStrip), (fun ctx x -> ctx.Element.MainMenuStrip <- x), x)
+
+    [<CustomOperation("MainMenuStrip")>]
+    member inline this.MainMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.MainMenuStrip <- x), creator)
+
+    [<CustomOperation("MainMenuStrip")>]
+    member inline this.MainMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.MainMenuStrip <- x), creator)
+                        
     [<CustomOperation("Margin")>] member inline this.Margin ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Padding) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Margin), (fun ctx x -> ctx.Element.Margin <- x), x)
     [<CustomOperation("Margin")>] member inline this.Margin ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Margin), (fun ctx x -> ctx.Element.Margin <- x), x)
     [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
     [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
     [<CustomOperation("MaximizeBox")>] member inline this.MaximizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MaximizeBox), (fun ctx x -> ctx.Element.MaximizeBox <- x), x)
     [<CustomOperation("MaximizeBox")>] member inline this.MaximizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximizeBox), (fun ctx x -> ctx.Element.MaximizeBox <- x), x)
-    [<CustomOperation("MdiChildren")>] member inline this.MdiChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.MdiChildren), x)
-    [<CustomOperation("MdiChildren'")>] member inline this.MdiChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.MdiChildren), x)
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
-    [<CustomOperation("MdiParent")>] member inline this.MdiParent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Form) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MdiParent), (fun ctx x -> ctx.Element.MdiParent <- x), x)
-    [<CustomOperation("MdiParent")>] member inline this.MdiParent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MdiParent), (fun ctx x -> ctx.Element.MdiParent <- x), x)
+
+    [<CustomOperation("MdiParent")>]
+    member inline this.MdiParent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.MdiParent <- x), creator)
+
+    [<CustomOperation("MdiParent")>]
+    member inline this.MdiParent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.MdiParent <- x), creator)
+                        
     [<CustomOperation("MinimizeBox")>] member inline this.MinimizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MinimizeBox), (fun ctx x -> ctx.Element.MinimizeBox <- x), x)
     [<CustomOperation("MinimizeBox")>] member inline this.MinimizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimizeBox), (fun ctx x -> ctx.Element.MinimizeBox <- x), x)
     [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
     [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
-    [<CustomOperation("OwnedForms")>] member inline this.OwnedForms ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OwnedForms), x)
-    [<CustomOperation("OwnedForms'")>] member inline this.OwnedForms' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OwnedForms), x)
-    [<CustomOperation("Owner")>] member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Form) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Owner), (fun ctx x -> ctx.Element.Owner <- x), x)
-    [<CustomOperation("Owner")>] member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Owner), (fun ctx x -> ctx.Element.Owner <- x), x)
+
+    [<CustomOperation("Owner")>]
+    member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Owner <- x), creator)
+
+    [<CustomOperation("Owner")>]
+    member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Owner <- x), creator)
+                        
     [<CustomOperation("RestoreBounds")>] member inline this.RestoreBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.RestoreBounds), x)
     [<CustomOperation("RestoreBounds'")>] member inline this.RestoreBounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.RestoreBounds), x)
     [<CustomOperation("RightToLeftLayout")>] member inline this.RightToLeftLayout ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RightToLeftLayout), (fun ctx x -> ctx.Element.RightToLeftLayout <- x), x)
@@ -763,8 +873,15 @@ type PrintPreviewDialogBuilder<'Element when 'Element :> System.Windows.Forms.Pr
     [<CustomOperation("CancelButton")>] member inline this.CancelButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CancelButton), (fun ctx x -> ctx.Element.CancelButton <- x), x)
     [<CustomOperation("ControlBox")>] member inline this.ControlBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ControlBox), (fun ctx x -> ctx.Element.ControlBox <- x), x)
     [<CustomOperation("ControlBox")>] member inline this.ControlBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ControlBox), (fun ctx x -> ctx.Element.ControlBox <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContextMenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+                        
     [<CustomOperation("FormBorderStyle")>] member inline this.FormBorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.FormBorderStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FormBorderStyle), (fun ctx x -> ctx.Element.FormBorderStyle <- x), x)
     [<CustomOperation("FormBorderStyle")>] member inline this.FormBorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FormBorderStyle), (fun ctx x -> ctx.Element.FormBorderStyle <- x), x)
     [<CustomOperation("HelpButton")>] member inline this.HelpButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HelpButton), (fun ctx x -> ctx.Element.HelpButton <- x), x)
@@ -900,6 +1017,8 @@ type ThreadExceptionDialogBuilder<'Element when 'Element :> System.Windows.Forms
                 
             
 namespace rec Fun.SunUI.WinForms.DslInternals.Design
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WinForms
@@ -915,6 +1034,8 @@ type ComponentEditorFormBuilder<'Element when 'Element :> System.Windows.Forms.D
                 
             
 namespace rec Fun.SunUI.WinForms.DslInternals
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WinForms
@@ -951,6 +1072,34 @@ type PropertyGridBuilder<'Element when 'Element :> System.Windows.Forms.Property
     [<CustomOperation("CommandsVisibleIfAvailable")>] member inline this.CommandsVisibleIfAvailable ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CommandsVisibleIfAvailable), (fun ctx x -> ctx.Element.CommandsVisibleIfAvailable <- x), x)
     [<CustomOperation("ContextMenuDefaultLocation")>] member inline this.ContextMenuDefaultLocation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ContextMenuDefaultLocation), x)
     [<CustomOperation("ContextMenuDefaultLocation'")>] member inline this.ContextMenuDefaultLocation' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ContextMenuDefaultLocation), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("ForeColor")>] member inline this.ForeColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Color) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ForeColor), (fun ctx x -> ctx.Element.ForeColor <- x), x)
     [<CustomOperation("ForeColor")>] member inline this.ForeColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ForeColor), (fun ctx x -> ctx.Element.ForeColor <- x), x)
     [<CustomOperation("HelpBackColor")>] member inline this.HelpBackColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Color) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HelpBackColor), (fun ctx x -> ctx.Element.HelpBackColor <- x), x)
@@ -1047,6 +1196,34 @@ type SplitContainerBuilder<'Element when 'Element :> System.Windows.Forms.SplitC
     [<CustomOperation("BindingContext")>] member inline this.BindingContext ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BindingContext), (fun ctx x -> ctx.Element.BindingContext <- x), x)
     [<CustomOperation("BorderStyle")>] member inline this.BorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.BorderStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BorderStyle), (fun ctx x -> ctx.Element.BorderStyle <- x), x)
     [<CustomOperation("BorderStyle")>] member inline this.BorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BorderStyle), (fun ctx x -> ctx.Element.BorderStyle <- x), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("Dock")>] member inline this.Dock ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.DockStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Dock), (fun ctx x -> ctx.Element.Dock <- x), x)
     [<CustomOperation("Dock")>] member inline this.Dock ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Dock), (fun ctx x -> ctx.Element.Dock <- x), x)
     [<CustomOperation("FixedPanel")>] member inline this.FixedPanel ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.FixedPanel) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FixedPanel), (fun ctx x -> ctx.Element.FixedPanel <- x), x)
@@ -1116,8 +1293,15 @@ type ToolStripContainerBuilder<'Element when 'Element :> System.Windows.Forms.To
     [<CustomOperation("ContentPanel'")>] member inline this.ContentPanel' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ContentPanel), x)
     [<CustomOperation("CausesValidation")>] member inline this.CausesValidation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CausesValidation), (fun ctx x -> ctx.Element.CausesValidation <- x), x)
     [<CustomOperation("CausesValidation")>] member inline this.CausesValidation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CausesValidation), (fun ctx x -> ctx.Element.CausesValidation <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContextMenuStrip) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
-    [<CustomOperation("ContextMenuStrip")>] member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenuStrip), (fun ctx x -> ctx.Element.ContextMenuStrip <- x), x)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+
+    [<CustomOperation("ContextMenuStrip")>]
+    member inline this.ContextMenuStrip ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenuStrip <- x), creator)
+                        
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Cursor) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("Cursor")>] member inline this.Cursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Cursor), (fun ctx x -> ctx.Element.Cursor <- x), x)
     [<CustomOperation("ForeColor")>] member inline this.ForeColor ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.Color) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ForeColor), (fun ctx x -> ctx.Element.ForeColor <- x), x)
@@ -1134,6 +1318,34 @@ type ToolStripContainerBuilder<'Element when 'Element :> System.Windows.Forms.To
     [<CustomOperation("TopToolStripPanel'")>] member inline this.TopToolStripPanel' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TopToolStripPanel), x)
     [<CustomOperation("TopToolStripPanelVisible")>] member inline this.TopToolStripPanelVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TopToolStripPanelVisible), (fun ctx x -> ctx.Element.TopToolStripPanelVisible <- x), x)
     [<CustomOperation("TopToolStripPanelVisible")>] member inline this.TopToolStripPanelVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TopToolStripPanelVisible), (fun ctx x -> ctx.Element.TopToolStripPanelVisible <- x), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
 
     [<CustomOperation("BackColorChanged")>] member inline this.BackColorChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BackColorChanged), "BackColorChanged", fn)
     [<CustomOperation("BackgroundImageChanged")>] member inline this.BackgroundImageChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageChanged), "BackgroundImageChanged", fn)
@@ -1265,8 +1477,15 @@ type SplitterPanelBuilder() =
     [<CustomOperation("MaximumSize")>] member inline this.MaximumSize ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximumSize), (fun ctx x -> ctx.Element.MaximumSize <- x), x)
     [<CustomOperation("Name")>] member inline this.Name ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Name), (fun ctx x -> ctx.Element.Name <- x), x)
     [<CustomOperation("Name")>] member inline this.Name ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Name), (fun ctx x -> ctx.Element.Name <- x), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x: System.Windows.Forms.Control) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Parent), (fun ctx x -> ctx.Element.Parent <- x), x)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+
+    [<CustomOperation("Parent")>]
+    member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Parent <- x), creator)
+                        
     [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x: System.Drawing.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
     [<CustomOperation("Size")>] member inline this.Size ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Size), (fun ctx x -> ctx.Element.Size <- x), x)
     [<CustomOperation("TabIndex")>] member inline this.TabIndex ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.SplitterPanel>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TabIndex), (fun ctx x -> ctx.Element.TabIndex <- x), x)
@@ -1297,6 +1516,34 @@ type TableLayoutPanelBuilder<'Element when 'Element :> System.Windows.Forms.Tabl
     [<CustomOperation("BorderStyle")>] member inline this.BorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BorderStyle), (fun ctx x -> ctx.Element.BorderStyle <- x), x)
     [<CustomOperation("CellBorderStyle")>] member inline this.CellBorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.TableLayoutPanelCellBorderStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CellBorderStyle), (fun ctx x -> ctx.Element.CellBorderStyle <- x), x)
     [<CustomOperation("CellBorderStyle")>] member inline this.CellBorderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CellBorderStyle), (fun ctx x -> ctx.Element.CellBorderStyle <- x), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WinForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: System.Windows.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("ColumnCount")>] member inline this.ColumnCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnCount), (fun ctx x -> ctx.Element.ColumnCount <- x), x)
     [<CustomOperation("ColumnCount")>] member inline this.ColumnCount ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnCount), (fun ctx x -> ctx.Element.ColumnCount <- x), x)
     [<CustomOperation("GrowStyle")>] member inline this.GrowStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.TableLayoutPanelGrowStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.GrowStyle), (fun ctx x -> ctx.Element.GrowStyle <- x), x)
@@ -1410,6 +1657,8 @@ type ToolStripContentPanelBuilder<'Element when 'Element :> System.Windows.Forms
                 
             
 namespace rec Fun.SunUI.WinForms.DslInternals.Design
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WinForms
@@ -1431,6 +1680,8 @@ type ComponentEditorPageBuilder<'Element when 'Element :> System.Windows.Forms.D
                 
             
 namespace rec Fun.SunUI.WinForms.DslInternals
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WinForms
@@ -1656,8 +1907,15 @@ type ComboBoxBuilder<'Element when 'Element :> System.Windows.Forms.ComboBox>() 
 type DataGridViewComboBoxEditingControlBuilder<'Element when 'Element :> System.Windows.Forms.DataGridViewComboBoxEditingControl>() =
     inherit ComboBoxBuilder<'Element>()
 
-    [<CustomOperation("EditingControlDataGridView")>] member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.DataGridView) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlDataGridView), (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), x)
-    [<CustomOperation("EditingControlDataGridView")>] member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlDataGridView), (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), x)
+
+    [<CustomOperation("EditingControlDataGridView")>]
+    member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), creator)
+
+    [<CustomOperation("EditingControlDataGridView")>]
+    member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), creator)
+                        
     [<CustomOperation("EditingControlFormattedValue")>] member inline this.EditingControlFormattedValue ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlFormattedValue), (fun ctx x -> ctx.Element.EditingControlFormattedValue <- x), x)
     [<CustomOperation("EditingControlFormattedValue")>] member inline this.EditingControlFormattedValue ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlFormattedValue), (fun ctx x -> ctx.Element.EditingControlFormattedValue <- x), x)
     [<CustomOperation("EditingControlRowIndex")>] member inline this.EditingControlRowIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlRowIndex), (fun ctx x -> ctx.Element.EditingControlRowIndex <- x), x)
@@ -1762,8 +2020,15 @@ type TextBoxBuilder<'Element when 'Element :> System.Windows.Forms.TextBox>() =
 type DataGridViewTextBoxEditingControlBuilder<'Element when 'Element :> System.Windows.Forms.DataGridViewTextBoxEditingControl>() =
     inherit TextBoxBuilder<'Element>()
 
-    [<CustomOperation("EditingControlDataGridView")>] member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.DataGridView) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlDataGridView), (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), x)
-    [<CustomOperation("EditingControlDataGridView")>] member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlDataGridView), (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), x)
+
+    [<CustomOperation("EditingControlDataGridView")>]
+    member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), creator)
+
+    [<CustomOperation("EditingControlDataGridView")>]
+    member inline this.EditingControlDataGridView ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.EditingControlDataGridView <- x), creator)
+                        
     [<CustomOperation("EditingControlFormattedValue")>] member inline this.EditingControlFormattedValue ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlFormattedValue), (fun ctx x -> ctx.Element.EditingControlFormattedValue <- x), x)
     [<CustomOperation("EditingControlFormattedValue")>] member inline this.EditingControlFormattedValue ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlFormattedValue), (fun ctx x -> ctx.Element.EditingControlFormattedValue <- x), x)
     [<CustomOperation("EditingControlRowIndex")>] member inline this.EditingControlRowIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EditingControlRowIndex), (fun ctx x -> ctx.Element.EditingControlRowIndex <- x), x)
@@ -2343,8 +2608,15 @@ type AxHostBuilder<'Element when 'Element :> System.Windows.Forms.AxHost>() =
     [<CustomOperation("Site")>] member inline this.Site ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Site), (fun ctx x -> ctx.Element.Site <- x), x)
     [<CustomOperation("OcxState")>] member inline this.OcxState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.AxHost.State) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.OcxState), (fun ctx x -> ctx.Element.OcxState <- x), x)
     [<CustomOperation("OcxState")>] member inline this.OcxState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.OcxState), (fun ctx x -> ctx.Element.OcxState <- x), x)
-    [<CustomOperation("ContainingControl")>] member inline this.ContainingControl ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ContainerControl) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContainingControl), (fun ctx x -> ctx.Element.ContainingControl <- x), x)
-    [<CustomOperation("ContainingControl")>] member inline this.ContainingControl ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContainingControl), (fun ctx x -> ctx.Element.ContainingControl <- x), x)
+
+    [<CustomOperation("ContainingControl")>]
+    member inline this.ContainingControl ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContainingControl <- x), creator)
+
+    [<CustomOperation("ContainingControl")>]
+    member inline this.ContainingControl ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContainingControl <- x), creator)
+                        
 
     [<CustomOperation("MouseClick")>] member inline this.MouseClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseClick), "MouseClick", fn)
     [<CustomOperation("MouseDoubleClick")>] member inline this.MouseDoubleClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseDoubleClick), "MouseDoubleClick", fn)
@@ -2976,8 +3248,6 @@ type MdiClientBuilder() =
     [<CustomOperation("BackgroundImage")>] member inline this.BackgroundImage ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImage), (fun ctx x -> ctx.Element.BackgroundImage <- x), x)
     [<CustomOperation("BackgroundImageLayout")>] member inline this.BackgroundImageLayout ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x: System.Windows.Forms.ImageLayout) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageLayout), (fun ctx x -> ctx.Element.BackgroundImageLayout <- x), x)
     [<CustomOperation("BackgroundImageLayout")>] member inline this.BackgroundImageLayout ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageLayout), (fun ctx x -> ctx.Element.BackgroundImageLayout <- x), x)
-    [<CustomOperation("MdiChildren")>] member inline this.MdiChildren ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.MdiChildren), x)
-    [<CustomOperation("MdiChildren'")>] member inline this.MdiChildren' ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.MdiChildren), x)
 
                 
 
@@ -3197,8 +3467,15 @@ type TabControlBuilder<'Element when 'Element :> System.Windows.Forms.TabControl
     [<CustomOperation("RightToLeftLayout")>] member inline this.RightToLeftLayout ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RightToLeftLayout), (fun ctx x -> ctx.Element.RightToLeftLayout <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
-    [<CustomOperation("SelectedTab")>] member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.TabPage) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTab), (fun ctx x -> ctx.Element.SelectedTab <- x), x)
-    [<CustomOperation("SelectedTab")>] member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedTab), (fun ctx x -> ctx.Element.SelectedTab <- x), x)
+
+    [<CustomOperation("SelectedTab")>]
+    member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.SelectedTab <- x), creator)
+
+    [<CustomOperation("SelectedTab")>]
+    member inline this.SelectedTab ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.SelectedTab <- x), creator)
+                        
     [<CustomOperation("SizeMode")>] member inline this.SizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.TabSizeMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SizeMode), (fun ctx x -> ctx.Element.SizeMode <- x), x)
     [<CustomOperation("SizeMode")>] member inline this.SizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SizeMode), (fun ctx x -> ctx.Element.SizeMode <- x), x)
     [<CustomOperation("ShowToolTips")>] member inline this.ShowToolTips ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowToolTips), (fun ctx x -> ctx.Element.ShowToolTips <- x), x)

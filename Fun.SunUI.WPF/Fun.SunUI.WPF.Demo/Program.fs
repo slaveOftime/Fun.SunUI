@@ -41,7 +41,7 @@ let main (_: string[]) =
                         }
                         Button'() {
                             Ref(fun this -> Grid.SetRow(this, 3))
-                            Content "Increase"
+                            Content' "Increase"
                             Height 60
                             Click(fun _ -> transact (fun () -> count.Value <- count.Value + 1))
                         }

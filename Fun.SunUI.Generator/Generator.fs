@@ -8,7 +8,9 @@ open Utils
 
 
 let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: string) (tys: Type seq) =
-    let metaInfos = tys |> TypeInfo.create ctx.RootType ctx.ExcludeBaseTypes (MetaInfo.getMetaInfo ctx >> fun x -> Namespace x.ty.Namespace, x)
+    let metaInfos =
+        tys
+        |> TypeInfo.create ctx.RootType ctx.ExcludeBaseTypes (MetaInfo.getMetaInfo ctx >> fun x -> Namespace x.ty.Namespace, x)
 
     let trimNamespace (ns: string) =
         metaInfos.rootNamespaces
@@ -147,7 +149,9 @@ let createCodeFile ctx (codesDir: string) (targetNamespace: string) (sourceAssem
 
     try
         let opens =
-            $"""open {targetNamespace}.{Utils.internalSegment}
+            $"""
+open FSharp.Data.Adaptive
+open {targetNamespace}.{Utils.internalSegment}
 open Fun.SunUI
 open Fun.SunUI.{ctx.UIStackName}
 """

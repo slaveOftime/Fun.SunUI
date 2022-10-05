@@ -10,11 +10,12 @@ let assemblyName = "System.Windows.Forms"
 
 let controlCtx = {
     GeneratorContext.RootType = typeof<Control>
+    ChildType = typeof<Control>
     BuilderName = "WinFormsControlBuilder"
     UIStackName = "WinForms"
-    ChildrenPropName = "Controls"
     IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
     ExcludeBaseTypes = []
+    ExcludeProp = fun _ -> false
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"

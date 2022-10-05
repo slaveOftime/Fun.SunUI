@@ -1,5 +1,6 @@
 namespace rec Fun.SunUI.WPF.DslInternals
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -61,8 +62,15 @@ type FrameworkElementBuilder<'Element when 'Element :> System.Windows.FrameworkE
     [<CustomOperation("ForceCursor")>] member inline this.ForceCursor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ForceCursor), (fun ctx x -> ctx.Element.ForceCursor <- x), x)
     [<CustomOperation("ToolTip")>] member inline this.ToolTip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ToolTip), (fun ctx x -> ctx.Element.ToolTip <- x), x)
     [<CustomOperation("ToolTip")>] member inline this.ToolTip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ToolTip), (fun ctx x -> ctx.Element.ToolTip <- x), x)
-    [<CustomOperation("ContextMenu")>] member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ContextMenu) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenu), (fun ctx x -> ctx.Element.ContextMenu <- x), x)
-    [<CustomOperation("ContextMenu")>] member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextMenu), (fun ctx x -> ctx.Element.ContextMenu <- x), x)
+
+    [<CustomOperation("ContextMenu")>]
+    member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenu <- x), creator)
+
+    [<CustomOperation("ContextMenu")>]
+    member inline this.ContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ContextMenu <- x), creator)
+                        
     [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Parent), x)
     [<CustomOperation("Parent'")>] member inline this.Parent' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Parent), x)
 
@@ -82,65 +90,7 @@ type FrameworkElementBuilder<'Element when 'Element :> System.Windows.FrameworkE
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
-open Fun.SunUI
-open Fun.SunUI.WPF
-
-
-type PageBuilder<'Element when 'Element :> System.Windows.Controls.Page>() =
-    inherit FrameworkElementBuilder<'Element>()
-
-    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
-    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
-    [<CustomOperation("WindowTitle")>] member inline this.WindowTitle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowTitle), (fun ctx x -> ctx.Element.WindowTitle <- x), x)
-    [<CustomOperation("WindowTitle")>] member inline this.WindowTitle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowTitle), (fun ctx x -> ctx.Element.WindowTitle <- x), x)
-    [<CustomOperation("WindowHeight")>] member inline this.WindowHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowHeight), (fun ctx x -> ctx.Element.WindowHeight <- x), x)
-    [<CustomOperation("WindowHeight")>] member inline this.WindowHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowHeight), (fun ctx x -> ctx.Element.WindowHeight <- x), x)
-    [<CustomOperation("WindowWidth")>] member inline this.WindowWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowWidth), (fun ctx x -> ctx.Element.WindowWidth <- x), x)
-    [<CustomOperation("WindowWidth")>] member inline this.WindowWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowWidth), (fun ctx x -> ctx.Element.WindowWidth <- x), x)
-    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
-    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
-    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
-    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
-    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
-    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
-    [<CustomOperation("KeepAlive")>] member inline this.KeepAlive ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.KeepAlive), (fun ctx x -> ctx.Element.KeepAlive <- x), x)
-    [<CustomOperation("KeepAlive")>] member inline this.KeepAlive ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.KeepAlive), (fun ctx x -> ctx.Element.KeepAlive <- x), x)
-    [<CustomOperation("NavigationService")>] member inline this.NavigationService ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationService), x)
-    [<CustomOperation("NavigationService'")>] member inline this.NavigationService' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationService), x)
-    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Foreground), (fun ctx x -> ctx.Element.Foreground <- x), x)
-    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Foreground), (fun ctx x -> ctx.Element.Foreground <- x), x)
-    [<CustomOperation("FontFamily")>] member inline this.FontFamily ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.FontFamily) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FontFamily), (fun ctx x -> ctx.Element.FontFamily <- x), x)
-    [<CustomOperation("FontFamily")>] member inline this.FontFamily ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontFamily), (fun ctx x -> ctx.Element.FontFamily <- x), x)
-    [<CustomOperation("FontSize")>] member inline this.FontSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FontSize), (fun ctx x -> ctx.Element.FontSize <- x), x)
-    [<CustomOperation("FontSize")>] member inline this.FontSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontSize), (fun ctx x -> ctx.Element.FontSize <- x), x)
-    [<CustomOperation("Template")>] member inline this.Template ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ControlTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Template), (fun ctx x -> ctx.Element.Template <- x), x)
-    [<CustomOperation("Template")>] member inline this.Template ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Template), (fun ctx x -> ctx.Element.Template <- x), x)
-
-                
-            
-namespace rec Fun.SunUI.WPF.DslInternals.Navigation
-open Fun.SunUI.WPF.DslInternals
-open Fun.SunUI
-open Fun.SunUI.WPF
-
-
-type PageFunctionBaseBuilder<'Element when 'Element :> System.Windows.Navigation.PageFunctionBase>() =
-    inherit Controls.PageBuilder<'Element>()
-
-    [<CustomOperation("RemoveFromJournal")>] member inline this.RemoveFromJournal ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RemoveFromJournal), (fun ctx x -> ctx.Element.RemoveFromJournal <- x), x)
-    [<CustomOperation("RemoveFromJournal")>] member inline this.RemoveFromJournal ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RemoveFromJournal), (fun ctx x -> ctx.Element.RemoveFromJournal <- x), x)
-
-                
-
-type PageFunctionBuilder<'Element, 'T when 'Element :> System.Windows.Navigation.PageFunction<'T>>() =
-    inherit Navigation.PageFunctionBaseBuilder<'Element>()
-
-
-    [<CustomOperation("Return'")>] member inline this.Return' ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Return), "Return", fn)
-                
-            
-namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -183,6 +133,471 @@ type ControlBuilder<'Element when 'Element :> System.Windows.Controls.Control>()
     [<CustomOperation("MouseDoubleClick")>] member inline this.MouseDoubleClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseDoubleClick), "MouseDoubleClick", fn)
                 
 
+type ContentControlBuilder<'Element when 'Element :> System.Windows.Controls.ContentControl>() =
+    inherit Controls.ControlBuilder<'Element>()
+
+
+    [<CustomOperation("Content")>]
+    member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+
+    [<CustomOperation("Content")>]
+    member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+                        
+    [<CustomOperation("Content'")>] member inline this.Content' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+    [<CustomOperation("Content'")>] member inline this.Content' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+    [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
+    [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
+    [<CustomOperation("ContentTemplateSelector")>] member inline this.ContentTemplateSelector ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.DataTemplateSelector) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplateSelector), (fun ctx x -> ctx.Element.ContentTemplateSelector <- x), x)
+    [<CustomOperation("ContentTemplateSelector")>] member inline this.ContentTemplateSelector ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplateSelector), (fun ctx x -> ctx.Element.ContentTemplateSelector <- x), x)
+    [<CustomOperation("ContentStringFormat")>] member inline this.ContentStringFormat ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentStringFormat), (fun ctx x -> ctx.Element.ContentStringFormat <- x), x)
+    [<CustomOperation("ContentStringFormat")>] member inline this.ContentStringFormat ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContentStringFormat), (fun ctx x -> ctx.Element.ContentStringFormat <- x), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type ButtonBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.ButtonBase>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("Command")>] member inline this.Command ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Input.ICommand) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Command), (fun ctx x -> ctx.Element.Command <- x), x)
+    [<CustomOperation("Command")>] member inline this.Command ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Command), (fun ctx x -> ctx.Element.Command <- x), x)
+    [<CustomOperation("CommandParameter")>] member inline this.CommandParameter ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CommandParameter), (fun ctx x -> ctx.Element.CommandParameter <- x), x)
+    [<CustomOperation("CommandParameter")>] member inline this.CommandParameter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CommandParameter), (fun ctx x -> ctx.Element.CommandParameter <- x), x)
+    [<CustomOperation("CommandTarget")>] member inline this.CommandTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.IInputElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CommandTarget), (fun ctx x -> ctx.Element.CommandTarget <- x), x)
+    [<CustomOperation("CommandTarget")>] member inline this.CommandTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CommandTarget), (fun ctx x -> ctx.Element.CommandTarget <- x), x)
+    [<CustomOperation("ClickMode")>] member inline this.ClickMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ClickMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ClickMode), (fun ctx x -> ctx.Element.ClickMode <- x), x)
+    [<CustomOperation("ClickMode")>] member inline this.ClickMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ClickMode), (fun ctx x -> ctx.Element.ClickMode <- x), x)
+
+    [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
+                
+
+type ToggleButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.ToggleButton>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Nullable<System.Boolean>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
+    [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
+    [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
+    [<CustomOperation("IsThreeState")>] member inline this.IsThreeState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsThreeState), (fun ctx x -> ctx.Element.IsThreeState <- x), x)
+
+    [<CustomOperation("Checked")>] member inline this.Checked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Checked), "Checked", fn)
+    [<CustomOperation("Unchecked")>] member inline this.Unchecked ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unchecked), "Unchecked", fn)
+    [<CustomOperation("Indeterminate")>] member inline this.Indeterminate ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Indeterminate), "Indeterminate", fn)
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type CheckBoxBuilder<'Element when 'Element :> System.Windows.Controls.CheckBox>() =
+    inherit Controls.Primitives.ToggleButtonBuilder<'Element>()
+
+
+                
+
+type RadioButtonBuilder<'Element when 'Element :> System.Windows.Controls.RadioButton>() =
+    inherit Controls.Primitives.ToggleButtonBuilder<'Element>()
+
+    [<CustomOperation("GroupName")>] member inline this.GroupName ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.GroupName), (fun ctx x -> ctx.Element.GroupName <- x), x)
+    [<CustomOperation("GroupName")>] member inline this.GroupName ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.GroupName), (fun ctx x -> ctx.Element.GroupName <- x), x)
+
+                
+
+type ButtonBuilder<'Element when 'Element :> System.Windows.Controls.Button>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("IsDefault")>] member inline this.IsDefault ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsDefault), (fun ctx x -> ctx.Element.IsDefault <- x), x)
+    [<CustomOperation("IsDefault")>] member inline this.IsDefault ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsDefault), (fun ctx x -> ctx.Element.IsDefault <- x), x)
+    [<CustomOperation("IsCancel")>] member inline this.IsCancel ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsCancel), (fun ctx x -> ctx.Element.IsCancel <- x), x)
+    [<CustomOperation("IsCancel")>] member inline this.IsCancel ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsCancel), (fun ctx x -> ctx.Element.IsCancel <- x), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type CalendarButtonBuilder() =
+    inherit Controls.ButtonBuilder<System.Windows.Controls.Primitives.CalendarButton>()
+
+
+                
+
+type CalendarDayButtonBuilder() =
+    inherit Controls.ButtonBuilder<System.Windows.Controls.Primitives.CalendarDayButton>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type GridViewColumnHeaderBuilder<'Element when 'Element :> System.Windows.Controls.GridViewColumnHeader>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("Column")>] member inline this.Column ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Column), x)
+    [<CustomOperation("Column'")>] member inline this.Column' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Column), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type DataGridColumnHeaderBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.DataGridColumnHeader>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("Column")>] member inline this.Column ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Column), x)
+    [<CustomOperation("Column'")>] member inline this.Column' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Column), x)
+    [<CustomOperation("SeparatorBrush")>] member inline this.SeparatorBrush ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorBrush), (fun ctx x -> ctx.Element.SeparatorBrush <- x), x)
+    [<CustomOperation("SeparatorBrush")>] member inline this.SeparatorBrush ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorBrush), (fun ctx x -> ctx.Element.SeparatorBrush <- x), x)
+    [<CustomOperation("SeparatorVisibility")>] member inline this.SeparatorVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Visibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorVisibility), (fun ctx x -> ctx.Element.SeparatorVisibility <- x), x)
+    [<CustomOperation("SeparatorVisibility")>] member inline this.SeparatorVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorVisibility), (fun ctx x -> ctx.Element.SeparatorVisibility <- x), x)
+    [<CustomOperation("SortDirection")>] member inline this.SortDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.SortDirection), x)
+    [<CustomOperation("SortDirection'")>] member inline this.SortDirection' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.SortDirection), x)
+
+                
+
+type DataGridRowHeaderBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.DataGridRowHeader>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("SeparatorBrush")>] member inline this.SeparatorBrush ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorBrush), (fun ctx x -> ctx.Element.SeparatorBrush <- x), x)
+    [<CustomOperation("SeparatorBrush")>] member inline this.SeparatorBrush ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorBrush), (fun ctx x -> ctx.Element.SeparatorBrush <- x), x)
+    [<CustomOperation("SeparatorVisibility")>] member inline this.SeparatorVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Visibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorVisibility), (fun ctx x -> ctx.Element.SeparatorVisibility <- x), x)
+    [<CustomOperation("SeparatorVisibility")>] member inline this.SeparatorVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SeparatorVisibility), (fun ctx x -> ctx.Element.SeparatorVisibility <- x), x)
+
+                
+
+type RepeatButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.RepeatButton>() =
+    inherit Controls.Primitives.ButtonBaseBuilder<'Element>()
+
+    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.``Delay``), (fun ctx x -> ctx.Element.``Delay`` <- x), x)
+    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.``Delay``), (fun ctx x -> ctx.Element.``Delay`` <- x), x)
+    [<CustomOperation("Interval")>] member inline this.Interval ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Interval), (fun ctx x -> ctx.Element.Interval <- x), x)
+    [<CustomOperation("Interval")>] member inline this.Interval ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Interval), (fun ctx x -> ctx.Element.Interval <- x), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type WindowBuilder<'Element when 'Element :> System.Windows.Window>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("TaskbarItemInfo")>] member inline this.TaskbarItemInfo ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Shell.TaskbarItemInfo) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TaskbarItemInfo), (fun ctx x -> ctx.Element.TaskbarItemInfo <- x), x)
+    [<CustomOperation("TaskbarItemInfo")>] member inline this.TaskbarItemInfo ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TaskbarItemInfo), (fun ctx x -> ctx.Element.TaskbarItemInfo <- x), x)
+    [<CustomOperation("AllowsTransparency")>] member inline this.AllowsTransparency ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowsTransparency), (fun ctx x -> ctx.Element.AllowsTransparency <- x), x)
+    [<CustomOperation("AllowsTransparency")>] member inline this.AllowsTransparency ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowsTransparency), (fun ctx x -> ctx.Element.AllowsTransparency <- x), x)
+    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
+    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
+    [<CustomOperation("Icon")>] member inline this.Icon ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.ImageSource) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Icon), (fun ctx x -> ctx.Element.Icon <- x), x)
+    [<CustomOperation("Icon")>] member inline this.Icon ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Icon), (fun ctx x -> ctx.Element.Icon <- x), x)
+    [<CustomOperation("SizeToContent")>] member inline this.SizeToContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.SizeToContent) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SizeToContent), (fun ctx x -> ctx.Element.SizeToContent <- x), x)
+    [<CustomOperation("SizeToContent")>] member inline this.SizeToContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SizeToContent), (fun ctx x -> ctx.Element.SizeToContent <- x), x)
+    [<CustomOperation("Top")>] member inline this.Top ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Top), (fun ctx x -> ctx.Element.Top <- x), x)
+    [<CustomOperation("Top")>] member inline this.Top ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Top), (fun ctx x -> ctx.Element.Top <- x), x)
+    [<CustomOperation("Left")>] member inline this.Left ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Left), (fun ctx x -> ctx.Element.Left <- x), x)
+    [<CustomOperation("Left")>] member inline this.Left ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Left), (fun ctx x -> ctx.Element.Left <- x), x)
+    [<CustomOperation("RestoreBounds")>] member inline this.RestoreBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.RestoreBounds), x)
+    [<CustomOperation("RestoreBounds'")>] member inline this.RestoreBounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.RestoreBounds), x)
+    [<CustomOperation("WindowStartupLocation")>] member inline this.WindowStartupLocation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.WindowStartupLocation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowStartupLocation), (fun ctx x -> ctx.Element.WindowStartupLocation <- x), x)
+    [<CustomOperation("WindowStartupLocation")>] member inline this.WindowStartupLocation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowStartupLocation), (fun ctx x -> ctx.Element.WindowStartupLocation <- x), x)
+    [<CustomOperation("ShowInTaskbar")>] member inline this.ShowInTaskbar ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowInTaskbar), (fun ctx x -> ctx.Element.ShowInTaskbar <- x), x)
+    [<CustomOperation("ShowInTaskbar")>] member inline this.ShowInTaskbar ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowInTaskbar), (fun ctx x -> ctx.Element.ShowInTaskbar <- x), x)
+
+    [<CustomOperation("Owner")>]
+    member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Owner <- x), creator)
+
+    [<CustomOperation("Owner")>]
+    member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Owner <- x), creator)
+                        
+    [<CustomOperation("OwnedWindows")>] member inline this.OwnedWindows ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OwnedWindows), x)
+    [<CustomOperation("OwnedWindows'")>] member inline this.OwnedWindows' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OwnedWindows), x)
+    [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Nullable<System.Boolean>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
+    [<CustomOperation("DialogResult")>] member inline this.DialogResult ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DialogResult), (fun ctx x -> ctx.Element.DialogResult <- x), x)
+    [<CustomOperation("WindowStyle")>] member inline this.WindowStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.WindowStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowStyle), (fun ctx x -> ctx.Element.WindowStyle <- x), x)
+    [<CustomOperation("WindowStyle")>] member inline this.WindowStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowStyle), (fun ctx x -> ctx.Element.WindowStyle <- x), x)
+    [<CustomOperation("WindowState")>] member inline this.WindowState ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.WindowState) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowState), (fun ctx x -> ctx.Element.WindowState <- x), x)
+    [<CustomOperation("WindowState")>] member inline this.WindowState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowState), (fun ctx x -> ctx.Element.WindowState <- x), x)
+    [<CustomOperation("ResizeMode")>] member inline this.ResizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.ResizeMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ResizeMode), (fun ctx x -> ctx.Element.ResizeMode <- x), x)
+    [<CustomOperation("ResizeMode")>] member inline this.ResizeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ResizeMode), (fun ctx x -> ctx.Element.ResizeMode <- x), x)
+    [<CustomOperation("Topmost")>] member inline this.Topmost ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Topmost), (fun ctx x -> ctx.Element.Topmost <- x), x)
+    [<CustomOperation("Topmost")>] member inline this.Topmost ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Topmost), (fun ctx x -> ctx.Element.Topmost <- x), x)
+    [<CustomOperation("ShowActivated")>] member inline this.ShowActivated ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowActivated), (fun ctx x -> ctx.Element.ShowActivated <- x), x)
+    [<CustomOperation("ShowActivated")>] member inline this.ShowActivated ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowActivated), (fun ctx x -> ctx.Element.ShowActivated <- x), x)
+
+    [<CustomOperation("SourceInitialized")>] member inline this.SourceInitialized ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SourceInitialized), "SourceInitialized", fn)
+    [<CustomOperation("DpiChanged")>] member inline this.DpiChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DpiChanged), "DpiChanged", fn)
+    [<CustomOperation("Activated")>] member inline this.Activated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Activated), "Activated", fn)
+    [<CustomOperation("Deactivated")>] member inline this.Deactivated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Deactivated), "Deactivated", fn)
+    [<CustomOperation("StateChanged")>] member inline this.StateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StateChanged), "StateChanged", fn)
+    [<CustomOperation("LocationChanged")>] member inline this.LocationChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LocationChanged), "LocationChanged", fn)
+    [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+    [<CustomOperation("ContentRendered")>] member inline this.ContentRendered ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentRendered), "ContentRendered", fn)
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Navigation
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type NavigationWindowBuilder<'Element when 'Element :> System.Windows.Navigation.NavigationWindow>() =
+    inherit WindowBuilder<'Element>()
+
+    [<CustomOperation("SandboxExternalContent")>] member inline this.SandboxExternalContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SandboxExternalContent), (fun ctx x -> ctx.Element.SandboxExternalContent <- x), x)
+    [<CustomOperation("SandboxExternalContent")>] member inline this.SandboxExternalContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SandboxExternalContent), (fun ctx x -> ctx.Element.SandboxExternalContent <- x), x)
+    [<CustomOperation("NavigationService")>] member inline this.NavigationService ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("NavigationService'")>] member inline this.NavigationService' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("BackStack")>] member inline this.BackStack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.BackStack), x)
+    [<CustomOperation("BackStack'")>] member inline this.BackStack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.BackStack), x)
+    [<CustomOperation("ForwardStack")>] member inline this.ForwardStack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ForwardStack), x)
+    [<CustomOperation("ForwardStack'")>] member inline this.ForwardStack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ForwardStack), x)
+    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
+    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
+    [<CustomOperation("Source")>] member inline this.Source ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Uri) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Source), (fun ctx x -> ctx.Element.Source <- x), x)
+    [<CustomOperation("Source")>] member inline this.Source ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Source), (fun ctx x -> ctx.Element.Source <- x), x)
+    [<CustomOperation("CurrentSource")>] member inline this.CurrentSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentSource), x)
+    [<CustomOperation("CurrentSource'")>] member inline this.CurrentSource' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentSource), x)
+
+    [<CustomOperation("Navigating")>] member inline this.Navigating ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigating), "Navigating", fn)
+    [<CustomOperation("NavigationProgress")>] member inline this.NavigationProgress ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationProgress), "NavigationProgress", fn)
+    [<CustomOperation("NavigationFailed")>] member inline this.NavigationFailed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationFailed), "NavigationFailed", fn)
+    [<CustomOperation("Navigated")>] member inline this.Navigated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigated), "Navigated", fn)
+    [<CustomOperation("LoadCompleted")>] member inline this.LoadCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LoadCompleted), "LoadCompleted", fn)
+    [<CustomOperation("NavigationStopped")>] member inline this.NavigationStopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationStopped), "NavigationStopped", fn)
+    [<CustomOperation("FragmentNavigation")>] member inline this.FragmentNavigation ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FragmentNavigation), "FragmentNavigation", fn)
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type ListBoxItemBuilder<'Element when 'Element :> System.Windows.Controls.ListBoxItem>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+
+    [<CustomOperation("Selected")>] member inline this.Selected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Selected), "Selected", fn)
+    [<CustomOperation("Unselected")>] member inline this.Unselected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unselected), "Unselected", fn)
+                
+
+type ComboBoxItemBuilder<'Element when 'Element :> System.Windows.Controls.ComboBoxItem>() =
+    inherit Controls.ListBoxItemBuilder<'Element>()
+
+
+                
+
+type ListViewItemBuilder<'Element when 'Element :> System.Windows.Controls.ListViewItem>() =
+    inherit Controls.ListBoxItemBuilder<'Element>()
+
+
+                
+
+type HeaderedContentControlBuilder<'Element when 'Element :> System.Windows.Controls.HeaderedContentControl>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
+    [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
+    [<CustomOperation("HeaderTemplate")>] member inline this.HeaderTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplate), (fun ctx x -> ctx.Element.HeaderTemplate <- x), x)
+    [<CustomOperation("HeaderTemplate")>] member inline this.HeaderTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplate), (fun ctx x -> ctx.Element.HeaderTemplate <- x), x)
+    [<CustomOperation("HeaderTemplateSelector")>] member inline this.HeaderTemplateSelector ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.DataTemplateSelector) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplateSelector), (fun ctx x -> ctx.Element.HeaderTemplateSelector <- x), x)
+    [<CustomOperation("HeaderTemplateSelector")>] member inline this.HeaderTemplateSelector ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplateSelector), (fun ctx x -> ctx.Element.HeaderTemplateSelector <- x), x)
+    [<CustomOperation("HeaderStringFormat")>] member inline this.HeaderStringFormat ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderStringFormat), (fun ctx x -> ctx.Element.HeaderStringFormat <- x), x)
+    [<CustomOperation("HeaderStringFormat")>] member inline this.HeaderStringFormat ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderStringFormat), (fun ctx x -> ctx.Element.HeaderStringFormat <- x), x)
+
+                
+
+type ExpanderBuilder<'Element when 'Element :> System.Windows.Controls.Expander>() =
+    inherit Controls.HeaderedContentControlBuilder<'Element>()
+
+    [<CustomOperation("ExpandDirection")>] member inline this.ExpandDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ExpandDirection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ExpandDirection), (fun ctx x -> ctx.Element.ExpandDirection <- x), x)
+    [<CustomOperation("ExpandDirection")>] member inline this.ExpandDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ExpandDirection), (fun ctx x -> ctx.Element.ExpandDirection <- x), x)
+    [<CustomOperation("IsExpanded")>] member inline this.IsExpanded ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsExpanded), (fun ctx x -> ctx.Element.IsExpanded <- x), x)
+    [<CustomOperation("IsExpanded")>] member inline this.IsExpanded ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsExpanded), (fun ctx x -> ctx.Element.IsExpanded <- x), x)
+
+    [<CustomOperation("Expanded")>] member inline this.Expanded ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Expanded), "Expanded", fn)
+    [<CustomOperation("Collapsed")>] member inline this.Collapsed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Collapsed), "Collapsed", fn)
+                
+
+type GroupBoxBuilder<'Element when 'Element :> System.Windows.Controls.GroupBox>() =
+    inherit Controls.HeaderedContentControlBuilder<'Element>()
+
+
+                
+
+type TabItemBuilder<'Element when 'Element :> System.Windows.Controls.TabItem>() =
+    inherit Controls.HeaderedContentControlBuilder<'Element>()
+
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+
+                
+
+type DataGridCellBuilder<'Element when 'Element :> System.Windows.Controls.DataGridCell>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("Column")>] member inline this.Column ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Column), x)
+    [<CustomOperation("Column'")>] member inline this.Column' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Column), x)
+    [<CustomOperation("IsEditing")>] member inline this.IsEditing ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsEditing), (fun ctx x -> ctx.Element.IsEditing <- x), x)
+    [<CustomOperation("IsEditing")>] member inline this.IsEditing ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsEditing), (fun ctx x -> ctx.Element.IsEditing <- x), x)
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+    [<CustomOperation("IsSelected")>] member inline this.IsSelected ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsSelected), (fun ctx x -> ctx.Element.IsSelected <- x), x)
+
+    [<CustomOperation("Selected")>] member inline this.Selected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Selected), "Selected", fn)
+    [<CustomOperation("Unselected")>] member inline this.Unselected ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Unselected), "Unselected", fn)
+                
+
+type FrameBuilder<'Element when 'Element :> System.Windows.Controls.Frame>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("Source")>] member inline this.Source ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Uri) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Source), (fun ctx x -> ctx.Element.Source <- x), x)
+    [<CustomOperation("Source")>] member inline this.Source ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Source), (fun ctx x -> ctx.Element.Source <- x), x)
+    [<CustomOperation("NavigationUIVisibility")>] member inline this.NavigationUIVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Navigation.NavigationUIVisibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationUIVisibility), (fun ctx x -> ctx.Element.NavigationUIVisibility <- x), x)
+    [<CustomOperation("NavigationUIVisibility")>] member inline this.NavigationUIVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationUIVisibility), (fun ctx x -> ctx.Element.NavigationUIVisibility <- x), x)
+    [<CustomOperation("SandboxExternalContent")>] member inline this.SandboxExternalContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SandboxExternalContent), (fun ctx x -> ctx.Element.SandboxExternalContent <- x), x)
+    [<CustomOperation("SandboxExternalContent")>] member inline this.SandboxExternalContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SandboxExternalContent), (fun ctx x -> ctx.Element.SandboxExternalContent <- x), x)
+    [<CustomOperation("JournalOwnership")>] member inline this.JournalOwnership ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Navigation.JournalOwnership) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.JournalOwnership), (fun ctx x -> ctx.Element.JournalOwnership <- x), x)
+    [<CustomOperation("JournalOwnership")>] member inline this.JournalOwnership ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.JournalOwnership), (fun ctx x -> ctx.Element.JournalOwnership <- x), x)
+    [<CustomOperation("NavigationService")>] member inline this.NavigationService ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("NavigationService'")>] member inline this.NavigationService' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("CurrentSource")>] member inline this.CurrentSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentSource), x)
+    [<CustomOperation("CurrentSource'")>] member inline this.CurrentSource' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentSource), x)
+    [<CustomOperation("BackStack")>] member inline this.BackStack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.BackStack), x)
+    [<CustomOperation("BackStack'")>] member inline this.BackStack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.BackStack), x)
+    [<CustomOperation("ForwardStack")>] member inline this.ForwardStack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ForwardStack), x)
+    [<CustomOperation("ForwardStack'")>] member inline this.ForwardStack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ForwardStack), x)
+
+    [<CustomOperation("ContentRendered")>] member inline this.ContentRendered ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentRendered), "ContentRendered", fn)
+    [<CustomOperation("Navigating")>] member inline this.Navigating ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigating), "Navigating", fn)
+    [<CustomOperation("NavigationProgress")>] member inline this.NavigationProgress ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationProgress), "NavigationProgress", fn)
+    [<CustomOperation("NavigationFailed")>] member inline this.NavigationFailed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationFailed), "NavigationFailed", fn)
+    [<CustomOperation("Navigated")>] member inline this.Navigated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Navigated), "Navigated", fn)
+    [<CustomOperation("LoadCompleted")>] member inline this.LoadCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LoadCompleted), "LoadCompleted", fn)
+    [<CustomOperation("NavigationStopped")>] member inline this.NavigationStopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigationStopped), "NavigationStopped", fn)
+    [<CustomOperation("FragmentNavigation")>] member inline this.FragmentNavigation ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FragmentNavigation), "FragmentNavigation", fn)
+                
+
+type GroupItemBuilder<'Element when 'Element :> System.Windows.Controls.GroupItem>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+
+                
+
+type LabelBuilder<'Element when 'Element :> System.Windows.Controls.Label>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("Target")>] member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Target), (fun ctx x -> ctx.Element.Target <- x), x)
+    [<CustomOperation("Target")>] member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Target), (fun ctx x -> ctx.Element.Target <- x), x)
+
+                
+
+type ScrollViewerBuilder<'Element when 'Element :> System.Windows.Controls.ScrollViewer>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("CanContentScroll")>] member inline this.CanContentScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanContentScroll), (fun ctx x -> ctx.Element.CanContentScroll <- x), x)
+    [<CustomOperation("CanContentScroll")>] member inline this.CanContentScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanContentScroll), (fun ctx x -> ctx.Element.CanContentScroll <- x), x)
+    [<CustomOperation("HorizontalScrollBarVisibility")>] member inline this.HorizontalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ScrollBarVisibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalScrollBarVisibility), (fun ctx x -> ctx.Element.HorizontalScrollBarVisibility <- x), x)
+    [<CustomOperation("HorizontalScrollBarVisibility")>] member inline this.HorizontalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalScrollBarVisibility), (fun ctx x -> ctx.Element.HorizontalScrollBarVisibility <- x), x)
+    [<CustomOperation("VerticalScrollBarVisibility")>] member inline this.VerticalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ScrollBarVisibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalScrollBarVisibility), (fun ctx x -> ctx.Element.VerticalScrollBarVisibility <- x), x)
+    [<CustomOperation("VerticalScrollBarVisibility")>] member inline this.VerticalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalScrollBarVisibility), (fun ctx x -> ctx.Element.VerticalScrollBarVisibility <- x), x)
+    [<CustomOperation("IsDeferredScrollingEnabled")>] member inline this.IsDeferredScrollingEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsDeferredScrollingEnabled), (fun ctx x -> ctx.Element.IsDeferredScrollingEnabled <- x), x)
+    [<CustomOperation("IsDeferredScrollingEnabled")>] member inline this.IsDeferredScrollingEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsDeferredScrollingEnabled), (fun ctx x -> ctx.Element.IsDeferredScrollingEnabled <- x), x)
+    [<CustomOperation("PanningMode")>] member inline this.PanningMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.PanningMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PanningMode), (fun ctx x -> ctx.Element.PanningMode <- x), x)
+    [<CustomOperation("PanningMode")>] member inline this.PanningMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PanningMode), (fun ctx x -> ctx.Element.PanningMode <- x), x)
+    [<CustomOperation("PanningDeceleration")>] member inline this.PanningDeceleration ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PanningDeceleration), (fun ctx x -> ctx.Element.PanningDeceleration <- x), x)
+    [<CustomOperation("PanningDeceleration")>] member inline this.PanningDeceleration ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PanningDeceleration), (fun ctx x -> ctx.Element.PanningDeceleration <- x), x)
+    [<CustomOperation("PanningRatio")>] member inline this.PanningRatio ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PanningRatio), (fun ctx x -> ctx.Element.PanningRatio <- x), x)
+    [<CustomOperation("PanningRatio")>] member inline this.PanningRatio ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PanningRatio), (fun ctx x -> ctx.Element.PanningRatio <- x), x)
+
+    [<CustomOperation("ScrollChanged")>] member inline this.ScrollChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollChanged), "ScrollChanged", fn)
+                
+
+type ToolTipBuilder<'Element when 'Element :> System.Windows.Controls.ToolTip>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+    [<CustomOperation("HorizontalOffset")>] member inline this.HorizontalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalOffset), (fun ctx x -> ctx.Element.HorizontalOffset <- x), x)
+    [<CustomOperation("HorizontalOffset")>] member inline this.HorizontalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalOffset), (fun ctx x -> ctx.Element.HorizontalOffset <- x), x)
+    [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
+    [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
+    [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
+    [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
+    [<CustomOperation("HasDropShadow")>] member inline this.HasDropShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HasDropShadow), (fun ctx x -> ctx.Element.HasDropShadow <- x), x)
+    [<CustomOperation("HasDropShadow")>] member inline this.HasDropShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HasDropShadow), (fun ctx x -> ctx.Element.HasDropShadow <- x), x)
+    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
+    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
+    [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
+    [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
+    [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.PlacementMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
+    [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
+    [<CustomOperation("CustomPopupPlacementCallback")>] member inline this.CustomPopupPlacementCallback ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.CustomPopupPlacementCallback) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CustomPopupPlacementCallback), (fun ctx x -> ctx.Element.CustomPopupPlacementCallback <- x), x)
+    [<CustomOperation("CustomPopupPlacementCallback")>] member inline this.CustomPopupPlacementCallback ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CustomPopupPlacementCallback), (fun ctx x -> ctx.Element.CustomPopupPlacementCallback <- x), x)
+    [<CustomOperation("StaysOpen")>] member inline this.StaysOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StaysOpen), (fun ctx x -> ctx.Element.StaysOpen <- x), x)
+    [<CustomOperation("StaysOpen")>] member inline this.StaysOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StaysOpen), (fun ctx x -> ctx.Element.StaysOpen <- x), x)
+    [<CustomOperation("ShowsToolTipOnKeyboardFocus")>] member inline this.ShowsToolTipOnKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Nullable<System.Boolean>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsToolTipOnKeyboardFocus), (fun ctx x -> ctx.Element.ShowsToolTipOnKeyboardFocus <- x), x)
+    [<CustomOperation("ShowsToolTipOnKeyboardFocus")>] member inline this.ShowsToolTipOnKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsToolTipOnKeyboardFocus), (fun ctx x -> ctx.Element.ShowsToolTipOnKeyboardFocus <- x), x)
+
+    [<CustomOperation("Opened")>] member inline this.Opened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opened), "Opened", fn)
+    [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
+                
+
+type UserControlBuilder<'Element when 'Element :> System.Windows.Controls.UserControl>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type StatusBarItemBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.StatusBarItem>() =
+    inherit Controls.ContentControlBuilder<'Element>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
 type ItemsControlBuilder<'Element when 'Element :> System.Windows.Controls.ItemsControl>() =
     inherit Controls.ControlBuilder<'Element>()
 
@@ -223,6 +638,7 @@ type ItemsControlBuilder<'Element when 'Element :> System.Windows.Controls.Items
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -254,6 +670,7 @@ type MultiSelectorBuilder<'Element when 'Element :> System.Windows.Controls.Prim
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -457,6 +874,7 @@ type TabControlBuilder<'Element when 'Element :> System.Windows.Controls.TabCont
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -473,6 +891,7 @@ type MenuBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primitive
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -599,6 +1018,7 @@ type TreeViewBuilder<'Element when 'Element :> System.Windows.Controls.TreeView>
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -667,6 +1087,7 @@ type TextBoxBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primit
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -705,6 +1126,7 @@ type TextBoxBuilder<'Element when 'Element :> System.Windows.Controls.TextBox>()
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -717,6 +1139,7 @@ type DatePickerTextBoxBuilder() =
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -737,6 +1160,7 @@ type RichTextBoxBuilder<'Element when 'Element :> System.Windows.Controls.RichTe
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -746,14 +1170,13 @@ type DocumentViewerBaseBuilder<'Element when 'Element :> System.Windows.Controls
 
     [<CustomOperation("Document")>] member inline this.Document ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Documents.IDocumentPaginatorSource) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Document), (fun ctx x -> ctx.Element.Document <- x), x)
     [<CustomOperation("Document")>] member inline this.Document ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Document), (fun ctx x -> ctx.Element.Document <- x), x)
-    [<CustomOperation("PageViews")>] member inline this.PageViews ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.PageViews), x)
-    [<CustomOperation("PageViews'")>] member inline this.PageViews' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.PageViews), x)
 
     [<CustomOperation("PageViewsChanged")>] member inline this.PageViewsChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PageViewsChanged), "PageViewsChanged", fn)
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -802,6 +1225,7 @@ type FlowDocumentPageViewerBuilder<'Element when 'Element :> System.Windows.Cont
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -817,6 +1241,7 @@ type ThumbBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.T
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -841,6 +1266,7 @@ type GridSplitterBuilder<'Element when 'Element :> System.Windows.Controls.GridS
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -864,6 +1290,7 @@ type RangeBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primitiv
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -885,8 +1312,8 @@ type SliderBuilder<'Element when 'Element :> System.Windows.Controls.Slider>() =
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("IsDirectionReversed")>] member inline this.IsDirectionReversed ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsDirectionReversed), (fun ctx x -> ctx.Element.IsDirectionReversed <- x), x)
     [<CustomOperation("IsDirectionReversed")>] member inline this.IsDirectionReversed ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsDirectionReversed), (fun ctx x -> ctx.Element.IsDirectionReversed <- x), x)
-    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Delay), (fun ctx x -> ctx.Element.Delay <- x), x)
-    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Delay), (fun ctx x -> ctx.Element.Delay <- x), x)
+    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.``Delay``), (fun ctx x -> ctx.Element.``Delay`` <- x), x)
+    [<CustomOperation("Delay'")>] member inline this.Delay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.``Delay``), (fun ctx x -> ctx.Element.``Delay`` <- x), x)
     [<CustomOperation("Interval")>] member inline this.Interval ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Interval), (fun ctx x -> ctx.Element.Interval <- x), x)
     [<CustomOperation("Interval")>] member inline this.Interval ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Interval), (fun ctx x -> ctx.Element.Interval <- x), x)
     [<CustomOperation("AutoToolTipPlacement")>] member inline this.AutoToolTipPlacement ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.AutoToolTipPlacement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoToolTipPlacement), (fun ctx x -> ctx.Element.AutoToolTipPlacement <- x), x)
@@ -914,6 +1341,7 @@ type SliderBuilder<'Element when 'Element :> System.Windows.Controls.Slider>() =
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -933,6 +1361,7 @@ type ScrollBarBuilder<'Element when 'Element :> System.Windows.Controls.Primitiv
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1160,6 +1589,7 @@ type SeparatorBuilder<'Element when 'Element :> System.Windows.Controls.Separato
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1176,8 +1606,302 @@ type ResizeGripBuilder<'Element when 'Element :> System.Windows.Controls.Primiti
 
                 
             
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type PageBuilder<'Element when 'Element :> System.Windows.Controls.Page>() =
+    inherit FrameworkElementBuilder<'Element>()
+
+    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+    [<CustomOperation("WindowTitle")>] member inline this.WindowTitle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowTitle), (fun ctx x -> ctx.Element.WindowTitle <- x), x)
+    [<CustomOperation("WindowTitle")>] member inline this.WindowTitle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowTitle), (fun ctx x -> ctx.Element.WindowTitle <- x), x)
+    [<CustomOperation("WindowHeight")>] member inline this.WindowHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowHeight), (fun ctx x -> ctx.Element.WindowHeight <- x), x)
+    [<CustomOperation("WindowHeight")>] member inline this.WindowHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowHeight), (fun ctx x -> ctx.Element.WindowHeight <- x), x)
+    [<CustomOperation("WindowWidth")>] member inline this.WindowWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowWidth), (fun ctx x -> ctx.Element.WindowWidth <- x), x)
+    [<CustomOperation("WindowWidth")>] member inline this.WindowWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowWidth), (fun ctx x -> ctx.Element.WindowWidth <- x), x)
+    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
+    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
+    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
+    [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
+    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
+    [<CustomOperation("ShowsNavigationUI")>] member inline this.ShowsNavigationUI ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowsNavigationUI), (fun ctx x -> ctx.Element.ShowsNavigationUI <- x), x)
+    [<CustomOperation("KeepAlive")>] member inline this.KeepAlive ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.KeepAlive), (fun ctx x -> ctx.Element.KeepAlive <- x), x)
+    [<CustomOperation("KeepAlive")>] member inline this.KeepAlive ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.KeepAlive), (fun ctx x -> ctx.Element.KeepAlive <- x), x)
+    [<CustomOperation("NavigationService")>] member inline this.NavigationService ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("NavigationService'")>] member inline this.NavigationService' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationService), x)
+    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Foreground), (fun ctx x -> ctx.Element.Foreground <- x), x)
+    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Foreground), (fun ctx x -> ctx.Element.Foreground <- x), x)
+    [<CustomOperation("FontFamily")>] member inline this.FontFamily ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.FontFamily) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FontFamily), (fun ctx x -> ctx.Element.FontFamily <- x), x)
+    [<CustomOperation("FontFamily")>] member inline this.FontFamily ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontFamily), (fun ctx x -> ctx.Element.FontFamily <- x), x)
+    [<CustomOperation("FontSize")>] member inline this.FontSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FontSize), (fun ctx x -> ctx.Element.FontSize <- x), x)
+    [<CustomOperation("FontSize")>] member inline this.FontSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontSize), (fun ctx x -> ctx.Element.FontSize <- x), x)
+    [<CustomOperation("Template")>] member inline this.Template ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ControlTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Template), (fun ctx x -> ctx.Element.Template <- x), x)
+    [<CustomOperation("Template")>] member inline this.Template ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Template), (fun ctx x -> ctx.Element.Template <- x), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Navigation
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type PageFunctionBaseBuilder<'Element when 'Element :> System.Windows.Navigation.PageFunctionBase>() =
+    inherit Controls.PageBuilder<'Element>()
+
+    [<CustomOperation("RemoveFromJournal")>] member inline this.RemoveFromJournal ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RemoveFromJournal), (fun ctx x -> ctx.Element.RemoveFromJournal <- x), x)
+    [<CustomOperation("RemoveFromJournal")>] member inline this.RemoveFromJournal ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RemoveFromJournal), (fun ctx x -> ctx.Element.RemoveFromJournal <- x), x)
+
+                
+
+type PageFunctionBuilder<'Element, 'T when 'Element :> System.Windows.Navigation.PageFunction<'T>>() =
+    inherit Navigation.PageFunctionBaseBuilder<'Element>()
+
+
+    [<CustomOperation("Return'")>] member inline this.Return' ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.``Return``), "Return", fn)
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type PanelBuilder<'Element when 'Element :> System.Windows.Controls.Panel>() =
+    inherit FrameworkElementBuilder<'Element>()
+
+    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
+    [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
+    [<CustomOperation("IsItemsHost")>] member inline this.IsItemsHost ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsItemsHost), (fun ctx x -> ctx.Element.IsItemsHost <- x), x)
+    [<CustomOperation("IsItemsHost")>] member inline this.IsItemsHost ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsItemsHost), (fun ctx x -> ctx.Element.IsItemsHost <- x), x)
+
+                
+
+type VirtualizingPanelBuilder<'Element when 'Element :> System.Windows.Controls.VirtualizingPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("ItemContainerGenerator")>] member inline this.ItemContainerGenerator ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ItemContainerGenerator), x)
+    [<CustomOperation("ItemContainerGenerator'")>] member inline this.ItemContainerGenerator' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ItemContainerGenerator), x)
+
+                
+
+type VirtualizingStackPanelBuilder<'Element when 'Element :> System.Windows.Controls.VirtualizingStackPanel>() =
+    inherit Controls.VirtualizingPanelBuilder<'Element>()
+
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+    [<CustomOperation("CanHorizontallyScroll")>] member inline this.CanHorizontallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanHorizontallyScroll), (fun ctx x -> ctx.Element.CanHorizontallyScroll <- x), x)
+    [<CustomOperation("CanHorizontallyScroll")>] member inline this.CanHorizontallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanHorizontallyScroll), (fun ctx x -> ctx.Element.CanHorizontallyScroll <- x), x)
+    [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
+    [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+                        
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type DataGridRowsPresenterBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.DataGridRowsPresenter>() =
+    inherit Controls.VirtualizingStackPanelBuilder<'Element>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type DataGridCellsPanelBuilder<'Element when 'Element :> System.Windows.Controls.DataGridCellsPanel>() =
+    inherit Controls.VirtualizingPanelBuilder<'Element>()
+
+
+                
+
+type GridBuilder<'Element when 'Element :> System.Windows.Controls.Grid>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("ShowGridLines")>] member inline this.ShowGridLines ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowGridLines), (fun ctx x -> ctx.Element.ShowGridLines <- x), x)
+    [<CustomOperation("ShowGridLines")>] member inline this.ShowGridLines ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowGridLines), (fun ctx x -> ctx.Element.ShowGridLines <- x), x)
+    [<CustomOperation("ColumnDefinitions")>] member inline this.ColumnDefinitions ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ColumnDefinitions), x)
+    [<CustomOperation("ColumnDefinitions'")>] member inline this.ColumnDefinitions' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ColumnDefinitions), x)
+    [<CustomOperation("RowDefinitions")>] member inline this.RowDefinitions ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.RowDefinitions), x)
+    [<CustomOperation("RowDefinitions'")>] member inline this.RowDefinitions' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.RowDefinitions), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type SelectiveScrollingGridBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.SelectiveScrollingGrid>() =
+    inherit Controls.GridBuilder<'Element>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type StackPanelBuilder<'Element when 'Element :> System.Windows.Controls.StackPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+    [<CustomOperation("CanHorizontallyScroll")>] member inline this.CanHorizontallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanHorizontallyScroll), (fun ctx x -> ctx.Element.CanHorizontallyScroll <- x), x)
+    [<CustomOperation("CanHorizontallyScroll")>] member inline this.CanHorizontallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanHorizontallyScroll), (fun ctx x -> ctx.Element.CanHorizontallyScroll <- x), x)
+    [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
+    [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+                        
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type ToolBarPanelBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.ToolBarPanel>() =
+    inherit Controls.StackPanelBuilder<'Element>()
+
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type CanvasBuilder<'Element when 'Element :> System.Windows.Controls.Canvas>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+
+                
+
+type DockPanelBuilder<'Element when 'Element :> System.Windows.Controls.DockPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("LastChildFill")>] member inline this.LastChildFill ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.LastChildFill), (fun ctx x -> ctx.Element.LastChildFill <- x), x)
+    [<CustomOperation("LastChildFill")>] member inline this.LastChildFill ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LastChildFill), (fun ctx x -> ctx.Element.LastChildFill <- x), x)
+
+                
+
+type WrapPanelBuilder<'Element when 'Element :> System.Windows.Controls.WrapPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("ItemWidth")>] member inline this.ItemWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemWidth), (fun ctx x -> ctx.Element.ItemWidth <- x), x)
+    [<CustomOperation("ItemWidth")>] member inline this.ItemWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemWidth), (fun ctx x -> ctx.Element.ItemWidth <- x), x)
+    [<CustomOperation("ItemHeight")>] member inline this.ItemHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemHeight), (fun ctx x -> ctx.Element.ItemHeight <- x), x)
+    [<CustomOperation("ItemHeight")>] member inline this.ItemHeight ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemHeight), (fun ctx x -> ctx.Element.ItemHeight <- x), x)
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+    [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
+
+                
+            
+namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
+open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
+open Fun.SunUI
+open Fun.SunUI.WPF
+
+
+type TabPanelBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.TabPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+
+                
+
+type ToolBarOverflowPanelBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.ToolBarOverflowPanel>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("WrapWidth")>] member inline this.WrapWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WrapWidth), (fun ctx x -> ctx.Element.WrapWidth <- x), x)
+    [<CustomOperation("WrapWidth")>] member inline this.WrapWidth ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WrapWidth), (fun ctx x -> ctx.Element.WrapWidth <- x), x)
+
+                
+
+type UniformGridBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.UniformGrid>() =
+    inherit Controls.PanelBuilder<'Element>()
+
+    [<CustomOperation("FirstColumn")>] member inline this.FirstColumn ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FirstColumn), (fun ctx x -> ctx.Element.FirstColumn <- x), x)
+    [<CustomOperation("FirstColumn")>] member inline this.FirstColumn ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FirstColumn), (fun ctx x -> ctx.Element.FirstColumn <- x), x)
+    [<CustomOperation("Columns")>] member inline this.Columns ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Columns), (fun ctx x -> ctx.Element.Columns <- x), x)
+    [<CustomOperation("Columns")>] member inline this.Columns ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Columns), (fun ctx x -> ctx.Element.Columns <- x), x)
+    [<CustomOperation("Rows")>] member inline this.Rows ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Rows), (fun ctx x -> ctx.Element.Rows <- x), x)
+    [<CustomOperation("Rows")>] member inline this.Rows ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Rows), (fun ctx x -> ctx.Element.Rows <- x), x)
+
+                
+            
 namespace rec Fun.SunUI.WPF.DslInternals.Interop
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1198,6 +1922,7 @@ type ActiveXHostBuilder<'Element when 'Element :> System.Windows.Interop.ActiveX
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1219,6 +1944,7 @@ type WebBrowserBuilder() =
             
 namespace rec Fun.SunUI.WPF.DslInternals.Shapes
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1323,6 +2049,7 @@ type RectangleBuilder() =
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1337,6 +2064,7 @@ type DecoratorBuilder<'Element when 'Element :> System.Windows.Controls.Decorato
             
 namespace rec Fun.SunUI.WPF.DslInternals.Documents
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1353,6 +2081,7 @@ type AdornerDecoratorBuilder<'Element when 'Element :> System.Windows.Documents.
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1395,6 +2124,7 @@ type ViewboxBuilder<'Element when 'Element :> System.Windows.Controls.Viewbox>()
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1419,6 +2149,7 @@ type GridViewRowPresenterBaseBuilder<'Element when 'Element :> System.Windows.Co
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1436,8 +2167,15 @@ type GridViewHeaderRowPresenterBuilder<'Element when 'Element :> System.Windows.
     [<CustomOperation("ColumnHeaderStringFormat")>] member inline this.ColumnHeaderStringFormat ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnHeaderStringFormat), (fun ctx x -> ctx.Element.ColumnHeaderStringFormat <- x), x)
     [<CustomOperation("AllowsColumnReorder")>] member inline this.AllowsColumnReorder ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowsColumnReorder), (fun ctx x -> ctx.Element.AllowsColumnReorder <- x), x)
     [<CustomOperation("AllowsColumnReorder")>] member inline this.AllowsColumnReorder ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowsColumnReorder), (fun ctx x -> ctx.Element.AllowsColumnReorder <- x), x)
-    [<CustomOperation("ColumnHeaderContextMenu")>] member inline this.ColumnHeaderContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.ContextMenu) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnHeaderContextMenu), (fun ctx x -> ctx.Element.ColumnHeaderContextMenu <- x), x)
-    [<CustomOperation("ColumnHeaderContextMenu")>] member inline this.ColumnHeaderContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnHeaderContextMenu), (fun ctx x -> ctx.Element.ColumnHeaderContextMenu <- x), x)
+
+    [<CustomOperation("ColumnHeaderContextMenu")>]
+    member inline this.ColumnHeaderContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ColumnHeaderContextMenu <- x), creator)
+
+    [<CustomOperation("ColumnHeaderContextMenu")>]
+    member inline this.ColumnHeaderContextMenu ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ColumnHeaderContextMenu <- x), creator)
+                        
     [<CustomOperation("ColumnHeaderToolTip")>] member inline this.ColumnHeaderToolTip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnHeaderToolTip), (fun ctx x -> ctx.Element.ColumnHeaderToolTip <- x), x)
     [<CustomOperation("ColumnHeaderToolTip")>] member inline this.ColumnHeaderToolTip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnHeaderToolTip), (fun ctx x -> ctx.Element.ColumnHeaderToolTip <- x), x)
 
@@ -1480,13 +2218,21 @@ type ScrollContentPresenterBuilder() =
     [<CustomOperation("CanHorizontallyScroll")>] member inline this.CanHorizontallyScroll ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanHorizontallyScroll), (fun ctx x -> ctx.Element.CanHorizontallyScroll <- x), x)
     [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
     [<CustomOperation("CanVerticallyScroll")>] member inline this.CanVerticallyScroll ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CanVerticallyScroll), (fun ctx x -> ctx.Element.CanVerticallyScroll <- x), x)
-    [<CustomOperation("ScrollOwner")>] member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, x: System.Windows.Controls.ScrollViewer) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollOwner), (fun ctx x -> ctx.Element.ScrollOwner <- x), x)
-    [<CustomOperation("ScrollOwner")>] member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ScrollOwner), (fun ctx x -> ctx.Element.ScrollOwner <- x), x)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+
+    [<CustomOperation("ScrollOwner")>]
+    member inline this.ScrollOwner ([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollContentPresenter>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.ScrollOwner <- x), creator)
+                        
 
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1499,6 +2245,7 @@ type DataGridDetailsPresenterBuilder<'Element when 'Element :> System.Windows.Co
             
 namespace rec Fun.SunUI.WPF.DslInternals.Documents
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1530,8 +2277,34 @@ type DocumentReferenceBuilder() =
 type FixedPageBuilder() =
     inherit FrameworkElementBuilder<System.Windows.Documents.FixedPage>()
 
-    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
-    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("PrintTicket")>] member inline this.PrintTicket ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PrintTicket), (fun ctx x -> ctx.Element.PrintTicket <- x), x)
     [<CustomOperation("PrintTicket")>] member inline this.PrintTicket ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PrintTicket), (fun ctx x -> ctx.Element.PrintTicket <- x), x)
     [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
@@ -1580,14 +2353,22 @@ type PageContentBuilder() =
     [<CustomOperation("Source")>] member inline this.Source ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Source), (fun ctx x -> ctx.Element.Source <- x), x)
     [<CustomOperation("LinkTargets")>] member inline this.LinkTargets ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.LinkTargets), x)
     [<CustomOperation("LinkTargets'")>] member inline this.LinkTargets' ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LinkTargets), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x: System.Windows.Documents.FixedPage) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
 
     [<CustomOperation("GetPageRootCompleted")>] member inline this.GetPageRootCompleted ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GetPageRootCompleted), "GetPageRootCompleted", fn)
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1661,8 +2442,34 @@ type InkCanvasBuilder<'Element when 'Element :> System.Windows.Controls.InkCanva
     [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
     [<CustomOperation("Strokes")>] member inline this.Strokes ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Ink.StrokeCollection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Strokes), (fun ctx x -> ctx.Element.Strokes <- x), x)
     [<CustomOperation("Strokes")>] member inline this.Strokes ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Strokes), (fun ctx x -> ctx.Element.Strokes <- x), x)
-    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
-    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("DefaultDrawingAttributes")>] member inline this.DefaultDrawingAttributes ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Ink.DrawingAttributes) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DefaultDrawingAttributes), (fun ctx x -> ctx.Element.DefaultDrawingAttributes <- x), x)
     [<CustomOperation("DefaultDrawingAttributes")>] member inline this.DefaultDrawingAttributes ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DefaultDrawingAttributes), (fun ctx x -> ctx.Element.DefaultDrawingAttributes <- x), x)
     [<CustomOperation("EraserShape")>] member inline this.EraserShape ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Ink.StylusShape) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.EraserShape), (fun ctx x -> ctx.Element.EraserShape <- x), x)
@@ -1802,8 +2609,34 @@ type ToolBarTrayBuilder<'Element when 'Element :> System.Windows.Controls.ToolBa
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("IsLocked")>] member inline this.IsLocked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsLocked), (fun ctx x -> ctx.Element.IsLocked <- x), x)
     [<CustomOperation("IsLocked")>] member inline this.IsLocked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsLocked), (fun ctx x -> ctx.Element.IsLocked <- x), x)
-    [<CustomOperation("ToolBars")>] member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ToolBars), x)
-    [<CustomOperation("ToolBars'")>] member inline this.ToolBars' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ToolBars), x)
+
+    [<CustomOperation("ToolBars")>]
+    member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
+            builder,
+            (fun x -> x.Element.ToolBars.Clear()),
+            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("ToolBars")>]
+    member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
+        this.MakeChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
+            builder,
+            (fun x -> x.Element.ToolBars.Clear()),
+            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticToolBars")>]
+    member inline this.StaticToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
+            builder,
+            (fun x -> x.Element.ToolBars.Clear()),
+            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
+            items
+        )
+                        
 
                 
 
@@ -1819,6 +2652,7 @@ type Viewport3DBuilder<'Element when 'Element :> System.Windows.Controls.Viewpor
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
 open Fun.SunUI.WPF.DslInternals
+open FSharp.Data.Adaptive
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1902,12 +2736,33 @@ type TickBarBuilder<'Element when 'Element :> System.Windows.Controls.Primitives
 type TrackBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.Track>() =
     inherit FrameworkElementBuilder<'Element>()
 
-    [<CustomOperation("DecreaseRepeatButton")>] member inline this.DecreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.RepeatButton) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.DecreaseRepeatButton), (fun ctx x -> ctx.Element.DecreaseRepeatButton <- x), x)
-    [<CustomOperation("DecreaseRepeatButton")>] member inline this.DecreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.DecreaseRepeatButton), (fun ctx x -> ctx.Element.DecreaseRepeatButton <- x), x)
-    [<CustomOperation("Thumb")>] member inline this.Thumb ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.Thumb) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Thumb), (fun ctx x -> ctx.Element.Thumb <- x), x)
-    [<CustomOperation("Thumb")>] member inline this.Thumb ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Thumb), (fun ctx x -> ctx.Element.Thumb <- x), x)
-    [<CustomOperation("IncreaseRepeatButton")>] member inline this.IncreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.RepeatButton) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IncreaseRepeatButton), (fun ctx x -> ctx.Element.IncreaseRepeatButton <- x), x)
-    [<CustomOperation("IncreaseRepeatButton")>] member inline this.IncreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IncreaseRepeatButton), (fun ctx x -> ctx.Element.IncreaseRepeatButton <- x), x)
+
+    [<CustomOperation("DecreaseRepeatButton")>]
+    member inline this.DecreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.DecreaseRepeatButton <- x), creator)
+
+    [<CustomOperation("DecreaseRepeatButton")>]
+    member inline this.DecreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.DecreaseRepeatButton <- x), creator)
+                        
+
+    [<CustomOperation("Thumb")>]
+    member inline this.Thumb ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Thumb <- x), creator)
+
+    [<CustomOperation("Thumb")>]
+    member inline this.Thumb ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Thumb <- x), creator)
+                        
+
+    [<CustomOperation("IncreaseRepeatButton")>]
+    member inline this.IncreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.IncreaseRepeatButton <- x), creator)
+
+    [<CustomOperation("IncreaseRepeatButton")>]
+    member inline this.IncreaseRepeatButton ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.IncreaseRepeatButton <- x), creator)
+                        
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Orientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Minimum")>] member inline this.Minimum ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Minimum), (fun ctx x -> ctx.Element.Minimum <- x), x)
@@ -1938,6 +2793,10 @@ module WPFElementBuilderDslCE_SystemWindows =
         inherit FrameworkElementBuilder<System.Windows.FrameworkElement>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.FrameworkElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.FrameworkElement()), this.GetRenderMode())
 
+    type Window' () = 
+        inherit WindowBuilder<System.Windows.Window>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Window>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Window()), this.GetRenderMode())
+
             
 namespace Fun.SunUI.WPF.Controls
 
@@ -1947,13 +2806,85 @@ module WPFElementBuilderDslCE_SystemWindowsControls =
     open Fun.SunUI
     open Fun.SunUI.WPF.DslInternals.Controls
 
-    type Page' () = 
-        inherit PageBuilder<System.Windows.Controls.Page>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Page()), this.GetRenderMode())
-
     type Control' () = 
         inherit ControlBuilder<System.Windows.Controls.Control>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Control>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Control()), this.GetRenderMode())
+
+    type ContentControl' () = 
+        inherit ContentControlBuilder<System.Windows.Controls.ContentControl>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ContentControl()), this.GetRenderMode())
+
+    type CheckBox' () = 
+        inherit CheckBoxBuilder<System.Windows.Controls.CheckBox>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.CheckBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.CheckBox()), this.GetRenderMode())
+
+    type RadioButton' () = 
+        inherit RadioButtonBuilder<System.Windows.Controls.RadioButton>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.RadioButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.RadioButton()), this.GetRenderMode())
+
+    type Button' () = 
+        inherit ButtonBuilder<System.Windows.Controls.Button>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Button>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Button()), this.GetRenderMode())
+
+    type GridViewColumnHeader' () = 
+        inherit GridViewColumnHeaderBuilder<System.Windows.Controls.GridViewColumnHeader>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GridViewColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GridViewColumnHeader()), this.GetRenderMode())
+
+    type ListBoxItem' () = 
+        inherit ListBoxItemBuilder<System.Windows.Controls.ListBoxItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListBoxItem()), this.GetRenderMode())
+
+    type ComboBoxItem' () = 
+        inherit ComboBoxItemBuilder<System.Windows.Controls.ComboBoxItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ComboBoxItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ComboBoxItem()), this.GetRenderMode())
+
+    type ListViewItem' () = 
+        inherit ListViewItemBuilder<System.Windows.Controls.ListViewItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ListViewItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ListViewItem()), this.GetRenderMode())
+
+    type HeaderedContentControl' () = 
+        inherit HeaderedContentControlBuilder<System.Windows.Controls.HeaderedContentControl>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.HeaderedContentControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.HeaderedContentControl()), this.GetRenderMode())
+
+    type Expander' () = 
+        inherit ExpanderBuilder<System.Windows.Controls.Expander>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Expander>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Expander()), this.GetRenderMode())
+
+    type GroupBox' () = 
+        inherit GroupBoxBuilder<System.Windows.Controls.GroupBox>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupBox>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupBox()), this.GetRenderMode())
+
+    type TabItem' () = 
+        inherit TabItemBuilder<System.Windows.Controls.TabItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.TabItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.TabItem()), this.GetRenderMode())
+
+    type DataGridCell' () = 
+        inherit DataGridCellBuilder<System.Windows.Controls.DataGridCell>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCell>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCell()), this.GetRenderMode())
+
+    type Frame' () = 
+        inherit FrameBuilder<System.Windows.Controls.Frame>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Frame>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Frame()), this.GetRenderMode())
+
+    type GroupItem' () = 
+        inherit GroupItemBuilder<System.Windows.Controls.GroupItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.GroupItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.GroupItem()), this.GetRenderMode())
+
+    type Label' () = 
+        inherit LabelBuilder<System.Windows.Controls.Label>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Label>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Label()), this.GetRenderMode())
+
+    type ScrollViewer' () = 
+        inherit ScrollViewerBuilder<System.Windows.Controls.ScrollViewer>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ScrollViewer>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ScrollViewer()), this.GetRenderMode())
+
+    type ToolTip' () = 
+        inherit ToolTipBuilder<System.Windows.Controls.ToolTip>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.ToolTip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.ToolTip()), this.GetRenderMode())
+
+    type UserControl' () = 
+        inherit UserControlBuilder<System.Windows.Controls.UserControl>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.UserControl>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.UserControl()), this.GetRenderMode())
 
     type ItemsControl' () = 
         inherit ItemsControlBuilder<System.Windows.Controls.ItemsControl>()
@@ -2063,6 +2994,38 @@ module WPFElementBuilderDslCE_SystemWindowsControls =
         inherit SeparatorBuilder<System.Windows.Controls.Separator>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Separator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Separator()), this.GetRenderMode())
 
+    type Page' () = 
+        inherit PageBuilder<System.Windows.Controls.Page>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Page>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Page()), this.GetRenderMode())
+
+    type VirtualizingStackPanel' () = 
+        inherit VirtualizingStackPanelBuilder<System.Windows.Controls.VirtualizingStackPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.VirtualizingStackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.VirtualizingStackPanel()), this.GetRenderMode())
+
+    type DataGridCellsPanel' () = 
+        inherit DataGridCellsPanelBuilder<System.Windows.Controls.DataGridCellsPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DataGridCellsPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DataGridCellsPanel()), this.GetRenderMode())
+
+    type Grid' () = 
+        inherit GridBuilder<System.Windows.Controls.Grid>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Grid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Grid()), this.GetRenderMode())
+
+    type StackPanel' () = 
+        inherit StackPanelBuilder<System.Windows.Controls.StackPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.StackPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.StackPanel()), this.GetRenderMode())
+
+    type Canvas' () = 
+        inherit CanvasBuilder<System.Windows.Controls.Canvas>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Canvas>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Canvas()), this.GetRenderMode())
+
+    type DockPanel' () = 
+        inherit DockPanelBuilder<System.Windows.Controls.DockPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.DockPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.DockPanel()), this.GetRenderMode())
+
+    type WrapPanel' () = 
+        inherit WrapPanelBuilder<System.Windows.Controls.WrapPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WrapPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WrapPanel()), this.GetRenderMode())
+
     type WebBrowser' () = 
         inherit WebBrowserBuilder()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.WebBrowser>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.WebBrowser()), this.GetRenderMode())
@@ -2136,19 +3099,6 @@ module WPFElementBuilderDslCE_SystemWindowsControls =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Viewport3D>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Viewport3D()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.WPF.Navigation
-
-[<AutoOpen>]
-module WPFElementBuilderDslCE_SystemWindowsNavigation =
-  
-    open Fun.SunUI
-    open Fun.SunUI.WPF.DslInternals.Navigation
-
-    type PageFunction'<'T> () = 
-        inherit PageFunctionBuilder<System.Windows.Navigation.PageFunction<'T>, 'T>()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.PageFunction<'T>>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.PageFunction<'T>()), this.GetRenderMode())
-
-            
 namespace Fun.SunUI.WPF.Controls.Primitives
 
 [<AutoOpen>]
@@ -2156,6 +3106,34 @@ module WPFElementBuilderDslCE_SystemWindowsControlsPrimitives =
   
     open Fun.SunUI
     open Fun.SunUI.WPF.DslInternals.Controls.Primitives
+
+    type ToggleButton' () = 
+        inherit ToggleButtonBuilder<System.Windows.Controls.Primitives.ToggleButton>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToggleButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToggleButton()), this.GetRenderMode())
+
+    type CalendarButton' () = 
+        inherit CalendarButtonBuilder()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarButton()), this.GetRenderMode())
+
+    type CalendarDayButton' () = 
+        inherit CalendarDayButtonBuilder()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.CalendarDayButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.CalendarDayButton()), this.GetRenderMode())
+
+    type DataGridColumnHeader' () = 
+        inherit DataGridColumnHeaderBuilder<System.Windows.Controls.Primitives.DataGridColumnHeader>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridColumnHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridColumnHeader()), this.GetRenderMode())
+
+    type DataGridRowHeader' () = 
+        inherit DataGridRowHeaderBuilder<System.Windows.Controls.Primitives.DataGridRowHeader>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowHeader>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowHeader()), this.GetRenderMode())
+
+    type RepeatButton' () = 
+        inherit RepeatButtonBuilder<System.Windows.Controls.Primitives.RepeatButton>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.RepeatButton>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.RepeatButton()), this.GetRenderMode())
+
+    type StatusBarItem' () = 
+        inherit StatusBarItemBuilder<System.Windows.Controls.Primitives.StatusBarItem>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.StatusBarItem>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.StatusBarItem()), this.GetRenderMode())
 
     type DataGridCellsPresenter' () = 
         inherit DataGridCellsPresenterBuilder<System.Windows.Controls.Primitives.DataGridCellsPresenter>()
@@ -2189,6 +3167,30 @@ module WPFElementBuilderDslCE_SystemWindowsControlsPrimitives =
         inherit ResizeGripBuilder<System.Windows.Controls.Primitives.ResizeGrip>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ResizeGrip>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ResizeGrip()), this.GetRenderMode())
 
+    type DataGridRowsPresenter' () = 
+        inherit DataGridRowsPresenterBuilder<System.Windows.Controls.Primitives.DataGridRowsPresenter>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.DataGridRowsPresenter>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.DataGridRowsPresenter()), this.GetRenderMode())
+
+    type SelectiveScrollingGrid' () = 
+        inherit SelectiveScrollingGridBuilder<System.Windows.Controls.Primitives.SelectiveScrollingGrid>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.SelectiveScrollingGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.SelectiveScrollingGrid()), this.GetRenderMode())
+
+    type ToolBarPanel' () = 
+        inherit ToolBarPanelBuilder<System.Windows.Controls.Primitives.ToolBarPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarPanel()), this.GetRenderMode())
+
+    type TabPanel' () = 
+        inherit TabPanelBuilder<System.Windows.Controls.Primitives.TabPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.TabPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.TabPanel()), this.GetRenderMode())
+
+    type ToolBarOverflowPanel' () = 
+        inherit ToolBarOverflowPanelBuilder<System.Windows.Controls.Primitives.ToolBarOverflowPanel>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.ToolBarOverflowPanel>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.ToolBarOverflowPanel()), this.GetRenderMode())
+
+    type UniformGrid' () = 
+        inherit UniformGridBuilder<System.Windows.Controls.Primitives.UniformGrid>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.UniformGrid>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.UniformGrid()), this.GetRenderMode())
+
     type BulletDecorator' () = 
         inherit BulletDecoratorBuilder<System.Windows.Controls.Primitives.BulletDecorator>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.BulletDecorator>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.BulletDecorator()), this.GetRenderMode())
@@ -2212,6 +3214,23 @@ module WPFElementBuilderDslCE_SystemWindowsControlsPrimitives =
     type Track' () = 
         inherit TrackBuilder<System.Windows.Controls.Primitives.Track>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Controls.Primitives.Track>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Controls.Primitives.Track()), this.GetRenderMode())
+
+            
+namespace Fun.SunUI.WPF.Navigation
+
+[<AutoOpen>]
+module WPFElementBuilderDslCE_SystemWindowsNavigation =
+  
+    open Fun.SunUI
+    open Fun.SunUI.WPF.DslInternals.Navigation
+
+    type NavigationWindow' () = 
+        inherit NavigationWindowBuilder<System.Windows.Navigation.NavigationWindow>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.NavigationWindow>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.NavigationWindow()), this.GetRenderMode())
+
+    type PageFunction'<'T> () = 
+        inherit PageFunctionBuilder<System.Windows.Navigation.PageFunction<'T>, 'T>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Navigation.PageFunction<'T>>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Navigation.PageFunction<'T>()), this.GetRenderMode())
 
             
 namespace Fun.SunUI.WPF.Interop

@@ -42,11 +42,10 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
             $"builder: BuildElement<{generic}>"
 
 
-    let rawProps = ty.GetProperties()
     let filteredProps =
-        rawProps
+        ty.GetProperties()
         |> Seq.filter (fun (prop: PropertyInfo) ->
-            not (ctx.IsChildrenProp prop)
+            not (ctx.ExcludeProp prop)
             && prop.DeclaringType = ty
             && ((prop.SetMethod <> null && prop.SetMethod.IsPublic)
                 || (not prop.PropertyType.IsPrimitive
@@ -67,39 +66,128 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
             let name = prop.Name
             let name = if fsharpKeywords |> List.contains name then $"{name}'" else name
 
-            let createAdaptiveProps () =
-                $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), (fun ctx x -> ctx.Element.{prop.Name} <- x), x)"
+            let createSimpleProps (name: string) = [
+                $"    {customOperation name} {memberStart}{name} ({contextArg}, x: {getTypeName prop.PropertyType}) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName prop.Name}), (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), x)"
+                $"    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName prop.Name}), (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), x)"
+            ]
 
             if prop.SetMethod = null || not prop.SetMethod.IsPublic then
+                let isIListChild (item: Type) = item.Name.StartsWith "IList`1" && item.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType
+
+                let hasIListChild = prop.PropertyType.GetInterfaces() |> Seq.exists isIListChild
+                if
+                    prop.PropertyType.IsAssignableTo typeof<System.Collections.IEnumerable>
+                    && (ctx.IsChildrenProp prop
+                        || hasIListChild
+                        || (prop.PropertyType.GenericTypeArguments.Length = 1
+                            && prop.PropertyType.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType))
+                then
+                    let childTypeName =
+                        try
+                            getTypeName (
+                                if hasIListChild then
+                                    prop.PropertyType.GetInterfaces() |> Seq.find isIListChild |> (fun x -> x.GenericTypeArguments[0])
+                                else
+                                    prop.PropertyType.GenericTypeArguments[0]
+                            )
+                        with _ ->
+                            getTypeName ctx.ChildType
+
+                    if prop.PropertyType.GetMember("AddRange").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0 then
+                        [
+                            $"""
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> seq) =
+        this.MakeChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> x.Element.{safeName prop.Name}.AddRange(ls)),
+            items
+        )
+
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> alist) =
+        this.MakeChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> x.Element.{safeName prop.Name}.AddRange(ls)),
+            items
+        )
+
+    {customOperation ("Static" + name)}
+    {memberStart}Static{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> seq) =
+        this.MakeStaticChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> x.Element.{safeName prop.Name}.AddRange(ls)),
+            items
+        )
+                        """
+                        ]
+                    else if prop.PropertyType.GetMember("Add").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0 then
+                        [
+                            $"""
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> seq) =
+        this.MakeChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> for i in ls do x.Element.{safeName prop.Name}.Add(i) |> ignore),
+            items
+        )
+
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> alist) =
+        this.MakeChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> for i in ls do x.Element.{safeName prop.Name}.Add(i) |> ignore),
+            items
+        )
+
+    {customOperation ("Static" + name)}
+    {memberStart}Static{name} ({contextArg}, items: ElementCreator<{ctx.UIStackName}> seq) =
+        this.MakeStaticChildrenBuilder<{elementGeneric}, {childTypeName}>(
+            builder,
+            (fun x -> x.Element.{safeName prop.Name}.Clear()),
+            (fun x (ls: {childTypeName}[]) -> for i in ls do x.Element.{safeName prop.Name}.Add(i) |> ignore),
+            items
+        )
+                        """
+                        ]
+                    else
+                        []
+                else
+                    [
+                        $"""    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                        $"""    {customOperation (name + "'")} {memberStart}{name}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                    ]
+            else if ctx.IsChildrenProp prop || prop.PropertyType.IsAssignableTo ctx.ChildType then
                 [
-                    $"""    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{prop.Name}), x)"""
-                    $"""    {customOperation (name + "'")} {memberStart}{name}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{prop.Name}), x)"""
+                    $"""
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), creator)
+
+    {customOperation name}
+    {memberStart}{name} ({contextArg}, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), creator)
+                        """
+                    if prop.PropertyType = typeof<obj> then yield! createSimpleProps (name + "'")
                 ]
             else if prop.PropertyType.IsGenericType then
-                if prop.PropertyType.Name.StartsWith "System.EventHandler" then
-                    [
-                        $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), {prop.Name}, fn)"
-                    ]
-                elif
+                if
                     prop.PropertyType.Namespace = "System"
                     && (prop.PropertyType.Name.StartsWith "Func`" || prop.PropertyType.Name.StartsWith "Action`")
                 then
                     [
-                        $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), (fun ctx x -> ctx.Element.{prop.Name} <- x), ({getTypeName prop.PropertyType}fn))"
+                        $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName prop.Name}), (fun ctx x -> ctx.Element.{safeName prop.Name} <- x), ({getTypeName prop.PropertyType}fn))"
                     ]
                 else
-                    let propTypeName = getTypeName prop.PropertyType
-                    [
-                        $"    {customOperation name} {memberStart}{name} ({contextArg}, x: {propTypeName}) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), (fun ctx x -> ctx.Element.{prop.Name} <- x), x)"
-                        createAdaptiveProps ()
-                    ]
+                    createSimpleProps name
 
             else
-                let propTypeName = getTypeName prop.PropertyType
-                [
-                    $"    {customOperation name} {memberStart}{name} ({contextArg}, x: {propTypeName}) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.{prop.Name}), (fun ctx x -> ctx.Element.{prop.Name} <- x), x)"
-                    createAdaptiveProps ()
-                ]
+                createSimpleProps name
         )
         |> Seq.concat
 
@@ -109,7 +197,7 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
         |> Seq.filter (fun x -> x.DeclaringType = ty)
         |> Seq.map (fun evt ->
             let name = if fsharpKeywords |> List.contains evt.Name then $"{evt.Name}'" else evt.Name
-            $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{evt.Name}), \"{evt.Name}\", fn)"
+            $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName evt.Name}), \"{evt.Name}\", fn)"
         )
 
     {|

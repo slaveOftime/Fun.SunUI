@@ -1,6 +1,5 @@
 ﻿namespace Fun.SunUI.WPF
 
-open System.Windows
 open Fun.SunUI
 
 
@@ -9,5 +8,5 @@ type WPF =
     end
 
 
-type WPFElementBuilder<'Element when 'Element :> FrameworkElement>() =
+type WPFElementBuilder<'Element>() =
     inherit ElementBuilder<WPF, 'Element>()

@@ -1,4 +1,6 @@
 namespace rec Fun.SunUI.ModernForms.DslInternals
+
+open FSharp.Data.Adaptive
 open Fun.SunUI.ModernForms.DslInternals
 open Fun.SunUI
 open Fun.SunUI.ModernForms
@@ -9,6 +11,34 @@ type WindowBaseBuilder<'Element when 'Element :> Modern.Forms.WindowBase>() =
 
     [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Bounds), x)
     [<CustomOperation("Bounds'")>] member inline this.Bounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Bounds), x)
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("Controls")>]
+    member inline this.Controls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> alist) =
+        this.MakeChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+
+    [<CustomOperation("StaticControls")>]
+    member inline this.StaticControls ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Modern.Forms.Control>(
+            builder,
+            (fun x -> x.Element.Controls.Clear()),
+            (fun x (ls: Modern.Forms.Control[]) -> x.Element.Controls.AddRange(ls)),
+            items
+        )
+                        
     [<CustomOperation("CurrentStyle")>] member inline this.CurrentStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentStyle), x)
     [<CustomOperation("CurrentStyle'")>] member inline this.CurrentStyle' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentStyle), x)
     [<CustomOperation("DisplayRectangle")>] member inline this.DisplayRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DisplayRectangle), x)

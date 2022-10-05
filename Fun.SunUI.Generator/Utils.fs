@@ -10,11 +10,12 @@ type Namespace = Namespace of string
 
 type GeneratorContext = {
     RootType: Type
+    ChildType: Type
     BuilderName: string
     UIStackName: string
-    ChildrenPropName: string
     IsChildrenProp: PropertyInfo -> bool
     ExcludeBaseTypes: Type seq
+    ExcludeProp: PropertyInfo -> bool
 }
 
 
@@ -114,6 +115,9 @@ let fsharpKeywords = [
 
 let internalSegment = "DslInternals"
 let elementGeneric = "'Element"
+
+
+let safeName (x: string) = if Seq.contains x fsharpKeywords then $"``{x}``" else x
 
 
 let lowerFirstCase (str: string) =
