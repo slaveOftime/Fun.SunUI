@@ -32,7 +32,15 @@ module CodeGenProject =
             |> ignore
 
 
-    let createAndRun forDefault (uiStackName: string) (projectFile: string) codesDirName sdk generatorVersion (packages: PackageMeta seq) =
+    let createAndRun
+        forDefault
+        (uiStackName: string)
+        (projectFile: string)
+        codesDirName
+        (sdk: string option)
+        generatorVersion
+        (packages: PackageMeta seq)
+        =
         let codeGenFolder = Path.GetTempPath() </> "FunSunUI-Cli-" + Guid.NewGuid().ToString()
 
         AnsiConsole.MarkupLine $"[green]Create temp project: {codeGenFolder}[/]"
@@ -53,26 +61,31 @@ module CodeGenProject =
             """
             )
 
+        let sdkMajorVersion =
+            match sdk with
+            | None -> "6"
+            | Some x -> x.Split(".")[0]
+
         let stack =
             match uiStackName with
             | "MAUI" ->
-                """
+                $"""
 		<UseMaui>true</UseMaui>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net{sdkMajorVersion}.0</TargetFramework>
                 """
             | "WinForms" ->
-                """
+                $"""
         <UseWindowsForms>true</UseWindowsForms>
-	    <TargetFramework>net6.0-windows</TargetFramework>
+	    <TargetFramework>net{sdkMajorVersion}.0-windows</TargetFramework>
                 """
             | "WPF" ->
-                """
+                $"""
 		<UseWPF>true</UseWPF>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net{sdkMajorVersion}.0-windows</TargetFramework>
                 """
             | _ ->
-                """
-        <TargetFramework>net6.0</TargetFramework>
+                $"""
+        <TargetFramework>net{sdkMajorVersion}.0</TargetFramework>
                 """
 
         File.WriteAllText(

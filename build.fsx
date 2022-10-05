@@ -7,6 +7,8 @@ open System.IO
 let inline (</>) x y = Path.Combine(x, y)
 
 
+let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Generator" </> "bin" </> "Debug" </>  "net6.0" </> "publish" </> "Fun.SunUI.Generator.exe"
+
 let modernFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms.fsproj"
 let winFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms.fsproj"
 let wpfProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WPF" </> "Fun.SunUI.WPF" </> "Fun.SunUI.WPF.fsproj"
@@ -15,11 +17,14 @@ let mauiProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI" </
 
 pipeline "GenerateInternalBindings" {
     workingDir (__SOURCE_DIRECTORY__ </> "Fun.SunUI.Generator")
-    stage "Check Envs" { run "dotnet build" }
-    stage "Generate" { run $"dotnet run -- generate {modernFormsProj} -u ModernForms --forDefault" }
-    stage "Generate" { run $"dotnet run -- generate {winFormsProj} -u WinForms --forDefault" }
-    stage "Generate" { run $"dotnet run -- generate {wpfProj} -u WPF --forDefault" }
-    stage "Generate" { run $"dotnet run -- generate {mauiProj} -u MAUI --forDefault" }
+    stage "Check Envs" {
+        run "dotnet --version"
+        run $"dotnet publish"
+    }
+    stage "Generate" { run $"{generatorExe} generate {modernFormsProj} -u ModernForms --forDefault" }
+    stage "Generate" { run $"{generatorExe} generate {winFormsProj} -u WinForms --forDefault" }
+    stage "Generate" { run $"{generatorExe} generate {wpfProj} -u WPF --forDefault" }
+    stage "Generate" { run $"{generatorExe} generate {mauiProj} -u MAUI --forDefault --sdk 6.0.401" }
     runIfOnlySpecified
 }
 
