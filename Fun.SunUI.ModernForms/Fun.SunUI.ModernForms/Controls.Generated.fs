@@ -597,34 +597,8 @@ type StatusBarBuilder<'Element when 'Element :> Modern.Forms.StatusBar>() =
 type TabControlBuilder<'Element when 'Element :> Modern.Forms.TabControl>() =
     inherit ControlBuilder<'Element>()
 
-
-    [<CustomOperation("TabPages")>]
-    member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
-        this.MakeChildrenBuilder<'Element, Modern.Forms.TabPage>(
-            builder,
-            (fun x -> x.Element.TabPages.Clear()),
-            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("TabPages")>]
-    member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> alist) =
-        this.MakeChildrenBuilder<'Element, Modern.Forms.TabPage>(
-            builder,
-            (fun x -> x.Element.TabPages.Clear()),
-            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("StaticTabPages")>]
-    member inline this.StaticTabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<ModernForms> seq) =
-        this.MakeStaticChildrenBuilder<'Element, Modern.Forms.TabPage>(
-            builder,
-            (fun x -> x.Element.TabPages.Clear()),
-            (fun x (ls: Modern.Forms.TabPage[]) -> for i in ls do x.Element.TabPages.Add(i) |> ignore),
-            items
-        )
-                        
+    [<CustomOperation("TabPages")>] member inline this.TabPages ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TabPages), x)
+    [<CustomOperation("TabPages'")>] member inline this.TabPages' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TabPages), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
 

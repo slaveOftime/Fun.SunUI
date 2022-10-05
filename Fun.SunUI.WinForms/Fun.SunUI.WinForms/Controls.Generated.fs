@@ -773,6 +773,8 @@ type FormBuilder<'Element when 'Element :> System.Windows.Forms.Form>() =
     [<CustomOperation("MinimumSize")>] member inline this.MinimumSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimumSize), (fun ctx x -> ctx.Element.MinimumSize <- x), x)
     [<CustomOperation("MaximizeBox")>] member inline this.MaximizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MaximizeBox), (fun ctx x -> ctx.Element.MaximizeBox <- x), x)
     [<CustomOperation("MaximizeBox")>] member inline this.MaximizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximizeBox), (fun ctx x -> ctx.Element.MaximizeBox <- x), x)
+    [<CustomOperation("MdiChildren")>] member inline this.MdiChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.MdiChildren), x)
+    [<CustomOperation("MdiChildren'")>] member inline this.MdiChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.MdiChildren), x)
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
 
@@ -788,6 +790,8 @@ type FormBuilder<'Element when 'Element :> System.Windows.Forms.Form>() =
     [<CustomOperation("MinimizeBox")>] member inline this.MinimizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MinimizeBox), (fun ctx x -> ctx.Element.MinimizeBox <- x), x)
     [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
     [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
+    [<CustomOperation("OwnedForms")>] member inline this.OwnedForms ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OwnedForms), x)
+    [<CustomOperation("OwnedForms'")>] member inline this.OwnedForms' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OwnedForms), x)
 
     [<CustomOperation("Owner")>]
     member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -3248,6 +3252,8 @@ type MdiClientBuilder() =
     [<CustomOperation("BackgroundImage")>] member inline this.BackgroundImage ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImage), (fun ctx x -> ctx.Element.BackgroundImage <- x), x)
     [<CustomOperation("BackgroundImageLayout")>] member inline this.BackgroundImageLayout ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x: System.Windows.Forms.ImageLayout) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageLayout), (fun ctx x -> ctx.Element.BackgroundImageLayout <- x), x)
     [<CustomOperation("BackgroundImageLayout")>] member inline this.BackgroundImageLayout ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BackgroundImageLayout), (fun ctx x -> ctx.Element.BackgroundImageLayout <- x), x)
+    [<CustomOperation("MdiChildren")>] member inline this.MdiChildren ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.MdiChildren), x)
+    [<CustomOperation("MdiChildren'")>] member inline this.MdiChildren' ([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.MdiClient>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.MdiChildren), x)
 
                 
 

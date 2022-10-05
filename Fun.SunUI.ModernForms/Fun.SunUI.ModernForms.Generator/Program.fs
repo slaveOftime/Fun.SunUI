@@ -14,8 +14,10 @@ let controlCtx = {
     BuilderName = "ModernFormsControlBuilder"
     UIStackName = "ModernForms"
     IsChildrenProp = fun _ -> false
+    IsYieldProp = fun _ -> false
     ExcludeBaseTypes = []
     ExcludeProp = fun _ -> false
+    ExcludeEvent = fun _ -> false
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
@@ -27,8 +29,10 @@ let windowBaseCtx = {
     BuilderName = "ModernFormsWindowBaseBuilder"
     UIStackName = "ModernForms"
     IsChildrenProp = fun _ -> false
+    IsYieldProp = fun _ -> false
     ExcludeBaseTypes = []
     ExcludeProp = fun _ -> false
+    ExcludeEvent = fun _ -> false
 }
 
 Generator.createCodeFile windowBaseCtx dir namesp assemblyName "Windows.Generated"

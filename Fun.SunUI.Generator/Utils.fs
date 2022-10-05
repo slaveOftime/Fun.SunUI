@@ -17,6 +17,7 @@ type GeneratorContext = {
     IsYieldProp: PropertyInfo -> bool
     ExcludeBaseTypes: Type seq
     ExcludeProp: PropertyInfo -> bool
+    ExcludeEvent: EventInfo -> bool
 }
 
 

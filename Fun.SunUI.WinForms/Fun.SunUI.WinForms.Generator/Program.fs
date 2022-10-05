@@ -14,8 +14,10 @@ let controlCtx = {
     BuilderName = "WinFormsControlBuilder"
     UIStackName = "WinForms"
     IsChildrenProp = fun prop -> prop.PropertyType.IsAssignableTo typeof<Control.ControlCollection> && prop.Name = "Controls"
+    IsYieldProp = fun prop -> false
     ExcludeBaseTypes = []
     ExcludeProp = fun _ -> false
+    ExcludeEvent = fun _ -> false
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"

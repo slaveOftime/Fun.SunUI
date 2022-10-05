@@ -14,40 +14,38 @@ let main (_: string[]) =
     let window =
         Window'() {
             Title "Demo"
-            Content(
-                Grid'() {
-                    RowDefinitions(fun row ->
-                        row.Add(RowDefinition(Height = GridLength 40.))
-                        row.Add(RowDefinition(Height = GridLength(1., GridUnitType.Star)))
-                        row.Add(RowDefinition(Height = GridLength.Auto))
-                    )
-                    StaticChildren [
-                        Border'() {
-                            Background(
-                                adaptive {
-                                    let! c = count
-                                    if c > 3 then
-                                        return System.Windows.Media.Brushes.Green :> Media.Brush
-                                    else
-                                        return System.Windows.Media.Brushes.Transparent
-                                }
-                            )
-                        }
-                        StackPanel'() {
-                            Ref(fun this -> Grid.SetRow(this, 1))
-                            VerticalAlignment VerticalAlignment.Center
-                            HorizontalAlignment HorizontalAlignment.Center
-                            StaticChildren [ TextBlock'() { Text(count |> AVal.map (sprintf "count = %d")) } ]
-                        }
-                        Button'() {
-                            Ref(fun this -> Grid.SetRow(this, 3))
-                            Content' "Increase"
-                            Height 60
-                            Click(fun _ -> transact (fun () -> count.Value <- count.Value + 1))
-                        }
-                    ]
-                }
-            )
+            Grid'() {
+                RowDefinitions(fun row ->
+                    row.Add(RowDefinition(Height = GridLength 40.))
+                    row.Add(RowDefinition(Height = GridLength(1., GridUnitType.Star)))
+                    row.Add(RowDefinition(Height = GridLength.Auto))
+                )
+                StaticChildren [
+                    Border'() {
+                        Background(
+                            adaptive {
+                                let! c = count
+                                if c > 3 then
+                                    return System.Windows.Media.Brushes.Green :> Media.Brush
+                                else
+                                    return System.Windows.Media.Brushes.Transparent
+                            }
+                        )
+                    }
+                    StackPanel'() {
+                        Ref(fun this -> Grid.SetRow(this, 1))
+                        VerticalAlignment VerticalAlignment.Center
+                        HorizontalAlignment HorizontalAlignment.Center
+                        StaticChildren [ TextBlock'() { Text(count |> AVal.map (sprintf "count = %d")) } ]
+                    }
+                    Button'() {
+                        Ref(fun this -> Grid.SetRow(this, 3))
+                        Content' "Increase"
+                        Height 60
+                        Click(fun _ -> transact (fun () -> count.Value <- count.Value + 1))
+                    }
+                ]
+            }
         }
 
     let services = ServiceCollection()

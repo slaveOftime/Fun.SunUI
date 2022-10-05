@@ -1,6 +1,7 @@
 namespace rec Fun.SunUI.WPF.DslInternals
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -89,8 +90,9 @@ type FrameworkElementBuilder<'Element when 'Element :> System.Windows.FrameworkE
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -137,6 +139,32 @@ type ContentControlBuilder<'Element when 'Element :> System.Windows.Controls.Con
     inherit Controls.ControlBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Content <- x), fn ())
+
+                        
+
     [<CustomOperation("Content")>]
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
@@ -157,8 +185,9 @@ type ContentControlBuilder<'Element when 'Element :> System.Windows.Controls.Con
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -192,8 +221,9 @@ type ToggleButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primi
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -223,8 +253,9 @@ type ButtonBuilder<'Element when 'Element :> System.Windows.Controls.Button>() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -242,8 +273,9 @@ type CalendarDayButtonBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -257,8 +289,9 @@ type GridViewColumnHeaderBuilder<'Element when 'Element :> System.Windows.Contro
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -298,8 +331,9 @@ type RepeatButtonBuilder<'Element when 'Element :> System.Windows.Controls.Primi
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -363,8 +397,9 @@ type WindowBuilder<'Element when 'Element :> System.Windows.Window>() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Navigation
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -397,8 +432,9 @@ type NavigationWindowBuilder<'Element when 'Element :> System.Windows.Navigation
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -579,8 +615,9 @@ type UserControlBuilder<'Element when 'Element :> System.Windows.Controls.UserCo
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -592,8 +629,9 @@ type StatusBarItemBuilder<'Element when 'Element :> System.Windows.Controls.Prim
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -637,8 +675,9 @@ type ItemsControlBuilder<'Element when 'Element :> System.Windows.Controls.Items
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -669,8 +708,9 @@ type MultiSelectorBuilder<'Element when 'Element :> System.Windows.Controls.Prim
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -873,8 +913,9 @@ type TabControlBuilder<'Element when 'Element :> System.Windows.Controls.TabCont
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -890,8 +931,9 @@ type MenuBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primitive
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1017,8 +1059,9 @@ type TreeViewBuilder<'Element when 'Element :> System.Windows.Controls.TreeView>
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1086,8 +1129,9 @@ type TextBoxBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primit
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1125,8 +1169,9 @@ type TextBoxBuilder<'Element when 'Element :> System.Windows.Controls.TextBox>()
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1138,8 +1183,9 @@ type DatePickerTextBoxBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1159,8 +1205,9 @@ type RichTextBoxBuilder<'Element when 'Element :> System.Windows.Controls.RichTe
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1170,13 +1217,16 @@ type DocumentViewerBaseBuilder<'Element when 'Element :> System.Windows.Controls
 
     [<CustomOperation("Document")>] member inline this.Document ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Documents.IDocumentPaginatorSource) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Document), (fun ctx x -> ctx.Element.Document <- x), x)
     [<CustomOperation("Document")>] member inline this.Document ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Document), (fun ctx x -> ctx.Element.Document <- x), x)
+    [<CustomOperation("PageViews")>] member inline this.PageViews ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.PageViews), x)
+    [<CustomOperation("PageViews'")>] member inline this.PageViews' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.PageViews), x)
 
     [<CustomOperation("PageViewsChanged")>] member inline this.PageViewsChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PageViewsChanged), "PageViewsChanged", fn)
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1224,8 +1274,9 @@ type FlowDocumentPageViewerBuilder<'Element when 'Element :> System.Windows.Cont
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1240,8 +1291,9 @@ type ThumbBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.T
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1265,8 +1317,9 @@ type GridSplitterBuilder<'Element when 'Element :> System.Windows.Controls.GridS
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1289,8 +1342,9 @@ type RangeBaseBuilder<'Element when 'Element :> System.Windows.Controls.Primitiv
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1340,8 +1394,9 @@ type SliderBuilder<'Element when 'Element :> System.Windows.Controls.Slider>() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1360,8 +1415,9 @@ type ScrollBarBuilder<'Element when 'Element :> System.Windows.Controls.Primitiv
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1588,8 +1644,9 @@ type SeparatorBuilder<'Element when 'Element :> System.Windows.Controls.Separato
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1607,8 +1664,9 @@ type ResizeGripBuilder<'Element when 'Element :> System.Windows.Controls.Primiti
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1646,8 +1704,9 @@ type PageBuilder<'Element when 'Element :> System.Windows.Controls.Page>() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Navigation
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1668,8 +1727,9 @@ type PageFunctionBuilder<'Element, 'T when 'Element :> System.Windows.Navigation
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1742,8 +1802,9 @@ type VirtualizingStackPanelBuilder<'Element when 'Element :> System.Windows.Cont
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1755,8 +1816,9 @@ type DataGridRowsPresenterBuilder<'Element when 'Element :> System.Windows.Contr
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1780,8 +1842,9 @@ type GridBuilder<'Element when 'Element :> System.Windows.Controls.Grid>() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1793,8 +1856,9 @@ type SelectiveScrollingGridBuilder<'Element when 'Element :> System.Windows.Cont
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1821,8 +1885,9 @@ type StackPanelBuilder<'Element when 'Element :> System.Windows.Controls.StackPa
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1834,8 +1899,9 @@ type ToolBarPanelBuilder<'Element when 'Element :> System.Windows.Controls.Primi
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1867,8 +1933,9 @@ type WrapPanelBuilder<'Element when 'Element :> System.Windows.Controls.WrapPane
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1900,8 +1967,9 @@ type UniformGridBuilder<'Element when 'Element :> System.Windows.Controls.Primit
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Interop
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1910,7 +1978,6 @@ type HwndHostBuilder<'Element when 'Element :> System.Windows.Interop.HwndHost>(
     inherit FrameworkElementBuilder<'Element>()
 
 
-    //[<CustomOperation("MessageHook")>] member inline this.MessageHook ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MessageHook), "MessageHook", fn)
     [<CustomOperation("DpiChanged")>] member inline this.DpiChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DpiChanged), "DpiChanged", fn)
                 
 
@@ -1921,8 +1988,9 @@ type ActiveXHostBuilder<'Element when 'Element :> System.Windows.Interop.ActiveX
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -1943,8 +2011,9 @@ type WebBrowserBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Shapes
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2048,8 +2117,9 @@ type RectangleBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2063,8 +2133,9 @@ type DecoratorBuilder<'Element when 'Element :> System.Windows.Controls.Decorato
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Documents
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2080,8 +2151,9 @@ type AdornerDecoratorBuilder<'Element when 'Element :> System.Windows.Documents.
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2123,8 +2195,9 @@ type ViewboxBuilder<'Element when 'Element :> System.Windows.Controls.Viewbox>()
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2148,8 +2221,9 @@ type GridViewRowPresenterBaseBuilder<'Element when 'Element :> System.Windows.Co
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2231,8 +2305,9 @@ type ScrollContentPresenterBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2244,8 +2319,9 @@ type DataGridDetailsPresenterBuilder<'Element when 'Element :> System.Windows.Co
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Documents
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2367,8 +2443,9 @@ type PageContentBuilder() =
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 
@@ -2609,34 +2686,8 @@ type ToolBarTrayBuilder<'Element when 'Element :> System.Windows.Controls.ToolBa
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("IsLocked")>] member inline this.IsLocked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsLocked), (fun ctx x -> ctx.Element.IsLocked <- x), x)
     [<CustomOperation("IsLocked")>] member inline this.IsLocked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsLocked), (fun ctx x -> ctx.Element.IsLocked <- x), x)
-
-    [<CustomOperation("ToolBars")>]
-    member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
-            builder,
-            (fun x -> x.Element.ToolBars.Clear()),
-            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("ToolBars")>]
-    member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
-        this.MakeChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
-            builder,
-            (fun x -> x.Element.ToolBars.Clear()),
-            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("StaticToolBars")>]
-    member inline this.StaticToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeStaticChildrenBuilder<'Element, System.Windows.Controls.ToolBar>(
-            builder,
-            (fun x -> x.Element.ToolBars.Clear()),
-            (fun x (ls: System.Windows.Controls.ToolBar[]) -> for i in ls do x.Element.ToolBars.Add(i) |> ignore),
-            items
-        )
-                        
+    [<CustomOperation("ToolBars")>] member inline this.ToolBars ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ToolBars), x)
+    [<CustomOperation("ToolBars'")>] member inline this.ToolBars' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ToolBars), x)
 
                 
 
@@ -2651,8 +2702,9 @@ type Viewport3DBuilder<'Element when 'Element :> System.Windows.Controls.Viewpor
                 
             
 namespace rec Fun.SunUI.WPF.DslInternals.Controls.Primitives
-open Fun.SunUI.WPF.DslInternals
+
 open FSharp.Data.Adaptive
+open Fun.SunUI.WPF.DslInternals
 open Fun.SunUI
 open Fun.SunUI.WPF
 

@@ -18,8 +18,10 @@ let elementCtx = {
         fun prop ->
             prop.PropertyType.IsAssignableTo typeof<UIElementCollection>
             || (prop.DeclaringType.IsAssignableTo typeof<ContentControl> && prop.Name = "Content")
+    IsYieldProp = fun prop -> prop.Name = "Content"
     ExcludeBaseTypes = []
-    ExcludeProp = fun prop -> prop.Name = "MessageHook"
+    ExcludeProp = fun _ -> false
+    ExcludeEvent = fun evt -> evt.Name = "MessageHook"
 }
 
 Generator.createCodeFile elementCtx dir namesp assemblyName "Elements.Generated"

@@ -18,6 +18,7 @@ let controlCtx = {
     // https://github.com/dotnet/fsharp/issues/14020
     ExcludeBaseTypes = [ typeof<NavigationPage>; typeof<FlyoutPage>; typeof<TabbedPage> ]
     ExcludeProp = fun prop -> prop.Name = "LogicalChildren"
+    ExcludeEvent = fun _ -> false
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
