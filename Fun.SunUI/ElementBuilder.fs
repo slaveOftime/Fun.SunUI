@@ -2,6 +2,7 @@
 
 open System
 open FSharp.Data.Adaptive
+open Fun.SunUI.Internal
 
 
 type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, key) as this =
@@ -207,7 +208,7 @@ type ElementBuilder<'UIStack, 'Element>() =
                         let childCreator = Seq.item i childrenCreators
                         let newChildContext = childCreator.CreateOrUpdate(sp, ValueNone)
                         ctx.ChildContexts.Add(newChildContext)
-                        newNativeElements[i] <- newChildContext.NativeElement :?> 'ChildElement
+                        newNativeElements[i] <- saferCast newChildContext.NativeElement
                         i <- i + 1
 
                     clearNativeChildren ctx
@@ -237,7 +238,7 @@ type ElementBuilder<'UIStack, 'Element>() =
                                 | _ -> childCreator.CreateOrUpdate(sp, ValueNone)
 
                         newChildrenContexts[i] <- newChildContext
-                        newNativeChildren[i] <- newChildContext.NativeElement :?> 'ChildElement
+                        newNativeChildren[i] <- saferCast newChildContext.NativeElement
                         i <- i + 1
 
                     for item in ctx.ChildContexts do
@@ -298,7 +299,7 @@ type ElementBuilder<'UIStack, 'Element>() =
                     let childCreator = Seq.item i childrenCreators
                     let newChildContext = childCreator.CreateOrUpdate(sp, ValueNone)
                     ctx.ChildContexts.Add(newChildContext)
-                    newNativeElements[i] <- newChildContext.NativeElement :?> 'ChildElement
+                    newNativeElements[i] <- saferCast newChildContext.NativeElement
                     i <- i + 1
 
                 clearNativeChildren ctx
@@ -354,7 +355,7 @@ type ElementBuilder<'UIStack, 'Element>() =
                     | RenderMode.Key _ when childCreator.RenderMode <> oldCtx.RenderMode -> childCreator.CreateOrUpdate(sp, ValueNone)
                     | RenderMode.Key _ -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
 
-            setChild ctx (ctx.ChildContexts[0].NativeElement :?> 'ChildElement)
+            setChild ctx (saferCast ctx.ChildContexts[0].NativeElement)
 
             index + 1
         )

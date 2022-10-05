@@ -193,38 +193,68 @@ type PageBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Page>() =
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
+
+    [<CustomOperation("ToolbarItems")>]
+    member inline this.ToolbarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ToolbarItem>(
+            builder,
+            (fun x -> x.Element.ToolbarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ToolbarItem[]) -> for i in ls do x.Element.ToolbarItems.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("ToolbarItems")>]
+    member inline this.ToolbarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ToolbarItem>(
+            builder,
+            (fun x -> x.Element.ToolbarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ToolbarItem[]) -> for i in ls do x.Element.ToolbarItems.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticToolbarItems")>]
+    member inline this.StaticToolbarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.ToolbarItem>(
+            builder,
+            (fun x -> x.Element.ToolbarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ToolbarItem[]) -> for i in ls do x.Element.ToolbarItems.Add(i) |> ignore),
+            items
+        )
+                        
+
+    [<CustomOperation("MenuBarItems")>]
+    member inline this.MenuBarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuBarItem>(
+            builder,
+            (fun x -> x.Element.MenuBarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuBarItem[]) -> for i in ls do x.Element.MenuBarItems.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("MenuBarItems")>]
+    member inline this.MenuBarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuBarItem>(
+            builder,
+            (fun x -> x.Element.MenuBarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuBarItem[]) -> for i in ls do x.Element.MenuBarItems.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticMenuBarItems")>]
+    member inline this.StaticMenuBarItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuBarItem>(
+            builder,
+            (fun x -> x.Element.MenuBarItems.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuBarItem[]) -> for i in ls do x.Element.MenuBarItems.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("ContainerArea")>] member inline this.ContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Graphics.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContainerArea), (fun ctx x -> ctx.Element.ContainerArea <- x), x)
     [<CustomOperation("ContainerArea")>] member inline this.ContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContainerArea), (fun ctx x -> ctx.Element.ContainerArea <- x), x)
     [<CustomOperation("IgnoresContainerArea")>] member inline this.IgnoresContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IgnoresContainerArea), (fun ctx x -> ctx.Element.IgnoresContainerArea <- x), x)
     [<CustomOperation("IgnoresContainerArea")>] member inline this.IgnoresContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IgnoresContainerArea), (fun ctx x -> ctx.Element.IgnoresContainerArea <- x), x)
-
-    [<CustomOperation("InternalChildren")>]
-    member inline this.InternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
-        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.Element>(
-            builder,
-            (fun x -> x.Element.InternalChildren.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.Element[]) -> for i in ls do x.Element.InternalChildren.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("InternalChildren")>]
-    member inline this.InternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
-        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.Element>(
-            builder,
-            (fun x -> x.Element.InternalChildren.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.Element[]) -> for i in ls do x.Element.InternalChildren.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("StaticInternalChildren")>]
-    member inline this.StaticInternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
-        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.Element>(
-            builder,
-            (fun x -> x.Element.InternalChildren.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.Element[]) -> for i in ls do x.Element.InternalChildren.Add(i) |> ignore),
-            items
-        )
-                        
+    [<CustomOperation("InternalChildren")>] member inline this.InternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.InternalChildren), x)
+    [<CustomOperation("InternalChildren'")>] member inline this.InternalChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.InternalChildren), x)
 
     [<CustomOperation("NavigatedTo")>] member inline this.NavigatedTo ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigatedTo), "NavigatedTo", fn)
     [<CustomOperation("NavigatingFrom")>] member inline this.NavigatingFrom ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigatingFrom), "NavigatingFrom", fn)
@@ -333,6 +363,34 @@ type ShellBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell>() =
     [<CustomOperation("FlyoutFooterTemplate")>] member inline this.FlyoutFooterTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutFooterTemplate), (fun ctx x -> ctx.Element.FlyoutFooterTemplate <- x), x)
     [<CustomOperation("FlyoutIsPresented")>] member inline this.FlyoutIsPresented ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutIsPresented), (fun ctx x -> ctx.Element.FlyoutIsPresented <- x), x)
     [<CustomOperation("FlyoutIsPresented")>] member inline this.FlyoutIsPresented ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutIsPresented), (fun ctx x -> ctx.Element.FlyoutIsPresented <- x), x)
+
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellItem>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellItem[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellItem>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellItem[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticItems")>]
+    member inline this.StaticItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellItem>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellItem[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("MenuItemTemplate")>] member inline this.MenuItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MenuItemTemplate), (fun ctx x -> ctx.Element.MenuItemTemplate <- x), x)
@@ -365,6 +423,34 @@ type MultiPageBuilder<'Element, 'T when 'T :> Microsoft.Maui.Controls.Page and '
     [<CustomOperation("CurrentPage")>]
     member inline this.CurrentPage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.CurrentPage <- x), creator)
+                        
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
                         
 
     [<CustomOperation("CurrentPageChanged")>] member inline this.CurrentPageChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CurrentPageChanged), "CurrentPageChanged", fn)
@@ -402,6 +488,8 @@ type LayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibili
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
     [<CustomOperation("CascadeInputTransparent")>] member inline this.CascadeInputTransparent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CascadeInputTransparent), (fun ctx x -> ctx.Element.CascadeInputTransparent <- x), x)
     [<CustomOperation("CascadeInputTransparent")>] member inline this.CascadeInputTransparent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CascadeInputTransparent), (fun ctx x -> ctx.Element.CascadeInputTransparent <- x), x)
+    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
+    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
 
     [<CustomOperation("LayoutChanged")>] member inline this.LayoutChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutChanged), "LayoutChanged", fn)
                 
@@ -640,6 +728,34 @@ open Fun.SunUI.MAUI
 type LayoutBuilder2<'Element, 'T when 'T :> Microsoft.Maui.Controls.View and 'Element :> Microsoft.Maui.Controls.Compatibility.Layout<'T>>() =
     inherit Compatibility.LayoutBuilder<'Element>()
 
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, 'T>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: 'T[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("LayoutHandler")>] member inline this.LayoutHandler ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.LayoutHandler), x)
     [<CustomOperation("LayoutHandler'")>] member inline this.LayoutHandler' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LayoutHandler), x)
 
@@ -648,6 +764,34 @@ type LayoutBuilder2<'Element, 'T when 'T :> Microsoft.Maui.Controls.View and 'El
 type AbsoluteLayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibility.AbsoluteLayout>() =
     inherit Compatibility.LayoutBuilder2<'Element, Microsoft.Maui.Controls.View>()
 
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
 
                 
 
@@ -672,6 +816,34 @@ type FlexLayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compati
 type GridBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibility.Grid>() =
     inherit Compatibility.LayoutBuilder2<'Element, Microsoft.Maui.Controls.View>()
 
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("ColumnDefinitions")>] member inline this.ColumnDefinitions ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.ColumnDefinitionCollection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnDefinitions), (fun ctx x -> ctx.Element.ColumnDefinitions <- x), x)
     [<CustomOperation("ColumnDefinitions")>] member inline this.ColumnDefinitions ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnDefinitions), (fun ctx x -> ctx.Element.ColumnDefinitions <- x), x)
     [<CustomOperation("ColumnSpacing")>] member inline this.ColumnSpacing ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnSpacing), (fun ctx x -> ctx.Element.ColumnSpacing <- x), x)
@@ -686,6 +858,34 @@ type GridBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibility
 type RelativeLayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibility.RelativeLayout>() =
     inherit Compatibility.LayoutBuilder2<'Element, Microsoft.Maui.Controls.View>()
 
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
 
                 
 
@@ -807,34 +1007,8 @@ type CarouselViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Carou
     [<CustomOperation("Loop")>] member inline this.Loop ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Loop), (fun ctx x -> ctx.Element.Loop <- x), x)
     [<CustomOperation("PeekAreaInsets")>] member inline this.PeekAreaInsets ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Thickness) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PeekAreaInsets), (fun ctx x -> ctx.Element.PeekAreaInsets <- x), x)
     [<CustomOperation("PeekAreaInsets")>] member inline this.PeekAreaInsets ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PeekAreaInsets), (fun ctx x -> ctx.Element.PeekAreaInsets <- x), x)
-
-    [<CustomOperation("VisibleViews")>]
-    member inline this.VisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
-        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
-            builder,
-            (fun x -> x.Element.VisibleViews.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.VisibleViews.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("VisibleViews")>]
-    member inline this.VisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
-        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
-            builder,
-            (fun x -> x.Element.VisibleViews.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.VisibleViews.Add(i) |> ignore),
-            items
-        )
-
-    [<CustomOperation("StaticVisibleViews")>]
-    member inline this.StaticVisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
-        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.View>(
-            builder,
-            (fun x -> x.Element.VisibleViews.Clear()),
-            (fun x (ls: Microsoft.Maui.Controls.View[]) -> for i in ls do x.Element.VisibleViews.Add(i) |> ignore),
-            items
-        )
-                        
+    [<CustomOperation("VisibleViews")>] member inline this.VisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.VisibleViews), x)
+    [<CustomOperation("VisibleViews'")>] member inline this.VisibleViews' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.VisibleViews), x)
     [<CustomOperation("IsBounceEnabled")>] member inline this.IsBounceEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsBounceEnabled), (fun ctx x -> ctx.Element.IsBounceEnabled <- x), x)
     [<CustomOperation("IsBounceEnabled")>] member inline this.IsBounceEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsBounceEnabled), (fun ctx x -> ctx.Element.IsBounceEnabled <- x), x)
     [<CustomOperation("IsSwipeEnabled")>] member inline this.IsSwipeEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSwipeEnabled), (fun ctx x -> ctx.Element.IsSwipeEnabled <- x), x)
@@ -874,8 +1048,34 @@ type CarouselViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Carou
 type LayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Layout>() =
     inherit ViewBuilder<'Element>()
 
-    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
-    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.IView>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.IView[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Children")>]
+    member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.IView>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.IView[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticChildren")>]
+    member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.IView>(
+            builder,
+            (fun x -> x.Element.Children.Clear()),
+            (fun x (ls: Microsoft.Maui.IView[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("IsClippedToBounds")>] member inline this.IsClippedToBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsClippedToBounds), (fun ctx x -> ctx.Element.IsClippedToBounds <- x), x)
     [<CustomOperation("IsClippedToBounds")>] member inline this.IsClippedToBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsClippedToBounds), (fun ctx x -> ctx.Element.IsClippedToBounds <- x), x)
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Thickness) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
@@ -1766,6 +1966,34 @@ type ShellItemBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ShellIte
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.CurrentItem <- x), creator)
                         
 
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellSection>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellSection[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellSection>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellSection[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticItems")>]
+    member inline this.StaticItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellSection>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellSection[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+                        
+
                 
 
 type FlyoutItemBuilder<'Element when 'Element :> Microsoft.Maui.Controls.FlyoutItem>() =
@@ -1792,6 +2020,36 @@ type ShellSectionBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell
     member inline this.CurrentItem ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.CurrentItem <- x), creator)
                         
+
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellContent>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellContent[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Items")>]
+    member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellContent>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellContent[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticItems")>]
+    member inline this.StaticItems ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.ShellContent>(
+            builder,
+            (fun x -> x.Element.Items.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.ShellContent[]) -> for i in ls do x.Element.Items.Add(i) |> ignore),
+            items
+        )
+                        
+    [<CustomOperation("Stack")>] member inline this.Stack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Stack), x)
+    [<CustomOperation("Stack'")>] member inline this.Stack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Stack), x)
 
                 
 
@@ -1832,8 +2090,17 @@ type ShellContentBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell
             items
         )
                         
-    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
-    [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+
+    [<CustomOperation("Content")>]
+    member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+
+    [<CustomOperation("Content")>]
+    member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
+                        
+    [<CustomOperation("Content'")>] member inline this.Content' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
+    [<CustomOperation("Content'")>] member inline this.Content' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
     [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
     [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
 
@@ -1878,6 +2145,34 @@ type WindowBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Window>() =
 type CellBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Cell>() =
     inherit ElementBuilder<'Element>()
 
+
+    [<CustomOperation("ContextActions")>]
+    member inline this.ContextActions ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuItem>(
+            builder,
+            (fun x -> x.Element.ContextActions.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuItem[]) -> for i in ls do x.Element.ContextActions.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("ContextActions")>]
+    member inline this.ContextActions ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuItem>(
+            builder,
+            (fun x -> x.Element.ContextActions.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuItem[]) -> for i in ls do x.Element.ContextActions.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticContextActions")>]
+    member inline this.StaticContextActions ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.MenuItem>(
+            builder,
+            (fun x -> x.Element.ContextActions.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.MenuItem[]) -> for i in ls do x.Element.ContextActions.Add(i) |> ignore),
+            items
+        )
+                        
     [<CustomOperation("IsContextActionsLegacyModeEnabled")>] member inline this.IsContextActionsLegacyModeEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsContextActionsLegacyModeEnabled), (fun ctx x -> ctx.Element.IsContextActionsLegacyModeEnabled <- x), x)
     [<CustomOperation("IsContextActionsLegacyModeEnabled")>] member inline this.IsContextActionsLegacyModeEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsContextActionsLegacyModeEnabled), (fun ctx x -> ctx.Element.IsContextActionsLegacyModeEnabled <- x), x)
     [<CustomOperation("Height")>] member inline this.Height ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Height), (fun ctx x -> ctx.Element.Height <- x), x)
@@ -2310,6 +2605,8 @@ type ApplicationBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Applic
     [<CustomOperation("Resources")>] member inline this.Resources ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Resources), (fun ctx x -> ctx.Element.Resources <- x), x)
     [<CustomOperation("UserAppTheme")>] member inline this.UserAppTheme ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.ApplicationModel.AppTheme) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UserAppTheme), (fun ctx x -> ctx.Element.UserAppTheme <- x), x)
     [<CustomOperation("UserAppTheme")>] member inline this.UserAppTheme ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UserAppTheme), (fun ctx x -> ctx.Element.UserAppTheme <- x), x)
+    [<CustomOperation("Windows")>] member inline this.Windows ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Windows), x)
+    [<CustomOperation("Windows'")>] member inline this.Windows' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Windows), x)
 
     [<CustomOperation("RequestedThemeChanged")>] member inline this.RequestedThemeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RequestedThemeChanged), "RequestedThemeChanged", fn)
     [<CustomOperation("ModalPopped")>] member inline this.ModalPopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ModalPopped), "ModalPopped", fn)
@@ -2348,6 +2645,34 @@ type AppLinkEntryBuilder<'Element when 'Element :> Microsoft.Maui.Controls.AppLi
 type FormattedStringBuilder<'Element when 'Element :> Microsoft.Maui.Controls.FormattedString>() =
     inherit ElementBuilder<'Element>()
 
+
+    [<CustomOperation("Spans")>]
+    member inline this.Spans ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.Span>(
+            builder,
+            (fun x -> x.Element.Spans.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.Span[]) -> for i in ls do x.Element.Spans.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("Spans")>]
+    member inline this.Spans ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> alist) =
+        this.MakeChildrenBuilder<'Element, Microsoft.Maui.Controls.Span>(
+            builder,
+            (fun x -> x.Element.Spans.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.Span[]) -> for i in ls do x.Element.Spans.Add(i) |> ignore),
+            items
+        )
+
+    [<CustomOperation("StaticSpans")>]
+    member inline this.StaticSpans ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<MAUI> seq) =
+        this.MakeStaticChildrenBuilder<'Element, Microsoft.Maui.Controls.Span>(
+            builder,
+            (fun x -> x.Element.Spans.Clear()),
+            (fun x (ls: Microsoft.Maui.Controls.Span[]) -> for i in ls do x.Element.Spans.Add(i) |> ignore),
+            items
+        )
+                        
 
                 
 

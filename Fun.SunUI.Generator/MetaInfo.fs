@@ -75,9 +75,16 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
                 let isIListChild (item: Type) = item.Name.StartsWith "IList`1" && item.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType
 
                 let hasIListChild = prop.PropertyType.GetInterfaces() |> Seq.exists isIListChild
+
+                let isReadOnly =
+                    prop.PropertyType.Name.StartsWith "ReadOnly"
+                    || prop.PropertyType.GetInterfaces() |> Seq.exists (fun x -> x.Name.Contains("ReadOnly"))
+
                 if
-                    prop.PropertyType.IsAssignableTo typeof<System.Collections.IEnumerable>
+                    not isReadOnly
+                    && prop.PropertyType.IsAssignableTo typeof<System.Collections.IEnumerable>
                     && (ctx.IsChildrenProp prop
+                        || isIListChild prop.PropertyType
                         || hasIListChild
                         || (prop.PropertyType.GenericTypeArguments.Length = 1
                             && prop.PropertyType.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType))
@@ -93,7 +100,11 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
                         with _ ->
                             getTypeName ctx.ChildType
 
-                    if prop.PropertyType.GetMember("AddRange").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0 then
+                    if
+                        (prop.PropertyType.GetMember("AddRange").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0)
+                        || (prop.PropertyType.GetInterfaces()
+                            |> Seq.exists (fun x -> x.GetMember("AddRange").Length > 0 && x.GetMember("Clear").Length > 0))
+                    then
                         [
                             $"""
     {customOperation name}
@@ -124,7 +135,11 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
         )
                         """
                         ]
-                    else if prop.PropertyType.GetMember("Add").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0 then
+                    else if
+                        (prop.PropertyType.GetMember("Add").Length > 0 && prop.PropertyType.GetMember("Clear").Length > 0)
+                        || (prop.PropertyType.GetInterfaces()
+                            |> Seq.exists (fun x -> x.GetMember("Add").Length > 0 && x.GetMember("Clear").Length > 0))
+                    then
                         [
                             $"""
     {customOperation name}

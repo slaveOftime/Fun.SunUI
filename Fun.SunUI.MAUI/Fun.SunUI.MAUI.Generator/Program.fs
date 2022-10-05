@@ -10,13 +10,13 @@ let assemblyName = "Microsoft.Maui.Controls"
 
 let controlCtx = {
     GeneratorContext.RootType = typeof<Element>
-    ChildType = typeof<Element>
+    ChildType = typeof<Microsoft.Maui.IElement>
     BuilderName = "MAUIElementBuilder"
     UIStackName = "MAUI"
-    IsChildrenProp = fun _ -> false
+    IsChildrenProp = fun prop -> prop.DeclaringType.IsAssignableTo typeof<ShellContent> && prop.Name = "Content"
     // https://github.com/dotnet/fsharp/issues/14020
     ExcludeBaseTypes = [ typeof<NavigationPage>; typeof<FlyoutPage>; typeof<TabbedPage> ]
-    ExcludeProp = fun _ -> false
+    ExcludeProp = fun prop -> prop.Name = "LogicalChildren"
 }
 
 Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"

@@ -24,10 +24,13 @@ type IElementContext =
 
 
 [<Struct>]
-type ElementCreator<'UIStack> = {
-    RenderMode: RenderMode
-    CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
-}
+type ElementCreator<'UIStack> =
+    {
+        RenderMode: RenderMode
+        CreateOrUpdate: IServiceProvider * IElementContext voption -> IElementContext
+    }
+
+    member this.Build<'Element>(sp) = this.CreateOrUpdate(sp, ValueNone).NativeElement :?> 'Element
 
 
 /// Used to attach DSL functions

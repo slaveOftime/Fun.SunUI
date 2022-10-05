@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<Compile Include="Types.fs" />
+		<Compile Include="Utils.fs" />
 		<Compile Include="I18n.fs" />
 		<Compile Include="Injectview.fs" />
 		<Compile Include="AdaptiveExtensions.fs" />
