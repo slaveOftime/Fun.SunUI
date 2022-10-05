@@ -23,19 +23,19 @@ let Create (sp) =
                                 VerticalOptions LayoutOptions.Center
                                 Children [
                                     Image'() {
-                                        Ref(fun this -> SemanticProperties.SetDescription(this, "Cute dot net bot waving hi to you!"))
+                                        With(fun this -> SemanticProperties.SetDescription(this, "Cute dot net bot waving hi to you!"))
                                         Source(FileImageSource'() { File "dotnet_bot.png" })
                                         HeightRequest 200.
                                         HorizontalOptions LayoutOptions.Center
                                     }
                                     Label'() {
-                                        Ref(fun this -> SemanticProperties.SetHeadingLevel(this, SemanticHeadingLevel.Level1))
+                                        With(fun this -> SemanticProperties.SetHeadingLevel(this, SemanticHeadingLevel.Level1))
                                         Text(count |> AVal.map (sprintf "Count = %d"))
                                         FontSize 32
                                         HorizontalOptions LayoutOptions.Center
                                     }
                                     Label'() {
-                                        Ref(fun this ->
+                                        With(fun this ->
                                             SemanticProperties.SetDescription(this, "Welcome to dot net Multi platform App UI")
                                             SemanticProperties.SetHeadingLevel(this, SemanticHeadingLevel.Level2)
                                         )
@@ -44,7 +44,7 @@ let Create (sp) =
                                         HorizontalOptions LayoutOptions.Center
                                     }
                                     Button'() {
-                                        Ref(fun this -> SemanticProperties.SetHint(this, "Counts the number of times you click"))
+                                        With(fun this -> SemanticProperties.SetHint(this, "Counts the number of times you click"))
                                         Text "Click Me"
                                         Clicked(fun _ -> count.Publish((+) 1))
                                         HorizontalOptions LayoutOptions.Center

@@ -90,11 +90,11 @@ type ElementBuilder<'UIStack, 'Element>() =
 
 
     /// This will return the native element reference.
-    [<CustomOperation("Ref")>]
-    member inline this.Ref([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) = this.MakeGetOnlyBuilder(builder, (fun x -> x), setRef)
+    [<CustomOperation("With")>]
+    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) = this.MakeGetOnlyBuilder(builder, (fun x -> x), setRef)
 
     /// This will return the native element reference.
-    [<CustomOperation("Ref'")>]
+    [<CustomOperation("With'")>]
     member inline this.Ref'([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) =
         this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), setRef)
 
