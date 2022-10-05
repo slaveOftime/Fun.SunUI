@@ -1,14 +1,15 @@
-﻿open Modern.Forms
+﻿module Fun.SunUI.ModernForms.Generator
+
+open Modern.Forms
 open Fun.SunUI.Generator
 open Utils
 
 
-let dir = @"C:\Users\woo\Documents\Code\Slaveoftime\Fun.SunUI\Fun.SunUI.ModernForms\Fun.SunUI.ModernForms"
 let namesp = "Fun.SunUI.ModernForms"
 let assemblyName = "Modern.Forms"
 
 
-let controlCtx = {
+let makeControlCtx () = {
     GeneratorContext.RootType = typeof<Control>
     ChildType = typeof<Control>
     BuilderName = "ModernFormsControlBuilder"
@@ -20,10 +21,8 @@ let controlCtx = {
     ExcludeEvent = fun _ -> false
 }
 
-Generator.createCodeFile controlCtx dir namesp assemblyName "Controls.Generated"
 
-
-let windowBaseCtx = {
+let makeWindowBaseCtx () = {
     GeneratorContext.RootType = typeof<WindowBase>
     ChildType = typeof<Control>
     BuilderName = "ModernFormsWindowBaseBuilder"
@@ -35,4 +34,10 @@ let windowBaseCtx = {
     ExcludeEvent = fun _ -> false
 }
 
-Generator.createCodeFile windowBaseCtx dir namesp assemblyName "Windows.Generated"
+
+let generateDefault dir =
+    Generator.createCodeFile (makeControlCtx ()) dir namesp assemblyName "Controls.Generated"
+    Generator.createCodeFile (makeWindowBaseCtx ()) dir namesp assemblyName "Windows.Generated"
+
+
+let generateCodeFile codesDir namesp assemblyName = Generator.createCodeFile (makeControlCtx ()) codesDir namesp assemblyName namesp
