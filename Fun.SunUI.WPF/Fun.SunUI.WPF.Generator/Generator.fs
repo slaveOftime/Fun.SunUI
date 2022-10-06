@@ -11,8 +11,8 @@ let assemblyName = "PresentationFramework"
 
 
 let makeElementCtx () = {
-    GeneratorContext.RootType = typeof<FrameworkElement>
-    ChildType = typeof<FrameworkElement>
+    GeneratorContext.RootType = typeof<UIElement>
+    ChildType = typeof<UIElement>
     BuilderName = "WPFElementBuilder"
     UIStackName = "WPF"
     IsChildrenProp =

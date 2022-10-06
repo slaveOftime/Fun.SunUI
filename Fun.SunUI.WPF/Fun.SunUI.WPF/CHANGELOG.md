@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.3] - 2022-10-07
+
+- Update generated DSL
+- Update dependency packages
+
 ## [0.0.2] - 2022-10-06
 
 ### Changed

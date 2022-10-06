@@ -6,8 +6,162 @@ open Fun.SunUI
 open Fun.SunUI.WPF
 
 
-type FrameworkElementBuilder<'Element when 'Element :> System.Windows.FrameworkElement>() =
+type UIElementBuilder<'Element when 'Element :> System.Windows.UIElement>() =
     inherit WPFElementBuilder<'Element>()
+
+    [<CustomOperation("InputBindings")>] member inline this.InputBindings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.InputBindings), x)
+    [<CustomOperation("InputBindings'")>] member inline this.InputBindings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.InputBindings), x)
+    [<CustomOperation("CommandBindings")>] member inline this.CommandBindings ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CommandBindings), x)
+    [<CustomOperation("CommandBindings'")>] member inline this.CommandBindings' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CommandBindings), x)
+    [<CustomOperation("AllowDrop")>] member inline this.AllowDrop ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowDrop), (fun ctx x -> ctx.Element.AllowDrop <- x), x)
+    [<CustomOperation("AllowDrop")>] member inline this.AllowDrop ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowDrop), (fun ctx x -> ctx.Element.AllowDrop <- x), x)
+    [<CustomOperation("DesiredSize")>] member inline this.DesiredSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("DesiredSize'")>] member inline this.DesiredSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("RenderSize")>] member inline this.RenderSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Size) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RenderSize), (fun ctx x -> ctx.Element.RenderSize <- x), x)
+    [<CustomOperation("RenderSize")>] member inline this.RenderSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RenderSize), (fun ctx x -> ctx.Element.RenderSize <- x), x)
+    [<CustomOperation("RenderTransform")>] member inline this.RenderTransform ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Transform) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RenderTransform), (fun ctx x -> ctx.Element.RenderTransform <- x), x)
+    [<CustomOperation("RenderTransform")>] member inline this.RenderTransform ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RenderTransform), (fun ctx x -> ctx.Element.RenderTransform <- x), x)
+    [<CustomOperation("RenderTransformOrigin")>] member inline this.RenderTransformOrigin ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Point) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RenderTransformOrigin), (fun ctx x -> ctx.Element.RenderTransformOrigin <- x), x)
+    [<CustomOperation("RenderTransformOrigin")>] member inline this.RenderTransformOrigin ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RenderTransformOrigin), (fun ctx x -> ctx.Element.RenderTransformOrigin <- x), x)
+    [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
+    [<CustomOperation("Opacity")>] member inline this.Opacity ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Opacity), (fun ctx x -> ctx.Element.Opacity <- x), x)
+    [<CustomOperation("OpacityMask")>] member inline this.OpacityMask ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.OpacityMask), (fun ctx x -> ctx.Element.OpacityMask <- x), x)
+    [<CustomOperation("OpacityMask")>] member inline this.OpacityMask ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.OpacityMask), (fun ctx x -> ctx.Element.OpacityMask <- x), x)
+    [<CustomOperation("BitmapEffect")>] member inline this.BitmapEffect ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Effects.BitmapEffect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BitmapEffect), (fun ctx x -> ctx.Element.BitmapEffect <- x), x)
+    [<CustomOperation("BitmapEffect")>] member inline this.BitmapEffect ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BitmapEffect), (fun ctx x -> ctx.Element.BitmapEffect <- x), x)
+    [<CustomOperation("Effect")>] member inline this.Effect ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Effects.Effect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Effect), (fun ctx x -> ctx.Element.Effect <- x), x)
+    [<CustomOperation("Effect")>] member inline this.Effect ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Effect), (fun ctx x -> ctx.Element.Effect <- x), x)
+    [<CustomOperation("BitmapEffectInput")>] member inline this.BitmapEffectInput ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Effects.BitmapEffectInput) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BitmapEffectInput), (fun ctx x -> ctx.Element.BitmapEffectInput <- x), x)
+    [<CustomOperation("BitmapEffectInput")>] member inline this.BitmapEffectInput ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BitmapEffectInput), (fun ctx x -> ctx.Element.BitmapEffectInput <- x), x)
+    [<CustomOperation("CacheMode")>] member inline this.CacheMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.CacheMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CacheMode), (fun ctx x -> ctx.Element.CacheMode <- x), x)
+    [<CustomOperation("CacheMode")>] member inline this.CacheMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CacheMode), (fun ctx x -> ctx.Element.CacheMode <- x), x)
+    [<CustomOperation("Uid")>] member inline this.Uid ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Uid), (fun ctx x -> ctx.Element.Uid <- x), x)
+    [<CustomOperation("Uid")>] member inline this.Uid ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Uid), (fun ctx x -> ctx.Element.Uid <- x), x)
+    [<CustomOperation("Visibility")>] member inline this.Visibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Visibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Visibility), (fun ctx x -> ctx.Element.Visibility <- x), x)
+    [<CustomOperation("Visibility")>] member inline this.Visibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Visibility), (fun ctx x -> ctx.Element.Visibility <- x), x)
+    [<CustomOperation("ClipToBounds")>] member inline this.ClipToBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ClipToBounds), (fun ctx x -> ctx.Element.ClipToBounds <- x), x)
+    [<CustomOperation("ClipToBounds")>] member inline this.ClipToBounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ClipToBounds), (fun ctx x -> ctx.Element.ClipToBounds <- x), x)
+    [<CustomOperation("Clip")>] member inline this.Clip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Geometry) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Clip), (fun ctx x -> ctx.Element.Clip <- x), x)
+    [<CustomOperation("Clip")>] member inline this.Clip ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Clip), (fun ctx x -> ctx.Element.Clip <- x), x)
+    [<CustomOperation("SnapsToDevicePixels")>] member inline this.SnapsToDevicePixels ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SnapsToDevicePixels), (fun ctx x -> ctx.Element.SnapsToDevicePixels <- x), x)
+    [<CustomOperation("SnapsToDevicePixels")>] member inline this.SnapsToDevicePixels ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.SnapsToDevicePixels), (fun ctx x -> ctx.Element.SnapsToDevicePixels <- x), x)
+    [<CustomOperation("IsEnabled")>] member inline this.IsEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsEnabled), (fun ctx x -> ctx.Element.IsEnabled <- x), x)
+    [<CustomOperation("IsEnabled")>] member inline this.IsEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsEnabled), (fun ctx x -> ctx.Element.IsEnabled <- x), x)
+    [<CustomOperation("IsHitTestVisible")>] member inline this.IsHitTestVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsHitTestVisible), (fun ctx x -> ctx.Element.IsHitTestVisible <- x), x)
+    [<CustomOperation("IsHitTestVisible")>] member inline this.IsHitTestVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsHitTestVisible), (fun ctx x -> ctx.Element.IsHitTestVisible <- x), x)
+    [<CustomOperation("Focusable")>] member inline this.Focusable ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Focusable), (fun ctx x -> ctx.Element.Focusable <- x), x)
+    [<CustomOperation("Focusable")>] member inline this.Focusable ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Focusable), (fun ctx x -> ctx.Element.Focusable <- x), x)
+    [<CustomOperation("IsManipulationEnabled")>] member inline this.IsManipulationEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsManipulationEnabled), (fun ctx x -> ctx.Element.IsManipulationEnabled <- x), x)
+    [<CustomOperation("IsManipulationEnabled")>] member inline this.IsManipulationEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsManipulationEnabled), (fun ctx x -> ctx.Element.IsManipulationEnabled <- x), x)
+    [<CustomOperation("TouchesCaptured")>] member inline this.TouchesCaptured ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TouchesCaptured), x)
+    [<CustomOperation("TouchesCaptured'")>] member inline this.TouchesCaptured' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TouchesCaptured), x)
+    [<CustomOperation("TouchesCapturedWithin")>] member inline this.TouchesCapturedWithin ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TouchesCapturedWithin), x)
+    [<CustomOperation("TouchesCapturedWithin'")>] member inline this.TouchesCapturedWithin' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TouchesCapturedWithin), x)
+    [<CustomOperation("TouchesOver")>] member inline this.TouchesOver ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TouchesOver), x)
+    [<CustomOperation("TouchesOver'")>] member inline this.TouchesOver' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TouchesOver), x)
+    [<CustomOperation("TouchesDirectlyOver")>] member inline this.TouchesDirectlyOver ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TouchesDirectlyOver), x)
+    [<CustomOperation("TouchesDirectlyOver'")>] member inline this.TouchesDirectlyOver' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TouchesDirectlyOver), x)
+
+    [<CustomOperation("PreviewMouseDown")>] member inline this.PreviewMouseDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseDown), "PreviewMouseDown", fn)
+    [<CustomOperation("MouseDown")>] member inline this.MouseDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseDown), "MouseDown", fn)
+    [<CustomOperation("PreviewMouseUp")>] member inline this.PreviewMouseUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseUp), "PreviewMouseUp", fn)
+    [<CustomOperation("MouseUp")>] member inline this.MouseUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseUp), "MouseUp", fn)
+    [<CustomOperation("PreviewMouseLeftButtonDown")>] member inline this.PreviewMouseLeftButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseLeftButtonDown), "PreviewMouseLeftButtonDown", fn)
+    [<CustomOperation("MouseLeftButtonDown")>] member inline this.MouseLeftButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseLeftButtonDown), "MouseLeftButtonDown", fn)
+    [<CustomOperation("PreviewMouseLeftButtonUp")>] member inline this.PreviewMouseLeftButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseLeftButtonUp), "PreviewMouseLeftButtonUp", fn)
+    [<CustomOperation("MouseLeftButtonUp")>] member inline this.MouseLeftButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseLeftButtonUp), "MouseLeftButtonUp", fn)
+    [<CustomOperation("PreviewMouseRightButtonDown")>] member inline this.PreviewMouseRightButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseRightButtonDown), "PreviewMouseRightButtonDown", fn)
+    [<CustomOperation("MouseRightButtonDown")>] member inline this.MouseRightButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseRightButtonDown), "MouseRightButtonDown", fn)
+    [<CustomOperation("PreviewMouseRightButtonUp")>] member inline this.PreviewMouseRightButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseRightButtonUp), "PreviewMouseRightButtonUp", fn)
+    [<CustomOperation("MouseRightButtonUp")>] member inline this.MouseRightButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseRightButtonUp), "MouseRightButtonUp", fn)
+    [<CustomOperation("PreviewMouseMove")>] member inline this.PreviewMouseMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseMove), "PreviewMouseMove", fn)
+    [<CustomOperation("MouseMove")>] member inline this.MouseMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseMove), "MouseMove", fn)
+    [<CustomOperation("PreviewMouseWheel")>] member inline this.PreviewMouseWheel ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewMouseWheel), "PreviewMouseWheel", fn)
+    [<CustomOperation("MouseWheel")>] member inline this.MouseWheel ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseWheel), "MouseWheel", fn)
+    [<CustomOperation("MouseEnter")>] member inline this.MouseEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseEnter), "MouseEnter", fn)
+    [<CustomOperation("MouseLeave")>] member inline this.MouseLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.MouseLeave), "MouseLeave", fn)
+    [<CustomOperation("GotMouseCapture")>] member inline this.GotMouseCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotMouseCapture), "GotMouseCapture", fn)
+    [<CustomOperation("LostMouseCapture")>] member inline this.LostMouseCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LostMouseCapture), "LostMouseCapture", fn)
+    [<CustomOperation("QueryCursor")>] member inline this.QueryCursor ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.QueryCursor), "QueryCursor", fn)
+    [<CustomOperation("PreviewStylusDown")>] member inline this.PreviewStylusDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusDown), "PreviewStylusDown", fn)
+    [<CustomOperation("StylusDown")>] member inline this.StylusDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusDown), "StylusDown", fn)
+    [<CustomOperation("PreviewStylusUp")>] member inline this.PreviewStylusUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusUp), "PreviewStylusUp", fn)
+    [<CustomOperation("StylusUp")>] member inline this.StylusUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusUp), "StylusUp", fn)
+    [<CustomOperation("PreviewStylusMove")>] member inline this.PreviewStylusMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusMove), "PreviewStylusMove", fn)
+    [<CustomOperation("StylusMove")>] member inline this.StylusMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusMove), "StylusMove", fn)
+    [<CustomOperation("PreviewStylusInAirMove")>] member inline this.PreviewStylusInAirMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusInAirMove), "PreviewStylusInAirMove", fn)
+    [<CustomOperation("StylusInAirMove")>] member inline this.StylusInAirMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusInAirMove), "StylusInAirMove", fn)
+    [<CustomOperation("StylusEnter")>] member inline this.StylusEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusEnter), "StylusEnter", fn)
+    [<CustomOperation("StylusLeave")>] member inline this.StylusLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusLeave), "StylusLeave", fn)
+    [<CustomOperation("PreviewStylusInRange")>] member inline this.PreviewStylusInRange ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusInRange), "PreviewStylusInRange", fn)
+    [<CustomOperation("StylusInRange")>] member inline this.StylusInRange ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusInRange), "StylusInRange", fn)
+    [<CustomOperation("PreviewStylusOutOfRange")>] member inline this.PreviewStylusOutOfRange ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusOutOfRange), "PreviewStylusOutOfRange", fn)
+    [<CustomOperation("StylusOutOfRange")>] member inline this.StylusOutOfRange ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusOutOfRange), "StylusOutOfRange", fn)
+    [<CustomOperation("PreviewStylusSystemGesture")>] member inline this.PreviewStylusSystemGesture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusSystemGesture), "PreviewStylusSystemGesture", fn)
+    [<CustomOperation("StylusSystemGesture")>] member inline this.StylusSystemGesture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusSystemGesture), "StylusSystemGesture", fn)
+    [<CustomOperation("GotStylusCapture")>] member inline this.GotStylusCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotStylusCapture), "GotStylusCapture", fn)
+    [<CustomOperation("LostStylusCapture")>] member inline this.LostStylusCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LostStylusCapture), "LostStylusCapture", fn)
+    [<CustomOperation("StylusButtonDown")>] member inline this.StylusButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusButtonDown), "StylusButtonDown", fn)
+    [<CustomOperation("StylusButtonUp")>] member inline this.StylusButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.StylusButtonUp), "StylusButtonUp", fn)
+    [<CustomOperation("PreviewStylusButtonDown")>] member inline this.PreviewStylusButtonDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusButtonDown), "PreviewStylusButtonDown", fn)
+    [<CustomOperation("PreviewStylusButtonUp")>] member inline this.PreviewStylusButtonUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewStylusButtonUp), "PreviewStylusButtonUp", fn)
+    [<CustomOperation("PreviewKeyDown")>] member inline this.PreviewKeyDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewKeyDown), "PreviewKeyDown", fn)
+    [<CustomOperation("KeyDown")>] member inline this.KeyDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.KeyDown), "KeyDown", fn)
+    [<CustomOperation("PreviewKeyUp")>] member inline this.PreviewKeyUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewKeyUp), "PreviewKeyUp", fn)
+    [<CustomOperation("KeyUp")>] member inline this.KeyUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.KeyUp), "KeyUp", fn)
+    [<CustomOperation("PreviewGotKeyboardFocus")>] member inline this.PreviewGotKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewGotKeyboardFocus), "PreviewGotKeyboardFocus", fn)
+    [<CustomOperation("GotKeyboardFocus")>] member inline this.GotKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotKeyboardFocus), "GotKeyboardFocus", fn)
+    [<CustomOperation("PreviewLostKeyboardFocus")>] member inline this.PreviewLostKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewLostKeyboardFocus), "PreviewLostKeyboardFocus", fn)
+    [<CustomOperation("LostKeyboardFocus")>] member inline this.LostKeyboardFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LostKeyboardFocus), "LostKeyboardFocus", fn)
+    [<CustomOperation("PreviewTextInput")>] member inline this.PreviewTextInput ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewTextInput), "PreviewTextInput", fn)
+    [<CustomOperation("TextInput")>] member inline this.TextInput ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextInput), "TextInput", fn)
+    [<CustomOperation("PreviewQueryContinueDrag")>] member inline this.PreviewQueryContinueDrag ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewQueryContinueDrag), "PreviewQueryContinueDrag", fn)
+    [<CustomOperation("QueryContinueDrag")>] member inline this.QueryContinueDrag ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.QueryContinueDrag), "QueryContinueDrag", fn)
+    [<CustomOperation("PreviewGiveFeedback")>] member inline this.PreviewGiveFeedback ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewGiveFeedback), "PreviewGiveFeedback", fn)
+    [<CustomOperation("GiveFeedback")>] member inline this.GiveFeedback ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GiveFeedback), "GiveFeedback", fn)
+    [<CustomOperation("PreviewDragEnter")>] member inline this.PreviewDragEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewDragEnter), "PreviewDragEnter", fn)
+    [<CustomOperation("DragEnter")>] member inline this.DragEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragEnter), "DragEnter", fn)
+    [<CustomOperation("PreviewDragOver")>] member inline this.PreviewDragOver ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewDragOver), "PreviewDragOver", fn)
+    [<CustomOperation("DragOver")>] member inline this.DragOver ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragOver), "DragOver", fn)
+    [<CustomOperation("PreviewDragLeave")>] member inline this.PreviewDragLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewDragLeave), "PreviewDragLeave", fn)
+    [<CustomOperation("DragLeave")>] member inline this.DragLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragLeave), "DragLeave", fn)
+    [<CustomOperation("PreviewDrop")>] member inline this.PreviewDrop ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewDrop), "PreviewDrop", fn)
+    [<CustomOperation("Drop")>] member inline this.Drop ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Drop), "Drop", fn)
+    [<CustomOperation("PreviewTouchDown")>] member inline this.PreviewTouchDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewTouchDown), "PreviewTouchDown", fn)
+    [<CustomOperation("TouchDown")>] member inline this.TouchDown ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TouchDown), "TouchDown", fn)
+    [<CustomOperation("PreviewTouchMove")>] member inline this.PreviewTouchMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewTouchMove), "PreviewTouchMove", fn)
+    [<CustomOperation("TouchMove")>] member inline this.TouchMove ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TouchMove), "TouchMove", fn)
+    [<CustomOperation("PreviewTouchUp")>] member inline this.PreviewTouchUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PreviewTouchUp), "PreviewTouchUp", fn)
+    [<CustomOperation("TouchUp")>] member inline this.TouchUp ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TouchUp), "TouchUp", fn)
+    [<CustomOperation("GotTouchCapture")>] member inline this.GotTouchCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotTouchCapture), "GotTouchCapture", fn)
+    [<CustomOperation("LostTouchCapture")>] member inline this.LostTouchCapture ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LostTouchCapture), "LostTouchCapture", fn)
+    [<CustomOperation("TouchEnter")>] member inline this.TouchEnter ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TouchEnter), "TouchEnter", fn)
+    [<CustomOperation("TouchLeave")>] member inline this.TouchLeave ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TouchLeave), "TouchLeave", fn)
+    [<CustomOperation("IsMouseDirectlyOverChanged")>] member inline this.IsMouseDirectlyOverChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsMouseDirectlyOverChanged), "IsMouseDirectlyOverChanged", fn)
+    [<CustomOperation("IsKeyboardFocusWithinChanged")>] member inline this.IsKeyboardFocusWithinChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsKeyboardFocusWithinChanged), "IsKeyboardFocusWithinChanged", fn)
+    [<CustomOperation("IsMouseCapturedChanged")>] member inline this.IsMouseCapturedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsMouseCapturedChanged), "IsMouseCapturedChanged", fn)
+    [<CustomOperation("IsMouseCaptureWithinChanged")>] member inline this.IsMouseCaptureWithinChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsMouseCaptureWithinChanged), "IsMouseCaptureWithinChanged", fn)
+    [<CustomOperation("IsStylusDirectlyOverChanged")>] member inline this.IsStylusDirectlyOverChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsStylusDirectlyOverChanged), "IsStylusDirectlyOverChanged", fn)
+    [<CustomOperation("IsStylusCapturedChanged")>] member inline this.IsStylusCapturedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsStylusCapturedChanged), "IsStylusCapturedChanged", fn)
+    [<CustomOperation("IsStylusCaptureWithinChanged")>] member inline this.IsStylusCaptureWithinChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsStylusCaptureWithinChanged), "IsStylusCaptureWithinChanged", fn)
+    [<CustomOperation("IsKeyboardFocusedChanged")>] member inline this.IsKeyboardFocusedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsKeyboardFocusedChanged), "IsKeyboardFocusedChanged", fn)
+    [<CustomOperation("LayoutUpdated")>] member inline this.LayoutUpdated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutUpdated), "LayoutUpdated", fn)
+    [<CustomOperation("GotFocus")>] member inline this.GotFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GotFocus), "GotFocus", fn)
+    [<CustomOperation("LostFocus")>] member inline this.LostFocus ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LostFocus), "LostFocus", fn)
+    [<CustomOperation("IsEnabledChanged")>] member inline this.IsEnabledChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsEnabledChanged), "IsEnabledChanged", fn)
+    [<CustomOperation("IsHitTestVisibleChanged")>] member inline this.IsHitTestVisibleChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsHitTestVisibleChanged), "IsHitTestVisibleChanged", fn)
+    [<CustomOperation("IsVisibleChanged")>] member inline this.IsVisibleChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.IsVisibleChanged), "IsVisibleChanged", fn)
+    [<CustomOperation("FocusableChanged")>] member inline this.FocusableChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.FocusableChanged), "FocusableChanged", fn)
+    [<CustomOperation("ManipulationStarting")>] member inline this.ManipulationStarting ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationStarting), "ManipulationStarting", fn)
+    [<CustomOperation("ManipulationStarted")>] member inline this.ManipulationStarted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationStarted), "ManipulationStarted", fn)
+    [<CustomOperation("ManipulationDelta")>] member inline this.ManipulationDelta ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationDelta), "ManipulationDelta", fn)
+    [<CustomOperation("ManipulationInertiaStarting")>] member inline this.ManipulationInertiaStarting ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationInertiaStarting), "ManipulationInertiaStarting", fn)
+    [<CustomOperation("ManipulationBoundaryFeedback")>] member inline this.ManipulationBoundaryFeedback ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationBoundaryFeedback), "ManipulationBoundaryFeedback", fn)
+    [<CustomOperation("ManipulationCompleted")>] member inline this.ManipulationCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ManipulationCompleted), "ManipulationCompleted", fn)
+                
+
+type FrameworkElementBuilder<'Element when 'Element :> System.Windows.FrameworkElement>() =
+    inherit UIElementBuilder<'Element>()
 
     [<CustomOperation("Style")>] member inline this.Style ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Style) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Style), (fun ctx x -> ctx.Element.Style <- x), x)
     [<CustomOperation("Style")>] member inline this.Style ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Style), (fun ctx x -> ctx.Element.Style <- x), x)
@@ -554,8 +708,15 @@ type GroupItemBuilder<'Element when 'Element :> System.Windows.Controls.GroupIte
 type LabelBuilder<'Element when 'Element :> System.Windows.Controls.Label>() =
     inherit Controls.ContentControlBuilder<'Element>()
 
-    [<CustomOperation("Target")>] member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Target), (fun ctx x -> ctx.Element.Target <- x), x)
-    [<CustomOperation("Target")>] member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Target), (fun ctx x -> ctx.Element.Target <- x), x)
+
+    [<CustomOperation("Target")>]
+    member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Target <- x), creator)
+
+    [<CustomOperation("Target")>]
+    member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Target <- x), creator)
+                        
 
                 
 
@@ -591,8 +752,15 @@ type ToolTipBuilder<'Element when 'Element :> System.Windows.Controls.ToolTip>()
     [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
     [<CustomOperation("HasDropShadow")>] member inline this.HasDropShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HasDropShadow), (fun ctx x -> ctx.Element.HasDropShadow <- x), x)
     [<CustomOperation("HasDropShadow")>] member inline this.HasDropShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HasDropShadow), (fun ctx x -> ctx.Element.HasDropShadow <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+                        
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.PlacementMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
@@ -950,8 +1118,15 @@ type ContextMenuBuilder<'Element when 'Element :> System.Windows.Controls.Contex
     [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
     [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
     [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+                        
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.PlacementMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
@@ -1749,28 +1924,28 @@ type PanelBuilder<'Element when 'Element :> System.Windows.Controls.Panel>() =
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("StaticChildren")>]
     member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
                         
@@ -2134,8 +2309,15 @@ open Fun.SunUI.WPF
 type DecoratorBuilder<'Element when 'Element :> System.Windows.Controls.Decorator>() =
     inherit FrameworkElementBuilder<'Element>()
 
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
 
                 
             
@@ -2152,8 +2334,15 @@ type AdornerDecoratorBuilder<'Element when 'Element :> System.Windows.Documents.
 
     [<CustomOperation("AdornerLayer")>] member inline this.AdornerLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.AdornerLayer), x)
     [<CustomOperation("AdornerLayer'")>] member inline this.AdornerLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AdornerLayer), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
 
                 
             
@@ -2192,8 +2381,15 @@ type InkPresenterBuilder<'Element when 'Element :> System.Windows.Controls.InkPr
 type ViewboxBuilder<'Element when 'Element :> System.Windows.Controls.Viewbox>() =
     inherit Controls.DecoratorBuilder<'Element>()
 
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
     [<CustomOperation("Stretch")>] member inline this.Stretch ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Stretch) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Stretch), (fun ctx x -> ctx.Element.Stretch <- x), x)
     [<CustomOperation("Stretch")>] member inline this.Stretch ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Stretch), (fun ctx x -> ctx.Element.Stretch <- x), x)
     [<CustomOperation("StretchDirection")>] member inline this.StretchDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.StretchDirection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StretchDirection), (fun ctx x -> ctx.Element.StretchDirection <- x), x)
@@ -2214,8 +2410,15 @@ type BulletDecoratorBuilder<'Element when 'Element :> System.Windows.Controls.Pr
 
     [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Media.Brush) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
     [<CustomOperation("Background")>] member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Background), (fun ctx x -> ctx.Element.Background <- x), x)
-    [<CustomOperation("Bullet")>] member inline this.Bullet ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Bullet), (fun ctx x -> ctx.Element.Bullet <- x), x)
-    [<CustomOperation("Bullet")>] member inline this.Bullet ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Bullet), (fun ctx x -> ctx.Element.Bullet <- x), x)
+
+    [<CustomOperation("Bullet")>]
+    member inline this.Bullet ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Bullet <- x), creator)
+
+    [<CustomOperation("Bullet")>]
+    member inline this.Bullet ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Bullet <- x), creator)
+                        
 
                 
 
@@ -2363,28 +2566,28 @@ type FixedPageBuilder() =
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> seq) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> alist) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("StaticChildren")>]
     member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.FixedPage>, items: ElementCreator<WPF> seq) =
-        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
                         
@@ -2500,8 +2703,15 @@ type AdornedElementPlaceholderBuilder<'Element when 'Element :> System.Windows.C
 
     [<CustomOperation("AdornedElement")>] member inline this.AdornedElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.AdornedElement), x)
     [<CustomOperation("AdornedElement'")>] member inline this.AdornedElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AdornedElement), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
 
                 
 
@@ -2529,28 +2739,28 @@ type InkCanvasBuilder<'Element when 'Element :> System.Windows.Controls.InkCanva
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("Children")>]
     member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> alist) =
-        this.MakeChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
 
     [<CustomOperation("StaticChildren")>]
     member inline this.StaticChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, items: ElementCreator<WPF> seq) =
-        this.MakeStaticChildrenBuilder<'Element, System.Windows.FrameworkElement>(
+        this.MakeStaticChildrenBuilder<'Element, System.Windows.UIElement>(
             builder,
             (fun x -> x.Element.Children.Clear()),
-            (fun x (ls: System.Windows.FrameworkElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
+            (fun x (ls: System.Windows.UIElement[]) -> for i in ls do x.Element.Children.Add(i) |> ignore),
             items
         )
                         
@@ -2737,8 +2947,15 @@ type DocumentPageViewBuilder<'Element when 'Element :> System.Windows.Controls.P
 type PopupBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.Popup>() =
     inherit FrameworkElementBuilder<'Element>()
 
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Child), (fun ctx x -> ctx.Element.Child <- x), x)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+
+    [<CustomOperation("Child")>]
+    member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+                        
     [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
     [<CustomOperation("IsOpen")>] member inline this.IsOpen ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsOpen), (fun ctx x -> ctx.Element.IsOpen <- x), x)
     [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.PlacementMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
@@ -2751,8 +2968,15 @@ type PopupBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.P
     [<CustomOperation("HorizontalOffset")>] member inline this.HorizontalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalOffset), (fun ctx x -> ctx.Element.HorizontalOffset <- x), x)
     [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
     [<CustomOperation("VerticalOffset")>] member inline this.VerticalOffset ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalOffset), (fun ctx x -> ctx.Element.VerticalOffset <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.UIElement) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
-    [<CustomOperation("PlacementTarget")>] member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementTarget), (fun ctx x -> ctx.Element.PlacementTarget <- x), x)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+
+    [<CustomOperation("PlacementTarget")>]
+    member inline this.PlacementTarget ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.PlacementTarget <- x), creator)
+                        
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Rect) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("PlacementRectangle")>] member inline this.PlacementRectangle ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlacementRectangle), (fun ctx x -> ctx.Element.PlacementRectangle <- x), x)
     [<CustomOperation("PopupAnimation")>] member inline this.PopupAnimation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Controls.Primitives.PopupAnimation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PopupAnimation), (fun ctx x -> ctx.Element.PopupAnimation <- x), x)
@@ -2847,6 +3071,10 @@ module WPFElementBuilderDslCE_SystemWindows =
   
     open Fun.SunUI
     open Fun.SunUI.WPF.DslInternals
+
+    type UIElement' () = 
+        inherit UIElementBuilder<System.Windows.UIElement>()
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.UIElement>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.UIElement()), this.GetRenderMode())
 
     type FrameworkElement' () = 
         inherit FrameworkElementBuilder<System.Windows.FrameworkElement>()

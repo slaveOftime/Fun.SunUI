@@ -3,8 +3,6 @@
 	<PropertyGroup>
 		<UseMaui>true</UseMaui>
 		<TargetFramework>net6.0</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<ChangelogFile>CHANGELOG.md</ChangelogFile>
 	</PropertyGroup>
 
 	<ItemGroup>

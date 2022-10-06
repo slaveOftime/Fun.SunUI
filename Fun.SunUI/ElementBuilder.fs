@@ -91,12 +91,12 @@ type ElementBuilder<'UIStack, 'Element>() =
 
     /// This will return the native element reference.
     [<CustomOperation("With")>]
-    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) = this.MakeGetOnlyBuilder(builder, (fun x -> x), setRef)
+    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, set) = this.MakeGetOnlyBuilder(builder, (fun x -> x), set)
 
     /// This will return the native element reference.
     [<CustomOperation("With'")>]
-    member inline this.Ref'([<InlineIfLambda>] builder: BuildElement<'Element>, setRef) =
-        this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), setRef)
+    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set) =
+        this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), set)
 
 
     /// Helper method to build an ElementCreator
@@ -151,7 +151,11 @@ type ElementBuilder<'UIStack, 'Element>() =
         ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
-            if getProperty ctx <> value then setProperty ctx value
+            let propertyName = "equal-prop-" + string index
+            // Set the value if it is first time to set or not equal
+            if not (ctx.PropertyResources.ContainsKey propertyName) || getProperty ctx <> value then
+                setProperty ctx value
+            ctx.PropertyResources[ propertyName ] <- 0
             index + 1
         )
 
@@ -166,13 +170,13 @@ type ElementBuilder<'UIStack, 'Element>() =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
             let propertyName = "store-prop-" + string index
-
-            if ctx.PropertyResources.ContainsKey propertyName then
+            let isPropAdded = ctx.PropertyResources.ContainsKey propertyName
+            if isPropAdded then
                 match ctx.PropertyResources[propertyName] with
                 | :? IDisposable as x -> x.Dispose()
                 | _ -> ()
 
-            ctx.PropertyResources[ propertyName ] <- value.AddCallback(fun x -> if getProperty ctx <> x then setProperty ctx x)
+            ctx.PropertyResources[ propertyName ] <- value.AddCallback(fun x -> if not isPropAdded || getProperty ctx <> x then setProperty ctx x)
 
             index + 1
         )

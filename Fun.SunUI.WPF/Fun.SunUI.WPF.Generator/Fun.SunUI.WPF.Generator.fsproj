@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<TargetFramework>net6.0-windows</TargetFramework>
-		<ChangelogFile>CHANGELOG.md</ChangelogFile>
 	</PropertyGroup>
 
 	<ItemGroup>
