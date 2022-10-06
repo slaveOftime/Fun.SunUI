@@ -13,10 +13,6 @@
 		<Compile Include="Core.fs" />
 		<Compile Include="Elements.Generated.fs" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Ionide.KeepAChangelog.Tasks" Version="0.1.8" PrivateAssets="all" />
-	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Update="FSharp.Core" Version="6.0.0" />

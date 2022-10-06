@@ -16,7 +16,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Modern.Forms" Version="0.3.0" />
-		<PackageReference Include="Ionide.KeepAChangelog.Tasks" Version="0.1.8" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>

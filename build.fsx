@@ -1,10 +1,36 @@
 #r "nuget: Fun.Build, 0.1.8"
 
-open Fun.Build
 open System.IO
+open System.Diagnostics
+open Fun.Build
 
 
 let inline (</>) x y = Path.Combine(x, y)
+
+
+let dotnetPack (proj: string) (ctx: StageContext) =
+    let path = __SOURCE_DIRECTORY__ </> proj
+    let changeLog = Path.GetDirectoryName path </> "CHANGELOG.md"
+
+    let command =
+        if File.Exists changeLog then
+            let lines = File.ReadAllLines changeLog
+            let vIndex = lines |> Array.tryFindIndex (fun x -> x.StartsWith "## [") |> Option.defaultValue 0
+            let vPreIndex =
+                lines |> Array.skip (vIndex + 1) |> Array.tryFindIndex (fun x -> x.StartsWith "## [") |> Option.defaultValue lines.Length
+            let v =
+                let breaktStart = lines[ vIndex ].IndexOf "["
+                let breaktEnd = lines[ vIndex ].IndexOf "]"
+                lines[ vIndex ].Substring(breaktStart + 1, breaktEnd - breaktStart - 1)
+            let notes = lines |> Array.skip vIndex |> Array.take (vPreIndex - vIndex) |> String.concat "\n"
+            $"dotnet pack -c Release {proj} -o . -p:Version={v} -p:PackageReleaseNotes=\"{notes}\""
+        else
+            $"dotnet pack -c Release {proj} -o ."
+
+    printfn "%s" command
+
+    let proc = ctx.BuildCommand(command) |> Process.Start
+    proc.WaitForExit()
 
 
 let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </> "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
@@ -30,25 +56,23 @@ pipeline "GenerateInternalBindings" {
 
 
 pipeline "Publish" {
-    stage "Check Env" {
-        run "dotnet workload restore"
-    }
+    stage "Check Env" { run "dotnet workload restore" }
     stage "Build packages" {
-        run "dotnet pack -c Release Fun.SunUI/Fun.SunUI.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj -o ."
+        run (dotnetPack "Fun.SunUI/Fun.SunUI.fsproj")
+        run (dotnetPack "Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj")
+        run (dotnetPack "Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj")
 
-        run "dotnet pack -c Release Fun.SunUI.MAUI/Fun.SunUI.MAUI/Fun.SunUI.MAUI.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.MAUI/Fun.SunUI.MAUI.Generator/Fun.SunUI.MAUI.Generator.fsproj -o ."
+        run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI/Fun.SunUI.MAUI.fsproj")
+        run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI.Generator/Fun.SunUI.MAUI.Generator.fsproj")
 
-        run "dotnet pack -c Release Fun.SunUI.ModernForms/Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.Generator/Fun.SunUI.ModernForms.Generator.fsproj -o ."
+        run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.fsproj")
+        run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.Generator/Fun.SunUI.ModernForms.Generator.fsproj")
 
-        run "dotnet pack -c Release Fun.SunUI.WinForms/Fun.SunUI.WinForms/Fun.SunUI.WinForms.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.WinForms/Fun.SunUI.WinForms.Generator/Fun.SunUI.WinForms.Generator.fsproj -o ."
+        run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms/Fun.SunUI.WinForms.fsproj")
+        run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms.Generator/Fun.SunUI.WinForms.Generator.fsproj")
 
-        run "dotnet pack -c Release Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj -o ."
-        run "dotnet pack -c Release Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj -o ."
+        run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj")
+        run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj")
     }
     stage "Publish packages to nuget" {
         whenAll {
