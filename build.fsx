@@ -7,7 +7,7 @@ open System.IO
 let inline (</>) x y = Path.Combine(x, y)
 
 
-let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Generator" </> "bin" </> "Debug" </>  "net6.0" </> "publish" </> "Fun.SunUI.Generator.exe"
+let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </>  "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
 
 let modernFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms.fsproj"
 let winFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms.fsproj"
@@ -16,7 +16,7 @@ let mauiProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI" </
 
 
 pipeline "GenerateInternalBindings" {
-    workingDir (__SOURCE_DIRECTORY__ </> "Fun.SunUI.Generator")
+    workingDir (__SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli")
     stage "Check Envs" {
         run "dotnet --version"
         run $"dotnet publish"

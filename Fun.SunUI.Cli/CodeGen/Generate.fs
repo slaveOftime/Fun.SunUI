@@ -1,4 +1,4 @@
-﻿module Fun.SunUI.Generator.Cli.Generate
+﻿module Fun.SunUI.Cli.CodeGen.Generate
 
 open System
 open System.IO

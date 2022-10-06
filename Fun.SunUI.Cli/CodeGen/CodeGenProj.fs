@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.Generator.Cli
+﻿namespace Fun.SunUI.Cli.CodeGen
 
 open System
 open System.IO

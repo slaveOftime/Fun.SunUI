@@ -2,9 +2,7 @@
 
 	<PropertyGroup>
 		<UseWindowsForms>true</UseWindowsForms>
-		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

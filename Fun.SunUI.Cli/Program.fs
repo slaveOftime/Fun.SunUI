@@ -1,4 +1,4 @@
-﻿module Fun.SunUI.Generator.Cli.Program
+﻿module Fun.SunUI.Cli.Program
 
 open System.ComponentModel
 open Spectre.Console.Cli
@@ -74,7 +74,7 @@ type GenerateCommand() =
             AnsiConsole.MarkupLine "[red] project is required[/]"
             -1
         | Some path ->
-            Generate.startGenerate settings.ForDefault (string settings.UIStack) path settings.OutDir settings.Sdk settings.GeneratorVersion
+            CodeGen.Generate.startGenerate settings.ForDefault (string settings.UIStack) path settings.OutDir settings.Sdk settings.GeneratorVersion
             0
 
 

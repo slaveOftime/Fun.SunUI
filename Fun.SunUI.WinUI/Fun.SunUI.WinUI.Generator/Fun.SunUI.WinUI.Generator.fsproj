@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<UseWinUI>true</UseWinUI>
-		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
 	</PropertyGroup>
 

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
@@ -11,15 +10,8 @@
 		<Compile Include="TypeInfo.fs" />
 		<Compile Include="MetaInfo.fs" />
 		<Compile Include="Generator.fs" />
-		<Compile Include="Cli\CodeGenProj.fs" />
-		<Compile Include="Cli\Generate.fs" />
-		<Compile Include="Cli\Program.fs" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="CliWrap" Version="3.4.4" />
-		<PackageReference Include="Spectre.Console" Version="0.44.0" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Fun.SunUI\Fun.SunUI.fsproj" />
