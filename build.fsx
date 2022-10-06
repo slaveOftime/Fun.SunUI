@@ -32,8 +32,16 @@ let dotnetPack (proj: string) (ctx: StageContext) =
 
     printfn "%s" command
 
-    let proc = ctx.BuildCommand(command) |> Process.Start
+    let cmd = ctx.BuildCommand(command) 
+    cmd.RedirectStandardOutput <- true
+
+    let proc = new Process()
+    proc.StartInfo <- cmd
+    proc.OutputDataReceived.Add(fun e -> printfn "%s" e.Data)
+    proc.Start() |> ignore
+    proc.BeginOutputReadLine()
     proc.WaitForExit()
+    proc.ExitCode
 
 
 let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </> "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
