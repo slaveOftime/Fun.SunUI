@@ -7,7 +7,7 @@ open System.IO
 let inline (</>) x y = Path.Combine(x, y)
 
 
-let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </>  "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
+let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </> "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
 
 let modernFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms" </> "Fun.SunUI.ModernForms.fsproj"
 let winFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms" </> "Fun.SunUI.WinForms.fsproj"
@@ -29,18 +29,12 @@ pipeline "GenerateInternalBindings" {
 }
 
 
-pipeline "Demo" {
-    stage "Check Envs" { run "dotnet build" }
-    stage "Publish Demo App" {
-        workingDir (__SOURCE_DIRECTORY__ </> "Fun.Modern.Forms.Demo")
-        run "dotnet publish -c Release -r win-x64"
-    }
-    runIfOnlySpecified
-}
-
-
 pipeline "Publish" {
-    stage "Build packages" { 
+    stage "Check Env" {
+        run "dotnet workload restore"
+        run "dotnet restore"
+    }
+    stage "Build packages" {
         run "dotnet pack -c Release Fun.SunUI/Fun.SunUI.fsproj -o ."
         run "dotnet pack -c Release Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj -o ."
         run "dotnet pack -c Release Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj -o ."
