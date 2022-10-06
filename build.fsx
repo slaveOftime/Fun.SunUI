@@ -37,3 +37,38 @@ pipeline "Demo" {
     }
     runIfOnlySpecified
 }
+
+
+pipeline "Publish" {
+    stage "Build packages" { 
+        run "dotnet pack -c Release Fun.SunUI/Fun.SunUI.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj -o ."
+
+        run "dotnet pack -c Release Fun.SunUI.MAUI/Fun.SunUI.MAUI/Fun.SunUI.MAUI.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.MAUI/Fun.SunUI.MAUI.Generator/Fun.SunUI.MAUI.Generator.fsproj -o ."
+
+        run "dotnet pack -c Release Fun.SunUI.ModernForms/Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.Generator/Fun.SunUI.ModernForms.Generator.fsproj -o ."
+
+        run "dotnet pack -c Release Fun.SunUI.WinForms/Fun.SunUI.WinForms/Fun.SunUI.WinForms.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.WinForms/Fun.SunUI.WinForms.Generator/Fun.SunUI.WinForms.Generator.fsproj -o ."
+
+        run "dotnet pack -c Release Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj -o ."
+        run "dotnet pack -c Release Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj -o ."
+    }
+    stage "Publish packages to nuget" {
+        whenAll {
+            branch "master"
+            whenAny {
+                envVar "NUGET_API_KEY"
+                cmdArg "NUGET_API_KEY"
+            }
+        }
+        run (fun ctx ->
+            let key = ctx.GetCmdArgOrEnvVar "NUGET_API_KEY"
+            cmd $"""dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json --skip-duplicate -k {key}"""
+        )
+    }
+    runIfOnlySpecified
+}

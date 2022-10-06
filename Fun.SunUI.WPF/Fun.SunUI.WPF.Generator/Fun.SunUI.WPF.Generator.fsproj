@@ -3,10 +3,15 @@
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
 		<TargetFramework>net6.0-windows</TargetFramework>
+		<Version>0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="Generator.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

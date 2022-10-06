@@ -6,11 +6,16 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TrimMode>link</TrimMode>
 		<IsTrimmable>true</IsTrimmable>
+		<Version>0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="Core.fs" />
 		<Compile Include="Elements.Generated.fs" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -3,10 +3,15 @@
 	<PropertyGroup>
 		<UseMaui>true</UseMaui>
 		<TargetFramework>net6.0</TargetFramework>
+		<Version>0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="Generator.fs" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
