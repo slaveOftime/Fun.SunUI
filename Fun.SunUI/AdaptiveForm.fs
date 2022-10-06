@@ -23,8 +23,8 @@ type AdaptiveForm<'T, 'Error>(defaultValue: 'T) as this =
 
     let hasChanges = cval false
     let mutable disposes = List<IDisposable>()
-    let mutable fields = Dictionary<string, cval<obj>>()
-    let mutable errors = Dictionary<string, cval<'Error list>>()
+    let mutable fields = Dictionary<string, cval<obj>>(10)
+    let mutable errors = Dictionary<string, cval<'Error list>>(10)
 
     let rec getExpressionName (exp: Expression) =
         match exp.NodeType with
@@ -35,16 +35,14 @@ type AdaptiveForm<'T, 'Error>(defaultValue: 'T) as this =
 
 
     do
-        fields <-
-            props
-            |> Seq.map (fun p ->
-                let v = cval (p.GetValue defaultValue)
-                v.AddLazyCallback(fun _ -> hasChanges.Publish true) |> disposes.Add
-                KeyValuePair(p.Name, v)
-            )
-            |> Dictionary
+        fields <- Dictionary(props.Count())
+        errors <- Dictionary(props.Count())
 
-        errors <- props |> Seq.map (fun x -> KeyValuePair(x.Name, cval [])) |> Dictionary
+        for p in props do
+            let v = cval (p.GetValue defaultValue)
+            v.AddLazyCallback(fun _ -> hasChanges.Publish true) |> disposes.Add
+            fields[p.Name] <- v
+            errors[p.Name] <- cval []
 
 
     member _.SetValue(value: 'T) =

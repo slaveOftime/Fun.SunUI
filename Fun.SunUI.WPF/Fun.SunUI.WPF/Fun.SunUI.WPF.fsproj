@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFrameworks>net471;net5.0-windows;net6.0-windows</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TrimMode>link</TrimMode>
 		<IsTrimmable>true</IsTrimmable>

@@ -775,8 +775,11 @@ type FormBuilder<'Element when 'Element :> System.Windows.Forms.Form>() =
     [<CustomOperation("MaximizeBox")>] member inline this.MaximizeBox ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MaximizeBox), (fun ctx x -> ctx.Element.MaximizeBox <- x), x)
     [<CustomOperation("MdiChildren")>] member inline this.MdiChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.MdiChildren), x)
     [<CustomOperation("MdiChildren'")>] member inline this.MdiChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.MdiChildren), x)
+    
+    #if NET6_0
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
     [<CustomOperation("MdiChildrenMinimizedAnchorBottom")>] member inline this.MdiChildrenMinimizedAnchorBottom ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MdiChildrenMinimizedAnchorBottom), (fun ctx x -> ctx.Element.MdiChildrenMinimizedAnchorBottom <- x), x)
+    #endif
 
     [<CustomOperation("MdiParent")>]
     member inline this.MdiParent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -2015,8 +2018,11 @@ type TextBoxBuilder<'Element when 'Element :> System.Windows.Forms.TextBox>() =
     [<CustomOperation("TextAlign")>] member inline this.TextAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlign), (fun ctx x -> ctx.Element.TextAlign <- x), x)
     [<CustomOperation("UseSystemPasswordChar")>] member inline this.UseSystemPasswordChar ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UseSystemPasswordChar), (fun ctx x -> ctx.Element.UseSystemPasswordChar <- x), x)
     [<CustomOperation("UseSystemPasswordChar")>] member inline this.UseSystemPasswordChar ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UseSystemPasswordChar), (fun ctx x -> ctx.Element.UseSystemPasswordChar <- x), x)
+
+    #if NET6_0
     [<CustomOperation("PlaceholderText")>] member inline this.PlaceholderText ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PlaceholderText), (fun ctx x -> ctx.Element.PlaceholderText <- x), x)
     [<CustomOperation("PlaceholderText")>] member inline this.PlaceholderText ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PlaceholderText), (fun ctx x -> ctx.Element.PlaceholderText <- x), x)
+    #endif
 
     [<CustomOperation("TextAlignChanged")>] member inline this.TextAlignChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TextAlignChanged), "TextAlignChanged", fn)
                 
@@ -2338,8 +2344,11 @@ type ScrollBarBuilder<'Element when 'Element :> System.Windows.Forms.ScrollBar>(
     [<CustomOperation("Text")>] member inline this.Text ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Text), (fun ctx x -> ctx.Element.Text <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
     [<CustomOperation("Value")>] member inline this.Value ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Value), (fun ctx x -> ctx.Element.Value <- x), x)
+
+    #if NET6_0
     [<CustomOperation("ScaleScrollBarForDpiChange")>] member inline this.ScaleScrollBarForDpiChange ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ScaleScrollBarForDpiChange), (fun ctx x -> ctx.Element.ScaleScrollBarForDpiChange <- x), x)
     [<CustomOperation("ScaleScrollBarForDpiChange")>] member inline this.ScaleScrollBarForDpiChange ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ScaleScrollBarForDpiChange), (fun ctx x -> ctx.Element.ScaleScrollBarForDpiChange <- x), x)
+    #endif
 
     [<CustomOperation("AutoSizeChanged")>] member inline this.AutoSizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoSizeChanged), "AutoSizeChanged", fn)
     [<CustomOperation("BackColorChanged")>] member inline this.BackColorChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BackColorChanged), "BackColorChanged", fn)
@@ -2401,8 +2410,12 @@ type LabelBuilder<'Element when 'Element :> System.Windows.Forms.Label>() =
     [<CustomOperation("ImageList")>] member inline this.ImageList ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ImageList), (fun ctx x -> ctx.Element.ImageList <- x), x)
     [<CustomOperation("ImageAlign")>] member inline this.ImageAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Drawing.ContentAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ImageAlign), (fun ctx x -> ctx.Element.ImageAlign <- x), x)
     [<CustomOperation("ImageAlign")>] member inline this.ImageAlign ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ImageAlign), (fun ctx x -> ctx.Element.ImageAlign <- x), x)
+
+    #if NET6_0
     [<CustomOperation("LiveSetting")>] member inline this.LiveSetting ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.Automation.AutomationLiveSetting) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.LiveSetting), (fun ctx x -> ctx.Element.LiveSetting <- x), x)
     [<CustomOperation("LiveSetting")>] member inline this.LiveSetting ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LiveSetting), (fun ctx x -> ctx.Element.LiveSetting <- x), x)
+    #endif
+
     [<CustomOperation("ImeMode")>] member inline this.ImeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ImeMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ImeMode), (fun ctx x -> ctx.Element.ImeMode <- x), x)
     [<CustomOperation("ImeMode")>] member inline this.ImeMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ImeMode), (fun ctx x -> ctx.Element.ImeMode <- x), x)
     [<CustomOperation("TabStop")>] member inline this.TabStop ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TabStop), (fun ctx x -> ctx.Element.TabStop <- x), x)
@@ -3153,8 +3166,12 @@ type ListViewBuilder<'Element when 'Element :> System.Windows.Forms.ListView>() 
     [<CustomOperation("FullRowSelect")>] member inline this.FullRowSelect ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FullRowSelect), (fun ctx x -> ctx.Element.FullRowSelect <- x), x)
     [<CustomOperation("GridLines")>] member inline this.GridLines ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.GridLines), (fun ctx x -> ctx.Element.GridLines <- x), x)
     [<CustomOperation("GridLines")>] member inline this.GridLines ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.GridLines), (fun ctx x -> ctx.Element.GridLines <- x), x)
+
+    #if NET6_0
     [<CustomOperation("GroupImageList")>] member inline this.GroupImageList ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ImageList) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.GroupImageList), (fun ctx x -> ctx.Element.GroupImageList <- x), x)
     [<CustomOperation("GroupImageList")>] member inline this.GroupImageList ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.GroupImageList), (fun ctx x -> ctx.Element.GroupImageList <- x), x)
+    #endif
+
     [<CustomOperation("Groups")>] member inline this.Groups ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Groups), x)
     [<CustomOperation("Groups'")>] member inline this.Groups' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Groups), x)
     [<CustomOperation("HeaderStyle")>] member inline this.HeaderStyle ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ColumnHeaderStyle) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderStyle), (fun ctx x -> ctx.Element.HeaderStyle <- x), x)
@@ -3223,7 +3240,9 @@ type ListViewBuilder<'Element when 'Element :> System.Windows.Forms.ListView>() 
     [<CustomOperation("BeforeLabelEdit")>] member inline this.BeforeLabelEdit ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.BeforeLabelEdit), "BeforeLabelEdit", fn)
     [<CustomOperation("CacheVirtualItems")>] member inline this.CacheVirtualItems ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CacheVirtualItems), "CacheVirtualItems", fn)
     [<CustomOperation("ColumnClick")>] member inline this.ColumnClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnClick), "ColumnClick", fn)
+    #if NET6_0
     [<CustomOperation("GroupTaskLinkClick")>] member inline this.GroupTaskLinkClick ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GroupTaskLinkClick), "GroupTaskLinkClick", fn)
+    #endif
     [<CustomOperation("ColumnReordered")>] member inline this.ColumnReordered ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnReordered), "ColumnReordered", fn)
     [<CustomOperation("ColumnWidthChanged")>] member inline this.ColumnWidthChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnWidthChanged), "ColumnWidthChanged", fn)
     [<CustomOperation("ColumnWidthChanging")>] member inline this.ColumnWidthChanging ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ColumnWidthChanging), "ColumnWidthChanging", fn)
@@ -3236,7 +3255,9 @@ type ListViewBuilder<'Element when 'Element :> System.Windows.Forms.ListView>() 
     [<CustomOperation("ItemDrag")>] member inline this.ItemDrag ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemDrag), "ItemDrag", fn)
     [<CustomOperation("ItemMouseHover")>] member inline this.ItemMouseHover ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemMouseHover), "ItemMouseHover", fn)
     [<CustomOperation("ItemSelectionChanged")>] member inline this.ItemSelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemSelectionChanged), "ItemSelectionChanged", fn)
+    #if NET6_0
     [<CustomOperation("GroupCollapsedStateChanged")>] member inline this.GroupCollapsedStateChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.GroupCollapsedStateChanged), "GroupCollapsedStateChanged", fn)
+    #endif
     [<CustomOperation("PaddingChanged")>] member inline this.PaddingChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PaddingChanged), "PaddingChanged", fn)
     [<CustomOperation("Paint")>] member inline this.Paint ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Paint), "Paint", fn)
     [<CustomOperation("RetrieveVirtualItem")>] member inline this.RetrieveVirtualItem ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RetrieveVirtualItem), "RetrieveVirtualItem", fn)

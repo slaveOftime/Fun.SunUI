@@ -1,6 +1,7 @@
 ﻿[<AutoOpen>]
 module Fun.SunUI.I18n
 
+#if NET5_0
 open System
 open System.Collections.Generic
 open System.Text.Json
@@ -64,3 +65,4 @@ type I18n(?newJson: string, ?defaultTrans: Dictionary<string, string>) =
         match trans.Value.TryGetValue(key) with
         | true, x -> Some(String.Format(x, args))
         | _ -> None
+#endif
