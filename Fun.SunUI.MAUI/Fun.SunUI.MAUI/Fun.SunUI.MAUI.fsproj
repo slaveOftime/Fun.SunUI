@@ -4,14 +4,18 @@
 		<UseMaui>true</UseMaui>
 		<TargetFramework>net6.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Version>0.0.1</Version>
+		<ChangelogFile>CHANGELOG.md</ChangelogFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="Core.fs" />
 		<Compile Include="Controls.Generated.fs" />
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<PackageReference Include="Ionide.KeepAChangelog.Tasks" Version="0.1.8" PrivateAssets="all" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Update="FSharp.Core" Version="6.0.0" />
 	</ItemGroup>
