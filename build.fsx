@@ -32,7 +32,6 @@ pipeline "GenerateInternalBindings" {
 pipeline "Publish" {
     stage "Check Env" {
         run "dotnet workload restore"
-        run "dotnet restore"
     }
     stage "Build packages" {
         run "dotnet pack -c Release Fun.SunUI/Fun.SunUI.fsproj -o ."
