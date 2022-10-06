@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<UseMaui>true</UseMaui>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="AppShell.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fun.SunUI.MAUI" Version="0.0.1" />
+	</ItemGroup>
+
+</Project>

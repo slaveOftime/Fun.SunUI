@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="Porgram.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fun.SunUI.ModernForms" Version="0.0.*" />
+	</ItemGroup>
+
+	<Target Name="ConfigureTrimming" BeforeTargets="PrepareForILLink">
+		<ItemGroup>
+			<ManagedAssemblyToLink Condition="'%(Filename)' == 'Modern.Forms'">
+				<TrimMode>link</TrimMode>
+				<IsTrimmable>true</IsTrimmable>
+			</ManagedAssemblyToLink>
+		</ItemGroup>
+	</Target>
+
+</Project>

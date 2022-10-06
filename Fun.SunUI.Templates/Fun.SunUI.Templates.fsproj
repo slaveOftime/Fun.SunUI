@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- General info -->
+        <Description>dotnet templates for Fun.SunUI</Description>
+
+        <!-- Build config -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <ContentTargetFolders>content</ContentTargetFolders>
+
+        <ChangelogFile>CHANGELOG.md</ChangelogFile>
+        
+        <!-- NuGet config -->
+        <PackageType>Template</PackageType>
+        <PackageId>Fun.SunUI.Templates</PackageId>
+        <PackageTags>templates;fsharp;MAUI;WPF;WinForm;ModernForms;Avalonia</PackageTags>
+        <PackageProjectUrl>https://github.com/slaveOftime/Fun.SunUI</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/slaveOftime/Fun.SunUI</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include=".\**\*" Exclude=".\**\.vs\**;.\**\bin\**;.\**\obj\**;Templates.fsproj" />
+        <Compile Remove="**\*" />
+    </ItemGroup>
+
+</Project>

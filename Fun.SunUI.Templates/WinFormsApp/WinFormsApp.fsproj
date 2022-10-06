@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<UseWindowsForms>true</UseWindowsForms>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="Porgram.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fun.SunUI.WinForms" Version="0.0.*" />
+	</ItemGroup>
+
+</Project>

@@ -16,13 +16,16 @@ let dotnetPack (proj: string) (ctx: StageContext) =
         if File.Exists changeLog then
             let lines = File.ReadAllLines changeLog
             let vIndex = lines |> Array.tryFindIndex (fun x -> x.StartsWith "## [") |> Option.defaultValue 0
-            let vPreIndex =
-                lines |> Array.skip (vIndex + 1) |> Array.tryFindIndex (fun x -> x.StartsWith "## [") |> Option.defaultValue lines.Length
+            let vIndexLength =
+                lines
+                |> Array.skip (vIndex + 1)
+                |> Array.tryFindIndex (fun x -> x.StartsWith "## [")
+                |> Option.defaultWith (fun _ -> lines.Length - vIndex - 1)
             let v =
                 let breaktStart = lines[ vIndex ].IndexOf "["
                 let breaktEnd = lines[ vIndex ].IndexOf "]"
                 lines[ vIndex ].Substring(breaktStart + 1, breaktEnd - breaktStart - 1)
-            let notes = lines |> Array.skip vIndex |> Array.take (vPreIndex - vIndex) |> String.concat "\n"
+            let notes = lines |> Array.skip vIndex |> Array.take (vIndexLength + 1) |> String.concat "\n"
             $"dotnet pack -c Release {proj} -o . -p:Version={v} -p:PackageReleaseNotes=\"{notes}\""
         else
             $"dotnet pack -c Release {proj} -o ."
@@ -73,6 +76,8 @@ pipeline "Publish" {
 
         run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj")
         run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj")
+
+        run (dotnetPack "Fun.SunUI.Templates/Fun.SunUI.Templates.fsproj")
     }
     stage "Publish packages to nuget" {
         whenAll {

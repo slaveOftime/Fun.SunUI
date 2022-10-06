@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "identity": "Fun.SunUI.MAUIApp",
+    "shortName": "sun-maui",
+    "name": "Fun.SunUI.MAUIApp",
+    "author": "slaveoftime",
+    "classifications": [
+        "Desktop",
+        "F#",
+        "MAUI"
+    ],
+    "type": {
+        "language": "F#"
+    },
+    "tags": {
+        "type": "project",
+        "language": "F#"
+    },
+    "sourceName": "MAUIApp",
+    "preferNameDirectory": true,
+    "guids": [
+        "df43ad84-f0c9-45c9-82d7-b41dddef6a3c"
+    ]
+}
