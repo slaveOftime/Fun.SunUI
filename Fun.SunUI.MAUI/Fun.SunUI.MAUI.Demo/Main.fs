@@ -44,7 +44,7 @@ let Create (sp) =
                                         HorizontalOptions LayoutOptions.Center
                                     }
                                     Button'() {
-                                        With(fun this -> SemanticProperties.SetHint(this, "Counts the number of times you click"))
+                                        WithEx(fun this firstTime -> SemanticProperties.SetHint(this, "Counts the number of times you click"))
                                         Text "Click Me"
                                         Clicked(fun _ -> count.Publish((+) 1))
                                         HorizontalOptions LayoutOptions.Center

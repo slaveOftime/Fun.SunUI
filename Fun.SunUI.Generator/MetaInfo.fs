@@ -173,9 +173,12 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
                     else
                         []
                 else
+                    let nameEx = name + "Ex"
                     [
-                        $"""    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
-                        $"""    {customOperation (name + "'")} {memberStart}{name}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                        $"""    {customOperation nameEx} {memberStart}{nameEx} ({contextArg}, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                        $"""    {customOperation (nameEx + "'")} {memberStart}{nameEx}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                        $"""    {customOperation name} {memberStart}{name} ({contextArg}, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.{safeName prop.Name}), x)"""
+                        $"""    {customOperation (name + "'")} {memberStart}{name}' ({contextArg}, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.{safeName prop.Name}), x)"""
                     ]
             else if ctx.IsChildrenProp prop || prop.PropertyType.IsAssignableTo ctx.ChildType then
                 [

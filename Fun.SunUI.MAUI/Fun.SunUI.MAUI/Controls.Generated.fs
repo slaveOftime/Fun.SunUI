@@ -13,12 +13,16 @@ type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element>()
     [<CustomOperation("AutomationId")>] member inline this.AutomationId ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AutomationId), (fun ctx x -> ctx.Element.AutomationId <- x), x)
     [<CustomOperation("ClassId")>] member inline this.ClassId ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ClassId), (fun ctx x -> ctx.Element.ClassId <- x), x)
     [<CustomOperation("ClassId")>] member inline this.ClassId ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ClassId), (fun ctx x -> ctx.Element.ClassId <- x), x)
-    [<CustomOperation("Effects")>] member inline this.Effects ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Effects), x)
-    [<CustomOperation("Effects'")>] member inline this.Effects' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Effects), x)
+    [<CustomOperation("EffectsEx")>] member inline this.EffectsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Effects), x)
+    [<CustomOperation("EffectsEx'")>] member inline this.EffectsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Effects), x)
+    [<CustomOperation("Effects")>] member inline this.Effects ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Effects), x)
+    [<CustomOperation("Effects'")>] member inline this.Effects' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Effects), x)
     [<CustomOperation("StyleId")>] member inline this.StyleId ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StyleId), (fun ctx x -> ctx.Element.StyleId <- x), x)
     [<CustomOperation("StyleId")>] member inline this.StyleId ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StyleId), (fun ctx x -> ctx.Element.StyleId <- x), x)
-    [<CustomOperation("RealParent")>] member inline this.RealParent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.RealParent), x)
-    [<CustomOperation("RealParent'")>] member inline this.RealParent' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.RealParent), x)
+    [<CustomOperation("RealParentEx")>] member inline this.RealParentEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.RealParent), x)
+    [<CustomOperation("RealParentEx'")>] member inline this.RealParentEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.RealParent), x)
+    [<CustomOperation("RealParent")>] member inline this.RealParent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.RealParent), x)
+    [<CustomOperation("RealParent'")>] member inline this.RealParent' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.RealParent), x)
 
     [<CustomOperation("Parent")>]
     member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -46,16 +50,20 @@ type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element>()
 type NavigableElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.NavigableElement>() =
     inherit ElementBuilder<'Element>()
 
-    [<CustomOperation("Navigation")>] member inline this.Navigation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Navigation), x)
-    [<CustomOperation("Navigation'")>] member inline this.Navigation' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Navigation), x)
+    [<CustomOperation("NavigationEx")>] member inline this.NavigationEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Navigation), x)
+    [<CustomOperation("NavigationEx'")>] member inline this.NavigationEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Navigation), x)
+    [<CustomOperation("Navigation")>] member inline this.Navigation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Navigation), x)
+    [<CustomOperation("Navigation'")>] member inline this.Navigation' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Navigation), x)
     [<CustomOperation("Style")>] member inline this.Style ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.Style) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Style), (fun ctx x -> ctx.Element.Style <- x), x)
     [<CustomOperation("Style")>] member inline this.Style ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Style), (fun ctx x -> ctx.Element.Style <- x), x)
     [<CustomOperation("StyleClass")>] member inline this.StyleClass ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Collections.Generic.IList<System.String>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StyleClass), (fun ctx x -> ctx.Element.StyleClass <- x), x)
     [<CustomOperation("StyleClass")>] member inline this.StyleClass ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StyleClass), (fun ctx x -> ctx.Element.StyleClass <- x), x)
     [<CustomOperation("class'")>] member inline this.class' ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Collections.Generic.IList<System.String>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.``class``), (fun ctx x -> ctx.Element.``class`` <- x), x)
     [<CustomOperation("class'")>] member inline this.class' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.``class``), (fun ctx x -> ctx.Element.``class`` <- x), x)
-    [<CustomOperation("NavigationProxy")>] member inline this.NavigationProxy ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationProxy), x)
-    [<CustomOperation("NavigationProxy'")>] member inline this.NavigationProxy' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxyEx")>] member inline this.NavigationProxyEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxyEx'")>] member inline this.NavigationProxyEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxy")>] member inline this.NavigationProxy ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxy'")>] member inline this.NavigationProxy' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.NavigationProxy), x)
 
                 
 
@@ -77,14 +85,18 @@ type VisualElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Visu
                         
     [<CustomOperation("ZIndex")>] member inline this.ZIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ZIndex), (fun ctx x -> ctx.Element.ZIndex <- x), x)
     [<CustomOperation("ZIndex")>] member inline this.ZIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ZIndex), (fun ctx x -> ctx.Element.ZIndex <- x), x)
-    [<CustomOperation("DesiredSize")>] member inline this.DesiredSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DesiredSize), x)
-    [<CustomOperation("DesiredSize'")>] member inline this.DesiredSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("DesiredSizeEx")>] member inline this.DesiredSizeEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("DesiredSizeEx'")>] member inline this.DesiredSizeEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("DesiredSize")>] member inline this.DesiredSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.DesiredSize), x)
+    [<CustomOperation("DesiredSize'")>] member inline this.DesiredSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.DesiredSize), x)
     [<CustomOperation("Visual")>] member inline this.Visual ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.IVisual) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Visual), (fun ctx x -> ctx.Element.Visual <- x), x)
     [<CustomOperation("Visual")>] member inline this.Visual ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Visual), (fun ctx x -> ctx.Element.Visual <- x), x)
     [<CustomOperation("FlowDirection")>] member inline this.FlowDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.FlowDirection) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlowDirection), (fun ctx x -> ctx.Element.FlowDirection <- x), x)
     [<CustomOperation("FlowDirection")>] member inline this.FlowDirection ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlowDirection), (fun ctx x -> ctx.Element.FlowDirection <- x), x)
-    [<CustomOperation("Window")>] member inline this.Window ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Window), x)
-    [<CustomOperation("Window'")>] member inline this.Window' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("WindowEx")>] member inline this.WindowEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("WindowEx'")>] member inline this.WindowEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("Window")>] member inline this.Window ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Window), x)
+    [<CustomOperation("Window'")>] member inline this.Window' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Window), x)
     [<CustomOperation("AnchorX")>] member inline this.AnchorX ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AnchorX), (fun ctx x -> ctx.Element.AnchorX <- x), x)
     [<CustomOperation("AnchorX")>] member inline this.AnchorX ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AnchorX), (fun ctx x -> ctx.Element.AnchorX <- x), x)
     [<CustomOperation("AnchorY")>] member inline this.AnchorY ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AnchorY), (fun ctx x -> ctx.Element.AnchorY <- x), x)
@@ -100,10 +112,14 @@ type VisualElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Visu
     member inline this.Background ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Background <- x), creator)
                         
-    [<CustomOperation("Behaviors")>] member inline this.Behaviors ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Behaviors), x)
-    [<CustomOperation("Behaviors'")>] member inline this.Behaviors' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Behaviors), x)
-    [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Bounds), x)
-    [<CustomOperation("Bounds'")>] member inline this.Bounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Bounds), x)
+    [<CustomOperation("BehaviorsEx")>] member inline this.BehaviorsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Behaviors), x)
+    [<CustomOperation("BehaviorsEx'")>] member inline this.BehaviorsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Behaviors), x)
+    [<CustomOperation("Behaviors")>] member inline this.Behaviors ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Behaviors), x)
+    [<CustomOperation("Behaviors'")>] member inline this.Behaviors' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Behaviors), x)
+    [<CustomOperation("BoundsEx")>] member inline this.BoundsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Bounds), x)
+    [<CustomOperation("BoundsEx'")>] member inline this.BoundsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Bounds), x)
+    [<CustomOperation("Bounds")>] member inline this.Bounds ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Bounds), x)
+    [<CustomOperation("Bounds'")>] member inline this.Bounds' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Bounds), x)
     [<CustomOperation("HeightRequest")>] member inline this.HeightRequest ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeightRequest), (fun ctx x -> ctx.Element.HeightRequest <- x), x)
     [<CustomOperation("HeightRequest")>] member inline this.HeightRequest ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HeightRequest), (fun ctx x -> ctx.Element.HeightRequest <- x), x)
     [<CustomOperation("InputTransparent")>] member inline this.InputTransparent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.InputTransparent), (fun ctx x -> ctx.Element.InputTransparent <- x), x)
@@ -138,8 +154,10 @@ type VisualElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Visu
     [<CustomOperation("TranslationX")>] member inline this.TranslationX ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TranslationX), (fun ctx x -> ctx.Element.TranslationX <- x), x)
     [<CustomOperation("TranslationY")>] member inline this.TranslationY ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TranslationY), (fun ctx x -> ctx.Element.TranslationY <- x), x)
     [<CustomOperation("TranslationY")>] member inline this.TranslationY ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.TranslationY), (fun ctx x -> ctx.Element.TranslationY <- x), x)
-    [<CustomOperation("Triggers")>] member inline this.Triggers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Triggers), x)
-    [<CustomOperation("Triggers'")>] member inline this.Triggers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Triggers), x)
+    [<CustomOperation("TriggersEx")>] member inline this.TriggersEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Triggers), x)
+    [<CustomOperation("TriggersEx'")>] member inline this.TriggersEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Triggers), x)
+    [<CustomOperation("Triggers")>] member inline this.Triggers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Triggers), x)
+    [<CustomOperation("Triggers'")>] member inline this.Triggers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Triggers), x)
     [<CustomOperation("WidthRequest")>] member inline this.WidthRequest ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WidthRequest), (fun ctx x -> ctx.Element.WidthRequest <- x), x)
     [<CustomOperation("WidthRequest")>] member inline this.WidthRequest ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WidthRequest), (fun ctx x -> ctx.Element.WidthRequest <- x), x)
     [<CustomOperation("Clip")>] member inline this.Clip ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.Shapes.Geometry) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Clip), (fun ctx x -> ctx.Element.Clip <- x), x)
@@ -253,8 +271,10 @@ type PageBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Page>() =
     [<CustomOperation("ContainerArea")>] member inline this.ContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContainerArea), (fun ctx x -> ctx.Element.ContainerArea <- x), x)
     [<CustomOperation("IgnoresContainerArea")>] member inline this.IgnoresContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IgnoresContainerArea), (fun ctx x -> ctx.Element.IgnoresContainerArea <- x), x)
     [<CustomOperation("IgnoresContainerArea")>] member inline this.IgnoresContainerArea ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IgnoresContainerArea), (fun ctx x -> ctx.Element.IgnoresContainerArea <- x), x)
-    [<CustomOperation("InternalChildren")>] member inline this.InternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.InternalChildren), x)
-    [<CustomOperation("InternalChildren'")>] member inline this.InternalChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.InternalChildren), x)
+    [<CustomOperation("InternalChildrenEx")>] member inline this.InternalChildrenEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.InternalChildren), x)
+    [<CustomOperation("InternalChildrenEx'")>] member inline this.InternalChildrenEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.InternalChildren), x)
+    [<CustomOperation("InternalChildren")>] member inline this.InternalChildren ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.InternalChildren), x)
+    [<CustomOperation("InternalChildren'")>] member inline this.InternalChildren' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.InternalChildren), x)
 
     [<CustomOperation("NavigatedTo")>] member inline this.NavigatedTo ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigatedTo), "NavigatedTo", fn)
     [<CustomOperation("NavigatingFrom")>] member inline this.NavigatingFrom ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NavigatingFrom), "NavigatingFrom", fn)
@@ -316,8 +336,10 @@ type ContentPageBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Conten
 type ShellBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell>() =
     inherit PageBuilder<'Element>()
 
-    [<CustomOperation("CurrentPage")>] member inline this.CurrentPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentPage), x)
-    [<CustomOperation("CurrentPage'")>] member inline this.CurrentPage' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentPage), x)
+    [<CustomOperation("CurrentPageEx")>] member inline this.CurrentPageEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentPage), x)
+    [<CustomOperation("CurrentPageEx'")>] member inline this.CurrentPageEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentPage), x)
+    [<CustomOperation("CurrentPage")>] member inline this.CurrentPage ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.CurrentPage), x)
+    [<CustomOperation("CurrentPage'")>] member inline this.CurrentPage' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.CurrentPage), x)
     [<CustomOperation("FlyoutVerticalScrollMode")>] member inline this.FlyoutVerticalScrollMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.ScrollMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutVerticalScrollMode), (fun ctx x -> ctx.Element.FlyoutVerticalScrollMode <- x), x)
     [<CustomOperation("FlyoutVerticalScrollMode")>] member inline this.FlyoutVerticalScrollMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutVerticalScrollMode), (fun ctx x -> ctx.Element.FlyoutVerticalScrollMode <- x), x)
 
@@ -338,8 +360,10 @@ type ShellBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell>() =
     member inline this.CurrentItem ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.CurrentItem <- x), creator)
                         
-    [<CustomOperation("CurrentState")>] member inline this.CurrentState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentState), x)
-    [<CustomOperation("CurrentState'")>] member inline this.CurrentState' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentState), x)
+    [<CustomOperation("CurrentStateEx")>] member inline this.CurrentStateEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentState), x)
+    [<CustomOperation("CurrentStateEx'")>] member inline this.CurrentStateEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentState), x)
+    [<CustomOperation("CurrentState")>] member inline this.CurrentState ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.CurrentState), x)
+    [<CustomOperation("CurrentState'")>] member inline this.CurrentState' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.CurrentState), x)
 
     [<CustomOperation("FlyoutBackgroundImage")>]
     member inline this.FlyoutBackgroundImage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -421,8 +445,10 @@ type ShellBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell>() =
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("MenuItemTemplate")>] member inline this.MenuItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.MenuItemTemplate), (fun ctx x -> ctx.Element.MenuItemTemplate <- x), x)
     [<CustomOperation("MenuItemTemplate")>] member inline this.MenuItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.MenuItemTemplate), (fun ctx x -> ctx.Element.MenuItemTemplate <- x), x)
-    [<CustomOperation("FlyoutItems")>] member inline this.FlyoutItems ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.FlyoutItems), x)
-    [<CustomOperation("FlyoutItems'")>] member inline this.FlyoutItems' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.FlyoutItems), x)
+    [<CustomOperation("FlyoutItemsEx")>] member inline this.FlyoutItemsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.FlyoutItems), x)
+    [<CustomOperation("FlyoutItemsEx'")>] member inline this.FlyoutItemsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.FlyoutItems), x)
+    [<CustomOperation("FlyoutItems")>] member inline this.FlyoutItems ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.FlyoutItems), x)
+    [<CustomOperation("FlyoutItems'")>] member inline this.FlyoutItems' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.FlyoutItems), x)
     [<CustomOperation("FlyoutContent")>] member inline this.FlyoutContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutContent), (fun ctx x -> ctx.Element.FlyoutContent <- x), x)
     [<CustomOperation("FlyoutContent")>] member inline this.FlyoutContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutContent), (fun ctx x -> ctx.Element.FlyoutContent <- x), x)
     [<CustomOperation("FlyoutContentTemplate")>] member inline this.FlyoutContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutContentTemplate), (fun ctx x -> ctx.Element.FlyoutContentTemplate <- x), x)
@@ -486,8 +512,10 @@ type MultiPageBuilder<'Element, 'T when 'T :> Microsoft.Maui.Controls.Page and '
 type ViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.View>() =
     inherit VisualElementBuilder<'Element>()
 
-    [<CustomOperation("GestureRecognizers")>] member inline this.GestureRecognizers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.GestureRecognizers), x)
-    [<CustomOperation("GestureRecognizers'")>] member inline this.GestureRecognizers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizersEx")>] member inline this.GestureRecognizersEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizersEx'")>] member inline this.GestureRecognizersEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizers")>] member inline this.GestureRecognizers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizers'")>] member inline this.GestureRecognizers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.GestureRecognizers), x)
     [<CustomOperation("HorizontalOptions")>] member inline this.HorizontalOptions ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.LayoutOptions) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalOptions), (fun ctx x -> ctx.Element.HorizontalOptions <- x), x)
     [<CustomOperation("HorizontalOptions")>] member inline this.HorizontalOptions ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalOptions), (fun ctx x -> ctx.Element.HorizontalOptions <- x), x)
     [<CustomOperation("Margin")>] member inline this.Margin ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Thickness) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Margin), (fun ctx x -> ctx.Element.Margin <- x), x)
@@ -514,8 +542,10 @@ type LayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibili
     [<CustomOperation("Padding")>] member inline this.Padding ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Padding), (fun ctx x -> ctx.Element.Padding <- x), x)
     [<CustomOperation("CascadeInputTransparent")>] member inline this.CascadeInputTransparent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.CascadeInputTransparent), (fun ctx x -> ctx.Element.CascadeInputTransparent <- x), x)
     [<CustomOperation("CascadeInputTransparent")>] member inline this.CascadeInputTransparent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CascadeInputTransparent), (fun ctx x -> ctx.Element.CascadeInputTransparent <- x), x)
-    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
-    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
+    [<CustomOperation("ChildrenEx")>] member inline this.ChildrenEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Children), x)
+    [<CustomOperation("ChildrenEx'")>] member inline this.ChildrenEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Children), x)
+    [<CustomOperation("Children")>] member inline this.Children ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Children), x)
+    [<CustomOperation("Children'")>] member inline this.Children' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Children), x)
 
     [<CustomOperation("LayoutChanged")>] member inline this.LayoutChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutChanged), "LayoutChanged", fn)
                 
@@ -808,8 +838,10 @@ type ScrollViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ScrollV
     member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Content <- x), creator)
                         
-    [<CustomOperation("ContentSize")>] member inline this.ContentSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ContentSize), x)
-    [<CustomOperation("ContentSize'")>] member inline this.ContentSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ContentSize), x)
+    [<CustomOperation("ContentSizeEx")>] member inline this.ContentSizeEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ContentSize), x)
+    [<CustomOperation("ContentSizeEx'")>] member inline this.ContentSizeEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ContentSize), x)
+    [<CustomOperation("ContentSize")>] member inline this.ContentSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.ContentSize), x)
+    [<CustomOperation("ContentSize'")>] member inline this.ContentSize' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.ContentSize), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.ScrollOrientation) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("Orientation")>] member inline this.Orientation ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Orientation), (fun ctx x -> ctx.Element.Orientation <- x), x)
     [<CustomOperation("HorizontalScrollBarVisibility")>] member inline this.HorizontalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.ScrollBarVisibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalScrollBarVisibility), (fun ctx x -> ctx.Element.HorizontalScrollBarVisibility <- x), x)
@@ -860,8 +892,10 @@ type LayoutBuilder2<'Element, 'T when 'T :> Microsoft.Maui.Controls.View and 'El
             items
         )
                         
-    [<CustomOperation("LayoutHandler")>] member inline this.LayoutHandler ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.LayoutHandler), x)
-    [<CustomOperation("LayoutHandler'")>] member inline this.LayoutHandler' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LayoutHandler), x)
+    [<CustomOperation("LayoutHandlerEx")>] member inline this.LayoutHandlerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.LayoutHandler), x)
+    [<CustomOperation("LayoutHandlerEx'")>] member inline this.LayoutHandlerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LayoutHandler), x)
+    [<CustomOperation("LayoutHandler")>] member inline this.LayoutHandler ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.LayoutHandler), x)
+    [<CustomOperation("LayoutHandler'")>] member inline this.LayoutHandler' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.LayoutHandler), x)
 
                 
 
@@ -1111,8 +1145,10 @@ type CarouselViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Carou
     [<CustomOperation("Loop")>] member inline this.Loop ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Loop), (fun ctx x -> ctx.Element.Loop <- x), x)
     [<CustomOperation("PeekAreaInsets")>] member inline this.PeekAreaInsets ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Thickness) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.PeekAreaInsets), (fun ctx x -> ctx.Element.PeekAreaInsets <- x), x)
     [<CustomOperation("PeekAreaInsets")>] member inline this.PeekAreaInsets ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.PeekAreaInsets), (fun ctx x -> ctx.Element.PeekAreaInsets <- x), x)
-    [<CustomOperation("VisibleViews")>] member inline this.VisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.VisibleViews), x)
-    [<CustomOperation("VisibleViews'")>] member inline this.VisibleViews' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.VisibleViews), x)
+    [<CustomOperation("VisibleViewsEx")>] member inline this.VisibleViewsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.VisibleViews), x)
+    [<CustomOperation("VisibleViewsEx'")>] member inline this.VisibleViewsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.VisibleViews), x)
+    [<CustomOperation("VisibleViews")>] member inline this.VisibleViews ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.VisibleViews), x)
+    [<CustomOperation("VisibleViews'")>] member inline this.VisibleViews' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.VisibleViews), x)
     [<CustomOperation("IsBounceEnabled")>] member inline this.IsBounceEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsBounceEnabled), (fun ctx x -> ctx.Element.IsBounceEnabled <- x), x)
     [<CustomOperation("IsBounceEnabled")>] member inline this.IsBounceEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsBounceEnabled), (fun ctx x -> ctx.Element.IsBounceEnabled <- x), x)
     [<CustomOperation("IsSwipeEnabled")>] member inline this.IsSwipeEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsSwipeEnabled), (fun ctx x -> ctx.Element.IsSwipeEnabled <- x), x)
@@ -1420,8 +1456,10 @@ type ShapeBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shapes.Shape
     [<CustomOperation("StrokeMiterLimit")>] member inline this.StrokeMiterLimit ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StrokeMiterLimit), (fun ctx x -> ctx.Element.StrokeMiterLimit <- x), x)
     [<CustomOperation("Aspect")>] member inline this.Aspect ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.Stretch) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Aspect), (fun ctx x -> ctx.Element.Aspect <- x), x)
     [<CustomOperation("Aspect")>] member inline this.Aspect ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Aspect), (fun ctx x -> ctx.Element.Aspect <- x), x)
-    [<CustomOperation("StrokeDashPattern")>] member inline this.StrokeDashPattern ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.StrokeDashPattern), x)
-    [<CustomOperation("StrokeDashPattern'")>] member inline this.StrokeDashPattern' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPatternEx")>] member inline this.StrokeDashPatternEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPatternEx'")>] member inline this.StrokeDashPatternEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPattern")>] member inline this.StrokeDashPattern ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPattern'")>] member inline this.StrokeDashPattern' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.StrokeDashPattern), x)
 
                 
 
@@ -1574,8 +1612,10 @@ type BorderBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Border>() =
     [<CustomOperation("StrokeLineJoin")>] member inline this.StrokeLineJoin ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StrokeLineJoin), (fun ctx x -> ctx.Element.StrokeLineJoin <- x), x)
     [<CustomOperation("StrokeMiterLimit")>] member inline this.StrokeMiterLimit ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Double) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.StrokeMiterLimit), (fun ctx x -> ctx.Element.StrokeMiterLimit <- x), x)
     [<CustomOperation("StrokeMiterLimit")>] member inline this.StrokeMiterLimit ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.StrokeMiterLimit), (fun ctx x -> ctx.Element.StrokeMiterLimit <- x), x)
-    [<CustomOperation("StrokeDashPattern")>] member inline this.StrokeDashPattern ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.StrokeDashPattern), x)
-    [<CustomOperation("StrokeDashPattern'")>] member inline this.StrokeDashPattern' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPatternEx")>] member inline this.StrokeDashPatternEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPatternEx'")>] member inline this.StrokeDashPatternEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPattern")>] member inline this.StrokeDashPattern ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.StrokeDashPattern), x)
+    [<CustomOperation("StrokeDashPattern'")>] member inline this.StrokeDashPattern' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.StrokeDashPattern), x)
 
                 
 
@@ -1646,8 +1686,10 @@ type CheckBoxBuilder<'Element when 'Element :> Microsoft.Maui.Controls.CheckBox>
     [<CustomOperation("Color")>] member inline this.Color ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Color), (fun ctx x -> ctx.Element.Color <- x), x)
     [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
     [<CustomOperation("IsChecked")>] member inline this.IsChecked ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsChecked), (fun ctx x -> ctx.Element.IsChecked <- x), x)
-    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Foreground), x)
-    [<CustomOperation("Foreground'")>] member inline this.Foreground' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Foreground), x)
+    [<CustomOperation("ForegroundEx")>] member inline this.ForegroundEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Foreground), x)
+    [<CustomOperation("ForegroundEx'")>] member inline this.ForegroundEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Foreground), x)
+    [<CustomOperation("Foreground")>] member inline this.Foreground ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Foreground), x)
+    [<CustomOperation("Foreground'")>] member inline this.Foreground' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Foreground), x)
 
     [<CustomOperation("CheckedChanged")>] member inline this.CheckedChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CheckedChanged), "CheckedChanged", fn)
                 
@@ -1807,8 +1849,10 @@ type PickerBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Picker>() =
     [<CustomOperation("FontSize")>] member inline this.FontSize ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontSize), (fun ctx x -> ctx.Element.FontSize <- x), x)
     [<CustomOperation("FontAutoScalingEnabled")>] member inline this.FontAutoScalingEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FontAutoScalingEnabled), (fun ctx x -> ctx.Element.FontAutoScalingEnabled <- x), x)
     [<CustomOperation("FontAutoScalingEnabled")>] member inline this.FontAutoScalingEnabled ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FontAutoScalingEnabled), (fun ctx x -> ctx.Element.FontAutoScalingEnabled <- x), x)
-    [<CustomOperation("Items")>] member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Items), x)
-    [<CustomOperation("Items'")>] member inline this.Items' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Items), x)
+    [<CustomOperation("ItemsEx")>] member inline this.ItemsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Items), x)
+    [<CustomOperation("ItemsEx'")>] member inline this.ItemsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Items), x)
+    [<CustomOperation("Items")>] member inline this.Items ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Items), x)
+    [<CustomOperation("Items'")>] member inline this.Items' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Items), x)
     [<CustomOperation("ItemsSource")>] member inline this.ItemsSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Collections.IList) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsSource), (fun ctx x -> ctx.Element.ItemsSource <- x), x)
     [<CustomOperation("ItemsSource")>] member inline this.ItemsSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsSource), (fun ctx x -> ctx.Element.ItemsSource <- x), x)
     [<CustomOperation("SelectedIndex")>] member inline this.SelectedIndex ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Int32) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectedIndex), (fun ctx x -> ctx.Element.SelectedIndex <- x), x)
@@ -1946,8 +1990,10 @@ type ItemsViewBuilder2<'Element, 'TVisual when 'TVisual :> Microsoft.Maui.Contro
     [<CustomOperation("ItemsSource")>] member inline this.ItemsSource ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsSource), (fun ctx x -> ctx.Element.ItemsSource <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.DataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
-    [<CustomOperation("TemplatedItems")>] member inline this.TemplatedItems ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplatedItems), x)
-    [<CustomOperation("TemplatedItems'")>] member inline this.TemplatedItems' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplatedItems), x)
+    [<CustomOperation("TemplatedItemsEx")>] member inline this.TemplatedItemsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TemplatedItems), x)
+    [<CustomOperation("TemplatedItemsEx'")>] member inline this.TemplatedItemsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TemplatedItems), x)
+    [<CustomOperation("TemplatedItems")>] member inline this.TemplatedItems ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.TemplatedItems), x)
+    [<CustomOperation("TemplatedItems'")>] member inline this.TemplatedItems' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.TemplatedItems), x)
 
                 
 
@@ -1996,10 +2042,14 @@ type ListViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ListView>
     [<CustomOperation("VerticalScrollBarVisibility")>] member inline this.VerticalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalScrollBarVisibility), (fun ctx x -> ctx.Element.VerticalScrollBarVisibility <- x), x)
     [<CustomOperation("RefreshAllowed")>] member inline this.RefreshAllowed ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.RefreshAllowed), (fun ctx x -> ctx.Element.RefreshAllowed <- x), x)
     [<CustomOperation("RefreshAllowed")>] member inline this.RefreshAllowed ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.RefreshAllowed), (fun ctx x -> ctx.Element.RefreshAllowed <- x), x)
-    [<CustomOperation("FooterElement")>] member inline this.FooterElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.FooterElement), x)
-    [<CustomOperation("FooterElement'")>] member inline this.FooterElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.FooterElement), x)
-    [<CustomOperation("HeaderElement")>] member inline this.HeaderElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.HeaderElement), x)
-    [<CustomOperation("HeaderElement'")>] member inline this.HeaderElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.HeaderElement), x)
+    [<CustomOperation("FooterElementEx")>] member inline this.FooterElementEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.FooterElement), x)
+    [<CustomOperation("FooterElementEx'")>] member inline this.FooterElementEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.FooterElement), x)
+    [<CustomOperation("FooterElement")>] member inline this.FooterElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.FooterElement), x)
+    [<CustomOperation("FooterElement'")>] member inline this.FooterElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.FooterElement), x)
+    [<CustomOperation("HeaderElementEx")>] member inline this.HeaderElementEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.HeaderElement), x)
+    [<CustomOperation("HeaderElementEx'")>] member inline this.HeaderElementEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.HeaderElement), x)
+    [<CustomOperation("HeaderElement")>] member inline this.HeaderElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.HeaderElement), x)
+    [<CustomOperation("HeaderElement'")>] member inline this.HeaderElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.HeaderElement), x)
 
     [<CustomOperation("ItemAppearing")>] member inline this.ItemAppearing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemAppearing), "ItemAppearing", fn)
     [<CustomOperation("ItemDisappearing")>] member inline this.ItemDisappearing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemDisappearing), "ItemDisappearing", fn)
@@ -2068,8 +2118,10 @@ type BaseShellItemBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Base
     [<CustomOperation("IsVisible")>] member inline this.IsVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsVisible), (fun ctx x -> ctx.Element.IsVisible <- x), x)
     [<CustomOperation("FlyoutItemIsVisible")>] member inline this.FlyoutItemIsVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutItemIsVisible), (fun ctx x -> ctx.Element.FlyoutItemIsVisible <- x), x)
     [<CustomOperation("FlyoutItemIsVisible")>] member inline this.FlyoutItemIsVisible ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.FlyoutItemIsVisible), (fun ctx x -> ctx.Element.FlyoutItemIsVisible <- x), x)
-    [<CustomOperation("Window")>] member inline this.Window ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Window), x)
-    [<CustomOperation("Window'")>] member inline this.Window' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("WindowEx")>] member inline this.WindowEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("WindowEx'")>] member inline this.WindowEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Window), x)
+    [<CustomOperation("Window")>] member inline this.Window ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Window), x)
+    [<CustomOperation("Window'")>] member inline this.Window' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Window), x)
 
     [<CustomOperation("Appearing")>] member inline this.Appearing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Appearing), "Appearing", fn)
     [<CustomOperation("Disappearing")>] member inline this.Disappearing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Disappearing), "Disappearing", fn)
@@ -2178,8 +2230,10 @@ type ShellSectionBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell
             items
         )
                         
-    [<CustomOperation("Stack")>] member inline this.Stack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Stack), x)
-    [<CustomOperation("Stack'")>] member inline this.Stack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Stack), x)
+    [<CustomOperation("StackEx")>] member inline this.StackEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Stack), x)
+    [<CustomOperation("StackEx'")>] member inline this.StackEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Stack), x)
+    [<CustomOperation("Stack")>] member inline this.Stack ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Stack), x)
+    [<CustomOperation("Stack'")>] member inline this.Stack' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Stack), x)
 
                 
 
@@ -2265,10 +2319,14 @@ type ShellContentBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shell
 type WindowBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Window>() =
     inherit NavigableElementBuilder<'Element>()
 
-    [<CustomOperation("Overlays")>] member inline this.Overlays ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Overlays), x)
-    [<CustomOperation("Overlays'")>] member inline this.Overlays' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Overlays), x)
-    [<CustomOperation("VisualDiagnosticsOverlay")>] member inline this.VisualDiagnosticsOverlay ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
-    [<CustomOperation("VisualDiagnosticsOverlay'")>] member inline this.VisualDiagnosticsOverlay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
+    [<CustomOperation("OverlaysEx")>] member inline this.OverlaysEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Overlays), x)
+    [<CustomOperation("OverlaysEx'")>] member inline this.OverlaysEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Overlays), x)
+    [<CustomOperation("Overlays")>] member inline this.Overlays ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Overlays), x)
+    [<CustomOperation("Overlays'")>] member inline this.Overlays' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Overlays), x)
+    [<CustomOperation("VisualDiagnosticsOverlayEx")>] member inline this.VisualDiagnosticsOverlayEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
+    [<CustomOperation("VisualDiagnosticsOverlayEx'")>] member inline this.VisualDiagnosticsOverlayEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
+    [<CustomOperation("VisualDiagnosticsOverlay")>] member inline this.VisualDiagnosticsOverlay ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
+    [<CustomOperation("VisualDiagnosticsOverlay'")>] member inline this.VisualDiagnosticsOverlay' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.VisualDiagnosticsOverlay), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.String) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
     [<CustomOperation("Title")>] member inline this.Title ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Title), (fun ctx x -> ctx.Element.Title <- x), x)
 
@@ -2706,8 +2764,10 @@ type UriImageSourceBuilder() =
 type GestureElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.GestureElement>() =
     inherit ElementBuilder<'Element>()
 
-    [<CustomOperation("GestureRecognizers")>] member inline this.GestureRecognizers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.GestureRecognizers), x)
-    [<CustomOperation("GestureRecognizers'")>] member inline this.GestureRecognizers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizersEx")>] member inline this.GestureRecognizersEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizersEx'")>] member inline this.GestureRecognizersEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizers")>] member inline this.GestureRecognizers ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.GestureRecognizers), x)
+    [<CustomOperation("GestureRecognizers'")>] member inline this.GestureRecognizers' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.GestureRecognizers), x)
 
                 
 
@@ -2744,8 +2804,10 @@ type SpanBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Span>() =
 type ApplicationBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Application>() =
     inherit ElementBuilder<'Element>()
 
-    [<CustomOperation("AppLinks")>] member inline this.AppLinks ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.AppLinks), x)
-    [<CustomOperation("AppLinks'")>] member inline this.AppLinks' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AppLinks), x)
+    [<CustomOperation("AppLinksEx")>] member inline this.AppLinksEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.AppLinks), x)
+    [<CustomOperation("AppLinksEx'")>] member inline this.AppLinksEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AppLinks), x)
+    [<CustomOperation("AppLinks")>] member inline this.AppLinks ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.AppLinks), x)
+    [<CustomOperation("AppLinks'")>] member inline this.AppLinks' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.AppLinks), x)
 
     [<CustomOperation("MainPage")>]
     member inline this.MainPage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -2755,14 +2817,18 @@ type ApplicationBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Applic
     member inline this.MainPage ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.MainPage <- x), creator)
                         
-    [<CustomOperation("NavigationProxy")>] member inline this.NavigationProxy ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationProxy), x)
-    [<CustomOperation("NavigationProxy'")>] member inline this.NavigationProxy' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxyEx")>] member inline this.NavigationProxyEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxyEx'")>] member inline this.NavigationProxyEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxy")>] member inline this.NavigationProxy ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.NavigationProxy), x)
+    [<CustomOperation("NavigationProxy'")>] member inline this.NavigationProxy' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.NavigationProxy), x)
     [<CustomOperation("Resources")>] member inline this.Resources ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.Controls.ResourceDictionary) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Resources), (fun ctx x -> ctx.Element.Resources <- x), x)
     [<CustomOperation("Resources")>] member inline this.Resources ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Resources), (fun ctx x -> ctx.Element.Resources <- x), x)
     [<CustomOperation("UserAppTheme")>] member inline this.UserAppTheme ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Microsoft.Maui.ApplicationModel.AppTheme) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UserAppTheme), (fun ctx x -> ctx.Element.UserAppTheme <- x), x)
     [<CustomOperation("UserAppTheme")>] member inline this.UserAppTheme ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UserAppTheme), (fun ctx x -> ctx.Element.UserAppTheme <- x), x)
-    [<CustomOperation("Windows")>] member inline this.Windows ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Windows), x)
-    [<CustomOperation("Windows'")>] member inline this.Windows' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Windows), x)
+    [<CustomOperation("WindowsEx")>] member inline this.WindowsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Windows), x)
+    [<CustomOperation("WindowsEx'")>] member inline this.WindowsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Windows), x)
+    [<CustomOperation("Windows")>] member inline this.Windows ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Windows), x)
+    [<CustomOperation("Windows'")>] member inline this.Windows' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Windows), x)
 
     [<CustomOperation("RequestedThemeChanged")>] member inline this.RequestedThemeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RequestedThemeChanged), "RequestedThemeChanged", fn)
     [<CustomOperation("ModalPopped")>] member inline this.ModalPopped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ModalPopped), "ModalPopped", fn)
@@ -2782,8 +2848,10 @@ type AppLinkEntryBuilder<'Element when 'Element :> Microsoft.Maui.Controls.AppLi
     [<CustomOperation("Description")>] member inline this.Description ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Description), (fun ctx x -> ctx.Element.Description <- x), x)
     [<CustomOperation("IsLinkActive")>] member inline this.IsLinkActive ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsLinkActive), (fun ctx x -> ctx.Element.IsLinkActive <- x), x)
     [<CustomOperation("IsLinkActive")>] member inline this.IsLinkActive ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsLinkActive), (fun ctx x -> ctx.Element.IsLinkActive <- x), x)
-    [<CustomOperation("KeyValues")>] member inline this.KeyValues ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.KeyValues), x)
-    [<CustomOperation("KeyValues'")>] member inline this.KeyValues' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.KeyValues), x)
+    [<CustomOperation("KeyValuesEx")>] member inline this.KeyValuesEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.KeyValues), x)
+    [<CustomOperation("KeyValuesEx'")>] member inline this.KeyValuesEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.KeyValues), x)
+    [<CustomOperation("KeyValues")>] member inline this.KeyValues ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.KeyValues), x)
+    [<CustomOperation("KeyValues'")>] member inline this.KeyValues' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.KeyValues), x)
 
     [<CustomOperation("Thumbnail")>]
     member inline this.Thumbnail ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =

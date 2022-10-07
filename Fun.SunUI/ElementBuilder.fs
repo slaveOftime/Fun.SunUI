@@ -32,6 +32,9 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
 type BuildElement<'Element> = delegate of ctx: ElementBuildContext<'Element> * index: int -> int
 
 
+type IsFirstTimeAdded = bool
+
+
 type ElementBuilder<'UIStack, 'Element>() =
     let mutable renderMode: RenderMode = RenderMode.CreateOnce
 
@@ -40,7 +43,8 @@ type ElementBuilder<'UIStack, 'Element>() =
 
     member inline _.Delay([<InlineIfLambda>] fn: unit -> BuildElement<'Element>) = BuildElement<'Element>(fun ctx i -> fn().Invoke(ctx, i))
 
-    member _.For(builder: BuildElement<'Element>, fn: unit -> BuildElement<'Element>) = BuildElement<'Element>(fun ctx i -> fn().Invoke(ctx, i))
+    member inline _.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> BuildElement<'Element>) =
+        BuildElement<'Element>(fun ctx i -> fn().Invoke(ctx, i))
 
 
     /// Set key to the element builder.
@@ -61,42 +65,75 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            setFn: 'T -> unit
+            setFn: 'T -> 'Element -> IsFirstTimeAdded -> unit
         ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
-            setFn (getFn ctx.Element)
+            let propertyName = "getter-" + string index
+            let isPropAdded = ctx.PropertyResources.ContainsKey propertyName
+
+            setFn (getFn ctx.Element) ctx.Element (not isPropAdded)
+            ctx.PropertyResources[ propertyName ] <- 0
+
             index + 1
         )
+
+    /// With this we can get some property, and if it is a mutable object then can change it accordingly
+    member inline this.MakeGetOnlyBuilder1<'T>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getFn: 'Element -> 'T,
+            setFn: 'T -> unit
+        ) =
+        this.MakeGetOnlyBuilder(builder, getFn, (fun x _ _ -> setFn x))
 
     /// With this we can get some property, and if it is a mutable object then can change it adaptively
     member inline this.MakeGetOnlyAdaptiveBuilder<'T>
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            getStore: 'T -> aval<unit>
+            getStore: 'T -> 'Element -> IsFirstTimeAdded -> aval<unit>
         ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
-            let propertyName = "getter-" + string index
+            let propertyName = "adaptive-getter-" + string index
+            let isPropAdded = ctx.PropertyResources.ContainsKey propertyName
 
-            if ctx.PropertyResources.ContainsKey propertyName then
+            if isPropAdded then
                 (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
-            ctx.PropertyResources[ propertyName ] <- (getStore (getFn ctx.Element)).AddCallback ignore
+            ctx.PropertyResources[ propertyName ] <- (getStore (getFn ctx.Element) ctx.Element (not isPropAdded)).AddCallback ignore
 
             index + 1
         )
 
+    /// With this we can get some property, and if it is a mutable object then can change it adaptively
+    member inline this.MakeGetOnlyAdaptiveBuilder1<'T>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] getFn: 'Element -> 'T,
+            getStore: 'T -> aval<unit>
+        ) =
+        this.MakeGetOnlyAdaptiveBuilder(builder, getFn, (fun x _ _ -> getStore x))
+
+
+    /// This will return the native element reference.
+    [<CustomOperation("WithEx")>]
+    member inline this.WithEx([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> IsFirstTimeAdded -> unit) =
+        this.MakeGetOnlyBuilder(builder, (fun x -> x), (fun x _ firstTime -> set x firstTime))
 
     /// This will return the native element reference.
     [<CustomOperation("With")>]
-    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, set) = this.MakeGetOnlyBuilder(builder, (fun x -> x), set)
+    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit) = this.WithEx(builder, (fun x _ -> set x))
+
+    /// This will return the native element reference.
+    [<CustomOperation("WithEx'")>]
+    member inline this.WithEx'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> IsFirstTimeAdded -> unit aval) =
+        this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), (fun x _ firstTime -> set x firstTime))
 
     /// This will return the native element reference.
     [<CustomOperation("With'")>]
-    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set) =
-        this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), set)
+    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit aval) = this.WithEx'(builder, (fun x _ -> set x))
 
 
     /// Helper method to build an ElementCreator
@@ -386,3 +423,30 @@ type ElementBuilder<'UIStack, 'Element>() =
 
             index + 1
         )
+
+
+[<AutoOpen>]
+module ElementBuilderExtensions =
+
+    type UI with
+
+        /// Create a native element directly
+        static member native<'Element, 'UIStack>(fn: ElementInjectContext -> 'Element, ?renderMode) : ElementCreator<'UIStack> =
+            let renderMode = defaultArg renderMode RenderMode.CreateOnce
+            UI.inject (
+                renderMode,
+                fun injectCtx -> {
+                    RenderMode = renderMode
+                    CreateOrUpdate =
+                        fun (sp, ctx) ->
+                            let newCtx =
+                                match ctx with
+                                | ValueNone -> new ElementBuildContext<'Element>(fn injectCtx, sp, renderMode)
+                                | ValueSome ctx -> unbox ctx
+                            newCtx
+                }
+            )
+
+        /// Create a native element directly
+        static member native<'Element, 'UIStack>(renderMode: RenderMode, fn: ElementInjectContext -> 'Element) : ElementCreator<'UIStack> =
+            UI.native<'Element, 'UIStack> (fn, renderMode)

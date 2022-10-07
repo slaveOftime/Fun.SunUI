@@ -54,7 +54,7 @@ let mainForm =
     Form'() {
         Text "Demo"
         Style(fun s -> s.BackgroundColor <- SkiaSharp.SKColor(byte 0, byte 0, byte 0))
-        TitleBar(fun t -> t.Style.BackgroundColor <- SkiaSharp.SKColor(byte 0, byte 0, byte 0))
+        TitleBarEx(fun t form firstTime -> t.Style.BackgroundColor <- SkiaSharp.SKColor(byte 0, byte 0, byte 0))
         StaticControls [
             FlowLayoutPanel'() {
                 Top 40
@@ -64,18 +64,12 @@ let mainForm =
                 Controls(
                     alist {
                         let! c = count
-                        {
-                            RenderMode = RenderMode.CreateOnce
-                            CreateOrUpdate =
-                                fun (sp, ctx) ->
-                                    match ctx with
-                                    | ValueNone ->
-                                        let tb = new TextBox()
-                                        tb.Placeholder <- "asdasd asd "
-                                        tb.TextChanged.Add(fun e -> ())
-                                        new ElementBuildContext<TextBox>(tb, sp, RenderMode.CreateOnce) :> IElementContext
-                                    | ValueSome x -> x
-                        }
+                        UI.native (fun _ ->
+                            let tb = new TextBox()
+                            tb.Placeholder <- "asdasd asd "
+                            tb.TextChanged.Add(fun e -> ())
+                            tb
+                        )
                         CheckBox'() {
                             Checked true
                             CheckedChanged(fun _ -> ())

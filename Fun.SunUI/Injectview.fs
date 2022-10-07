@@ -44,12 +44,12 @@ module Injectview =
             RenderMode = defaultArg key RenderMode.CreateOnce
             CreateOrUpdate =
                 fun (sp, ctx) ->
-                    let newCtx =
-                        match ctx with
-                        | ValueNone -> new ElementInjectviewContext<'UIStack>(fn, sp, defaultArg key RenderMode.CreateOnce)
-                        | ValueSome ctx -> unbox ctx
-                    newCtx.Update()
-                    newCtx
+                    match ctx with
+                    | ValueNone -> new ElementInjectviewContext<'UIStack>(fn, sp, defaultArg key RenderMode.CreateOnce)
+                    | ValueSome ctx ->
+                        let newCtx = unbox<ElementInjectviewContext<'UIStack>> ctx
+                        newCtx.Update()
+                        newCtx
         }
 
         static member inline inject(key: RenderMode, [<InlineIfLambda>] fn: ElementInjectContext -> ElementCreator<'UIStack>) = UI.inject (fn, key)
