@@ -51,6 +51,7 @@ let winFormsProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WinForms" </> "Fun.SunUI.
 let wpfProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WPF" </> "Fun.SunUI.WPF" </> "Fun.SunUI.WPF.fsproj"
 let mauiProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI.fsproj"
 let avaloniaProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Avalonia" </> "Fun.SunUI.Avalonia" </> "Fun.SunUI.Avalonia.fsproj"
+let terminalGUIProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.TerminalGUI" </> "Fun.SunUI.TerminalGUI" </> "Fun.SunUI.TerminalGUI.fsproj"
 
 
 pipeline "GenerateInternalBindings" {
@@ -64,6 +65,7 @@ pipeline "GenerateInternalBindings" {
     stage "Generate" { run $"{generatorExe} generate {wpfProj} -u WPF --forDefault" }
     stage "Generate" { run $"{generatorExe} generate {mauiProj} -u MAUI --forDefault --sdk 6.0.401" }
     stage "Generate" { run $"{generatorExe} generate {avaloniaProj} -u Avalonia --forDefault" }
+    stage "Generate" { run $"{generatorExe} generate {terminalGUIProj} -u TerminalGUI --forDefault" }
     runIfOnlySpecified
 }
 
@@ -89,6 +91,9 @@ pipeline "Publish" {
 
         run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.fsproj")
         run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.Generator/Fun.SunUI.Avalonia.Generator.fsproj")
+
+        run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.fsproj")
+        run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.Generator/Fun.SunUI.TerminalGUI.Generator.fsproj")
 
         run (dotnetPack "Fun.SunUI.Templates/Fun.SunUI.Templates.fsproj")
     }
