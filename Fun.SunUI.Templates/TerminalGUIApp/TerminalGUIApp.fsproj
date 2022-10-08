@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="Porgram.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fun.SunUI.TerminalGUI" Version="0.0.*" />
+	</ItemGroup>
+
+</Project>

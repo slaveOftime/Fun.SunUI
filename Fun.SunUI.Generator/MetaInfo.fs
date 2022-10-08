@@ -243,7 +243,10 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
         |> Seq.filter (fun x -> not (ctx.ExcludeEvent x) && x.DeclaringType = ty)
         |> Seq.map (fun evt ->
             let name = if fsharpKeywords |> List.contains evt.Name then $"{evt.Name}'" else evt.Name
-            $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName evt.Name}), \"{evt.Name}\", fn)"
+            if evt.AddMethod <> null && evt.RemoveMethod <> null && evt.EventHandlerType.Name.StartsWith "Action" then
+                $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeActionPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName evt.AddMethod.Name}), (fun ctx -> ctx.Element.{safeName evt.RemoveMethod.Name}), \"{evt.Name}\", fn)"
+            else
+                $"    {customOperation name} {memberStart}{name} ({contextArg}, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.{safeName evt.Name}), \"{evt.Name}\", fn)"
         )
 
     {|

@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "identity": "Fun.SunUI.TerminalGUIApp",
+    "shortName": "sun-term",
+    "name": "Fun.SunUI.TerminalGUIApp",
+    "author": "slaveoftime",
+    "classifications": [
+        "Desktop",
+        "F#",
+        "TerminalGUI"
+    ],
+    "type": {
+        "language": "F#"
+    },
+    "tags": {
+        "type": "project",
+        "language": "F#"
+    },
+    "sourceName": "TerminalGUIApp",
+    "preferNameDirectory": true
+}

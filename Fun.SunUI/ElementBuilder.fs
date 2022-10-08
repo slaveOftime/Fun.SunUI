@@ -133,7 +133,8 @@ type ElementBuilder<'UIStack, 'Element>() =
 
     /// This will return the native element reference.
     [<CustomOperation("With'")>]
-    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit aval) = this.WithEx'(builder, (fun x _ -> set x))
+    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit aval) =
+        this.WithEx'(builder, (fun x _ -> set x))
 
 
     /// Helper method to build an ElementCreator
@@ -174,6 +175,50 @@ type ElementBuilder<'UIStack, 'Element>() =
                 (ctx.PropertyResources[propertyName] :?> IDisposable).Dispose()
 
             ctx.PropertyResources[ propertyName ] <- event.Subscribe(fun e -> fn (ctx.Element, e))
+
+            index + 1
+        )
+
+
+    member inline _.MakeActionPropertyBuilder<'Element, 'Handler, 'Args when 'Handler :> Delegate>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] addAction: ElementBuildContext<'Element> -> (Action<'Args> -> unit),
+            [<InlineIfLambda>] removeAction: ElementBuildContext<'Element> -> (Action<'Args> -> unit),
+            propertyName: string,
+            [<InlineIfLambda>] fn: 'Element * 'Args -> unit
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let propertyName = propertyName + "-" + string index
+
+            let action = Action<'Args>(fun e -> fn (ctx.Element, e))
+
+            if ctx.PropertyResources.ContainsKey propertyName then removeAction ctx action
+
+            ctx.PropertyResources[ propertyName ] <- addAction ctx action
+
+            index + 1
+        )
+
+
+    member inline _.MakeActionPropertyBuilder<'Element, 'Handler, 'Args when 'Handler :> Delegate>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] addAction: ElementBuildContext<'Element> -> (Action -> unit),
+            [<InlineIfLambda>] removeAction: ElementBuildContext<'Element> -> (Action -> unit),
+            propertyName: string,
+            [<InlineIfLambda>] fn: 'Element -> unit
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            let propertyName = propertyName + "-" + string index
+
+            let action = Action(fun () -> fn ctx.Element)
+
+            if ctx.PropertyResources.ContainsKey propertyName then removeAction ctx action
+
+            ctx.PropertyResources[ propertyName ] <- addAction ctx action
 
             index + 1
         )

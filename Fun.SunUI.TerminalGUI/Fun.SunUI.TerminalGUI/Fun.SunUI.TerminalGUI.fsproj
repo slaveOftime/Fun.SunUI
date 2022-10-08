@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net472;net5.0</TargetFrameworks>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Core.fs" />
+		<Compile Include="Views.Generated.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="FSharp.Core" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Terminal.Gui" Version="1.8.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Fun.SunUI\Fun.SunUI.fsproj" />
+	</ItemGroup>
+
+</Project>

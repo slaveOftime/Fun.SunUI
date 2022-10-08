@@ -22,6 +22,7 @@ type UIStack =
     | WPF = 2
     | MAUI = 3
     | Avalonia = 4
+    | TerminalGUI = 5
 
 
 module CodeGenProject =
@@ -168,7 +169,7 @@ module CodeGenProject =
 
         AnsiConsole.MarkupLine $"[green]Clean temp project[/]"
 
-        try
-            Directory.Delete(codeGenFolder, true)
-        with _ ->
-            ()
+        //try
+        //    Directory.Delete(codeGenFolder, true)
+        //with _ ->
+        //    ()
