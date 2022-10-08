@@ -169,7 +169,7 @@ module CodeGenProject =
 
         AnsiConsole.MarkupLine $"[green]Clean temp project[/]"
 
-        //try
-        //    Directory.Delete(codeGenFolder, true)
-        //with _ ->
-        //    ()
+        try
+            Directory.Delete(codeGenFolder, true)
+        with _ ->
+            ()

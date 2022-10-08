@@ -41,10 +41,11 @@ dotnet new --install Fun.SunUI.Templates::0.0.1
 - Modern.Forms
 - WinForms
 - WPF
+- Avalonia
+- Terminal.Gui
 
 In coming support:
 
-- Avanolia
 - Fable Html
 - Uno
 - WinUI3
