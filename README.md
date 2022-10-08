@@ -30,7 +30,7 @@ Window'() {
 You can install below dotnet template to get started:
 
 ```bash
-dotnet new --install Fun.SunUI.Templates::0.0.1
+dotnet new --install Fun.SunUI.Templates::0.0.*
 ```
 
 ## Supported UIStack
