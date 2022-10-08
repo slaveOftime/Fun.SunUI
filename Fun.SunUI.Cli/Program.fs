@@ -6,13 +6,6 @@ open System.IO
 open Spectre.Console
 
 
-type UIStack =
-    | ModernForms = 0
-    | WinForms = 1
-    | WPF = 2
-    | MAUI = 3
-
-
 type CodeGenSettings() =
     inherit CommandSettings()
 
@@ -26,7 +19,7 @@ type CodeGenSettings() =
 
     [<Description("UIStack")>]
     [<CommandOption("-u|--uiStack")>]
-    member val UIStack = UIStack.ModernForms with get, set
+    member val UIStack = Fun.SunUI.Cli.CodeGen.UIStack.ModernForms with get, set
 
     [<Description("Generate for default")>]
     [<CommandOption("--forDefault")>]
@@ -74,13 +67,13 @@ type GenerateCommand() =
             AnsiConsole.MarkupLine "[red] project is required[/]"
             -1
         | Some path ->
-            CodeGen.Generate.startGenerate settings.ForDefault (string settings.UIStack) path settings.OutDir settings.Sdk settings.GeneratorVersion
+            CodeGen.Generate.startGenerate settings.ForDefault settings.UIStack path settings.OutDir settings.Sdk settings.GeneratorVersion
             0
 
 
 [<EntryPoint>]
 let main (args: string[]) =
-    AnsiConsole.Write(FigletText("Fun.Blazor.Cli", Color = Color.CadetBlue))
+    AnsiConsole.Write(FigletText("Fun.SunUI.Cli", Color = Color.CadetBlue))
 
     let application = CommandApp()
 

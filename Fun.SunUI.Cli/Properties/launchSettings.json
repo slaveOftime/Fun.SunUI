@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Fun.SunUI.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "generate \\\"$(SolutionDir)\\\\Fun.SunUI.Avalonia\\\\Fun.SunUI.Avalonia.Generator\\\\Fun.SunUI.Avalonia.Generator\\\" -u Avalonia --forDefault"
+    }
+  }
+}

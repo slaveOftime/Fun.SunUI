@@ -16,6 +16,13 @@ type PackageMeta = {
     TargetNamespace: string
 }
 
+type UIStack =
+    | ModernForms = 0
+    | WinForms = 1
+    | WPF = 2
+    | MAUI = 3
+    | Avalonia = 4
+
 
 module CodeGenProject =
 
@@ -34,13 +41,14 @@ module CodeGenProject =
 
     let createAndRun
         forDefault
-        (uiStackName: string)
+        (uiStack: UIStack)
         (projectFile: string)
         codesDirName
         (sdk: string option)
         generatorVersion
         (packages: PackageMeta seq)
         =
+        let uiStackName = string uiStack
         let codeGenFolder = Path.GetTempPath() </> "FunSunUI-Cli-" + Guid.NewGuid().ToString()
 
         AnsiConsole.MarkupLine $"[green]Create temp project: {codeGenFolder}[/]"
@@ -67,18 +75,18 @@ module CodeGenProject =
             | Some x -> x.Split(".")[0]
 
         let stack =
-            match uiStackName with
-            | "MAUI" ->
+            match uiStack with
+            | UIStack.MAUI ->
                 $"""
 		<UseMaui>true</UseMaui>
 		<TargetFramework>net{sdkMajorVersion}.0</TargetFramework>
                 """
-            | "WinForms" ->
+            | UIStack.WinForms ->
                 $"""
         <UseWindowsForms>true</UseWindowsForms>
 	    <TargetFramework>net{sdkMajorVersion}.0-windows</TargetFramework>
                 """
-            | "WPF" ->
+            | UIStack.WPF ->
                 $"""
 		<UseWPF>true</UseWPF>
 		<TargetFramework>net{sdkMajorVersion}.0-windows</TargetFramework>

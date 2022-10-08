@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<TrimMode>copyused</TrimMode>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="Porgram.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fun.SunUI.Avalonia" Version="0.0.*" />
+	</ItemGroup>
+
+</Project>

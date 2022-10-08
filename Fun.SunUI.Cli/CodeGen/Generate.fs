@@ -77,7 +77,7 @@ let private attachCodeFiles (project: XDocument) (projectFile: string) (codesDir
 
 
 
-let startGenerate forDefault uiStackName (projectFile: string) (codesDirName: string) sdkStr generatorVersion =
+let startGenerate forDefault uiStack (projectFile: string) (codesDirName: string) sdkStr generatorVersion =
     AnsiConsole.MarkupLine $"Found project: [green]{projectFile}[/]"
     AnsiConsole.WriteLine()
 
@@ -97,7 +97,7 @@ let startGenerate forDefault uiStackName (projectFile: string) (codesDirName: st
     AnsiConsole.WriteLine()
     AnsiConsole.MarkupLine "Find packages and generate codes"
     findPackageMetas project
-    |> CodeGenProject.createAndRun forDefault uiStackName projectFile codesDirName sdk generatorVersion
+    |> CodeGenProject.createAndRun forDefault uiStack projectFile codesDirName sdk generatorVersion
 
     if not forDefault then
 
