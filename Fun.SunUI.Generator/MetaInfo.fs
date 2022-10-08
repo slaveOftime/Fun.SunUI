@@ -74,20 +74,20 @@ let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
             if prop.SetMethod = null || not prop.SetMethod.IsPublic then
                 let isIListChild (item: Type) = item.Name.StartsWith "IList`1" && item.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType
 
-                let hasIListChild = prop.PropertyType.GetInterfaces() |> Seq.exists isIListChild
-
-                let isReadOnly =
+                let isReadOnly () =
                     prop.PropertyType.Name.StartsWith "ReadOnly"
                     || prop.PropertyType.GetInterfaces() |> Seq.exists (fun x -> x.Name.Contains("ReadOnly"))
 
+                let hasIListChild = prop.PropertyType.GetInterfaces() |> Seq.exists isIListChild
+
                 if
-                    not isReadOnly
-                    && prop.PropertyType.IsAssignableTo typeof<System.Collections.IEnumerable>
-                    && (ctx.IsChildrenProp prop
-                        || isIListChild prop.PropertyType
-                        || hasIListChild
-                        || (prop.PropertyType.GenericTypeArguments.Length = 1
-                            && prop.PropertyType.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType))
+                    ctx.IsChildrenProp prop
+                    || (not (isReadOnly ())
+                        && prop.PropertyType.IsAssignableTo typeof<System.Collections.IEnumerable>
+                        && (isIListChild prop.PropertyType
+                            || hasIListChild
+                            || (prop.PropertyType.GenericTypeArguments.Length = 1
+                                && prop.PropertyType.GenericTypeArguments[ 0 ].IsAssignableTo ctx.ChildType)))
                 then
                     let childTypeName =
                         try

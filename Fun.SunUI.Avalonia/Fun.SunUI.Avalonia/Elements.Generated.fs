@@ -236,10 +236,6 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control>() =
     [<CustomOperation("ContextFlyout")>] member inline this.ContextFlyout ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContextFlyout), (fun ctx x -> ctx.Element.ContextFlyout <- x), x)
     [<CustomOperation("Tag")>] member inline this.Tag ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Tag), (fun ctx x -> ctx.Element.Tag <- x), x)
     [<CustomOperation("Tag")>] member inline this.Tag ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Tag), (fun ctx x -> ctx.Element.Tag <- x), x)
-    [<CustomOperation("ParentEx")>] member inline this.ParentEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Parent), x)
-    [<CustomOperation("ParentEx'")>] member inline this.ParentEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Parent), x)
-    [<CustomOperation("Parent")>] member inline this.Parent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Parent), x)
-    [<CustomOperation("Parent'")>] member inline this.Parent' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Parent), x)
 
     [<CustomOperation("ContextRequested")>] member inline this.ContextRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextRequested), "ContextRequested", fn)
                 
@@ -331,10 +327,6 @@ type ContentControlBuilder<'Element when 'Element :> Avalonia.Controls.ContentCo
     [<CustomOperation("Content'")>] member inline this.Content' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
     [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
     [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
-    [<CustomOperation("PresenterEx")>] member inline this.PresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("PresenterEx'")>] member inline this.PresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("Presenter")>] member inline this.Presenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("Presenter'")>] member inline this.Presenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Presenter), x)
     [<CustomOperation("HorizontalContentAlignment")>] member inline this.HorizontalContentAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Layout.HorizontalAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalContentAlignment), (fun ctx x -> ctx.Element.HorizontalContentAlignment <- x), x)
     [<CustomOperation("HorizontalContentAlignment")>] member inline this.HorizontalContentAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalContentAlignment), (fun ctx x -> ctx.Element.HorizontalContentAlignment <- x), x)
     [<CustomOperation("VerticalContentAlignment")>] member inline this.VerticalContentAlignment ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Layout.VerticalAlignment) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalContentAlignment), (fun ctx x -> ctx.Element.VerticalContentAlignment <- x), x)
@@ -413,14 +405,6 @@ type ToggleSwitchBuilder<'Element when 'Element :> Avalonia.Controls.ToggleSwitc
     [<CustomOperation("OnContent")>] member inline this.OnContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.OnContent), (fun ctx x -> ctx.Element.OnContent <- x), x)
     [<CustomOperation("OffContent")>] member inline this.OffContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.OffContent), (fun ctx x -> ctx.Element.OffContent <- x), x)
     [<CustomOperation("OffContent")>] member inline this.OffContent ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.OffContent), (fun ctx x -> ctx.Element.OffContent <- x), x)
-    [<CustomOperation("OffContentPresenterEx")>] member inline this.OffContentPresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OffContentPresenter), x)
-    [<CustomOperation("OffContentPresenterEx'")>] member inline this.OffContentPresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OffContentPresenter), x)
-    [<CustomOperation("OffContentPresenter")>] member inline this.OffContentPresenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.OffContentPresenter), x)
-    [<CustomOperation("OffContentPresenter'")>] member inline this.OffContentPresenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.OffContentPresenter), x)
-    [<CustomOperation("OnContentPresenterEx")>] member inline this.OnContentPresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OnContentPresenter), x)
-    [<CustomOperation("OnContentPresenterEx'")>] member inline this.OnContentPresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OnContentPresenter), x)
-    [<CustomOperation("OnContentPresenter")>] member inline this.OnContentPresenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.OnContentPresenter), x)
-    [<CustomOperation("OnContentPresenter'")>] member inline this.OnContentPresenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.OnContentPresenter), x)
     [<CustomOperation("OffContentTemplate")>] member inline this.OffContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.OffContentTemplate), (fun ctx x -> ctx.Element.OffContentTemplate <- x), x)
     [<CustomOperation("OffContentTemplate")>] member inline this.OffContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.OffContentTemplate), (fun ctx x -> ctx.Element.OffContentTemplate <- x), x)
     [<CustomOperation("OnContentTemplate")>] member inline this.OnContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.OnContentTemplate), (fun ctx x -> ctx.Element.OnContentTemplate <- x), x)
@@ -555,10 +539,6 @@ type WindowBaseBuilder<'Element when 'Element :> Avalonia.Controls.WindowBase>()
     [<CustomOperation("ScreensEx'")>] member inline this.ScreensEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Screens), x)
     [<CustomOperation("Screens")>] member inline this.Screens ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Screens), x)
     [<CustomOperation("Screens'")>] member inline this.Screens' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Screens), x)
-    [<CustomOperation("OwnerEx")>] member inline this.OwnerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Owner), x)
-    [<CustomOperation("OwnerEx'")>] member inline this.OwnerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Owner), x)
-    [<CustomOperation("Owner")>] member inline this.Owner ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Owner), x)
-    [<CustomOperation("Owner'")>] member inline this.Owner' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Owner), x)
     [<CustomOperation("Topmost")>] member inline this.Topmost ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Topmost), (fun ctx x -> ctx.Element.Topmost <- x), x)
     [<CustomOperation("Topmost")>] member inline this.Topmost ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Topmost), (fun ctx x -> ctx.Element.Topmost <- x), x)
 
@@ -692,10 +672,6 @@ type HeaderedContentControlBuilder<'Element when 'Element :> Avalonia.Controls.P
 
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
-    [<CustomOperation("HeaderPresenterEx")>] member inline this.HeaderPresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenterEx'")>] member inline this.HeaderPresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter")>] member inline this.HeaderPresenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter'")>] member inline this.HeaderPresenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.HeaderPresenter), x)
     [<CustomOperation("HeaderTemplate")>] member inline this.HeaderTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplate), (fun ctx x -> ctx.Element.HeaderTemplate <- x), x)
     [<CustomOperation("HeaderTemplate")>] member inline this.HeaderTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HeaderTemplate), (fun ctx x -> ctx.Element.HeaderTemplate <- x), x)
 
@@ -785,10 +761,6 @@ type ScrollViewerBuilder<'Element when 'Element :> Avalonia.Controls.ScrollViewe
     [<CustomOperation("HorizontalScrollBarVisibility")>] member inline this.HorizontalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.HorizontalScrollBarVisibility), (fun ctx x -> ctx.Element.HorizontalScrollBarVisibility <- x), x)
     [<CustomOperation("VerticalScrollBarVisibility")>] member inline this.VerticalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Primitives.ScrollBarVisibility) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalScrollBarVisibility), (fun ctx x -> ctx.Element.VerticalScrollBarVisibility <- x), x)
     [<CustomOperation("VerticalScrollBarVisibility")>] member inline this.VerticalScrollBarVisibility ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.VerticalScrollBarVisibility), (fun ctx x -> ctx.Element.VerticalScrollBarVisibility <- x), x)
-    [<CustomOperation("CurrentAnchorEx")>] member inline this.CurrentAnchorEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.CurrentAnchor), x)
-    [<CustomOperation("CurrentAnchorEx'")>] member inline this.CurrentAnchorEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CurrentAnchor), x)
-    [<CustomOperation("CurrentAnchor")>] member inline this.CurrentAnchor ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.CurrentAnchor), x)
-    [<CustomOperation("CurrentAnchor'")>] member inline this.CurrentAnchor' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.CurrentAnchor), x)
     [<CustomOperation("AllowAutoHide")>] member inline this.AllowAutoHide ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.AllowAutoHide), (fun ctx x -> ctx.Element.AllowAutoHide <- x), x)
     [<CustomOperation("AllowAutoHide")>] member inline this.AllowAutoHide ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.AllowAutoHide), (fun ctx x -> ctx.Element.AllowAutoHide <- x), x)
 
@@ -905,10 +877,6 @@ type ItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.ItemsContro
     [<CustomOperation("ItemsPanel")>] member inline this.ItemsPanel ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsPanel), (fun ctx x -> ctx.Element.ItemsPanel <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
-    [<CustomOperation("PresenterEx")>] member inline this.PresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("PresenterEx'")>] member inline this.PresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("Presenter")>] member inline this.Presenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Presenter), x)
-    [<CustomOperation("Presenter'")>] member inline this.Presenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Presenter), x)
 
                 
             
@@ -1037,10 +1005,6 @@ type HeaderedSelectingItemsControlBuilder<'Element when 'Element :> Avalonia.Con
 
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
-    [<CustomOperation("HeaderPresenterEx")>] member inline this.HeaderPresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenterEx'")>] member inline this.HeaderPresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter")>] member inline this.HeaderPresenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter'")>] member inline this.HeaderPresenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.HeaderPresenter), x)
 
                 
             
@@ -1145,10 +1109,6 @@ type HeaderedItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.Pri
 
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
     [<CustomOperation("Header")>] member inline this.Header ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Header), (fun ctx x -> ctx.Element.Header <- x), x)
-    [<CustomOperation("HeaderPresenterEx")>] member inline this.HeaderPresenterEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenterEx'")>] member inline this.HeaderPresenterEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter")>] member inline this.HeaderPresenter ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.HeaderPresenter), x)
-    [<CustomOperation("HeaderPresenter'")>] member inline this.HeaderPresenter' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.HeaderPresenter), x)
 
                 
             
@@ -2123,10 +2083,6 @@ type LayoutTransformControlBuilder<'Element when 'Element :> Avalonia.Controls.L
     [<CustomOperation("LayoutTransform")>] member inline this.LayoutTransform ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutTransform), (fun ctx x -> ctx.Element.LayoutTransform <- x), x)
     [<CustomOperation("UseRenderTransform")>] member inline this.UseRenderTransform ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.UseRenderTransform), (fun ctx x -> ctx.Element.UseRenderTransform <- x), x)
     [<CustomOperation("UseRenderTransform")>] member inline this.UseRenderTransform ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.UseRenderTransform), (fun ctx x -> ctx.Element.UseRenderTransform <- x), x)
-    [<CustomOperation("TransformRootEx")>] member inline this.TransformRootEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.TransformRoot), x)
-    [<CustomOperation("TransformRootEx'")>] member inline this.TransformRootEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.TransformRoot), x)
-    [<CustomOperation("TransformRoot")>] member inline this.TransformRoot ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.TransformRoot), x)
-    [<CustomOperation("TransformRoot'")>] member inline this.TransformRoot' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.TransformRoot), x)
 
                 
 
@@ -2153,22 +2109,6 @@ type VisualLayerManagerBuilder<'Element when 'Element :> Avalonia.Controls.Primi
 
     [<CustomOperation("IsPopup")>] member inline this.IsPopup ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.IsPopup), (fun ctx x -> ctx.Element.IsPopup <- x), x)
     [<CustomOperation("IsPopup")>] member inline this.IsPopup ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.IsPopup), (fun ctx x -> ctx.Element.IsPopup <- x), x)
-    [<CustomOperation("AdornerLayerEx")>] member inline this.AdornerLayerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.AdornerLayer), x)
-    [<CustomOperation("AdornerLayerEx'")>] member inline this.AdornerLayerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AdornerLayer), x)
-    [<CustomOperation("AdornerLayer")>] member inline this.AdornerLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.AdornerLayer), x)
-    [<CustomOperation("AdornerLayer'")>] member inline this.AdornerLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.AdornerLayer), x)
-    [<CustomOperation("ChromeOverlayLayerEx")>] member inline this.ChromeOverlayLayerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.ChromeOverlayLayer), x)
-    [<CustomOperation("ChromeOverlayLayerEx'")>] member inline this.ChromeOverlayLayerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.ChromeOverlayLayer), x)
-    [<CustomOperation("ChromeOverlayLayer")>] member inline this.ChromeOverlayLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.ChromeOverlayLayer), x)
-    [<CustomOperation("ChromeOverlayLayer'")>] member inline this.ChromeOverlayLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.ChromeOverlayLayer), x)
-    [<CustomOperation("OverlayLayerEx")>] member inline this.OverlayLayerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.OverlayLayer), x)
-    [<CustomOperation("OverlayLayerEx'")>] member inline this.OverlayLayerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.OverlayLayer), x)
-    [<CustomOperation("OverlayLayer")>] member inline this.OverlayLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.OverlayLayer), x)
-    [<CustomOperation("OverlayLayer'")>] member inline this.OverlayLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.OverlayLayer), x)
-    [<CustomOperation("LightDismissOverlayLayerEx")>] member inline this.LightDismissOverlayLayerEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.LightDismissOverlayLayer), x)
-    [<CustomOperation("LightDismissOverlayLayerEx'")>] member inline this.LightDismissOverlayLayerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.LightDismissOverlayLayer), x)
-    [<CustomOperation("LightDismissOverlayLayer")>] member inline this.LightDismissOverlayLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.LightDismissOverlayLayer), x)
-    [<CustomOperation("LightDismissOverlayLayer'")>] member inline this.LightDismissOverlayLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.LightDismissOverlayLayer), x)
 
                 
             
@@ -2287,10 +2227,6 @@ type ItemsPresenterBaseBuilder<'Element when 'Element :> Avalonia.Controls.Prese
     [<CustomOperation("ItemsPanel")>] member inline this.ItemsPanel ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemsPanel), (fun ctx x -> ctx.Element.ItemsPanel <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
     [<CustomOperation("ItemTemplate")>] member inline this.ItemTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ItemTemplate), (fun ctx x -> ctx.Element.ItemTemplate <- x), x)
-    [<CustomOperation("PanelEx")>] member inline this.PanelEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Panel), x)
-    [<CustomOperation("PanelEx'")>] member inline this.PanelEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Panel), x)
-    [<CustomOperation("Panel")>] member inline this.Panel ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Panel), x)
-    [<CustomOperation("Panel'")>] member inline this.Panel' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Panel), x)
 
                 
 
@@ -2327,10 +2263,6 @@ type ContentPresenterBuilder<'Element when 'Element :> Avalonia.Controls.Present
     [<CustomOperation("CornerRadius")>] member inline this.CornerRadius ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.CornerRadius), (fun ctx x -> ctx.Element.CornerRadius <- x), x)
     [<CustomOperation("BoxShadow")>] member inline this.BoxShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Media.BoxShadows) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.BoxShadow), (fun ctx x -> ctx.Element.BoxShadow <- x), x)
     [<CustomOperation("BoxShadow")>] member inline this.BoxShadow ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.BoxShadow), (fun ctx x -> ctx.Element.BoxShadow <- x), x)
-    [<CustomOperation("ChildEx")>] member inline this.ChildEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Child), x)
-    [<CustomOperation("ChildEx'")>] member inline this.ChildEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Child), x)
-    [<CustomOperation("Child")>] member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Child), x)
-    [<CustomOperation("Child'")>] member inline this.Child' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Child), x)
     [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Object) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
     [<CustomOperation("Content")>] member inline this.Content ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Content), (fun ctx x -> ctx.Element.Content <- x), x)
     [<CustomOperation("ContentTemplate")>] member inline this.ContentTemplate ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.Templates.IDataTemplate) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ContentTemplate), (fun ctx x -> ctx.Element.ContentTemplate <- x), x)
@@ -2774,10 +2706,6 @@ type FlyoutBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Fl
     [<CustomOperation("Placement")>] member inline this.Placement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.Placement), (fun ctx x -> ctx.Element.Placement <- x), x)
     [<CustomOperation("ShowMode")>] member inline this.ShowMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Avalonia.Controls.FlyoutShowMode) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.ShowMode), (fun ctx x -> ctx.Element.ShowMode <- x), x)
     [<CustomOperation("ShowMode")>] member inline this.ShowMode ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.ShowMode), (fun ctx x -> ctx.Element.ShowMode <- x), x)
-    [<CustomOperation("TargetEx")>] member inline this.TargetEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Target), x)
-    [<CustomOperation("TargetEx'")>] member inline this.TargetEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Target), x)
-    [<CustomOperation("Target")>] member inline this.Target ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Target), x)
-    [<CustomOperation("Target'")>] member inline this.Target' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Target), x)
 
     [<CustomOperation("Closed")>] member inline this.Closed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closed), "Closed", fn)
     [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)

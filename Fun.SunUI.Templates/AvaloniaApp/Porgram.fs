@@ -15,7 +15,7 @@ let count = cval 0
 
 let mainWindow =
     Window'() {
-        Title "Fun.SunUI.Avalonia.Demo"
+        Title "AvaloniaApp"
         Width 400
         Height 500
         TransparencyBackgroundFallback(SolidColorBrush(Colors.HotPink, 0.2))
