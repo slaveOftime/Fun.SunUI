@@ -52,6 +52,7 @@ let wpfProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.WPF" </> "Fun.SunUI.WPF" </> "
 let mauiProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI" </> "Fun.SunUI.MAUI.fsproj"
 let avaloniaProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Avalonia" </> "Fun.SunUI.Avalonia" </> "Fun.SunUI.Avalonia.fsproj"
 let terminalGUIProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.TerminalGUI" </> "Fun.SunUI.TerminalGUI" </> "Fun.SunUI.TerminalGUI.fsproj"
+let htmlProj = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Html" </> "Fun.SunUI.Html" </> "Fun.SunUI.Html.fsproj"
 
 
 pipeline "GenerateInternalBindings" {
@@ -66,6 +67,7 @@ pipeline "GenerateInternalBindings" {
     stage "Generate" { run $"{generatorExe} generate {mauiProj} -u MAUI --forDefault --sdk 6.0.401" }
     stage "Generate" { run $"{generatorExe} generate {avaloniaProj} -u Avalonia --forDefault" }
     stage "Generate" { run $"{generatorExe} generate {terminalGUIProj} -u TerminalGUI --forDefault" }
+    stage "Generate" { run $"{generatorExe} generate {htmlProj} -u Html --forDefault" }
     runIfOnlySpecified
 }
 

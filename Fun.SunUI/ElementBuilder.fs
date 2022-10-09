@@ -19,6 +19,7 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
         member _.ServiceProvider = sp
 
         member _.Dispose() =
+#if !FABLE_COMPILER
             match tryUnbox<IDisposable> nativeElement with
             | Some x -> x.Dispose()
             | _ -> ()
@@ -27,6 +28,16 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
                 match tryUnbox<IDisposable> property with
                 | Some x -> x.Dispose()
                 | _ -> ()
+#else
+            match box nativeElement with
+            | :? IDisposable as x -> x.Dispose()
+            | _ -> ()
+
+            for KeyValue (_, property) in this.PropertyResources do
+                match box property with
+                | :? IDisposable as x -> x.Dispose()
+                | _ -> ()
+#endif
 
 
 type BuildElement<'Element> = delegate of ctx: ElementBuildContext<'Element> * index: int -> int
@@ -225,6 +236,19 @@ type ElementBuilder<'UIStack, 'Element>() =
 
             ctx.PropertyResources[ propertyName ] <- addAction ctx action
 
+            index + 1
+        )
+
+
+    member inline _.MakeSimplePropertyBuilder<'Element, 'Property>
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] setProperty: ElementBuildContext<'Element> -> 'Property -> unit,
+            value: 'Property
+        ) =
+        BuildElement<'Element>(fun ctx index ->
+            let index = builder.Invoke(ctx, index)
+            setProperty ctx value
             index + 1
         )
 

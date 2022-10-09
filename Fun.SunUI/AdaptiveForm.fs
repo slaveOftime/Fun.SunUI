@@ -1,5 +1,6 @@
 ﻿namespace rec Fun.SunUI
 
+#if !FABLE_COMPILER
 open System
 open System.Linq
 open System.Collections.Generic
@@ -176,3 +177,4 @@ module Validators =
     let seqMinLen min error : Validator<'T, _, 'Error> = fun _ value -> if value |> Seq.length < min then [ error min ] else []
 
     let seqMaxLen max error : Validator<'T, _, 'Error> = fun _ value -> if value |> Seq.length > max then [ error max ] else []
+#endif
