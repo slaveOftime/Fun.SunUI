@@ -2,37 +2,27 @@
 
 open Modern.Forms
 open Fun.SunUI.Generator
-open Utils
+open Fun.SunUI.Generator.TypeInfo
 
 
 let namesp = "Fun.SunUI.ModernForms"
 let assemblyName = "Modern.Forms"
 
 
-let makeControlCtx () = {
-    GeneratorContext.RootType = typeof<Control>
-    ChildType = typeof<Control>
-    BuilderName = "ModernFormsControlBuilder"
-    UIStackName = "ModernForms"
-    IsChildrenProp = fun _ -> false
-    IsYieldProp = fun _ -> false
-    ExcludeBaseTypes = []
-    ExcludeProp = fun _ -> false
-    ExcludeEvent = fun _ -> false
-}
+let makeControlCtx () =
+    { GeneratorContext.Create<Control>() with
+        ChildType = typeof<Control>
+        BuilderName = "ModernFormsControlBuilder"
+        UIStackName = "ModernForms"
+    }
 
 
-let makeWindowBaseCtx () = {
-    GeneratorContext.RootType = typeof<WindowBase>
-    ChildType = typeof<Control>
-    BuilderName = "ModernFormsWindowBaseBuilder"
-    UIStackName = "ModernForms"
-    IsChildrenProp = fun _ -> false
-    IsYieldProp = fun _ -> false
-    ExcludeBaseTypes = []
-    ExcludeProp = fun _ -> false
-    ExcludeEvent = fun _ -> false
-}
+let makeWindowBaseCtx () =
+    { GeneratorContext.Create<WindowBase>() with
+        ChildType = typeof<Control>
+        BuilderName = "ModernFormsWindowBaseBuilder"
+        UIStackName = "ModernForms"
+    }
 
 
 let generateDefault dir =

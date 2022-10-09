@@ -3,13 +3,14 @@
 open System
 open System.Reflection
 open Utils
+open TypeInfo
 
 
 let getMetaInfo (ctx: GeneratorContext) (ty: Type) =
     let useInline = true
 
     let getTypeMeta (ty: Type) =
-        if ty.Name.Contains "`" then
+        if ty <> null && ty.Name.Contains "`" then
             let generics =
                 if ty.GenericTypeArguments.Length = 0 then
                     ty.GetTypeInfo().GenericTypeParameters

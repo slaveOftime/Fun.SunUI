@@ -5,6 +5,7 @@ open System.IO
 open System.Reflection
 open System.Collections.Generic
 open Utils
+open TypeInfo
 
 
 let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: string) (tys: Type seq) =
@@ -118,10 +119,14 @@ type {builderName}{if meta.ty.IsSealed then "" else builderGenericsWithContraint
                     let genericStr =
                         meta.generics |> getTypeNames |> createGenerics |> appendStr (createConstraint meta.generics) |> closeGenerics
 
+                    let ctr =
+                        match ctx.TransformBuilderName with
+                        | None -> $"new {getTypeName meta.ty}()"
+                        | Some fn -> fn meta.ty
 
                     $"""    type {typeName}'{genericStr} () = 
         inherit {builderName}{if meta.ty.IsSealed then "" else builderGenerics}()
-        member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> new {getTypeName meta.ty}()), this.GetRenderMode())
+        member inline this.Run([<InlineIfLambda>] builder: BuildElement<{getTypeName meta.ty}>) = this.MakeElementCreator(builder, (fun _ -> {ctr}), this.GetRenderMode())
 """
                 )
                 |> String.concat "\n"

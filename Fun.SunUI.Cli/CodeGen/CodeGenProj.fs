@@ -23,6 +23,7 @@ type UIStack =
     | MAUI = 3
     | Avalonia = 4
     | TerminalGUI = 5
+    | Html = 6
 
 
 module CodeGenProject =

@@ -1,7 +1,40 @@
 ﻿module Fun.SunUI.Generator.TypeInfo
 
 open System
+open System.Reflection
 open Utils
+
+
+type Namespace = Namespace of string
+
+
+type GeneratorContext =
+    {
+        RootType: Type
+        ChildType: Type
+        BuilderName: string
+        UIStackName: string
+        IsChildrenProp: PropertyInfo -> bool
+        IsYieldProp: PropertyInfo -> bool
+        ExcludeBaseTypes: Type seq
+        ExcludeProp: PropertyInfo -> bool
+        ExcludeEvent: EventInfo -> bool
+        TransformBuilderName: (Type -> string) option
+    }
+
+    static member Create<'RootType>() = {
+        GeneratorContext.RootType = typeof<'RootType>
+        ChildType = typeof<'RootType>
+        BuilderName = ""
+        UIStackName = ""
+        IsChildrenProp = fun _ -> false
+        IsYieldProp = fun _ -> false
+        ExcludeBaseTypes = []
+        ExcludeProp = fun _ -> false
+        ExcludeEvent = fun _ -> false
+        TransformBuilderName = None
+    }
+
 
 type private TypeTree = Node of Type * TypeTree list
 
@@ -51,7 +84,7 @@ let create (rootType: Type) (excludeBaseTypes: Type seq) (buildMetaInfo: Type ->
         )
         |> Seq.toList
 
-    let baseTypes = validTypes |> Seq.map (fun x -> x.BaseType) |> Seq.filter ((<>) rootType)
+    let baseTypes = validTypes |> Seq.map (fun x -> x.BaseType) |> Seq.filter (fun ty -> ty <> rootType && ty <> null)
 
     let deeperBaseTypes = System.Collections.Generic.List()
 

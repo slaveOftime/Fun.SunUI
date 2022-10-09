@@ -5,22 +5,6 @@ open System.IO
 open System.Reflection
 
 
-type Namespace = Namespace of string
-
-
-type GeneratorContext = {
-    RootType: Type
-    ChildType: Type
-    BuilderName: string
-    UIStackName: string
-    IsChildrenProp: PropertyInfo -> bool
-    IsYieldProp: PropertyInfo -> bool
-    ExcludeBaseTypes: Type seq
-    ExcludeProp: PropertyInfo -> bool
-    ExcludeEvent: EventInfo -> bool
-}
-
-
 let (</>) x y = Path.Combine(x, y)
 
 

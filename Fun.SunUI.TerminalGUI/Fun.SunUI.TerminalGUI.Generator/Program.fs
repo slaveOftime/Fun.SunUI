@@ -2,24 +2,19 @@
 
 open Terminal.Gui
 open Fun.SunUI.Generator
-open Utils
+open Fun.SunUI.Generator.TypeInfo
 
 
 let namesp = "Fun.SunUI.TerminalGUI"
 let assemblyName = "Terminal.GUI"
 
 
-let makeViewCtx () = {
-    GeneratorContext.RootType = typeof<View>
-    ChildType = typeof<View>
-    BuilderName = "TerminalGUIViewBuilder"
-    UIStackName = "TerminalGUI"
-    IsChildrenProp = fun _ -> false
-    IsYieldProp = fun _ -> false
-    ExcludeBaseTypes = []
-    ExcludeProp = fun _ -> false
-    ExcludeEvent = fun _ -> false
-}
+let makeViewCtx () =
+    { GeneratorContext.Create<View>() with
+        ChildType = typeof<View>
+        BuilderName = "TerminalGUIViewBuilder"
+        UIStackName = "TerminalGUI"
+    }
 
 
 let generateDefault dir = Generator.createCodeFile (makeViewCtx ()) dir namesp assemblyName "Views.Generated"
