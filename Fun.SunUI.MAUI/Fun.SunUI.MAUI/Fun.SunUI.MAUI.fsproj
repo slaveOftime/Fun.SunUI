@@ -8,6 +8,7 @@
 	<ItemGroup>
 		<Compile Include="Core.fs" />
 		<Compile Include="Controls.Generated.fs" />
+		<Compile Include="Controls.Extensions.fs" />
 	</ItemGroup>
 
 	<ItemGroup>

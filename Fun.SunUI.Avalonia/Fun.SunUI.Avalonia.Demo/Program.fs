@@ -6,7 +6,6 @@ open Avalonia.Layout
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Themes.Fluent
 open Avalonia.Controls
-open Fun.SunUI
 open Fun.SunUI.Avalonia.Controls
 
 
@@ -21,7 +20,7 @@ let mainWindow =
         TransparencyBackgroundFallback(SolidColorBrush(Colors.HotPink, 0.2))
         Background Brushes.Transparent
         Grid'() {
-            RowDefinitions(Avalonia.Controls.RowDefinitions("Auto,*,Auto"))
+            RowDefinitions "Auto,*,Auto"
             StaticChildren [
                 Border'() {
                     Height 20
@@ -33,13 +32,13 @@ let mainWindow =
                     )
                 }
                 StackPanel'() {
-                    With(fun this -> Grid.SetRow(this, 1))
+                    GridRow 1
                     VerticalAlignment VerticalAlignment.Center
                     HorizontalAlignment HorizontalAlignment.Center
                     StaticChildren [ TextBlock'() { Text(count |> AVal.map (sprintf "count = %d")) } ]
                 }
                 Button'() {
-                    With(fun this -> Grid.SetRow(this, 2))
+                    GridRow 2
                     Content' "Increase"
                     Height 60
                     HorizontalAlignment HorizontalAlignment.Stretch

@@ -12,6 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
 		<PackageReference Include="Fun.SunUI.ModernForms" Version="0.0.*" />
 	</ItemGroup>
 

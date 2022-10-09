@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] - 2022-10-08
+
+Update templates
+
 ## [0.0.4] - 2022-10-09
 
 Fix Avalonia template

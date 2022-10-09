@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
 		<PackageReference Include="Fun.SunUI.WPF" Version="0.0.*" />
 	</ItemGroup>
 

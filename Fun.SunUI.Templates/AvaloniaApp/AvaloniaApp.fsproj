@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
 		<PackageReference Include="Fun.SunUI.Avalonia" Version="0.0.*" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->

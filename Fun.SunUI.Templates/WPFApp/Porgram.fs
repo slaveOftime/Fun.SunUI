@@ -40,7 +40,7 @@ let window =
                     ]
                 }
                 Button'() {
-                    With(fun this -> Grid.SetRow(this, 3))
+                    GridRow 1
                     Content' "Increase"
                     Height 60
                     Click(fun _ -> count.Publish((+) 1))

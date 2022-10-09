@@ -65,7 +65,7 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            setFn: 'T -> 'Element -> IsFirstTimeAdded -> unit
+            [<InlineIfLambda>] setFn: 'T -> 'Element -> IsFirstTimeAdded -> unit
         ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
@@ -83,7 +83,7 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            setFn: 'T -> unit
+            [<InlineIfLambda>] setFn: 'T -> unit
         ) =
         this.MakeGetOnlyBuilder(builder, getFn, (fun x _ _ -> setFn x))
 
@@ -92,7 +92,7 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            getStore: 'T -> 'Element -> IsFirstTimeAdded -> aval<unit>
+            [<InlineIfLambda>] getStore: 'T -> 'Element -> IsFirstTimeAdded -> aval<unit>
         ) =
         BuildElement<'Element>(fun ctx index ->
             let index = builder.Invoke(ctx, index)
@@ -112,28 +112,33 @@ type ElementBuilder<'UIStack, 'Element>() =
         (
             [<InlineIfLambda>] builder: BuildElement<'Element>,
             [<InlineIfLambda>] getFn: 'Element -> 'T,
-            getStore: 'T -> aval<unit>
+            [<InlineIfLambda>] getStore: 'T -> aval<unit>
         ) =
         this.MakeGetOnlyAdaptiveBuilder(builder, getFn, (fun x _ _ -> getStore x))
 
 
     /// This will return the native element reference.
     [<CustomOperation("WithEx")>]
-    member inline this.WithEx([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> IsFirstTimeAdded -> unit) =
+    member inline this.WithEx([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] set: 'Element -> IsFirstTimeAdded -> unit) =
         this.MakeGetOnlyBuilder(builder, (fun x -> x), (fun x _ firstTime -> set x firstTime))
 
     /// This will return the native element reference.
     [<CustomOperation("With")>]
-    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit) = this.WithEx(builder, (fun x _ -> set x))
+    member inline this.With([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] set: 'Element -> unit) =
+        this.WithEx(builder, (fun x _ -> set x))
 
     /// This will return the native element reference.
     [<CustomOperation("WithEx'")>]
-    member inline this.WithEx'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> IsFirstTimeAdded -> unit aval) =
+    member inline this.WithEx'
+        (
+            [<InlineIfLambda>] builder: BuildElement<'Element>,
+            [<InlineIfLambda>] set: 'Element -> IsFirstTimeAdded -> unit aval
+        ) =
         this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x), (fun x _ firstTime -> set x firstTime))
 
     /// This will return the native element reference.
     [<CustomOperation("With'")>]
-    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, set: 'Element -> unit aval) =
+    member inline this.With'([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] set: 'Element -> unit aval) =
         this.WithEx'(builder, (fun x _ -> set x))
 
 

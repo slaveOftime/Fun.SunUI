@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.4] - 2022-10-09
+
+- Upgrade dependency packages
+- Add extensions for GridRow GridColumn GriwRowSpan GridColumnSpan
+- Add extensions for SemanticProperties
+
 ## [0.0.3] - 2022-10-07
 
 - Update dependency packages

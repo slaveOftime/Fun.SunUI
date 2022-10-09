@@ -10,7 +10,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fun.SunUI.MAUI" Version="0.0.1" />
+		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
+		<PackageReference Include="Fun.SunUI.MAUI" Version="0.0.*" />
 	</ItemGroup>
 
 </Project>

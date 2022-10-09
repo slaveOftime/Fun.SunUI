@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] - 2022-10-09
+
+- Upgrade dependency packages
+
 ## [0.0.4] - 2022-10-07
 
 - Update dependency packages

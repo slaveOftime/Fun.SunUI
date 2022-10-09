@@ -43,13 +43,13 @@ let main (_: string[]) =
                             rect
                         )
                         StackPanel'() {
-                            With(fun this -> Grid.SetRow(this, 1))
+                            GridRow 1
                             VerticalAlignment VerticalAlignment.Center
                             HorizontalAlignment HorizontalAlignment.Center
                             StaticChildren [ TextBlock'() { Text(count |> AVal.map (sprintf "count = %d")) } ]
                         }
                         Button'() {
-                            With(fun this -> Grid.SetRow(this, 3))
+                            GridRow 2
                             Content' "Increase"
                             Height 60
                             Click(fun _ -> transact (fun () -> count.Value <- count.Value + 1))
