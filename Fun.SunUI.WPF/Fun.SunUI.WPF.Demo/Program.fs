@@ -44,6 +44,9 @@ let main (_: string[]) =
                         )
                         StackPanel'() {
                             GridRow 1
+                            GridRow (cval 1)
+                            GridCol 1
+                            GridCol (cval 1)
                             VerticalAlignment VerticalAlignment.Center
                             HorizontalAlignment HorizontalAlignment.Center
                             StaticChildren [ TextBlock'() { Text(count |> AVal.map (sprintf "count = %d")) } ]

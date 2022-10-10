@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFrameworks>net472;net5.0</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TrimMode>link</TrimMode>
+		<IsTrimmable>true</IsTrimmable>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.6] - 2022-10-10
+
+Update templates
+
 ## [0.0.5] - 2022-10-08
 
 Update templates

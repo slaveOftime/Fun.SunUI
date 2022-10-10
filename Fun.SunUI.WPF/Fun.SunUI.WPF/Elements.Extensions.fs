@@ -23,11 +23,11 @@ type UIElementBuilder<'Element when 'Element :> System.Windows.UIElement> with
         )
 
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColumn([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColmn([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With'(
             builder,
             (fun this -> adaptive {
@@ -47,5 +47,20 @@ type UIElementBuilder<'Element when 'Element :> System.Windows.UIElement> with
             (fun this -> adaptive {
                 let! x = x
                 Grid.SetRowSpan(this, x)
+            })
+        )
+
+
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+        this.With(builder, (fun this -> Grid.SetColumnSpan(this, x)))
+
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+        this.With'(
+            builder,
+            (fun this -> adaptive {
+                let! x = x
+                Grid.SetColumnSpan(this, x)
             })
         )

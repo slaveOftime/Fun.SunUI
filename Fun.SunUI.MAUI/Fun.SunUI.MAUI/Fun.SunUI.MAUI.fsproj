@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<UseMaui>true</UseMaui>
 		<TargetFramework>net6.0</TargetFramework>
+		<TrimMode>link</TrimMode>
+		<IsTrimmable>true</IsTrimmable>
 	</PropertyGroup>
 
 	<ItemGroup>

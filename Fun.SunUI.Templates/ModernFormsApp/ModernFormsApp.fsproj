@@ -16,6 +16,7 @@
 		<PackageReference Include="Fun.SunUI.ModernForms" Version="0.0.*" />
 	</ItemGroup>
 
+//-:cnd:noEmit
 	<Target Name="ConfigureTrimming" BeforeTargets="PrepareForILLink">
 		<ItemGroup>
 			<ManagedAssemblyToLink Condition="'%(Filename)' == 'Modern.Forms'">
@@ -24,5 +25,6 @@
 			</ManagedAssemblyToLink>
 		</ItemGroup>
 	</Target>
+//+:cnd:noEmit
 
 </Project>

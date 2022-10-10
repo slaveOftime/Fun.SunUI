@@ -21,6 +21,7 @@ let mainWindow =
         Background Brushes.Transparent
         Grid'() {
             RowDefinitions "Auto,*,Auto"
+            ColDefinitions "*"
             StaticChildren [
                 Border'() {
                     Height 20
@@ -39,6 +40,13 @@ let mainWindow =
                 }
                 Button'() {
                     GridRow 2
+                    GridRow(cval 2)
+                    GridCol 0
+                    GridCol(cval 0)
+                    GridRowSpan 1
+                    GridRowSpan(cval 1)
+                    GridColSpan 1
+                    GridColSpan(cval 1)
                     Content' "Increase"
                     Height 60
                     HorizontalAlignment HorizontalAlignment.Stretch
@@ -59,9 +67,7 @@ type App() =
 
     override app.OnFrameworkInitializationCompleted() =
         match app.ApplicationLifetime with
-        | :? IClassicDesktopStyleApplicationLifetime as desktop ->
-            let window = mainWindow.Build<Window>(null)
-            desktop.MainWindow <- window
+        | :? IClassicDesktopStyleApplicationLifetime as desktop -> desktop.MainWindow <- mainWindow.Build(null)
         | _ -> ()
 
         base.OnFrameworkInitializationCompleted()

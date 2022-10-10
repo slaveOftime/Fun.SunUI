@@ -23,11 +23,11 @@ type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element> w
         )
 
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColumn([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColmn([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With'(
             builder,
             (fun this -> adaptive {
@@ -51,12 +51,12 @@ type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element> w
         )
 
 
-    [<CustomOperation("GridColmnSpan")>]
-    member inline this.GridColmnSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With(builder, (fun this -> Grid.SetColumnSpan(this, x)))
 
-    [<CustomOperation("GridColumnSpan")>]
-    member inline this.GridColumnSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With'(
             builder,
             (fun this -> adaptive {

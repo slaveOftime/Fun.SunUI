@@ -23,11 +23,11 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
         )
 
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColumn([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.With(builder, (fun this -> Grid.SetColumn(this, x)))
 
-    [<CustomOperation("GridColumn")>]
-    member inline this.GridColmn([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridCol")>]
+    member inline this.GridCol([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With'(
             builder,
             (fun this -> adaptive {
@@ -51,12 +51,12 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
         )
 
 
-    [<CustomOperation("GridColmnSpan")>]
-    member inline this.GridColmnSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With(builder, (fun this -> Grid.SetColumnSpan(this, x)))
 
-    [<CustomOperation("GridColumnSpan")>]
-    member inline this.GridColumnSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
+    [<CustomOperation("GridColSpan")>]
+    member inline this.GridColSpan([<InlineIfLambda>] builder: BuildElement<'Element>, x) =
         this.With'(
             builder,
             (fun this -> adaptive {
@@ -75,3 +75,12 @@ type GridBuilder<'Element when 'Element :> Avalonia.Controls.Grid> with
     [<CustomOperation("RowDefinitions")>]
     member inline this.RowDefinitions([<InlineIfLambda>] builder: BuildElement<'Element>, x: string aval) =
         this.RowDefinitions(builder, x |> AVal.map Avalonia.Controls.RowDefinitions)
+
+
+    [<CustomOperation("ColDefinitions")>]
+    member inline this.ColDefinitions([<InlineIfLambda>] builder: BuildElement<'Element>, x: string) =
+        this.ColumnDefinitions(builder, Avalonia.Controls.ColumnDefinitions(x))
+
+    [<CustomOperation("ColDefinitions")>]
+    member inline this.ColDefinitions([<InlineIfLambda>] builder: BuildElement<'Element>, x: string aval) =
+        this.ColumnDefinitions(builder, x |> AVal.map Avalonia.Controls.ColumnDefinitions)
