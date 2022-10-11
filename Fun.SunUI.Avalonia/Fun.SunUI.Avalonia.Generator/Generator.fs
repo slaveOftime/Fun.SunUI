@@ -21,7 +21,7 @@ let makeElementCtx () = {
             prop.PropertyType.IsAssignableTo typeof<Controls>
             || prop.PropertyType.IsAssignableTo typeof<IControl>
             || (prop.DeclaringType.IsAssignableTo typeof<Avalonia.Controls.ContentControl> && prop.Name = "Content")
-    IsYieldProp = fun prop -> prop.Name = "Content"
+    IsYieldProp = fun prop -> prop.Name = "Content" || prop.Name = "Child"
     ExcludeBaseTypes = []
     ExcludeProp = fun _ -> false
     ExcludeEvent = fun _ -> false

@@ -1,10 +1,22 @@
 ﻿[<AutoOpen>]
 module Fun.SunUI.Avalonia.Controls.Extensions
 
+open System
 open FSharp.Data.Adaptive
 open Avalonia.Controls
+open Avalonia.Controls.Templates
 open Fun.SunUI
+open Fun.SunUI.Avalonia
 open Fun.SunUI.Avalonia.DslInternals.Controls
+
+
+type UI with
+
+    static member inline CreateDataTemplate(sp: IServiceProvider, [<InlineIfLambda>] creator: 'Data -> ElementCreator<Avalonia>) =
+        { new IDataTemplate with
+            member _.Match _ = true
+            member _.Build data = creator(unbox data).Build(sp)
+        }
 
 
 type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
@@ -19,7 +31,8 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
             (fun this -> adaptive {
                 let! x = x
                 Grid.SetRow(this, x)
-            })
+            }
+            )
         )
 
 
@@ -33,7 +46,8 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
             (fun this -> adaptive {
                 let! x = x
                 Grid.SetColumn(this, x)
-            })
+            }
+            )
         )
 
 
@@ -47,7 +61,8 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
             (fun this -> adaptive {
                 let! x = x
                 Grid.SetRowSpan(this, x)
-            })
+            }
+            )
         )
 
 
@@ -62,7 +77,8 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control> with
             (fun this -> adaptive {
                 let! x = x
                 Grid.SetColumnSpan(this, x)
-            })
+            }
+            )
         )
 
 

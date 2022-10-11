@@ -19,7 +19,7 @@ let makeElementCtx () = {
         fun prop ->
             prop.PropertyType.IsAssignableTo typeof<UIElementCollection>
             || (prop.DeclaringType.IsAssignableTo typeof<ContentControl> && prop.Name = "Content")
-    IsYieldProp = fun prop -> prop.Name = "Content"
+    IsYieldProp = fun prop -> prop.Name = "Content" || prop.Name = "Child"
     ExcludeBaseTypes = []
     ExcludeProp = fun _ -> false
     ExcludeEvent = fun evt -> evt.Name = "MessageHook"

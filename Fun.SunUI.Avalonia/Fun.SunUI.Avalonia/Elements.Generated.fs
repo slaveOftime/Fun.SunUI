@@ -2001,6 +2001,32 @@ type DecoratorBuilder<'Element when 'Element :> Avalonia.Controls.Decorator>() =
     inherit Controls.ControlBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<Avalonia>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<Avalonia>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<Avalonia> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<Avalonia> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
+
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
@@ -2505,6 +2531,32 @@ type PopupBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Popup>(
     [<CustomOperation("Host'")>] member inline this.Host' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Host), x)
     [<CustomOperation("WindowManagerAddShadowHint")>] member inline this.WindowManagerAddShadowHint ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Boolean) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.WindowManagerAddShadowHint), (fun ctx x -> ctx.Element.WindowManagerAddShadowHint <- x), x)
     [<CustomOperation("WindowManagerAddShadowHint")>] member inline this.WindowManagerAddShadowHint ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeAdaptivePropertyBuilder(builder, (fun ctx -> ctx.Element.WindowManagerAddShadowHint), (fun ctx x -> ctx.Element.WindowManagerAddShadowHint <- x), x)
+
+
+    member inline _.Yield(creator: ElementCreator<Avalonia>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<Avalonia>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<Avalonia> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<Avalonia> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<Avalonia> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
 
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =

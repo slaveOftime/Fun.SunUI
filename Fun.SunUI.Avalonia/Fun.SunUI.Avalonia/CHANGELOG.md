@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.4] - 2022-10-11
+
+- Enable yield Child
+- Add UI.CreateDataTemplate util
+
 ## [0.0.3] - 2022-10-10
 
 Update Grid extensions

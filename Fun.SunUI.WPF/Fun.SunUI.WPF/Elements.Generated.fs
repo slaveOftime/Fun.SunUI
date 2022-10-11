@@ -2444,6 +2444,32 @@ type DecoratorBuilder<'Element when 'Element :> System.Windows.Controls.Decorato
     inherit FrameworkElementBuilder<'Element>()
 
 
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
+
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
@@ -2470,6 +2496,32 @@ type AdornerDecoratorBuilder<'Element when 'Element :> System.Windows.Documents.
     [<CustomOperation("AdornerLayerEx'")>] member inline this.AdornerLayerEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AdornerLayer), x)
     [<CustomOperation("AdornerLayer")>] member inline this.AdornerLayer ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.AdornerLayer), x)
     [<CustomOperation("AdornerLayer'")>] member inline this.AdornerLayer' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.AdornerLayer), x)
+
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
 
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -2517,6 +2569,32 @@ type InkPresenterBuilder<'Element when 'Element :> System.Windows.Controls.InkPr
 type ViewboxBuilder<'Element when 'Element :> System.Windows.Controls.Viewbox>() =
     inherit Controls.DecoratorBuilder<'Element>()
 
+
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
 
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -2782,6 +2860,32 @@ type PageContentBuilder() =
     [<CustomOperation("LinkTargets")>] member inline this.LinkTargets ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.LinkTargets), x)
     [<CustomOperation("LinkTargets'")>] member inline this.LinkTargets' ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.LinkTargets), x)
 
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
+
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<System.Windows.Documents.PageContent>, creator) =
         this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
@@ -2847,6 +2951,32 @@ type AdornedElementPlaceholderBuilder<'Element when 'Element :> System.Windows.C
     [<CustomOperation("AdornedElementEx'")>] member inline this.AdornedElementEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.AdornedElement), x)
     [<CustomOperation("AdornedElement")>] member inline this.AdornedElement ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.AdornedElement), x)
     [<CustomOperation("AdornedElement'")>] member inline this.AdornedElement' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.AdornedElement), x)
+
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
 
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =
@@ -3107,6 +3237,32 @@ type DocumentPageViewBuilder<'Element when 'Element :> System.Windows.Controls.P
 type PopupBuilder<'Element when 'Element :> System.Windows.Controls.Primitives.Popup>() =
     inherit FrameworkElementBuilder<'Element>()
 
+
+
+    member inline _.Yield(creator: ElementCreator<WPF>) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF>, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+    
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF>) =
+        this.MakeSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+    
+    member inline _.Yield(creator: ElementCreator<WPF> aval) = creator
+    
+    member inline this.Combine(creator: ElementCreator<WPF> aval, [<InlineIfLambda>] builder: BuildElement<'Element>) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), creator)
+    
+    member inline this.For([<InlineIfLambda>] builder: BuildElement<'Element>, [<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Child <- x), fn ())
+                        
+    member inline this.Delay([<InlineIfLambda>] fn: unit -> ElementCreator<WPF> aval) =
+        this.MakeAdaptiveSingleChildBuilder(BuildElement(fun _ i -> i), (fun ctx x -> ctx.Element.Child <- x), fn ())
+
+                        
 
     [<CustomOperation("Child")>]
     member inline this.Child ([<InlineIfLambda>] builder: BuildElement<'Element>, creator) =

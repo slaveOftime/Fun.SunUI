@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2022-10-11
+
+- Support yield Child
+
 ## [0.0.6] - 2022-10-10
 
 Update Grid extensions
