@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.4] - 2022-10-24
+
+Fix dependency issue
+
 ## [0.0.3] - 2022-10-10
 
 Enable trim by link

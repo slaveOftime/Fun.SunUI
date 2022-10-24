@@ -25,5 +25,9 @@
         <Content Include=".\**\*" Exclude=".\**\.vs\**;.\**\bin\**;.\**\obj\**;Templates.fsproj" />
         <Compile Remove="**\*" />
     </ItemGroup>
+    
+	<ItemGroup>
+		<PackageReference Condition="'$(Configuration)'=='RELEASE'" Include="Ionide.KeepAChangelog.Tasks" Version="0.1.8" PrivateAssets="all" />
+	</ItemGroup>
 
 </Project>

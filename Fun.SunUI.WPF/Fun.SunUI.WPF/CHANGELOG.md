@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.8] - 2022-10-24
+
+Fix dependency issue
+
 ## [0.0.7] - 2022-10-11
 
 - Support yield Child

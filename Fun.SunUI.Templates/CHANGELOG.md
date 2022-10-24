@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2022-10-24
+
+Fix dependency issue
+
 ## [0.0.6] - 2022-10-10
 
 Update templates
