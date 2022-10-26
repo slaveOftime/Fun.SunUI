@@ -1,47 +1,12 @@
 #r "nuget: Fun.Build, 0.1.8"
 
 open System.IO
-open System.Diagnostics
 open Fun.Build
 
 
 let inline (</>) x y = Path.Combine(x, y)
 
-
-let dotnetPack (proj: string) (ctx: StageContext) =
-    let path = __SOURCE_DIRECTORY__ </> proj
-    let changeLog = Path.GetDirectoryName path </> "CHANGELOG.md"
-
-    let command =
-        if File.Exists changeLog then
-            let lines = File.ReadAllLines changeLog
-            let vIndex = lines |> Array.tryFindIndex (fun x -> x.StartsWith "## [") |> Option.defaultValue 0
-            let vIndexLength =
-                lines
-                |> Array.skip (vIndex + 1)
-                |> Array.tryFindIndex (fun x -> x.StartsWith "## [")
-                |> Option.defaultWith (fun _ -> lines.Length - vIndex - 1)
-            let v =
-                let breaktStart = lines[ vIndex ].IndexOf "["
-                let breaktEnd = lines[ vIndex ].IndexOf "]"
-                lines[ vIndex ].Substring(breaktStart + 1, breaktEnd - breaktStart - 1)
-            let notes = lines |> Array.skip vIndex |> Array.take (vIndexLength + 1) |> String.concat "\n"
-            $"dotnet pack -c Release {proj} -o . -p:Version={v} -p:PackageReleaseNotes=\"{notes}\""
-        else
-            $"dotnet pack -c Release {proj} -o ."
-
-    printfn "%s" command
-
-    let cmd = ctx.BuildCommand(command) 
-    cmd.RedirectStandardOutput <- true
-
-    let proc = new Process()
-    proc.StartInfo <- cmd
-    proc.OutputDataReceived.Add(fun e -> printfn "%s" e.Data)
-    proc.Start() |> ignore
-    proc.BeginOutputReadLine()
-    proc.WaitForExit()
-    proc.ExitCode
+let dotnetPack (proj: string) = $"dotnet pack -c Release {proj} -o ."
 
 
 let generatorExe = __SOURCE_DIRECTORY__ </> "Fun.SunUI.Cli" </> "bin" </> "Debug" </> "net6.0" </> "publish" </> "Fun.SunUI.Cli.exe"
