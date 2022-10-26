@@ -109,3 +109,13 @@ type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element> w
                 SemanticProperties.SetHint(this, x)
             })
         )
+
+
+type Image' with
+    [<CustomOperation("Source")>]
+    member inline this.Source ([<InlineIfLambda>] builder: BuildElement<Image>, src: string) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Source <- x), FileImageSource'() { File src })
+
+    [<CustomOperation("Source")>]
+    member inline this.Source ([<InlineIfLambda>] builder: BuildElement<Image>, src: string aval) =
+        this.MakeSingleChildBuilder(builder, (fun ctx x -> ctx.Element.Source <- x), FileImageSource'() { File src })

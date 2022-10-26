@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.8] - 2022-10-27
+
+Support file path for Image' 
+
 ## [0.0.7] - 2022-10-26
 
 Simplify namespace convention

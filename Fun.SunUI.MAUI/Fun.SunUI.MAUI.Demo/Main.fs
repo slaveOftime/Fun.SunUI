@@ -22,7 +22,7 @@ let Create (sp) =
                                 VerticalOptions LayoutOptions.Center
                                 Children [
                                     Image'() {
-                                        Source(FileImageSource'() { File "dotnet_bot.png" })
+                                        Source "dotnet_bot.png"
                                         HeightRequest 200.
                                         HorizontalOptions LayoutOptions.Center
                                         SematicDescription "Cute dot net bot waving hi to you!"
