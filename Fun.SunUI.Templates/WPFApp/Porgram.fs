@@ -14,10 +14,10 @@ let window =
         Width 300
         Height 400
         Grid'() {
-            RowDefinitions(fun row ->
-                row.Add(RowDefinition(Height = GridLength(1., GridUnitType.Star)))
-                row.Add(RowDefinition(Height = GridLength.Auto))
-            )
+            Rows [
+                RowDefinition(Height = GridLength(1., GridUnitType.Star))
+                RowDefinition(Height = GridLength.Auto)
+            ]
             StaticChildren [
                 StackPanel'() {
                     VerticalAlignment VerticalAlignment.Center

@@ -15,12 +15,11 @@ let main (_: string[]) =
             Window'() {
                 Title "Demo"
                 Grid'() {
-                    RowDefinitionsEx(fun row _ isFirstTime ->
-                        if isFirstTime then
-                            row.Add(RowDefinition(Height = GridLength 40.))
-                            row.Add(RowDefinition(Height = GridLength(1., GridUnitType.Star)))
-                            row.Add(RowDefinition(Height = GridLength.Auto))
-                    )
+                    Rows [
+                        RowDefinition(Height = GridLength 40.)
+                        RowDefinition(Height = GridLength(1., GridUnitType.Star))
+                        RowDefinition(Height = GridLength.Auto)
+                    ]
                     StaticChildren [
                         Border'() {
                             Background(

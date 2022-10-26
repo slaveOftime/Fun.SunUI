@@ -64,3 +64,12 @@ type UIElementBuilder<'Element when 'Element :> System.Windows.UIElement> with
                 Grid.SetColumnSpan(this, x)
             })
         )
+
+
+type Grid' with
+
+    [<CustomOperation("Rows")>]
+    member inline this.Rows([<InlineIfLambda>] builder: BuildElement<Grid>, rows: RowDefinition seq) = this.With(builder, fun comp -> comp.RowDefinitions.Clear(); rows |> Seq.iter comp.RowDefinitions.Add)
+
+    [<CustomOperation("Columns")>]
+    member inline this.Columns([<InlineIfLambda>] builder: BuildElement<Grid>, rows: ColumnDefinition seq) = this.With(builder, fun comp -> comp.ColumnDefinitions.Clear(); rows |> Seq.iter comp.ColumnDefinitions.Add)
