@@ -5,7 +5,7 @@ open FSharp.Data.Adaptive
 open Fun.SunUI.Internal
 
 
-type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, key) as this =
+type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider, renderMode) as this =
     /// Used to reserve property related thing like event handler for later to clean up.
     member val PropertyResources = System.Collections.Generic.Dictionary<string, obj>()
 
@@ -14,7 +14,7 @@ type ElementBuildContext<'Element>(nativeElement: 'Element, sp: IServiceProvider
     member _.Element = nativeElement
 
     interface IElementContext with
-        member val RenderMode = key with get, set
+        member val RenderMode = renderMode with get, set
         member _.NativeElement = box nativeElement
         member _.ServiceProvider = sp
 

@@ -62,7 +62,7 @@ let main (_: string[]) =
     let services = ServiceCollection()
     let sp = services.BuildServiceProvider()
 
-    let nativeWindow = window.CreateOrUpdate(sp, ValueNone).NativeElement :?> Window
+    let nativeWindow = window.Build<Window>(sp)
     Application() |> ignore
     Application.Current.MainWindow <- nativeWindow
 

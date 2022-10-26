@@ -36,7 +36,7 @@ let start () =
 
     let services = new ServiceCollection()
     let sp = services.BuildServiceProvider()
-    let nativeMainForm = mainForm.CreateOrUpdate(sp, ValueNone).NativeElement :?> Form
+    let nativeMainForm = mainForm.Build<Form>(sp)
     Application.Run(nativeMainForm)
 
 
