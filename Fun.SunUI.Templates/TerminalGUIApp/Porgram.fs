@@ -1,8 +1,7 @@
 ﻿open FSharp.Data.Adaptive
-open Terminal.Gui
 open NStack
+open Terminal.Gui
 open Fun.SunUI
-open Fun.SunUI.TerminalGUI
 
 
 let count = cval 0

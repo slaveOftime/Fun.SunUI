@@ -7,7 +7,6 @@ open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Themes.Fluent
 open Avalonia.Controls
 open Fun.SunUI
-open Fun.SunUI.Avalonia.Controls
 
 
 let count = cval 0
