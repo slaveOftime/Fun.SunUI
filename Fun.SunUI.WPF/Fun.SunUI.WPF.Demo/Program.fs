@@ -4,8 +4,6 @@ open System.Windows.Controls
 open FSharp.Data.Adaptive
 open Microsoft.Extensions.DependencyInjection
 open Fun.SunUI
-open Fun.SunUI.WPF
-open Fun.SunUI.WPF.Controls
 
 
 [<EntryPoint; STAThread>]

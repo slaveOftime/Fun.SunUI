@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.MAUI.DslInternals
+namespace rec Microsoft.Maui.Controls.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element>() =
@@ -525,12 +525,12 @@ type ViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.View>() =
 
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals.Compatibility
+namespace rec Microsoft.Maui.Controls.DslInternals.Compatibility
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type LayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibility.Layout>() =
@@ -550,12 +550,12 @@ type LayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compatibili
     [<CustomOperation("LayoutChanged")>] member inline this.LayoutChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutChanged), "LayoutChanged", fn)
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals
+namespace rec Microsoft.Maui.Controls.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type TemplatedViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.TemplatedView>() =
@@ -853,12 +853,12 @@ type ScrollViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ScrollV
     [<CustomOperation("Scrolled")>] member inline this.Scrolled ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Scrolled), "Scrolled", fn)
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals.Compatibility
+namespace rec Microsoft.Maui.Controls.DslInternals.Compatibility
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type LayoutBuilder2<'Element, 'T when 'T :> Microsoft.Maui.Controls.View and 'Element :> Microsoft.Maui.Controls.Compatibility.Layout<'T>>() =
@@ -1037,12 +1037,12 @@ type StackLayoutBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Compat
 
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals
+namespace rec Microsoft.Maui.Controls.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type ItemsViewBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ItemsView>() =
@@ -1413,12 +1413,12 @@ type SearchBarBuilder<'Element when 'Element :> Microsoft.Maui.Controls.SearchBa
     [<CustomOperation("SearchButtonPressed")>] member inline this.SearchButtonPressed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SearchButtonPressed), "SearchButtonPressed", fn)
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals.Shapes
+namespace rec Microsoft.Maui.Controls.DslInternals.Shapes
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type ShapeBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Shapes.Shape>() =
@@ -1531,12 +1531,12 @@ type RoundRectangleBuilder() =
 
                 
             
-namespace rec Fun.SunUI.MAUI.DslInternals
+namespace rec Microsoft.Maui.Controls.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.MAUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI
+open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 
 
 type ActivityIndicatorBuilder<'Element when 'Element :> Microsoft.Maui.Controls.ActivityIndicator>() =
@@ -2953,13 +2953,13 @@ type SwipeItemsBuilder<'Element when 'Element :> Microsoft.Maui.Controls.SwipeIt
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.MAUI
+namespace Microsoft.Maui.Controls
 
 [<AutoOpen>]
-module MAUIElementBuilderDslCE_MicrosoftMauiControls =
+module MAUIElementBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.MAUI.DslInternals
+    open Microsoft.Maui.Controls.DslInternals
 
     type Page' () = 
         inherit PageBuilder<Microsoft.Maui.Controls.Page>()
@@ -3334,13 +3334,13 @@ module MAUIElementBuilderDslCE_MicrosoftMauiControls =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.Maui.Controls.SwipeItems>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.Maui.Controls.SwipeItems()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.MAUI.Compatibility
+namespace Microsoft.Maui.Controls.Compatibility
 
 [<AutoOpen>]
-module MAUIElementBuilderDslCE_MicrosoftMauiControlsCompatibility =
+module MAUIElementBuilderDslCE_Compatibility =
   
     open Fun.SunUI
-    open Fun.SunUI.MAUI.DslInternals.Compatibility
+    open Microsoft.Maui.Controls.DslInternals.Compatibility
 
     type AbsoluteLayout' () = 
         inherit AbsoluteLayoutBuilder<Microsoft.Maui.Controls.Compatibility.AbsoluteLayout>()
@@ -3363,13 +3363,13 @@ module MAUIElementBuilderDslCE_MicrosoftMauiControlsCompatibility =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Microsoft.Maui.Controls.Compatibility.StackLayout>) = this.MakeElementCreator(builder, (fun _ -> new Microsoft.Maui.Controls.Compatibility.StackLayout()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.MAUI.Shapes
+namespace Microsoft.Maui.Controls.Shapes
 
 [<AutoOpen>]
-module MAUIElementBuilderDslCE_MicrosoftMauiControlsShapes =
+module MAUIElementBuilderDslCE_Shapes =
   
     open Fun.SunUI
-    open Fun.SunUI.MAUI.DslInternals.Shapes
+    open Microsoft.Maui.Controls.DslInternals.Shapes
 
     type Ellipse' () = 
         inherit EllipseBuilder()

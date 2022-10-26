@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.Avalonia
+﻿namespace Avalonia
 
 open Fun.SunUI
 

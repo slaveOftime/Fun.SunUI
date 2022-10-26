@@ -5,7 +5,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.ModernForms"
+let namesp = "Modern.Forms"
 let assemblyName = "Modern.Forms"
 
 

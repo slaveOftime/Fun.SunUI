@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.WinForms.DslInternals
+namespace rec System.Windows.Forms.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.WinForms
+open System.Windows.Forms
+open System.Windows.Forms.DslInternals
 
 
 type ControlBuilder<'Element when 'Element :> System.Windows.Forms.Control>() =
@@ -1103,12 +1103,12 @@ type ThreadExceptionDialogBuilder<'Element when 'Element :> System.Windows.Forms
     [<CustomOperation("AutoSizeChanged")>] member inline this.AutoSizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoSizeChanged), "AutoSizeChanged", fn)
                 
             
-namespace rec Fun.SunUI.WinForms.DslInternals.Design
+namespace rec System.Windows.Forms.DslInternals.Design
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.WinForms
+open System.Windows.Forms
+open System.Windows.Forms.DslInternals
 
 
 type ComponentEditorFormBuilder<'Element when 'Element :> System.Windows.Forms.Design.ComponentEditorForm>() =
@@ -1120,12 +1120,12 @@ type ComponentEditorFormBuilder<'Element when 'Element :> System.Windows.Forms.D
     [<CustomOperation("AutoSizeChanged")>] member inline this.AutoSizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoSizeChanged), "AutoSizeChanged", fn)
                 
             
-namespace rec Fun.SunUI.WinForms.DslInternals
+namespace rec System.Windows.Forms.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.WinForms
+open System.Windows.Forms
+open System.Windows.Forms.DslInternals
 
 
 type PropertyGridBuilder<'Element when 'Element :> System.Windows.Forms.PropertyGrid>() =
@@ -1781,12 +1781,12 @@ type ToolStripContentPanelBuilder<'Element when 'Element :> System.Windows.Forms
     [<CustomOperation("RendererChanged")>] member inline this.RendererChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.RendererChanged), "RendererChanged", fn)
                 
             
-namespace rec Fun.SunUI.WinForms.DslInternals.Design
+namespace rec System.Windows.Forms.DslInternals.Design
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.WinForms
+open System.Windows.Forms
+open System.Windows.Forms.DslInternals
 
 
 type ComponentEditorPageBuilder<'Element when 'Element :> System.Windows.Forms.Design.ComponentEditorPage>() =
@@ -1806,12 +1806,12 @@ type ComponentEditorPageBuilder<'Element when 'Element :> System.Windows.Forms.D
     [<CustomOperation("AutoSizeChanged")>] member inline this.AutoSizeChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.AutoSizeChanged), "AutoSizeChanged", fn)
                 
             
-namespace rec Fun.SunUI.WinForms.DslInternals
+namespace rec System.Windows.Forms.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.WinForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.WinForms
+open System.Windows.Forms
+open System.Windows.Forms.DslInternals
 
 
 type ListControlBuilder<'Element when 'Element :> System.Windows.Forms.ListControl>() =
@@ -3356,7 +3356,8 @@ type ListViewBuilder<'Element when 'Element :> System.Windows.Forms.ListView>() 
     [<CustomOperation("CheckedItemsEx'")>] member inline this.CheckedItemsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.CheckedItems), x)
     [<CustomOperation("CheckedItems")>] member inline this.CheckedItems ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.CheckedItems), x)
     [<CustomOperation("CheckedItems'")>] member inline this.CheckedItems' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.CheckedItems), x)
-    [<CustomOperation("Columns")>] member inline this.Columns ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Columns), x)
+    [<CustomOperation("ColumnsEx")>] member inline this.ColumnsEx ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder(builder, (fun x -> x.Columns), x)
+    [<CustomOperation("ColumnsEx'")>] member inline this.ColumnsEx' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder(builder, (fun x -> x.Columns), x)
     [<CustomOperation("Columns")>] member inline this.Columns ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyBuilder1(builder, (fun x -> x.Columns), x)
     [<CustomOperation("Columns'")>] member inline this.Columns' ([<InlineIfLambda>] builder: BuildElement<'Element>, x) = this.MakeGetOnlyAdaptiveBuilder1(builder, (fun x -> x.Columns), x)
     [<CustomOperation("FocusedItem")>] member inline this.FocusedItem ([<InlineIfLambda>] builder: BuildElement<'Element>, x: System.Windows.Forms.ListViewItem) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.FocusedItem), (fun ctx x -> ctx.Element.FocusedItem <- x), x)
@@ -3898,13 +3899,13 @@ type TreeViewBuilder<'Element when 'Element :> System.Windows.Forms.TreeView>() 
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.WinForms
+namespace System.Windows.Forms
 
 [<AutoOpen>]
-module WinFormsControlBuilderDslCE_SystemWindowsForms =
+module WinFormsControlBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.WinForms.DslInternals
+    open System.Windows.Forms.DslInternals
 
     type Control' () = 
         inherit ControlBuilder<System.Windows.Forms.Control>()
@@ -4119,13 +4120,13 @@ module WinFormsControlBuilderDslCE_SystemWindowsForms =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<System.Windows.Forms.TreeView>) = this.MakeElementCreator(builder, (fun _ -> new System.Windows.Forms.TreeView()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.WinForms.Design
+namespace System.Windows.Forms.Design
 
 [<AutoOpen>]
-module WinFormsControlBuilderDslCE_SystemWindowsFormsDesign =
+module WinFormsControlBuilderDslCE_Design =
   
     open Fun.SunUI
-    open Fun.SunUI.WinForms.DslInternals.Design
+    open System.Windows.Forms.DslInternals.Design
 
 
             

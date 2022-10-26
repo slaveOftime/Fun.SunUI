@@ -1,11 +1,10 @@
 ﻿module Program
 
 open System
-open Modern.Forms
 open FSharp.Data.Adaptive
-open Fun.SunUI
-open Fun.SunUI.ModernForms
 open Microsoft.Extensions.DependencyInjection
+open Modern.Forms
+open Fun.SunUI
 
 
 type SimpleService() =

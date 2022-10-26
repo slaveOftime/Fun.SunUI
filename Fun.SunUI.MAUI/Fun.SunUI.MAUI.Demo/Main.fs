@@ -4,7 +4,6 @@ open FSharp.Data.Adaptive
 open Microsoft.Maui
 open Microsoft.Maui.Controls
 open Fun.SunUI
-open Fun.SunUI.MAUI
 
 
 let Create (sp) =

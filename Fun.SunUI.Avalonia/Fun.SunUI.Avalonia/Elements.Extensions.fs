@@ -1,13 +1,13 @@
 ﻿[<AutoOpen>]
-module Fun.SunUI.Avalonia.Controls.Extensions
+module Avalonia.Controls.Extensions
 
 open System
 open FSharp.Data.Adaptive
+open Avalonia
 open Avalonia.Controls
 open Avalonia.Controls.Templates
+open Avalonia.DslInternals.Controls
 open Fun.SunUI
-open Fun.SunUI.Avalonia
-open Fun.SunUI.Avalonia.DslInternals.Controls
 
 
 type UI with

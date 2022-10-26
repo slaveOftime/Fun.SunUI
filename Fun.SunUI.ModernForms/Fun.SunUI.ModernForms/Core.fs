@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.ModernForms
+﻿namespace Modern.Forms
 
 open Fun.SunUI
 

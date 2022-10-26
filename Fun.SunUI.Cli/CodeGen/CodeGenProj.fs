@@ -143,7 +143,7 @@ module CodeGenProject =
         let bootstrapCode = StringBuilder()
 
         if forDefault then
-            bootstrapCode.AppendLine $"Fun.SunUI.{uiStackName}.Generator.generateDefault \"{Path.GetDirectoryName projectFile}\""
+            bootstrapCode.AppendLine $"Fun.SunUI.{uiStackName}.Generator.generateDefault @\"{Path.GetDirectoryName projectFile}\""
             |> ignore
         else
             for package in packages do

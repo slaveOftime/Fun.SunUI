@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.TerminalGUI
+﻿namespace Terminal.Gui
 
 open FSharp.Data.Adaptive
 open Terminal.Gui

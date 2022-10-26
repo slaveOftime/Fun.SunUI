@@ -5,7 +5,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.TerminalGUI"
+let namesp = "Terminal.Gui"
 let assemblyName = "Terminal.GUI"
 
 

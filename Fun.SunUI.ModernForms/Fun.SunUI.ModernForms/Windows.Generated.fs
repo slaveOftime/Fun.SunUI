@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.ModernForms.DslInternals
+namespace rec Modern.Forms.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.ModernForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.ModernForms
+open Modern.Forms
+open Modern.Forms.DslInternals
 
 
 type WindowBaseBuilder<'Element when 'Element :> Modern.Forms.WindowBase>() =
@@ -143,13 +143,13 @@ type PopupWindowBuilder<'Element when 'Element :> Modern.Forms.PopupWindow>() =
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.ModernForms
+namespace Modern.Forms
 
 [<AutoOpen>]
-module ModernFormsWindowBaseBuilderDslCE_ModernForms =
+module ModernFormsWindowBaseBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.ModernForms.DslInternals
+    open Modern.Forms.DslInternals
 
     type Form' () = 
         inherit FormBuilder<Modern.Forms.Form>()

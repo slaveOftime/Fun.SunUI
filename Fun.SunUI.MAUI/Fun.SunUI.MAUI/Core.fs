@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.MAUI
+﻿namespace Microsoft.Maui.Controls
 
 open Fun.SunUI
 

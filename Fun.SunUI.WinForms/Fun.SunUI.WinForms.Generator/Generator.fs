@@ -5,7 +5,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.WinForms"
+let namesp = "System.Windows.Forms"
 let assemblyName = "System.Windows.Forms"
 
 

@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.WinForms
+﻿namespace System.Windows.Forms
 
 open FSharp.Data.Adaptive
 open System.Windows.Forms

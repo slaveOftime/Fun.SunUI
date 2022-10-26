@@ -22,8 +22,11 @@ let private generate (ctx: GeneratorContext) (targetNamespace: string) (opens: s
         )
 
     let trimWithTargetNamespace (ns: string) =
-        if ns.StartsWith targetNamespace && ns.Length > targetNamespace.Length then
-            ns.Substring(targetNamespace.Length + 1)
+        if ns.StartsWith targetNamespace then
+            if ns.Length > targetNamespace.Length then
+                ns.Substring(targetNamespace.Length + 1)
+            else
+                ""
         else
             ns
 
@@ -151,9 +154,9 @@ let createCodeFile ctx (codesDir: string) (targetNamespace: string) (sourceAssem
         let opens =
             $"""
 open FSharp.Data.Adaptive
-open {targetNamespace}.{Utils.internalSegment}
 open Fun.SunUI
-open Fun.SunUI.{ctx.UIStackName}
+open {targetNamespace}
+open {targetNamespace}.{Utils.internalSegment}
 """
 
         let types = Assembly.Load(sourceAssemblyName).GetTypes()

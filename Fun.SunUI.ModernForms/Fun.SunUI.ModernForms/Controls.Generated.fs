@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.ModernForms.DslInternals
+namespace rec Modern.Forms.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.ModernForms.DslInternals
 open Fun.SunUI
-open Fun.SunUI.ModernForms
+open Modern.Forms
+open Modern.Forms.DslInternals
 
 
 type ControlBuilder<'Element when 'Element :> Modern.Forms.Control>() =
@@ -765,13 +765,13 @@ type TreeViewBuilder<'Element when 'Element :> Modern.Forms.TreeView>() =
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.ModernForms
+namespace Modern.Forms
 
 [<AutoOpen>]
-module ModernFormsControlBuilderDslCE_ModernForms =
+module ModernFormsControlBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.ModernForms.DslInternals
+    open Modern.Forms.DslInternals
 
     type Control' () = 
         inherit ControlBuilder<Modern.Forms.Control>()

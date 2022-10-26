@@ -1,10 +1,10 @@
 ﻿[<AutoOpen>]
-module Fun.SunUI.WPF.Extensions
+module System.Windows.Controls.Extensions
 
 open System.Windows.Controls
+open System.Windows.DslInternals
 open FSharp.Data.Adaptive
 open Fun.SunUI
-open Fun.SunUI.WPF.DslInternals
 
 
 type UIElementBuilder<'Element when 'Element :> System.Windows.UIElement> with

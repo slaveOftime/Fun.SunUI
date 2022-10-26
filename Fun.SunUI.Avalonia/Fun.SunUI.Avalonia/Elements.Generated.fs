@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.Avalonia.DslInternals
+namespace rec Avalonia.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type AvaloniaObjectBuilder<'Element when 'Element :> Avalonia.AvaloniaObject>() =
@@ -13,12 +13,12 @@ type AvaloniaObjectBuilder<'Element when 'Element :> Avalonia.AvaloniaObject>() 
     [<CustomOperation("PropertyChanged")>] member inline this.PropertyChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.PropertyChanged), "PropertyChanged", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Animation
+namespace rec Avalonia.DslInternals.Animation
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type AnimatableBuilder<'Element when 'Element :> Avalonia.Animation.Animatable>() =
@@ -31,12 +31,12 @@ type AnimatableBuilder<'Element when 'Element :> Avalonia.Animation.Animatable>(
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals
+namespace rec Avalonia.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type StyledElementBuilder<'Element when 'Element :> Avalonia.StyledElement>() =
@@ -102,12 +102,12 @@ type VisualBuilder<'Element when 'Element :> Avalonia.Visual>() =
     [<CustomOperation("DetachedFromVisualTree")>] member inline this.DetachedFromVisualTree ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DetachedFromVisualTree), "DetachedFromVisualTree", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Layout
+namespace rec Avalonia.DslInternals.Layout
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type LayoutableBuilder<'Element when 'Element :> Avalonia.Layout.Layoutable>() =
@@ -142,12 +142,12 @@ type LayoutableBuilder<'Element when 'Element :> Avalonia.Layout.Layoutable>() =
     [<CustomOperation("LayoutUpdated")>] member inline this.LayoutUpdated ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.LayoutUpdated), "LayoutUpdated", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Interactivity
+namespace rec Avalonia.DslInternals.Interactivity
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type InteractiveBuilder<'Element when 'Element :> Avalonia.Interactivity.Interactive>() =
@@ -156,12 +156,12 @@ type InteractiveBuilder<'Element when 'Element :> Avalonia.Interactivity.Interac
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Input
+namespace rec Avalonia.DslInternals.Input
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type InputElementBuilder<'Element when 'Element :> Avalonia.Input.InputElement>() =
@@ -206,12 +206,12 @@ type InputElementBuilder<'Element when 'Element :> Avalonia.Input.InputElement>(
     [<CustomOperation("DoubleTapped")>] member inline this.DoubleTapped ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DoubleTapped), "DoubleTapped", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control>() =
@@ -240,12 +240,12 @@ type ControlBuilder<'Element when 'Element :> Avalonia.Controls.Control>() =
     [<CustomOperation("ContextRequested")>] member inline this.ContextRequested ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.ContextRequested), "ContextRequested", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TemplatedControlBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.TemplatedControl>() =
@@ -277,12 +277,12 @@ type TemplatedControlBuilder<'Element when 'Element :> Avalonia.Controls.Primiti
     [<CustomOperation("TemplateApplied")>] member inline this.TemplateApplied ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.TemplateApplied), "TemplateApplied", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ContentControlBuilder<'Element when 'Element :> Avalonia.Controls.ContentControl>() =
@@ -355,12 +355,12 @@ type ButtonBuilder<'Element when 'Element :> Avalonia.Controls.Button>() =
     [<CustomOperation("Click")>] member inline this.Click ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Click), "Click", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ToggleButtonBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.ToggleButton>() =
@@ -376,12 +376,12 @@ type ToggleButtonBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.
     [<CustomOperation("Indeterminate")>] member inline this.Indeterminate ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Indeterminate), "Indeterminate", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type CheckBoxBuilder<'Element when 'Element :> Avalonia.Controls.CheckBox>() =
@@ -422,12 +422,12 @@ type RepeatButtonBuilder<'Element when 'Element :> Avalonia.Controls.RepeatButto
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type CalendarButtonBuilder() =
@@ -446,12 +446,12 @@ type CalendarDayButtonBuilder() =
     [<CustomOperation("CalendarDayButtonMouseUp")>] member inline this.CalendarDayButtonMouseUp ([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Primitives.CalendarDayButton>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.CalendarDayButtonMouseUp), "CalendarDayButtonMouseUp", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ListBoxItemBuilder<'Element when 'Element :> Avalonia.Controls.ListBoxItem>() =
@@ -474,12 +474,12 @@ type DropDownItemBuilder<'Element when 'Element :> Avalonia.Controls.DropDownIte
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TabStripItemBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.TabStripItem>() =
@@ -488,12 +488,12 @@ type TabStripItemBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TopLevelBuilder<'Element when 'Element :> Avalonia.Controls.TopLevel>() =
@@ -598,12 +598,12 @@ type WindowBuilder<'Element when 'Element :> Avalonia.Controls.Window>() =
     [<CustomOperation("Closing")>] member inline this.Closing ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Closing), "Closing", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type PopupRootBuilder() =
@@ -616,12 +616,12 @@ type PopupRootBuilder() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Embedding
+namespace rec Avalonia.DslInternals.Controls.Embedding
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type EmbeddableControlRootBuilder<'Element when 'Element :> Avalonia.Controls.Embedding.EmbeddableControlRoot>() =
@@ -630,12 +630,12 @@ type EmbeddableControlRootBuilder<'Element when 'Element :> Avalonia.Controls.Em
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type SpinnerBuilder<'Element when 'Element :> Avalonia.Controls.Spinner>() =
@@ -659,12 +659,12 @@ type ButtonSpinnerBuilder<'Element when 'Element :> Avalonia.Controls.ButtonSpin
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type HeaderedContentControlBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.HeaderedContentControl>() =
@@ -677,12 +677,12 @@ type HeaderedContentControlBuilder<'Element when 'Element :> Avalonia.Controls.P
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ExpanderBuilder<'Element when 'Element :> Avalonia.Controls.Expander>() =
@@ -821,12 +821,12 @@ type UserControlBuilder<'Element when 'Element :> Avalonia.Controls.UserControl>
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Notifications
+namespace rec Avalonia.DslInternals.Controls.Notifications
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type NotificationCardBuilder<'Element when 'Element :> Avalonia.Controls.Notifications.NotificationCard>() =
@@ -838,12 +838,12 @@ type NotificationCardBuilder<'Element when 'Element :> Avalonia.Controls.Notific
     [<CustomOperation("NotificationClosed")>] member inline this.NotificationClosed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.NotificationClosed), "NotificationClosed", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type OverlayPopupHostBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.OverlayPopupHost>() =
@@ -856,12 +856,12 @@ type OverlayPopupHostBuilder<'Element when 'Element :> Avalonia.Controls.Primiti
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.ItemsControl>() =
@@ -880,12 +880,12 @@ type ItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.ItemsContro
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type SelectingItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.SelectingItemsControl>() =
@@ -903,12 +903,12 @@ type SelectingItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.Pr
     [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type MenuBaseBuilder<'Element when 'Element :> Avalonia.Controls.MenuBase>() =
@@ -992,12 +992,12 @@ type DropDownBuilder<'Element when 'Element :> Avalonia.Controls.DropDown>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type HeaderedSelectingItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.HeaderedSelectingItemsControl>() =
@@ -1008,12 +1008,12 @@ type HeaderedSelectingItemsControlBuilder<'Element when 'Element :> Avalonia.Con
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type MenuItemBuilder<'Element when 'Element :> Avalonia.Controls.MenuItem>() =
@@ -1090,12 +1090,12 @@ type TabControlBuilder<'Element when 'Element :> Avalonia.Controls.TabControl>()
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TabStripBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.TabStrip>() =
@@ -1112,12 +1112,12 @@ type HeaderedItemsControlBuilder<'Element when 'Element :> Avalonia.Controls.Pri
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TreeViewItemBuilder<'Element when 'Element :> Avalonia.Controls.TreeViewItem>() =
@@ -1153,12 +1153,12 @@ type TreeViewBuilder<'Element when 'Element :> Avalonia.Controls.TreeView>() =
     [<CustomOperation("SelectionChanged")>] member inline this.SelectionChanged ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.SelectionChanged), "SelectionChanged", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type PickerPresenterBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.PickerPresenterBase>() =
@@ -1169,12 +1169,12 @@ type PickerPresenterBaseBuilder<'Element when 'Element :> Avalonia.Controls.Prim
     [<CustomOperation("Dismissed")>] member inline this.Dismissed ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Dismissed), "Dismissed", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type DatePickerPresenterBuilder<'Element when 'Element :> Avalonia.Controls.DatePickerPresenter>() =
@@ -1213,12 +1213,12 @@ type TimePickerPresenterBuilder<'Element when 'Element :> Avalonia.Controls.Time
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ThumbBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Thumb>() =
@@ -1230,12 +1230,12 @@ type ThumbBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Thumb>(
     [<CustomOperation("DragCompleted")>] member inline this.DragCompleted ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.DragCompleted), "DragCompleted", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type GridSplitterBuilder<'Element when 'Element :> Avalonia.Controls.GridSplitter>() =
@@ -1363,12 +1363,12 @@ type PathIconBuilder<'Element when 'Element :> Avalonia.Controls.PathIcon>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type RangeBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.RangeBase>() =
@@ -1387,12 +1387,12 @@ type RangeBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Ran
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ProgressBarBuilder<'Element when 'Element :> Avalonia.Controls.ProgressBar>() =
@@ -1433,12 +1433,12 @@ type SliderBuilder<'Element when 'Element :> Avalonia.Controls.Slider>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ScrollBarBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.ScrollBar>() =
@@ -1460,12 +1460,12 @@ type ScrollBarBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Scr
     [<CustomOperation("Scroll")>] member inline this.Scroll ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Scroll), "Scroll", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type AutoCompleteBoxBuilder<'Element when 'Element :> Avalonia.Controls.AutoCompleteBox>() =
@@ -1694,12 +1694,12 @@ type SeparatorBuilder<'Element when 'Element :> Avalonia.Controls.Separator>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Notifications
+namespace rec Avalonia.DslInternals.Controls.Notifications
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type WindowNotificationManagerBuilder<'Element when 'Element :> Avalonia.Controls.Notifications.WindowNotificationManager>() =
@@ -1712,12 +1712,12 @@ type WindowNotificationManagerBuilder<'Element when 'Element :> Avalonia.Control
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Chrome
+namespace rec Avalonia.DslInternals.Controls.Chrome
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type CaptionButtonsBuilder<'Element when 'Element :> Avalonia.Controls.Chrome.CaptionButtons>() =
@@ -1732,12 +1732,12 @@ type TitleBarBuilder<'Element when 'Element :> Avalonia.Controls.Chrome.TitleBar
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type CalendarItemBuilder() =
@@ -1750,12 +1750,12 @@ type CalendarItemBuilder() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type PanelBuilder<'Element when 'Element :> Avalonia.Controls.Panel>() =
@@ -1824,12 +1824,12 @@ type CanvasBuilder<'Element when 'Element :> Avalonia.Controls.Canvas>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type AdornerLayerBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.AdornerLayer>() =
@@ -1848,12 +1848,12 @@ type OverlayLayerBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type DockPanelBuilder<'Element when 'Element :> Avalonia.Controls.DockPanel>() =
@@ -1917,12 +1917,12 @@ type WrapPanelBuilder<'Element when 'Element :> Avalonia.Controls.WrapPanel>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type DateTimePickerPanelBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.DateTimePickerPanel>() =
@@ -1989,12 +1989,12 @@ type UniformGridBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.U
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type DecoratorBuilder<'Element when 'Element :> Avalonia.Controls.Decorator>() =
@@ -2068,12 +2068,12 @@ type BorderBuilder<'Element when 'Element :> Avalonia.Controls.Border>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type LightDismissOverlayLayerBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.LightDismissOverlayLayer>() =
@@ -2084,12 +2084,12 @@ type LightDismissOverlayLayerBuilder<'Element when 'Element :> Avalonia.Controls
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ExperimentalAcrylicBorderBuilder<'Element when 'Element :> Avalonia.Controls.ExperimentalAcrylicBorder>() =
@@ -2122,12 +2122,12 @@ type ViewboxBuilder<'Element when 'Element :> Avalonia.Controls.Viewbox>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type VisualLayerManagerBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.VisualLayerManager>() =
@@ -2138,12 +2138,12 @@ type VisualLayerManagerBuilder<'Element when 'Element :> Avalonia.Controls.Primi
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Shapes
+namespace rec Avalonia.DslInternals.Controls.Shapes
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ShapeBuilder<'Element when 'Element :> Avalonia.Controls.Shapes.Shape>() =
@@ -2232,12 +2232,12 @@ type RectangleBuilder<'Element when 'Element :> Avalonia.Controls.Shapes.Rectang
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Presenters
+namespace rec Avalonia.DslInternals.Controls.Presenters
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ItemsPresenterBaseBuilder<'Element when 'Element :> Avalonia.Controls.Presenters.ItemsPresenterBase>() =
@@ -2324,12 +2324,12 @@ type ScrollContentPresenterBuilder<'Element when 'Element :> Avalonia.Controls.P
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TextBlockBuilder<'Element when 'Element :> Avalonia.Controls.TextBlock>() =
@@ -2370,12 +2370,12 @@ type TextBlockBuilder<'Element when 'Element :> Avalonia.Controls.TextBlock>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type AccessTextBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.AccessText>() =
@@ -2386,12 +2386,12 @@ type AccessTextBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Ac
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type DrawingPresenterBuilder<'Element when 'Element :> Avalonia.Controls.DrawingPresenter>() =
@@ -2446,12 +2446,12 @@ type TickBarBuilder<'Element when 'Element :> Avalonia.Controls.TickBar>() =
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Remote
+namespace rec Avalonia.DslInternals.Controls.Remote
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type RemoteWidgetBuilder<'Element when 'Element :> Avalonia.Controls.Remote.RemoteWidget>() =
@@ -2462,12 +2462,12 @@ type RemoteWidgetBuilder<'Element when 'Element :> Avalonia.Controls.Remote.Remo
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Presenters
+namespace rec Avalonia.DslInternals.Controls.Presenters
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type TextPresenterBuilder<'Element when 'Element :> Avalonia.Controls.Presenters.TextPresenter>() =
@@ -2514,12 +2514,12 @@ type TextPresenterBuilder<'Element when 'Element :> Avalonia.Controls.Presenters
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type PopupBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Popup>() =
@@ -2657,12 +2657,12 @@ type TrackBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Track>(
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type NativeMenuItemBaseBuilder<'Element when 'Element :> Avalonia.Controls.NativeMenuItemBase>() =
@@ -2743,12 +2743,12 @@ type RowDefinitionBuilder<'Element when 'Element :> Avalonia.Controls.RowDefinit
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+namespace rec Avalonia.DslInternals.Controls.Primitives
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type FlyoutBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.FlyoutBase>() =
@@ -2765,12 +2765,12 @@ type FlyoutBaseBuilder<'Element when 'Element :> Avalonia.Controls.Primitives.Fl
     [<CustomOperation("Opening")>] member inline this.Opening ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.Opening), "Opening", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type FlyoutBuilder<'Element when 'Element :> Avalonia.Controls.Flyout>() =
@@ -2799,12 +2799,12 @@ type MenuFlyoutBuilder<'Element when 'Element :> Avalonia.Controls.MenuFlyout>()
 
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals
+namespace rec Avalonia.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type ApplicationBuilder<'Element when 'Element :> Avalonia.Application>() =
@@ -2843,12 +2843,12 @@ type ApplicationBuilder<'Element when 'Element :> Avalonia.Application>() =
     [<CustomOperation("UrlsOpened")>] member inline this.UrlsOpened ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeEventPropertyBuilder(builder, (fun ctx -> ctx.Element.UrlsOpened), "UrlsOpened", fn)
                 
             
-namespace rec Fun.SunUI.Avalonia.DslInternals.Controls
+namespace rec Avalonia.DslInternals.Controls
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.Avalonia.DslInternals
 open Fun.SunUI
-open Fun.SunUI.Avalonia
+open Avalonia
+open Avalonia.DslInternals
 
 
 type NativeMenuBuilder<'Element when 'Element :> Avalonia.Controls.NativeMenu>() =
@@ -2902,13 +2902,13 @@ type TrayIconBuilder<'Element when 'Element :> Avalonia.Controls.TrayIcon>() =
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.Avalonia
+namespace Avalonia
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_Avalonia =
+module AvaloniaElementBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals
+    open Avalonia.DslInternals
 
     type AvaloniaObject' () = 
         inherit AvaloniaObjectBuilder<Avalonia.AvaloniaObject>()
@@ -2927,65 +2927,65 @@ module AvaloniaElementBuilderDslCE_Avalonia =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Application>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Application()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Animation
+namespace Avalonia.Animation
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaAnimation =
+module AvaloniaElementBuilderDslCE_Animation =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Animation
+    open Avalonia.DslInternals.Animation
 
     type Animatable' () = 
         inherit AnimatableBuilder<Avalonia.Animation.Animatable>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Animation.Animatable>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Animation.Animatable()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Layout
+namespace Avalonia.Layout
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaLayout =
+module AvaloniaElementBuilderDslCE_Layout =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Layout
+    open Avalonia.DslInternals.Layout
 
     type Layoutable' () = 
         inherit LayoutableBuilder<Avalonia.Layout.Layoutable>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Layout.Layoutable>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Layout.Layoutable()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Interactivity
+namespace Avalonia.Interactivity
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaInteractivity =
+module AvaloniaElementBuilderDslCE_Interactivity =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Interactivity
+    open Avalonia.DslInternals.Interactivity
 
     type Interactive' () = 
         inherit InteractiveBuilder<Avalonia.Interactivity.Interactive>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Interactivity.Interactive>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Interactivity.Interactive()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Input
+namespace Avalonia.Input
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaInput =
+module AvaloniaElementBuilderDslCE_Input =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Input
+    open Avalonia.DslInternals.Input
 
     type InputElement' () = 
         inherit InputElementBuilder<Avalonia.Input.InputElement>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Input.InputElement>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Input.InputElement()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls
+namespace Avalonia.Controls
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControls =
+module AvaloniaElementBuilderDslCE_Controls =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls
+    open Avalonia.DslInternals.Controls
 
     type Control' () = 
         inherit ControlBuilder<Avalonia.Controls.Control>()
@@ -3304,13 +3304,13 @@ module AvaloniaElementBuilderDslCE_AvaloniaControls =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.TrayIcon>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.TrayIcon()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Primitives
+namespace Avalonia.Controls.Primitives
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsPrimitives =
+module AvaloniaElementBuilderDslCE_ControlsPrimitives =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Primitives
+    open Avalonia.DslInternals.Controls.Primitives
 
     type TemplatedControl' () = 
         inherit TemplatedControlBuilder<Avalonia.Controls.Primitives.TemplatedControl>()
@@ -3405,39 +3405,39 @@ module AvaloniaElementBuilderDslCE_AvaloniaControlsPrimitives =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Primitives.Track>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Primitives.Track()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Embedding
+namespace Avalonia.Controls.Embedding
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsEmbedding =
+module AvaloniaElementBuilderDslCE_ControlsEmbedding =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Embedding
+    open Avalonia.DslInternals.Controls.Embedding
 
     type EmbeddableControlRoot' () = 
         inherit EmbeddableControlRootBuilder<Avalonia.Controls.Embedding.EmbeddableControlRoot>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Embedding.EmbeddableControlRoot>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Embedding.EmbeddableControlRoot()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Notifications
+namespace Avalonia.Controls.Notifications
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsNotifications =
+module AvaloniaElementBuilderDslCE_ControlsNotifications =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Notifications
+    open Avalonia.DslInternals.Controls.Notifications
 
     type NotificationCard' () = 
         inherit NotificationCardBuilder<Avalonia.Controls.Notifications.NotificationCard>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Notifications.NotificationCard>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Notifications.NotificationCard()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Chrome
+namespace Avalonia.Controls.Chrome
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsChrome =
+module AvaloniaElementBuilderDslCE_ControlsChrome =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Chrome
+    open Avalonia.DslInternals.Controls.Chrome
 
     type CaptionButtons' () = 
         inherit CaptionButtonsBuilder<Avalonia.Controls.Chrome.CaptionButtons>()
@@ -3448,13 +3448,13 @@ module AvaloniaElementBuilderDslCE_AvaloniaControlsChrome =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Chrome.TitleBar>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Chrome.TitleBar()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Shapes
+namespace Avalonia.Controls.Shapes
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsShapes =
+module AvaloniaElementBuilderDslCE_ControlsShapes =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Shapes
+    open Avalonia.DslInternals.Controls.Shapes
 
     type Arc' () = 
         inherit ArcBuilder<Avalonia.Controls.Shapes.Arc>()
@@ -3485,13 +3485,13 @@ module AvaloniaElementBuilderDslCE_AvaloniaControlsShapes =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Shapes.Rectangle>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Shapes.Rectangle()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Presenters
+namespace Avalonia.Controls.Presenters
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsPresenters =
+module AvaloniaElementBuilderDslCE_ControlsPresenters =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Presenters
+    open Avalonia.DslInternals.Controls.Presenters
 
     type CarouselPresenter' () = 
         inherit CarouselPresenterBuilder<Avalonia.Controls.Presenters.CarouselPresenter>()
@@ -3514,13 +3514,13 @@ module AvaloniaElementBuilderDslCE_AvaloniaControlsPresenters =
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Avalonia.Controls.Presenters.TextPresenter>) = this.MakeElementCreator(builder, (fun _ -> new Avalonia.Controls.Presenters.TextPresenter()), this.GetRenderMode())
 
             
-namespace Fun.SunUI.Avalonia.Controls.Remote
+namespace Avalonia.Controls.Remote
 
 [<AutoOpen>]
-module AvaloniaElementBuilderDslCE_AvaloniaControlsRemote =
+module AvaloniaElementBuilderDslCE_ControlsRemote =
   
     open Fun.SunUI
-    open Fun.SunUI.Avalonia.DslInternals.Controls.Remote
+    open Avalonia.DslInternals.Controls.Remote
 
 
             

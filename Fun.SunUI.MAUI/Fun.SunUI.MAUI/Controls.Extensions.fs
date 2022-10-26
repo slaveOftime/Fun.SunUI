@@ -1,10 +1,10 @@
 ﻿[<AutoOpen>]
-module Fun.SunUI.MAUI.Extensions
+module Microsoft.Maui.Controls.Extensions
 
 open FSharp.Data.Adaptive
 open Microsoft.Maui.Controls
+open Microsoft.Maui.Controls.DslInternals
 open Fun.SunUI
-open Fun.SunUI.MAUI.DslInternals
 
 
 type ElementBuilder<'Element when 'Element :> Microsoft.Maui.Controls.Element> with

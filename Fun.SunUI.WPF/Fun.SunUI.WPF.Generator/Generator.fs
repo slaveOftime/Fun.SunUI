@@ -6,7 +6,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.WPF"
+let namesp = "System.Windows"
 let assemblyName = "PresentationFramework"
 
 

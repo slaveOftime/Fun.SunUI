@@ -1,9 +1,9 @@
-namespace rec Fun.SunUI.TerminalGUI.DslInternals
+namespace rec Terminal.Gui.DslInternals
 
 open FSharp.Data.Adaptive
-open Fun.SunUI.TerminalGUI.DslInternals
 open Fun.SunUI
-open Fun.SunUI.TerminalGUI
+open Terminal.Gui
+open Terminal.Gui.DslInternals
 
 
 type ViewBuilder<'Element when 'Element :> Terminal.Gui.View>() =
@@ -801,7 +801,7 @@ type TextViewBuilder<'Element when 'Element :> Terminal.Gui.TextView>() =
     [<CustomOperation("UnwrappedCursorPosition")>] member inline this.UnwrappedCursorPosition ([<InlineIfLambda>] builder: BuildElement<'Element>, fn) = this.MakeActionPropertyBuilder(builder, (fun ctx -> ctx.Element.add_UnwrappedCursorPosition), (fun ctx -> ctx.Element.remove_UnwrappedCursorPosition), "UnwrappedCursorPosition", fn)
                 
 
-type TreeViewBuilder<'Element, 'T when 'T : not struct and 'T : equality and 'Element :> Terminal.Gui.TreeView<'T>>() =
+type TreeViewBuilder<'Element, 'T when 'T : equality and 'T : not struct and 'Element :> Terminal.Gui.TreeView<'T>>() =
     inherit ViewBuilder<'Element>()
 
     [<CustomOperation("TreeBuilder")>] member inline this.TreeBuilder ([<InlineIfLambda>] builder: BuildElement<'Element>, x: Terminal.Gui.Trees.ITreeBuilder<'T>) = this.MakeEqualityPropertyBuilder(builder, (fun ctx -> ctx.Element.TreeBuilder), (fun ctx x -> ctx.Element.TreeBuilder <- x), x)
@@ -845,13 +845,13 @@ type TreeViewBuilder2<'Element when 'Element :> Terminal.Gui.TreeView>() =
 
 // =======================================================================================================================
 
-namespace Fun.SunUI.TerminalGUI
+namespace Terminal.Gui
 
 [<AutoOpen>]
-module TerminalGUIViewBuilderDslCE_TerminalGui =
+module TerminalGUIViewBuilderDslCE =
   
     open Fun.SunUI
-    open Fun.SunUI.TerminalGUI.DslInternals
+    open Terminal.Gui.DslInternals
 
     type View' () = 
         inherit ViewBuilder<Terminal.Gui.View>()
@@ -981,7 +981,7 @@ module TerminalGUIViewBuilderDslCE_TerminalGui =
         inherit TextViewBuilder<Terminal.Gui.TextView>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Terminal.Gui.TextView>) = this.MakeElementCreator(builder, (fun _ -> new Terminal.Gui.TextView()), this.GetRenderMode())
 
-    type TreeView'<'T when 'T : not struct and 'T : equality> () = 
+    type TreeView'<'T when 'T : equality and 'T : not struct> () = 
         inherit TreeViewBuilder<Terminal.Gui.TreeView<'T>, 'T>()
         member inline this.Run([<InlineIfLambda>] builder: BuildElement<Terminal.Gui.TreeView<'T>>) = this.MakeElementCreator(builder, (fun _ -> new Terminal.Gui.TreeView<'T>()), this.GetRenderMode())
 

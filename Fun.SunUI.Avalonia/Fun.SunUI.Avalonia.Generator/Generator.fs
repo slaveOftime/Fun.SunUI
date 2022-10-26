@@ -6,10 +6,9 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.Avalonia"
+let namesp = "Avalonia"
 let assemblyName = "Avalonia.Controls"
 //let assemblyNames = [ "Avalonia.Base"; "Avalonia.Animation"; "Avalonia.Styling"; "Avalonia.Visuals"; "Avalonia.Layout"; "Avalonia.Interactivity"; "Avalonia.Input"; "Avalonia.Controls" ]
-
 
 let makeElementCtx () = {
     GeneratorContext.RootType = typeof<AvaloniaObject>

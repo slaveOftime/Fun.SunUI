@@ -5,7 +5,7 @@ open Fun.SunUI.Generator
 open Utils
 
 
-let namesp = "Fun.SunUI.MAUI"
+let namesp = "Microsoft.Maui.Controls"
 let assemblyName = "Microsoft.Maui.Controls"
 
 

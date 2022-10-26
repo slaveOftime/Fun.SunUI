@@ -1,4 +1,4 @@
-﻿namespace Fun.SunUI.WPF
+﻿namespace System.Windows
 
 open Fun.SunUI
 

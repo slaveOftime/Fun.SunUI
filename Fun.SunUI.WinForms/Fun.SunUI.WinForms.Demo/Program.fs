@@ -4,7 +4,7 @@ open System
 open System.Windows.Forms
 open FSharp.Data.Adaptive
 open Microsoft.Extensions.DependencyInjection
-open Fun.SunUI.WinForms
+open Fun.SunUI
 
 
 let start () =
