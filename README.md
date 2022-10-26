@@ -227,8 +227,8 @@ Grid'() {
 ```
 
 
-## Development and contribution
+## Local development and contribution
 
 You will need **dotnet 6 SDK** to build this whole solution. There are some pipelines which is in build.fsx and it contains some pipelines for some tasks like generate internal DSL binding and nuget packages.
 
-Contrition is quit simple, just raise a PR.
+Contribution is quit simple, just raise a PR.
