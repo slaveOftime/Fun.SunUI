@@ -8,12 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="Entry.fs" />
 	  <Compile Include="Porgram.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
 		<PackageReference Include="Fun.SunUI.TerminalGUI" Version="0.0.*" />
+		<PackageReference Condition="'$(Configuration)'=='DEBUG'" Include="Fun.SunUI.HotReload" Version="0.0.*" />
 	</ItemGroup>
 
 </Project>

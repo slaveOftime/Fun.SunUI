@@ -1,4 +1,5 @@
-﻿module MAUIApp.AppShell
+﻿// hot-reload
+module MAUIApp.Entry
 
 open FSharp.Data.Adaptive
 open Microsoft.Maui
@@ -6,9 +7,9 @@ open Microsoft.Maui.Controls
 open Fun.SunUI
 
 
-let count = cval 0
+let private count = cval 0
 
-let homePage =
+let private homePage =
     ContentPage'() {
         ScrollView'() {
             VerticalStackLayout'() {
@@ -47,12 +48,14 @@ let homePage =
     }
 
 
-let Create () =
-    Shell'() {
-        Items [
-            ShellContent'() {
-                Title "Fun.SunUI.MAUI Page1"
-                homePage
-            }
-        ]
-    }
+let Create sp =
+//-:cnd:noEmit
+#if DEBUG
+    let dispatcher (fn: unit -> unit) =
+        if Application.Current <> null then
+            Application.Current.Dispatcher.Dispatch fn |> ignore
+    UI.hotreload("MAUIApp.Entry.homePage", (fun () -> homePage), (), dispatcher).Build<ContentPage>(sp)
+#else
+    homePage.Build<ContentPage>(sp)
+#endif
+//+:cnd:noEmit

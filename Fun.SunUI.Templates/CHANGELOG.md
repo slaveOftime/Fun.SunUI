@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.9] - 2022-10-30
+
+Add hot-reload
+
 ## [0.0.8] - 2022-10-26
 
 Update templates

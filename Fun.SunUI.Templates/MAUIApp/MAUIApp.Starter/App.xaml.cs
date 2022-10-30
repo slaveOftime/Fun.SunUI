@@ -21,7 +21,7 @@
 //+:cnd:noEmit
             });
 
-            MainPage = AppShell.Create().Build<Shell>(serviceProvider);
+            MainPage = Entry.Create(serviceProvider);
         }
     }
 }

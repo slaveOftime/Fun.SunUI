@@ -1,42 +1,20 @@
-﻿open System
-open FSharp.Data.Adaptive
-open Microsoft.Extensions.DependencyInjection
-open SkiaSharp
+﻿open Microsoft.Extensions.DependencyInjection
 open Modern.Forms
 open Fun.SunUI
-
-
-let count = cval 0
-
-let mainForm =
-    Form'() {
-        TitleBar(fun title -> title.Text <- "Fun.SunUI.ModernForms")
-        Size(Drawing.Size(500, 200))
-        Controls [
-            FlowLayoutPanel'() {
-                Dock DockStyle.Fill
-                Controls [
-                    Label'() {
-                        Text(count |> AVal.map (sprintf "count = %d"))
-                        Style'(fun s -> adaptive {
-                            let! c = count
-                            if c % 2 = 0 then
-                                s.ForegroundColor <- SKColors.Green
-                            else
-                                s.ForegroundColor <- SKColors.HotPink
-                        })
-                    }
-                    Button'() {
-                        Click(fun _ -> count.Publish((+) 1))
-                        Text "Increase"
-                    }
-                ]
-            }
-        ]
-    }
 
 
 let services = new ServiceCollection()
 let sp = services.BuildServiceProvider()
 
-Application.Run(mainForm.Build(sp))
+Application.Run(
+//-:cnd:noEmit
+#if DEBUG
+    let mutable dispatcher = fun (fn: unit -> unit) -> fn ()
+    let form = UI.hotreload("ModernFormsApp.Entry.mainForm", (fun () -> Entry.mainForm), (), dispatcher).Build<Form>(sp)
+    dispatcher <- fun fn -> Modern.WindowKit.Threading.Dispatcher.UIThread.InvokeAsync(fn) |> ignore
+    form
+#else
+    mainForm.Build(sp)
+#endif
+//+:cnd:noEmit
+)

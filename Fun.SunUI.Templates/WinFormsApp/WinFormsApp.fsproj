@@ -7,11 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="MainForm.fs" />
 	  <Compile Include="Porgram.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fun.SunUI" Version="0.0.*" />
+		<PackageReference Condition="'$(Configuration)'=='DEBUG'" Include="Fun.SunUI.HotReload" Version="1.0.*" />
 		<PackageReference Include="Fun.SunUI.WinForms" Version="0.0.*" />
 	</ItemGroup>
 

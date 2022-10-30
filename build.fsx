@@ -1,4 +1,4 @@
-#r "nuget: Fun.Build, 0.1.8"
+#r "nuget: Fun.Build, 0.2.3"
 
 open System.IO
 open Fun.Build
@@ -38,27 +38,27 @@ pipeline "GenerateInternalBindings" {
 pipeline "Publish" {
     stage "Check Env" { run "dotnet workload restore" }
     stage "Build packages" {
-        run (dotnetPack "Fun.SunUI/Fun.SunUI.fsproj")
-        run (dotnetPack "Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj")
-        run (dotnetPack "Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj")
+        //run (dotnetPack "Fun.SunUI/Fun.SunUI.fsproj")
+        //run (dotnetPack "Fun.SunUI.Generator/Fun.SunUI.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.Cli/Fun.SunUI.Cli.fsproj")
 
-        run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI/Fun.SunUI.MAUI.fsproj")
-        run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI.Generator/Fun.SunUI.MAUI.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI/Fun.SunUI.MAUI.fsproj")
+        //run (dotnetPack "Fun.SunUI.MAUI/Fun.SunUI.MAUI.Generator/Fun.SunUI.MAUI.Generator.fsproj")
 
-        run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.fsproj")
-        run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.Generator/Fun.SunUI.ModernForms.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.fsproj")
+        //run (dotnetPack "Fun.SunUI.ModernForms/Fun.SunUI.ModernForms.Generator/Fun.SunUI.ModernForms.Generator.fsproj")
 
-        run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms/Fun.SunUI.WinForms.fsproj")
-        run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms.Generator/Fun.SunUI.WinForms.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms/Fun.SunUI.WinForms.fsproj")
+        //run (dotnetPack "Fun.SunUI.WinForms/Fun.SunUI.WinForms.Generator/Fun.SunUI.WinForms.Generator.fsproj")
 
-        run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj")
-        run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF/Fun.SunUI.WPF.fsproj")
+        //run (dotnetPack "Fun.SunUI.WPF/Fun.SunUI.WPF.Generator/Fun.SunUI.WPF.Generator.fsproj")
 
-        run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.fsproj")
-        run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.Generator/Fun.SunUI.Avalonia.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.fsproj")
+        //run (dotnetPack "Fun.SunUI.Avalonia/Fun.SunUI.Avalonia.Generator/Fun.SunUI.Avalonia.Generator.fsproj")
 
-        run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.fsproj")
-        run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.Generator/Fun.SunUI.TerminalGUI.Generator.fsproj")
+        //run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.fsproj")
+        //run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.Generator/Fun.SunUI.TerminalGUI.Generator.fsproj")
 
         run (dotnetPack "Fun.SunUI.HotReload/Fun.SunUI.HotReload.fsproj")
 
