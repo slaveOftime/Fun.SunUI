@@ -4,7 +4,7 @@ open System
 open FSharp.Data.Adaptive
 
 
-type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, sp: IServiceProvider, key) =
+type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, sp: IServiceProvider, renderMode) =
     let mutable ctx = ValueNone
 
     let eleStoreSub =
@@ -14,8 +14,10 @@ type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, s
             ctx <- ValueSome(creator.CreateOrUpdate(sp, ctx))
         )
 
+    member _.Update() = ctx <- ValueSome((AVal.force eleStore).CreateOrUpdate(sp, ctx))
+
     interface IElementContext with
-        member val RenderMode = key with get, set
+        member val RenderMode = renderMode with get, set
         member _.NativeElement = ctx.Value.NativeElement
         member _.ServiceProvider = sp
         member _.Dispose() = eleStoreSub.Dispose()
@@ -26,7 +28,7 @@ type ElementAdaptiveContext<'UIStack>(eleStore: ElementCreator<'UIStack> aval, s
 type AdaptiveSingleElement<'UIStack> = AdaptiveSingleElement of ElementCreator<'UIStack> aval
 
 
-type AdaptiviewBuilder<'UIStack>(?key) =
+type AdaptiviewBuilder<'UIStack>(?renderMode) =
     inherit AValBuilder()
 
 
@@ -43,15 +45,16 @@ type AdaptiviewBuilder<'UIStack>(?key) =
         )
 
 
-    member this.Run(AdaptiveSingleElement store) = {
-        ElementCreator.RenderMode = defaultArg key RenderMode.CreateOnce
+    member _.Run(AdaptiveSingleElement store) = {
+        ElementCreator.RenderMode = defaultArg renderMode RenderMode.CreateOnce
         CreateOrUpdate =
             fun (sp, ctx) ->
-                let newCtx =
-                    match ctx with
-                    | ValueNone -> new ElementAdaptiveContext<'UIStack>(store, sp, defaultArg key RenderMode.CreateOnce)
-                    | ValueSome ctx -> unbox ctx
-                newCtx
+                match ctx with
+                | ValueNone -> new ElementAdaptiveContext<'UIStack>(store, sp, defaultArg renderMode RenderMode.CreateOnce)
+                | ValueSome ctx ->
+                    let newCtx = unbox<ElementAdaptiveContext<'UIStack>> ctx
+                    newCtx.Update()
+                    newCtx
     }
 
 
@@ -61,4 +64,4 @@ module Adaptiview =
     type UI with
 
         static member inline adaptive() = AdaptiviewBuilder<'UIStack>()
-        static member inline adaptive(key) = AdaptiviewBuilder<'UIStack>(key)
+        static member inline adaptive(renderMode) = AdaptiviewBuilder<'UIStack>(renderMode)

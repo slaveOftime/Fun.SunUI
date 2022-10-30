@@ -60,6 +60,8 @@ pipeline "Publish" {
         run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.fsproj")
         run (dotnetPack "Fun.SunUI.TerminalGUI/Fun.SunUI.TerminalGUI.Generator/Fun.SunUI.TerminalGUI.Generator.fsproj")
 
+        run (dotnetPack "Fun.SunUI.HotReload/Fun.SunUI.HotReload.fsproj")
+
         run (dotnetPack "Fun.SunUI.Templates/Fun.SunUI.Templates.fsproj")
     }
     stage "Publish packages to nuget" {

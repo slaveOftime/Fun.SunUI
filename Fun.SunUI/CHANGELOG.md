@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.8] - 2022-10-25
+
+- Fix Adaptivew update issue
+- Fix ElementBuilder StaticChildren recreate mode issue
+
 ## [0.0.7] - 2022-10-24
 
 Fix dependency issue

@@ -227,6 +227,30 @@ Grid'() {
 ```
 
 
+### Hot-reload
+
+1. You will need to add // hot-reload at the top of the file which you want to enable. For how it works you can check [Fun.Blazor hot-reload](https://slaveoftime.github.io/Fun.Blazor.Docs/documents/Hot-Reload/). Because we share the same cli. So you will also need to install **Fun.Blazor.Cli**. Then you can run **fun-blazor watch your_fsharp_project_path**
+
+2. Add package **Fun.SunUI.HotReload**, it will be better to add below condition to this package so we can avoid bundling it in release mode.
+
+```text
+    Condition="'$(Configuration)'=='DEBUG'"
+```
+
+3. Add below code to the entry you want. Below is from the WPF demo.
+
+```fsharp
+    let nativeWindow =
+    #if DEBUG
+        let dispatcher (fn: unit -> unit) = if Application.Current <> null then Application.Current.Dispatcher.Invoke fn
+        UI
+            .hotreload("Fun.SunUI.WPF.Demo.Entry.window", (fun () -> Fun.SunUI.WPF.Demo.Entry.window), (), dispatcher)
+            .Build<Window>(sp)
+    #else
+        window.Build<Window>(sp)
+    #endif
+```
+
 ## Local development and contribution
 
 You will need **dotnet 6 SDK** to build this whole solution. There are some pipelines which is in build.fsx and it contains some pipelines for some tasks like generate internal DSL binding and nuget packages.

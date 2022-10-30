@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net471;net5.0</TargetFrameworks>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TrimMode>link</TrimMode>
+		<IsTrimmable>true</IsTrimmable>
+		<ChangelogFile>CHANGELOG.md</ChangelogFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="CodeModel.fs" />
+		<Compile Include="Interpreter.fs" />
+		<Compile Include="Utils.fs" />
+		<Compile Include="HotReloadComponent.fs" />
+		<Compile Include="Dsl.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MessagePack.FSharpExtensions" Version="3.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Fun.SunUI\Fun.SunUI.fsproj" />
+	</ItemGroup>
+
+</Project>

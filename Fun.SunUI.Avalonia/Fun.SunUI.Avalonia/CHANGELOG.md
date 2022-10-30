@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2022-10-30
+
+Update dependencies
+
 ## [0.0.6] - 2022-10-26
 
 Simplify namespace convention

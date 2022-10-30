@@ -8,11 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="Demo.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fun.SunUI.WPF\Fun.SunUI.WPF.fsproj" />
+		<ProjectReference Include="..\..\Fun.SunUI.HotReload\Fun.SunUI.HotReload.fsproj" />
+		<ProjectReference Condition="'$(Configuration)'=='DEBUG'" Include="..\Fun.SunUI.WPF\Fun.SunUI.WPF.fsproj" />
 	</ItemGroup>
 
 </Project>

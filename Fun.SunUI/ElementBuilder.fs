@@ -404,6 +404,8 @@ type ElementBuilder<'UIStack, 'Element>() =
                 let newChildrenContexts = Array.create childrenLength Unchecked.defaultof<IElementContext>
 
                 let mutable i = 0
+                let mutable needRecreateNativeChildren = false
+
                 while i < childrenLength do
                     let oldCtx = Seq.item i ctx.ChildContexts
                     let childCreator = Seq.item i childrenCreators
@@ -412,8 +414,12 @@ type ElementBuilder<'UIStack, 'Element>() =
                         match childCreator.RenderMode with
                         | RenderMode.CreateOnce -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
                         | RenderMode.CreateOnceNoRerender -> oldCtx
-                        | RenderMode.AlwaysRecreate -> childCreator.CreateOrUpdate(sp, ValueNone)
-                        | RenderMode.Key _ when childCreator.RenderMode <> oldCtx.RenderMode -> childCreator.CreateOrUpdate(sp, ValueNone)
+                        | RenderMode.AlwaysRecreate ->
+                            needRecreateNativeChildren <- true
+                            childCreator.CreateOrUpdate(sp, ValueNone)
+                        | RenderMode.Key _ when childCreator.RenderMode <> oldCtx.RenderMode ->
+                            needRecreateNativeChildren <- true
+                            childCreator.CreateOrUpdate(sp, ValueNone)
                         | RenderMode.Key _ -> childCreator.CreateOrUpdate(sp, ValueSome oldCtx)
 
                     i <- i + 1
@@ -423,6 +429,10 @@ type ElementBuilder<'UIStack, 'Element>() =
 
                 ctx.ChildContexts.Clear()
                 ctx.ChildContexts.AddRange newChildrenContexts
+
+                if needRecreateNativeChildren then
+                    clearNativeChildren ctx
+                    addNativeChildren ctx (newChildrenContexts |> Array.map (fun x -> unbox x.NativeElement))
 
             index + 1
         )

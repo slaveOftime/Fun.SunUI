@@ -11,7 +11,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Fun.SunUI.MAUI\Fun.SunUI.MAUI.fsproj" />
+		<ProjectReference Include="..\..\Fun.SunUI.HotReload\Fun.SunUI.HotReload.fsproj" />
+		<ProjectReference Condition="'$(Configuration)'=='DEBUG'" Include="..\Fun.SunUI.MAUI\Fun.SunUI.MAUI.fsproj" />
 	</ItemGroup>
 
 </Project>

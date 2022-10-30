@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.9] - 2022-10-30
+
+Update dependencies
+
 ## [0.0.8] - 2022-10-27
 
 Support file path for Image' 

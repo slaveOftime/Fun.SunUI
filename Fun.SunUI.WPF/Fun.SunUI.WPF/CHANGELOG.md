@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.1] - 2022-10-30
+
+Update dependencies
+
 ## [0.1.0] - 2022-10-26
 
 Add Rows amd Columns for Grid'
